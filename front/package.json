@@ -10,13 +10,19 @@
   "dependencies": {
     "bootstrap": "^4.3.1",
     "bootstrap-vue": "^2.0.0-rc.13",
-    "vue": "^2.6.7"
+    "v-autocomplete": "^1.8.2",
+    "vue": "^2.6.7",
+    "vue-bootstrap-typeahead": "^0.2.6",
+    "vue-resource": "^1.5.1",
+    "vue-simple-suggest": "^1.8.3",
+    "vuejs-auto-complete": "^0.9.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.4.0",
     "@vue/cli-plugin-eslint": "^3.4.0",
     "@vue/cli-service": "^3.4.0",
     "babel-eslint": "^10.0.1",
+    "browser-sync": "^2.26.3",
     "eslint": "^5.8.0",
     "eslint-plugin-vue": "^5.0.0",
     "vue-template-compiler": "^2.5.21"
@@ -30,7 +36,9 @@
       "plugin:vue/essential",
       "eslint:recommended"
     ],
-    "rules": {},
+    "rules": {
+      "no-console": "off"
+    },
     "parserOptions": {
       "parser": "babel-eslint"
     }
