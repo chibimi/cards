@@ -2,13 +2,11 @@ package main
 
 import (
 	"net/http"
-	"objenious/card"
 
-	"github.com/jmoiron/sqlx"
-
-	"objenious/card/api"
-
+	"github.com/chibimi/cards/card"
+	"github.com/chibimi/cards/card/api"
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/jmoiron/sqlx"
 	"github.com/julienschmidt/httprouter"
 	"github.com/rs/cors"
 	"gopkg.in/inconshreveable/log15.v2"
@@ -30,7 +28,7 @@ func main() {
 	router.PUT("/cards/:id", s.UpdateCard)
 	router.GET("/cards/:id", s.GetCard)
 	router.GET("/cards/", s.ListCards)
-	router.GET("/cards/:/related", s.GetRelatedCards)
+	router.GET("/cards/:id/related", s.GetRelatedCards)
 	router.DELETE("/cards/:id", s.DeleteCard)
 	router.POST("/models", s.CreateModel)
 	router.PUT("/models/:id", s.UpdateModel)

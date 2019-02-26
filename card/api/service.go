@@ -3,10 +3,10 @@ package api
 import (
 	"encoding/json"
 	"net/http"
-	"objenious/card"
 
-	log "github.com/inconshreveable/log15"
+	"github.com/chibimi/cards/card"
 	"github.com/julienschmidt/httprouter"
+	"gopkg.in/inconshreveable/log15.v2"
 )
 
 type Config struct {
@@ -36,7 +36,7 @@ func writeJson(w http.ResponseWriter, body interface{}, code int) {
 	if body != nil {
 		err := json.NewEncoder(w).Encode(body)
 		if err != nil {
-			log.Error("Unable to send JSON body", "err", err.Error())
+			log15.Error("Unable to send JSON body", "err", err.Error())
 		}
 	}
 }

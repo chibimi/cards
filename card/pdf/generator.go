@@ -2,10 +2,10 @@ package pdf
 
 import (
 	"fmt"
-	"objenious/card"
 	"strconv"
 	"strings"
 
+	"github.com/chibimi/cards/card"
 	"github.com/jung-kurt/gofpdf"
 	"github.com/pkg/errors"
 )

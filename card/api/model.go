@@ -3,9 +3,9 @@ package api
 import (
 	"encoding/json"
 	"net/http"
-	"objenious/card"
 	"strconv"
 
+	"github.com/chibimi/cards/card"
 	"github.com/julienschmidt/httprouter"
 )
 

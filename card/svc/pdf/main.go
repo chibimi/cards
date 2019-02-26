@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
-	"objenious/card"
-	"objenious/card/pdf"
 
+	"github.com/chibimi/cards/card"
+	"github.com/chibimi/cards/card/pdf"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jmoiron/sqlx"
 	"gopkg.in/inconshreveable/log15.v2"
