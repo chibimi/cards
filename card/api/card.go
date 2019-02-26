@@ -76,14 +76,14 @@ func (s *Service) DeleteCard(w http.ResponseWriter, r *http.Request, p httproute
 }
 
 func (s *Service) ListCards(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
-	fid, err := strconv.Atoi(p.ByName("faction_id"))
+	fid, err := strconv.Atoi(r.URL.Query().Get("faction_id"))
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	cid, err := strconv.Atoi(p.ByName("category_id"))
+	cid, err := strconv.Atoi(r.URL.Query().Get("category_id"))
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
 	res, err := s.src.ListCards(fid, cid)

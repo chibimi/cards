@@ -1,25 +1,25 @@
 <template>
 	<div id="app" class="container">
 		<div class="row">
-			<form class="form-inline">
+			<form v-on:submit.prevent class="form-inline">
 				<label >Faction</label>
-				<select v-model="faction" class="form-control" @change="getModels(faction, category)">
+				<select v-model="faction" class="form-control" @change="getCards(faction, category)">
 					<option v-for="f in factions" :key="f.id" :value="f.id">{{f.name}}</option>
 				</select>
 				<label >Category</label>
-				<select v-model="category" class="form-control" @change="getModels(faction, category)">
+				<select v-model="category" class="form-control" @change="getCards(faction, category)">
 					<option v-for="c in categories" :key="c.id" :value="c.id">{{c.name}}</option>
 				</select>
-				<label >Model</label>
-				<select v-model="model" class="form-control">
-					<option value="0">Create new</option>
-					<option v-for="m in models" :key="m.id" :value="m.id">[{{m.status}}] {{m.name}}</option>
+				<label >Card</label>
+				<select v-model="card" class="form-control">
+					<option v-for="c in cards" :key="c.id" :value="c.id">[{{c.status}}] {{c.name}}</option>
 				</select>
-				<button type="submit" class="btn btn-primary">Go</button>
+				<button type="submit" class="btn btn-primary" @click="setCard(card)">Go</button>
+				<button type="submit" class="btn btn-primary" @click="setCard(0)">New Card</button>
 			</form>
 		</div>
 		<div class="row">
-			<Content v-if="model" :id="model" :factions="factions" :categories="categories"/>
+			<Content v-if="cardID !== null" :id="cardID" :factions="factions" :categories="categories"/>
 		</div>
 	</div>
 </template>
@@ -31,20 +31,34 @@ export default {
 	components: {
 		Content
 	},
+	data() {
+		return {
+			factions: [],
+			faction: null,
+			categories: [],
+			category: null,
+			cards: [],
+			card: null,
+			cardID: null
+		};
+	},
 	methods: {
-		getModels: function(faction, category) {
+		getCards: function(faction, category) {
 			if (!faction || !category){
 				return
 			}
 			this.$http
-			.get("http://localhost:9901/models?faction="+faction+"&category="+category)
+			.get("http://localhost:9901/cards?faction_id="+faction+"&category_id="+category)
 			.then(function(res) {
 				console.log(res);
-				this.models = res.data;
+				this.cards = res.data;
 			})
 			.catch(function(err) {
 				console.log(err);
 			});
+		},
+		setCard: function(card) {
+			this.cardID = card;
 		}
 	},
 	created: function() {
@@ -66,16 +80,6 @@ export default {
 			.catch(function(err) {
 				console.log(err);
 			});
-	},
-	data() {
-		return {
-			factions: [],
-			faction: null,
-			categories: [],
-			category: null,
-			models: [],
-			model: null
-		};
 	}
 };
 </script>

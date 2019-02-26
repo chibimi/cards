@@ -24,12 +24,14 @@ func main() {
 	router := httprouter.New()
 	router.GET("/factions", s.ListFactions)
 	router.GET("/categories", s.ListCategories)
+
+	router.GET("/cards", s.ListCards)
+	router.GET("/cards/:id", s.GetCard)
+	router.GET("/cards/:id/related", s.GetRelatedCards)
 	router.POST("/cards", s.CreateCard)
 	router.PUT("/cards/:id", s.UpdateCard)
-	router.GET("/cards/:id", s.GetCard)
-	router.GET("/cards/", s.ListCards)
-	router.GET("/cards/:id/related", s.GetRelatedCards)
 	router.DELETE("/cards/:id", s.DeleteCard)
+
 	router.POST("/models", s.CreateModel)
 	router.PUT("/models/:id", s.UpdateModel)
 	router.GET("/models/", s.ListModels)
