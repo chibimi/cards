@@ -12,7 +12,7 @@ import (
 func (s *Service) CreateModel(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	model := &card.Model{}
 	if err := json.NewDecoder(r.Body).Decode(model); err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
 
@@ -22,7 +22,7 @@ func (s *Service) CreateModel(w http.ResponseWriter, r *http.Request, p httprout
 		return
 	}
 
-	writeJson(w, res, http.StatusOK)
+	writeJson(w, res, http.StatusCreated)
 }
 
 func (s *Service) UpdateModel(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
@@ -61,9 +61,9 @@ func (s *Service) GetModel(w http.ResponseWriter, r *http.Request, p httprouter.
 }
 
 func (s *Service) ListModels(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
-	id, err := strconv.Atoi(p.ByName("card_id"))
+	id, err := strconv.Atoi(r.URL.Query().Get("card_id"))
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
 	res, err := s.src.ListModels(id)
@@ -78,7 +78,7 @@ func (s *Service) ListModels(w http.ResponseWriter, r *http.Request, p httproute
 func (s *Service) DeleteModel(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	id, err := strconv.Atoi(p.ByName("id"))
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
 	err = s.src.DeleteModel(id)
@@ -87,5 +87,5 @@ func (s *Service) DeleteModel(w http.ResponseWriter, r *http.Request, p httprout
 		return
 	}
 
-	writeJson(w, nil, http.StatusOK)
+	writeJson(w, nil, http.StatusNoContent)
 }
