@@ -11,19 +11,16 @@ type Card struct {
 	MainCardID int    `json:"main_card_id,omitempty" db:"main_card_id"`
 	Name       string `json:"name,omitempty" db:"name"`
 	Properties string `json:"properties,omitempty" db:"properties"`
-	ModelsMin  string `json:"models_min,omitempty" db:"models_min"`
 	Models     string `json:"models,omitempty" db:"models"`
-	CostMin    string `json:"cost_min,omitempty" db:"cost_min"`
+	ModelsMax  string `json:"models_max,omitempty" db:"models_max"`
 	Cost       string `json:"cost,omitempty" db:"cost"`
+	CostMax    string `json:"cost_max,omitempty" db:"cost_max"`
 	FA         string `json:"fa,omitempty" db:"fa"`
 
-	Fury      string `json:"fury,omitempty" db:"fury"`
-	Focus     string `json:"focus,omitempty" db:"focus"`
+	Resource  string `json:"resource,omitempty" db:"resource"`
 	Threshold string `json:"threshold,omitempty" db:"threshold"`
 
-	Damage       string `json:"damage,omitempty" db:"damage"`
-	DamageGrid   string `json:"damage_grid,omitempty" db:"damage_grid"`
-	DamageSpiral string `json:"damage_spiral,omitempty" db:"damage_spiral"`
+	Damage string `json:"damage,omitempty" db:"damage"`
 
 	Status string `json:"status,omitempty" db:"status"`
 }
@@ -59,6 +56,29 @@ func (s *Service) GetRelatedCards(id int) ([]Card, error) {
 	res := []Card{}
 	for rows.Next() {
 		r := Card{}
+		if err := rows.StructScan(&r); err != nil {
+			return nil, errors.Wrap(err, "struct scan")
+		}
+		res = append(res, r)
+	}
+	return res, nil
+}
+
+func (s *Service) GetCardAbilities(id int) ([]Ability, error) {
+	stmt, err := s.db.Preparex("SELECT id, type, original_name, name, description FROM card_ability AS l LEFT JOIN abilities AS a ON l.ability_id = a.id WHERE l.card_id = ?")
+	if err != nil {
+		return nil, errors.Wrap(err, "prepare statement")
+	}
+	defer stmt.Close()
+
+	rows, err := stmt.Queryx(id)
+	if err != nil {
+		return nil, errors.Wrap(err, "execute query")
+	}
+
+	res := []Ability{}
+	for rows.Next() {
+		r := Ability{}
 		if err := rows.StructScan(&r); err != nil {
 			return nil, errors.Wrap(err, "struct scan")
 		}
@@ -106,8 +126,8 @@ func (s *Service) DeleteCard(id int) error {
 
 func (s *Service) SaveCard(card *Card) (int, error) {
 	stmt, err := s.db.PrepareNamed(`INSERT INTO cards VALUES(
-		:id, :main_card_id, :faction_id, :category_id, :main_card_id:, :name, :properties, :models_min, :models, :cost_min, :cost, :fa, :status,
-		:fury, :focus, :threshold, :damage, :damage_grid, :damage_spiral
+		:id, :main_card_id, :faction_id, :category_id, :name, :properties, :models, :models_max, :cost, :cost_max, :fa, :status,
+		:resource, :threshold, :damage
 	)`)
 	if err != nil {
 		return 0, errors.Wrap(err, "prepare statement")
@@ -125,8 +145,8 @@ func (s *Service) SaveCard(card *Card) (int, error) {
 func (s *Service) UpdateCard(card *Card) error {
 	stmt, err := s.db.PrepareNamed(`UPDATE cards SET 
 	faction_id = :faction_id, category_id = :category_id, main_card_id = :main_card_id, name = :name, properties = :properties, 
-	models_min = :models_min, models = :model, cost_min = :cost_min, cost = :cost, fa = :fa, status = :status, 
-	fury = :fury, focus = :focus, threshold = :threshold, damage = :damage, damage_grid = :damage_grid, damage_spiral = :damage_spiral 
+	models = :models, models_max = :models_max, cost = :cost, cost_max = :cost_max, fa = :fa, status = :status, 
+	resource = :resource, threshold = :threshold, damage = :damage
 	WHERE id = :id`)
 	if err != nil {
 		return errors.Wrap(err, "prepare statement")

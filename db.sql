@@ -1,3 +1,4 @@
+
 CREATE DATABASE cards_db;
 USE cards_db;
 
@@ -8,25 +9,22 @@ CREATE TABLE cards (
     category_id int not null, 
     name varchar(100) not null, 
     properties varchar(100),
-    models_min varchar(50), 
     models varchar(50), 
-    cost_min varchar(2), 
-    cost varchar(2), 
+    models_max varchar(50), 
+    cost varchar(50), 
+    cost_max varchar(50), 
     fa varchar(2), 
     status varchar(10), 
-    fury varchar(2), 
-    focus varchar(2), 
+    resource varchar(2),  
     threshold varchar(2), 
     damage varchar(100),
-    damage_grid varchar(100),
-    damage_spiral varchar(100),
     PRIMARY KEY (id)
 );
 
-INSERT INTO cards VALUES (0, 0, 11, 5, "Blighted Nyss Swordmen", "Unité de la légion", "chef & 5 recrues", "chef & 9 recrues", "9", "15", "2", "TODO", "", "", "", "", "", "");
-INSERT INTO cards VALUES (0, 0, 11, 5, "Blighted Nyss Legionaires", "Unité de la légion", "chef & 5 recrues", "chef & 9 recrues", "9", "15", "2", "TODO", "", "", "", "", "", "");
-INSERT INTO cards VALUES (0, 0, 11, 5, "Hellmouth", "Unité de la légion", "", "bouche & 3 tentacules", "", "6", "2", "TODO", "", "", "", "8", "", "");
-INSERT INTO cards VALUES (0, 0, 11, 5, "Blackfrost Shard", "Unité de nyss corrompus de la légion", "", "Sevryn, Rhylyss & Vysarr", "", "9", "C", "TODO", "", "", "", "5-5-5", "", "");
+INSERT INTO cards VALUES (0, 0, 11, 5, "Blighted Nyss Swordmen", "Unité de la légion", "6", "9", "10", "15", "2", "TODO", "", "", "");
+INSERT INTO cards VALUES (0, 0, 11, 5, "Blighted Nyss Legionaires", "Unité de la légion", "6", "9", "10", "15", "2", "TODO", "", "", "");
+INSERT INTO cards VALUES (0, 0, 11, 5, "Hellmouth", "Unité de la légion", "4", "6", "", "", "2", "TODO", "", "", "8*1");
+INSERT INTO cards VALUES (0, 0, 11, 5, "Blackfrost Shard", "Unité de nyss corrompus de la légion", "3", "10", "","", "C", "TODO", "", "", "5*3");
 
 CREATE TABLE models (
     id int unsigned not null auto_increment, 
@@ -57,27 +55,31 @@ INSERT INTO models VALUES (0, 4, "Vysarr1", "6", "5", "7", "4", "14", "12", "6",
 CREATE TABLE abilities (
     id int unsigned not null auto_increment, 
     type int not null, 
+    original_name varchar(100) not null, 
     name varchar(100) not null, 
     description text,
     PRIMARY KEY (id)
 );
 
-INSERT INTO abilities VALUES (0, 3, "Eclair gelé (*attaque)", "Eclair Gelé est une attaque magique de POR 10. La figurine touchée subit un jet de dégats de froid PUI 12. Sur une touche critique la figurine touchée devient stationnaire à moins qu'elle ait Immunité Froid.");
-INSERT INTO abilities VALUES (0, 3, "Prison gelée (*attaque)", "Prison Gelée est une attaque magique de POR 10. La figurine touchée subit une malus cumulatif de -2 DEF pour un tour à moins qu'elle ait Immunité Froid. Quand une figurine sans imunité froid est touchée 3 fois ou plus par Prison Gelée pendant le même tour, elle devient stationnaire.");
-INSERT INTO abilities VALUES (0, 3, "Baiser de Lyliss (*attaque)", "Baiser de Lyliss est une attaque magique de POR 10. Quand une figurine de faction alliée fait un jet de dégats contre une figurine/unité touchée par Baiser de Lyliss, ajouter +2 au résultat des dés. Baiser de Lyliss dure 1 tour.");
-INSERT INTO abilities VALUES (0, 3, "Manteau Brumeux (*action)", "Les figurines de cette unité gagne dissimulation. Les figurines hors formation ne sont pas affectées. Manteau Brumeux dure 1 round.");
-INSERT INTO abilities VALUES (0, 3, "Détachement (*action)", "Les sorts à entretien ennemi et les animi sur les figurines de cette unité expirent immédiatement.");
-INSERT INTO abilities VALUES (0, 2, "Vengeance", "Pendant la phase de maintenance, si une figurine ou plus de cette unité a été endommagé par une attaque ennemie lors du round précédent, chaque modèle dans cette unité peut avancer de 3"" et faire une attaque de mêlée basique.");
-INSERT INTO abilities VALUES (0, 2, "Mur d'Acier", "Tant que la figurine est SàS avec une figurine ou plus de cette unité, elle gagne +2 ARM.");
-INSERT INTO abilities VALUES (0, 4, "Consumer", "Si cette attaque touche une figurine de petite base non-warlock, non-warcaster, la figurine touchée est retirée du jeu.");
-INSERT INTO abilities VALUES (0, 4, "Attaque arrière", "Cette figurine peut cibler des modèles dans son arc arrière lorsqu'elle déclare une attaque avec cette arme et sa porté de mêlée n'est pas limité à son arc avant avec cette arme.");
-INSERT INTO abilities VALUES (0, 4, "Etreinte", "Si cette arme touche une figurine ennemie sur une base large ou plus petite, imédiatement après la résolution de l'attaque cette figurine peut être retirée du jeu. Quand c'est le cas, la figurine touchée est poussée directement vers la Bouche jusqu'à ce qu'elle contacte une figurine, un obstacle ou une obstruction. Après avoir bougé la figurine, la Bouche peut immédiatement faire une attaque de mêlée basique ciblant celle-ci.");
+INSERT INTO abilities VALUES (0, 3, "Ice bolt", "Eclair gelé (*attaque)", "Eclair Gelé est une attaque magique de POR 10. La figurine touchée subit un jet de dégats de froid PUI 12. Sur une touche critique la figurine touchée devient stationnaire à moins qu'elle ait Immunité Froid.");
+INSERT INTO abilities VALUES (0, 3, "Ice cage", "Prison gelée (*attaque)", "Prison Gelée est une attaque magique de POR 10. La figurine touchée subit une malus cumulatif de -2 DEF pour un tour à moins qu'elle ait Immunité Froid. Quand une figurine sans imunité froid est touchée 3 fois ou plus par Prison Gelée pendant le même tour, elle devient stationnaire.");
+INSERT INTO abilities VALUES (0, 3, "kiss of Lyliss", "Baiser de Lyliss (*attaque)", "Baiser de Lyliss est une attaque magique de POR 10. Quand une figurine de faction alliée fait un jet de dégats contre une figurine/unité touchée par Baiser de Lyliss, ajouter +2 au résultat des dés. Baiser de Lyliss dure 1 tour.");
+INSERT INTO abilities VALUES (0, 3, "Cloak of mist", "Manteau Brumeux (*action)", "Les figurines de cette unité gagne dissimulation. Les figurines hors formation ne sont pas affectées. Manteau Brumeux dure 1 round.");
+INSERT INTO abilities VALUES (0, 3, "Disbinding", "Détachement (*action)", "Les sorts à entretien ennemi et les animi sur les figurines de cette unité expirent immédiatement.");
+INSERT INTO abilities VALUES (0, 2, "Vengeance", "Vengeance", "Pendant la phase de maintenance, si une figurine ou plus de cette unité a été endommagé par une attaque ennemie lors du round précédent, chaque modèle dans cette unité peut avancer de 3"" et faire une attaque de mêlée basique.");
+INSERT INTO abilities VALUES (0, 2, "wall of steel", "Mur d'Acier", "Tant que la figurine est SàS avec une figurine ou plus de cette unité, elle gagne +2 ARM.");
+INSERT INTO abilities VALUES (0, 4, "consume", "Consumer", "Si cette attaque touche une figurine de petite base non-warlock, non-warcaster, la figurine touchée est retirée du jeu.");
+INSERT INTO abilities VALUES (0, 4, "back attack", "Attaque arrière", "Cette figurine peut cibler des modèles dans son arc arrière lorsqu'elle déclare une attaque avec cette arme et sa porté de mêlée n'est pas limité à son arc avant avec cette arme.");
+INSERT INTO abilities VALUES (0, 4, "grip", "Etreinte", "Si cette arme touche une figurine ennemie sur une base large ou plus petite, imédiatement après la résolution de l'attaque cette figurine peut être retirée du jeu. Quand c'est le cas, la figurine touchée est poussée directement vers la Bouche jusqu'à ce qu'elle contacte une figurine, un obstacle ou une obstruction. Après avoir bougé la figurine, la Bouche peut immédiatement faire une attaque de mêlée basique ciblant celle-ci.");
+INSERT INTO abilities VALUES (0, 1, "test card abi", "Test abilité de carte", "Si cette arme touche une figurine ennemie sur une base large ou plus petite, imédiatement après la résolution de l'attaque cette figurine peut être retirée du jeu. Quand c'est le cas, la figurine touchée est poussée directement vers la Bouche jusqu'à ce qu'elle contacte une figurine, un obstacle ou une obstruction. Après avoir bougé la figurine, la Bouche peut immédiatement faire une attaque de mêlée basique ciblant celle-ci.");
 
 CREATE TABLE card_ability (
     card_id int not null,
     ability_id int not null,
     PRIMARY KEY (card_id, ability_id)
 );
+
+INSERT INTO card_ability VALUES (2, 11);
 
 CREATE TABLE model_ability (
     model_id int not null,

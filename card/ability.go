@@ -5,10 +5,11 @@ import (
 )
 
 type Ability struct {
-	ID          int    `json:"id,omitempty" db:"id"`
-	Type        int    `json:"type,omitempty" db:"type"`
-	Name        string `json:"name,omitempty" db:"name"`
-	Description string `json:"description,omitempty" db:"description"`
+	ID           int    `json:"id,omitempty" db:"id"`
+	Type         int    `json:"type,omitempty" db:"type"`
+	OriginalName string `json:"original_name,omitempty" db:"original_name"`
+	Name         string `json:"name,omitempty" db:"name"`
+	Description  string `json:"description,omitempty" db:"description"`
 }
 
 func (s *Service) GetAbility(id int) (*Ability, error) {
@@ -43,7 +44,7 @@ func (s *Service) DeleteAbility(id int) error {
 
 func (s *Service) SaveAbility(ability *Ability) (int, error) {
 	stmt, err := s.db.PrepareNamed(`INSERT INTO abilities VALUES(
-		:id, :type, :name, :description
+		:id, :type, :original_name, :name, :description
 	)`)
 	if err != nil {
 		return 0, errors.Wrap(err, "prepare statement")
@@ -60,7 +61,7 @@ func (s *Service) SaveAbility(ability *Ability) (int, error) {
 
 func (s *Service) UpdateAbility(ability *Ability) error {
 	stmt, err := s.db.PrepareNamed(`UPDATE abilities SET 
-	type = :type, name = :name, description = :description WHERE id = :id`)
+	type = :type, name = :name, original_name = :original_name, description = :description WHERE id = :id`)
 	if err != nil {
 		return errors.Wrap(err, "prepare statement")
 	}
@@ -73,14 +74,14 @@ func (s *Service) UpdateAbility(ability *Ability) error {
 	return nil
 }
 
-func (s *Service) ListCardAbilities(cardID int) ([]Ability, error) {
-	stmt, err := s.db.Preparex("SELECT id, type, name, description FROM abilities AS a LEFT JOIN card_ability AS ca ON a.id = ca.ability_id WHERE ca.card_id = ? AND a.type = ?")
+func (s *Service) ListAbilities() ([]Ability, error) {
+	stmt, err := s.db.Preparex("SELECT * FROM abilities")
 	if err != nil {
 		return nil, errors.Wrap(err, "prepare statement")
 	}
 	defer stmt.Close()
 
-	rows, err := stmt.Queryx(cardID, 1)
+	rows, err := stmt.Queryx()
 	if err != nil {
 		return nil, errors.Wrap(err, "execute query")
 	}
@@ -94,6 +95,35 @@ func (s *Service) ListCardAbilities(cardID int) ([]Ability, error) {
 	}
 	return res, nil
 }
+
+func (s *Service) AddCardAbility(cardID, abilityID int) error {
+	stmt, err := s.db.Prepare(`INSERT INTO card_ability VALUES(?, ?)`)
+	if err != nil {
+		return errors.Wrap(err, "prepare statement")
+	}
+	defer stmt.Close()
+
+	_, err = stmt.Exec(cardID, abilityID)
+	if err != nil {
+		return errors.Wrap(err, "execute query")
+	}
+	return nil
+}
+
+func (s *Service) DeleteCardAbility(cardID, abilityID int) error {
+	stmt, err := s.db.Prepare(`DELETE FROM card_ability WHERE card_id = ? AND ability_id = ?`)
+	if err != nil {
+		return errors.Wrap(err, "prepare statement")
+	}
+	defer stmt.Close()
+
+	_, err = stmt.Exec(cardID, abilityID)
+	if err != nil {
+		return errors.Wrap(err, "execute query")
+	}
+	return nil
+}
+
 func (s *Service) ListModelAbilities(modelID int) ([]Ability, error) {
 	stmt, err := s.db.Preparex("SELECT id, type, name, description FROM abilities AS a LEFT JOIN model_ability AS ma ON a.id = ma.ability_id WHERE ma.model_id = ? AND a.type = ?")
 	if err != nil {

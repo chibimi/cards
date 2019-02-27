@@ -11,7 +11,7 @@
 				</select>
 				<label >Card</label>
 				<select v-model="card" class="form-control">
-					<option v-for="c in cards" :key="c.id" :value="c.id">[{{c.status}}] {{c.name}}</option>
+					<option v-for="c in cards" :key="c.id" :value="c.id">[{{c.status}}] #{{c.id}} {{c.name}}</option>
 				</select>
 				<button type="submit" class="btn btn-primary" @click="$emit('selected', card)">Go</button>
 				<button type="submit" class="btn btn-primary" @click="$emit('selected', 0)">New Card</button>
@@ -20,15 +20,16 @@
 </template>
 
 <script>
+import {Factions, Categories} from './const.js'
 export default {
 	name: "Selector",
 	components: {
     },
 	data() {
 		return {
-			factions: [],
+			factions: Factions,
 			faction: 11,
-			categories: [],
+			categories: Categories,
 			category: 5,
 			cards: [],
 			card: null,
@@ -51,24 +52,6 @@ export default {
 		},
 	},
 	created: function() {
-		this.$http
-			.get("http://localhost:9901/factions")
-			.then(function(res) {
-				console.log(res);
-				this.factions = res.data;
-			})
-			.catch(function(err) {
-				console.log(err);
-			});
-		this.$http
-			.get("http://localhost:9901/categories")
-			.then(function(res) {
-				console.log(res);
-				this.categories = res.data;
-			})
-			.catch(function(err) {
-				console.log(err);
-            });
         this.getCards(this.faction, this.category);
 	}
 };

@@ -25,9 +25,14 @@ func main() {
 	router.GET("/factions", s.ListFactions)
 	router.GET("/categories", s.ListCategories)
 
+	router.GET("/abilities", s.ListAbilities)
+	router.POST("/abilities", s.CreateAbility)
+	router.PUT("/abilities/:id", s.UpdateAbility)
+
 	router.GET("/cards", s.ListCards)
 	router.GET("/cards/:id", s.GetCard)
 	router.GET("/cards/:id/related", s.GetRelatedCards)
+	router.GET("/cards/:id/abilities", s.GetCardAbilities)
 	router.POST("/cards", s.CreateCard)
 	router.PUT("/cards/:id", s.UpdateCard)
 	router.DELETE("/cards/:id", s.DeleteCard)
@@ -37,6 +42,10 @@ func main() {
 	router.GET("/models/", s.ListModels)
 	router.GET("/models/:id", s.GetModel)
 	router.DELETE("/models/:id", s.DeleteModel)
+
+	router.PUT("/cards/:id/abilities/:ability_id", s.AddCardAbility)
+	router.DELETE("/cards/:id/abilities/:ability_id", s.DeleteCardAbility)
+
 	// router.GET("/models", s.ListModels)
 	// router.POST("/models", s.CreateModel)
 	// router.PUT("/models/:id", s.UpdateModel)

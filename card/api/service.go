@@ -30,6 +30,16 @@ func (s *Service) ListCategories(w http.ResponseWriter, r *http.Request, _ httpr
 	writeJson(w, s.src.ListCategories(), http.StatusOK)
 }
 
+func (s *Service) ListAbilities(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+	res, err := s.src.ListAbilities()
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	writeJson(w, res, http.StatusOK)
+}
+
 func writeJson(w http.ResponseWriter, body interface{}, code int) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(code)
