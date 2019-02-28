@@ -110,6 +110,7 @@
 			<label class="col-1 col-form-label"></label>
 			<div class="col-11">
 				<Model v-for="(value,index) in models" :abilitiesList="abilitiesList" v-bind:model="value" :key="value.id" v-on:remove="removeModel(index)"></Model>
+				<h4 class="text-left">New model</h4>
 				<Model :model="model" :abilitiesList="abilitiesList" v-on:add="addModel"></Model>
 				<!-- <Model v-bind:model="model" v-on:add="addModel()"></Model> -->
 			</div>

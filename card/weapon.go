@@ -9,7 +9,7 @@ import (
 type Weapon struct {
 	ID           int      `json:"id,omitempty" db:"id"`
 	ModelID      int      `json:"model_id,omitempty" db:"model_id"`
-	Type         int      `json:"type,omitempty" db:"type"`
+	Type         int      `json:"type,omitempty,string" db:"type"`
 	Name         string   `json:"name,omitempty" db:"name"`
 	RNG          string   `json:"rng,omitempty" db:"rng"`
 	POW          string   `json:"pow,omitempty" db:"pow"`
@@ -72,7 +72,7 @@ func (s *Service) SaveWeapon(weapon *Weapon) (int, error) {
 }
 
 func (s *Service) UpdateWeapon(weapon *Weapon) error {
-	stmt, err := s.db.PrepareNamed(`UPDATE abilities SET 
+	stmt, err := s.db.PrepareNamed(`UPDATE weapons SET 
 	model_id = :model_id, type = :type, name = :name, 
 	rng = :rng, pow = :pow, rof = :rof, aoe = :aoe, loc = :loc, cnt = :cnt, advantages = :advantages WHERE id = :id`)
 	if err != nil {
@@ -89,14 +89,14 @@ func (s *Service) UpdateWeapon(weapon *Weapon) error {
 	return nil
 }
 
-func (s *Service) ListWeapons(modelID int) ([]Weapon, error) {
-	stmt, err := s.db.Preparex("SELECT * FROM weapons WHERE model_id = ?")
+func (s *Service) ListWeapons() ([]Weapon, error) {
+	stmt, err := s.db.Preparex("SELECT * FROM weapons")
 	if err != nil {
 		return nil, errors.Wrap(err, "prepare statement")
 	}
 	defer stmt.Close()
 
-	rows, err := stmt.Queryx(modelID)
+	rows, err := stmt.Queryx()
 	if err != nil {
 		return nil, errors.Wrap(err, "execute query")
 	}
@@ -108,6 +108,29 @@ func (s *Service) ListWeapons(modelID int) ([]Weapon, error) {
 		}
 		r.Advantages = strings.Split(r.AdvantagesDB, ",")
 
+		res = append(res, r)
+	}
+	return res, nil
+}
+
+func (s *Service) GetWeaponAbilities(id int) ([]Ability, error) {
+	stmt, err := s.db.Preparex("SELECT id, original_name, name, magical, description FROM weapon_ability AS l LEFT JOIN abilities AS a ON l.ability_id = a.id WHERE l.weapon_id = ?")
+	if err != nil {
+		return nil, errors.Wrap(err, "prepare statement")
+	}
+	defer stmt.Close()
+
+	rows, err := stmt.Queryx(id)
+	if err != nil {
+		return nil, errors.Wrap(err, "execute query")
+	}
+
+	res := []Ability{}
+	for rows.Next() {
+		r := Ability{}
+		if err := rows.StructScan(&r); err != nil {
+			return nil, errors.Wrap(err, "struct scan")
+		}
 		res = append(res, r)
 	}
 	return res, nil

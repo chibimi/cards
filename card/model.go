@@ -140,3 +140,27 @@ func (s *Service) ListModels() ([]Model, error) {
 	}
 	return res, nil
 }
+
+func (s *Service) GetModelWeapons(id int) ([]Weapon, error) {
+	stmt, err := s.db.Preparex("SELECT * FROM weapons WHERE model_id = ?")
+	if err != nil {
+		return nil, errors.Wrap(err, "prepare statement")
+	}
+	defer stmt.Close()
+
+	rows, err := stmt.Queryx(id)
+	if err != nil {
+		return nil, errors.Wrap(err, "execute query")
+	}
+
+	res := []Weapon{}
+	for rows.Next() {
+		r := Weapon{}
+		if err := rows.StructScan(&r); err != nil {
+			return nil, errors.Wrap(err, "struct scan")
+		}
+		r.Advantages = strings.Split(r.AdvantagesDB, ",")
+		res = append(res, r)
+	}
+	return res, nil
+}

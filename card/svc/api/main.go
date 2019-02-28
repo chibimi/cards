@@ -41,15 +41,26 @@ func main() {
 	router.GET("/models/", s.ListModels)
 	router.GET("/models/:id", s.GetModel)
 	router.GET("/models/:id/abilities", s.GetModelAbilities)
+	router.GET("/models/:id/weapons", s.GetModelWeapons)
 	router.POST("/models", s.CreateModel)
 	router.PUT("/models/:id", s.UpdateModel)
 	router.DELETE("/models/:id", s.DeleteModel)
+
+	router.GET("/weapons/", s.ListWeapons)
+	router.GET("/weapons/:id", s.GetWeapon)
+	router.GET("/weapons/:id/abilities", s.GetWeaponAbilities)
+	router.POST("/weapons", s.CreateWeapon)
+	router.PUT("/weapons/:id", s.UpdateWeapon)
+	router.DELETE("/weapons/:id", s.DeleteWeapon)
 
 	router.PUT("/cards/:id/abilities/:ability_id", s.AddCardAbility)
 	router.DELETE("/cards/:id/abilities/:ability_id", s.DeleteCardAbility)
 
 	router.PUT("/models/:id/abilities/:ability_id", s.AddModelAbility)
 	router.DELETE("/models/:id/abilities/:ability_id", s.DeleteModelAbility)
+
+	router.PUT("/weapons/:id/abilities/:ability_id", s.AddWeaponAbility)
+	router.DELETE("/weapons/:id/abilities/:ability_id", s.DeleteWeaponAbility)
 
 	// router.GET("/models", s.ListModels)
 	// router.POST("/models", s.CreateModel)

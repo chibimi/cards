@@ -1,31 +1,40 @@
 <template>
 	<div class="w-100">
 		<div class="form-group row">
-			<label class="col-2 col-form-label">Model Name</label>
-			<div class="col-7">
-				<input v-model="model.name" type="text" class="form-control" placeholder="Fyanna 2">
+
+			<span class="col-2 text-left">Name</span>
+			<span class="col-1 text-left">spd</span>
+			<span class="col-1 text-left">str</span>
+			<span class="col-1 text-left">mat</span>
+			<span class="col-1 text-left">rat</span>
+			<span class="col-1 text-left">def</span>
+			<span class="col-1 text-left">arm</span>
+			<span class="col-1 text-left">cmd</span>
+			<span class="col-1 text-left">base</span>
+			<span class="col-1 text-left"></span>
+			<span class="col-1 text-left"></span>
+
+			<input v-model="model.name" type="text" class="form-control col-2" placeholder="Name">
+			<input v-model="model.spd" type="text" class="form-control col-1" placeholder="spd">
+			<input v-model="model.str" type="text" class="form-control col-1" placeholder="str">
+			<input v-model="model.mat" type="text" class="form-control col-1" placeholder="mat">
+			<input v-model="model.rat" type="text" class="form-control col-1" placeholder="rat">
+			<input v-model="model.def" type="text" class="form-control col-1" placeholder="def">
+			<input v-model="model.arm" type="text" class="form-control col-1" placeholder="arm">
+			<input v-model="model.cmd" type="text" class="form-control col-1" placeholder="cmd">
+			<input v-model="model.base_size" type="text" class="form-control col-1" placeholder="case">
+
+			<div v-if="model.id" class="col-1 pl-1 pr-0">
+				<button type="submit" class="form-control btn btn-success" @click="save(model)">Update</button>
 			</div>
-			<label class="col-1 col-form-label">Order</label>
-			<div class="col-2">
-				<input v-model="model.order" type="text" class="form-control" placeholder>
+			<div v-if="model.id" class="col-1 pl-1 pr-0">
+				<button type="submit" class="form-control btn btn-danger" @click="remove(model)">Delete</button>
+			</div>
+			<div v-if="!model.id" class="col-2 pl-1 pr-0">
+				<button type="submit" class="form-control btn btn-primary" @click="save(model)">Add</button>
 			</div>
 
-			<label class="col-2 col-form-label">Statline</label>
-			<div class="col-10 text-left">
-				<form class="form-inline statline">
-					<input v-model="model.spd" type="text" class="form-control" placeholder="SPD">
-					<input v-model="model.str" type="text" class="form-control" placeholder="STR">
-					<input v-model="model.mat" type="text" class="form-control" placeholder="MAT">
-					<input v-model="model.rat" type="text" class="form-control" placeholder="RAT">
-					<input v-model="model.def" type="text" class="form-control" placeholder="DEF">
-					<input v-model="model.arm" type="text" class="form-control" placeholder="ARM">
-					<input v-model="model.cmd" type="text" class="form-control" placeholder="CMD">
-					<input v-model="model.base_size" type="text" class="form-control" placeholder="Base Size">
-				</form>
-			</div>
-
-			<label class="col-2 col-form-label">Advantages</label>
-			<div class="col-10 text-left">
+			<div class="col-12 text-left px-0 mt-2">
 				<div class="form-check form-check-inline">
 					<input class="form-check-input" type="checkbox" v-model="model.advantages" value="advance_deploy">
 					<label class="form-check-label">Advance deploy</label>
@@ -124,16 +133,6 @@
 				</div>
 			</div>
 
-			<label class="col-2 col-form-label mt-2"></label>
-			<div v-if="model.id" class="col-8 mt-2">
-				<button type="submit" class="form-control btn btn-success" @click="save(model)">Update Model</button>
-			</div>
-			<div v-if="model.id" class="col-2 mt-2">
-				<button type="submit" class="form-control btn btn-danger" @click="remove(model)">Delete Model</button>
-			</div>
-			<div v-if="!model.id" class="col-10 mt-2">
-				<button type="submit" class="form-control btn btn-primary" @click="save(model)">Save Model</button>
-			</div>
 		</div>
 		<hr>
 		<div v-if="model.id">
@@ -157,6 +156,7 @@
 				<label class="col-1 col-form-label"></label>
 				<div class="col-11">
 					<Weapon v-for="(value,index) in weapons" :abilitiesList="abilitiesList" v-bind:weapon="value" :key="value.id" v-on:remove="removeWeapon(index)"></Weapon>
+					<h4 class="text-left">New weapon</h4>
 					<Weapon :weapon="weapon" :abilitiesList="abilitiesList" v-on:add="addWeapon"></Weapon>
 				</div>
 			</div>

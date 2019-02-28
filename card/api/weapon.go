@@ -9,14 +9,14 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-func (s *Service) CreateModel(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
-	model := &card.Model{}
-	if err := json.NewDecoder(r.Body).Decode(model); err != nil {
+func (s *Service) CreateWeapon(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+	weapon := &card.Weapon{}
+	if err := json.NewDecoder(r.Body).Decode(weapon); err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
 
-	res, err := s.src.SaveModel(model)
+	res, err := s.src.SaveWeapon(weapon)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -25,18 +25,18 @@ func (s *Service) CreateModel(w http.ResponseWriter, r *http.Request, p httprout
 	writeJson(w, res, http.StatusCreated)
 }
 
-func (s *Service) UpdateModel(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+func (s *Service) UpdateWeapon(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	if p.ByName("id") == "0" {
-		s.CreateModel(w, r, p)
+		s.CreateWeapon(w, r, p)
 		return
 	}
-	model := &card.Model{}
-	if err := json.NewDecoder(r.Body).Decode(model); err != nil {
+	weapon := &card.Weapon{}
+	if err := json.NewDecoder(r.Body).Decode(weapon); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 
-	err := s.src.UpdateModel(model)
+	err := s.src.UpdateWeapon(weapon)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -45,13 +45,13 @@ func (s *Service) UpdateModel(w http.ResponseWriter, r *http.Request, p httprout
 	writeJson(w, nil, http.StatusOK)
 }
 
-func (s *Service) GetModel(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+func (s *Service) GetWeapon(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	id, err := strconv.Atoi(p.ByName("id"))
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	res, err := s.src.GetModel(id)
+	res, err := s.src.GetWeapon(id)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -60,8 +60,8 @@ func (s *Service) GetModel(w http.ResponseWriter, r *http.Request, p httprouter.
 	writeJson(w, res, http.StatusOK)
 }
 
-func (s *Service) ListModels(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
-	res, err := s.src.ListModels()
+func (s *Service) ListWeapons(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+	res, err := s.src.ListWeapons()
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -70,13 +70,13 @@ func (s *Service) ListModels(w http.ResponseWriter, r *http.Request, p httproute
 	writeJson(w, res, http.StatusOK)
 }
 
-func (s *Service) DeleteModel(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+func (s *Service) DeleteWeapon(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	id, err := strconv.Atoi(p.ByName("id"))
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	err = s.src.DeleteModel(id)
+	err = s.src.DeleteWeapon(id)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -85,14 +85,14 @@ func (s *Service) DeleteModel(w http.ResponseWriter, r *http.Request, p httprout
 	writeJson(w, nil, http.StatusNoContent)
 }
 
-func (s *Service) GetModelAbilities(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+func (s *Service) GetWeaponAbilities(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	id, err := strconv.Atoi(p.ByName("id"))
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
 
-	res, err := s.src.GetModelAbilities(id)
+	res, err := s.src.GetWeaponAbilities(id)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -101,7 +101,7 @@ func (s *Service) GetModelAbilities(w http.ResponseWriter, r *http.Request, p ht
 	writeJson(w, res, http.StatusOK)
 }
 
-func (s *Service) AddModelAbility(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+func (s *Service) AddWeaponAbility(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	cardID, err := strconv.Atoi(p.ByName("id"))
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
@@ -113,7 +113,7 @@ func (s *Service) AddModelAbility(w http.ResponseWriter, r *http.Request, p http
 		return
 	}
 
-	err = s.src.AddModelAbility(cardID, abilityID)
+	err = s.src.AddWeaponAbility(cardID, abilityID)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -122,7 +122,7 @@ func (s *Service) AddModelAbility(w http.ResponseWriter, r *http.Request, p http
 	writeJson(w, nil, http.StatusOK)
 }
 
-func (s *Service) DeleteModelAbility(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+func (s *Service) DeleteWeaponAbility(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	cardID, err := strconv.Atoi(p.ByName("id"))
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
@@ -134,26 +134,10 @@ func (s *Service) DeleteModelAbility(w http.ResponseWriter, r *http.Request, p h
 		return
 	}
 
-	err = s.src.DeleteModelAbility(cardID, abilityID)
+	err = s.src.DeleteWeaponAbility(cardID, abilityID)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 	writeJson(w, nil, http.StatusNoContent)
-}
-
-func (s *Service) GetModelWeapons(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
-	id, err := strconv.Atoi(p.ByName("id"))
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
-		return
-	}
-
-	res, err := s.src.GetModelWeapons(id)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-
-	writeJson(w, res, http.StatusOK)
 }

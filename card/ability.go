@@ -123,6 +123,33 @@ func (s *Service) DeleteCardAbility(cardID, abilityID int) error {
 	return nil
 }
 
+func (s *Service) AddWeaponAbility(weaponID, abilityID int) error {
+	stmt, err := s.db.Prepare(`INSERT INTO weapon_ability VALUES(?, ?)`)
+	if err != nil {
+		return errors.Wrap(err, "prepare statement")
+	}
+	defer stmt.Close()
+
+	_, err = stmt.Exec(weaponID, abilityID)
+	if err != nil {
+		return errors.Wrap(err, "execute query")
+	}
+	return nil
+}
+func (s *Service) DeleteWeaponAbility(weaponID, abilityID int) error {
+	stmt, err := s.db.Prepare(`DELETE FROM weapon_ability WHERE weapon_id = ? AND ability_id = ?`)
+	if err != nil {
+		return errors.Wrap(err, "prepare statement")
+	}
+	defer stmt.Close()
+
+	_, err = stmt.Exec(weaponID, abilityID)
+	if err != nil {
+		return errors.Wrap(err, "execute query")
+	}
+	return nil
+}
+
 func (s *Service) AddModelAbility(modelID, abilityID int) error {
 	stmt, err := s.db.Prepare(`INSERT INTO model_ability VALUES(?, ?)`)
 	if err != nil {
