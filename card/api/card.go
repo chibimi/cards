@@ -127,6 +127,22 @@ func (s *Service) GetCardAbilities(w http.ResponseWriter, r *http.Request, p htt
 	writeJson(w, res, http.StatusOK)
 }
 
+func (s *Service) GetCardModels(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+	id, err := strconv.Atoi(p.ByName("id"))
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	res, err := s.src.GetCardModels(id)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	writeJson(w, res, http.StatusOK)
+}
+
 func (s *Service) AddCardAbility(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	cardID, err := strconv.Atoi(p.ByName("id"))
 	if err != nil {

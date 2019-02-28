@@ -1,29 +1,38 @@
 <template>
 	<div class="w-100">
 		<div class="row">
-		<div class="col-4">
-			<v-autocomplete
-				v-if="!ability.id"
-				:items="items"
-				:get-label="getLabel"
-				@update-items="updateItems"
-				:component-item="template"
-				:auto-select-one-item="false"
-				@item-selected="selectedItem"
-			></v-autocomplete>
+			<div class="col-4">
+				<v-autocomplete
+					v-if="!ability.id"
+					:items="items"
+					:get-label="getLabel"
+					@update-items="updateItems"
+					:component-item="template"
+					:auto-select-one-item="false"
+					@item-selected="selectedItem"
+				></v-autocomplete>
 
-			<input v-model="selectedAbility.original_name" type="text" class="form-control" placeholder>
-			<input v-model="selectedAbility.name" type="text" class="form-control" placeholder>
-			
-			<button v-if="ability.id || selectedAbility.id" type="submit" class="form-control btn btn-success" @click="save(selectedAbility)">Update Ability</button>
-			<button v-if="ability.id" type="submit" class="form-control btn btn-danger" @click="remove(selectedAbility)">Delete Ability</button>
-			<button v-if="!ability.id && selectedAbility.id" type="submit" class="form-control btn btn-primary" @click="add(selectedAbility)">Add Ability</button>
-			<button v-if="!ability.id && !selectedAbility.id" type="submit" class="form-control btn btn-primary" @click="save(selectedAbility)">Save & Add Ability</button>
-		</div>
+				<input v-model="selectedAbility.original_name" type="text" class="form-control" placeholder="English Name">
+				<input v-model="selectedAbility.name" type="text" class="form-control" placeholder="French Name">
+				<div class="form-check form-check-inline mb-2">
+					<label class="form-check-label">Can be magical or choose type ? </label>
+					<input class="form-check-input ml-3" type="checkbox" v-model="selectedAbility.magical">
+				</div>
 
-		<div class="col-8">
-			<textarea v-model="selectedAbility.description" type="text" class="form-control" rows="6" placeholder/>
-		</div>
+				<button v-if="ability.id || selectedAbility.id" type="submit" class="form-control btn btn-success" @click="save(selectedAbility)">Update Ability</button>
+				<button v-if="ability.id" type="submit" class="form-control btn btn-danger" @click="remove(selectedAbility)">Delete Ability</button>
+				<button v-if="!ability.id && selectedAbility.id" type="submit" class="form-control btn btn-primary" @click="add(selectedAbility)">Add Ability</button>
+				<button
+					v-if="!ability.id && !selectedAbility.id"
+					type="submit"
+					class="form-control btn btn-primary"
+					@click="save(selectedAbility)"
+				>Save & Add Ability</button>
+			</div>
+
+			<div class="col-8">
+				<textarea v-model="selectedAbility.description" type="text" class="form-control" rows="7" placeholder/>
+			</div>
 		</div>
 		<hr>
 	</div>
@@ -69,7 +78,7 @@ export default {
 			this.$emit("add", ability);
 		},
 		remove: function() {
-			console.log("remove")
+			console.log("remove");
 			this.$emit("remove");
 		},
 		getLabel: function(item) {
@@ -84,8 +93,8 @@ export default {
 			);
 		},
 		selectedItem(item) {
-			console.log("SELECTED",item, this.ability)
-			this.selectedAbility = item
+			console.log("SELECTED", item, this.ability);
+			this.selectedAbility = item;
 			// this.ability.id = item.id;
 			// this.selectedAbility.name = item.name;
 			// this.selectedAbility.original_name = item.original_name;

@@ -33,18 +33,23 @@ func main() {
 	router.GET("/cards/:id", s.GetCard)
 	router.GET("/cards/:id/related", s.GetRelatedCards)
 	router.GET("/cards/:id/abilities", s.GetCardAbilities)
+	router.GET("/cards/:id/models", s.GetCardModels)
 	router.POST("/cards", s.CreateCard)
 	router.PUT("/cards/:id", s.UpdateCard)
 	router.DELETE("/cards/:id", s.DeleteCard)
 
-	router.POST("/models", s.CreateModel)
-	router.PUT("/models/:id", s.UpdateModel)
 	router.GET("/models/", s.ListModels)
 	router.GET("/models/:id", s.GetModel)
+	router.GET("/models/:id/abilities", s.GetModelAbilities)
+	router.POST("/models", s.CreateModel)
+	router.PUT("/models/:id", s.UpdateModel)
 	router.DELETE("/models/:id", s.DeleteModel)
 
 	router.PUT("/cards/:id/abilities/:ability_id", s.AddCardAbility)
 	router.DELETE("/cards/:id/abilities/:ability_id", s.DeleteCardAbility)
+
+	router.PUT("/models/:id/abilities/:ability_id", s.AddModelAbility)
+	router.DELETE("/models/:id/abilities/:ability_id", s.DeleteModelAbility)
 
 	// router.GET("/models", s.ListModels)
 	// router.POST("/models", s.CreateModel)

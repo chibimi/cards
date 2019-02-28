@@ -93,14 +93,24 @@
 				</div>
 			</div>
 		</form>
+
 		<hr>
 		<h3>Card abilities</h3>
 		<div class="row">
-
 			<label class="col-1 col-form-label"></label>
 			<div class="col-11">
 				<Ability v-for="(value,index) in abilities" :abilitiesList="abilitiesList" v-bind:ability="value" :key="value.id" v-on:remove="removeAbility(value,index)"></Ability>
 				<Ability :ability="ability" :abilitiesList="abilitiesList" v-on:add="addAbility"></Ability>
+			</div>
+		</div>
+
+		<hr>
+		<h3>Models</h3>
+		<div class="row">
+			<label class="col-1 col-form-label"></label>
+			<div class="col-11">
+				<Model v-for="(value,index) in models" :abilitiesList="abilitiesList" v-bind:model="value" :key="value.id" v-on:remove="removeModel(index)"></Model>
+				<Model :model="model" :abilitiesList="abilitiesList" v-on:add="addModel"></Model>
 				<!-- <Model v-bind:model="model" v-on:add="addModel()"></Model> -->
 			</div>
 		</div>
@@ -142,6 +152,7 @@ export default {
 			ability: {},
 			models: [],
 			model: {
+				card_id: this.id,
 				advantages: []
 			}
 		};
@@ -181,12 +192,12 @@ export default {
 					console.log(res);
 					this.card = res.data;
 				});
-			// this.$http
-			// 	.get("http://localhost:9901/models?card_id=" + cardID)
-			// 	.then(function(res) {
-			// 		console.log(res);
-			// 		this.models = res.data;
-			// 	});
+			this.$http
+				.get("http://localhost:9901/cards/" + cardID + "/models")
+				.then(function(res) {
+					console.log(res);
+					this.models = res.data;
+				});
 			this.$http
 				.get("http://localhost:9901/cards/" + cardID + "/abilities")
 				.then(function(res) {
@@ -216,13 +227,15 @@ export default {
 				});
 			
 		},
-		// removeModel: function(index) {
-		// 	this.models.splice(index, 1);
-		// },
-		// addModel: function() {
-		// 	this.models.push(this.model);
-		// 	this.model = { card_id: this.card.id, advantages: [] };
-		// }
+		removeModel: function(index) {
+						console.log("REMOVE FROM CARD",index)
+
+			this.models.splice(index, 1);
+		},
+		addModel: function(model) {
+			this.models.push(model);
+			this.model = { card_id: this.card.id, advantages: [] };
+		}
 	}
 };
 </script>

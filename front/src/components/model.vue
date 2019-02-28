@@ -1,7 +1,7 @@
 <template>
 	<div class="w-100">
 		<div class="form-group row">
-			<label class="col-2 col-form-label">Model Name 2</label>
+			<label class="col-2 col-form-label">Model Name</label>
 			<div class="col-7">
 				<input v-model="model.name" type="text" class="form-control" placeholder="Fyanna 2">
 			</div>
@@ -129,20 +129,50 @@
 				<button type="submit" class="form-control btn btn-success" @click="save(model)">Update Model</button>
 			</div>
 			<div v-if="model.id" class="col-2 mt-2">
-				<button type="submit" class="form-control btn btn-danger" @click="remove(model.id)">Delete Model</button>
+				<button type="submit" class="form-control btn btn-danger" @click="remove(model)">Delete Model</button>
 			</div>
 			<div v-if="!model.id" class="col-10 mt-2">
 				<button type="submit" class="form-control btn btn-primary" @click="save(model)">Save Model</button>
 			</div>
 		</div>
 		<hr>
+		<div v-if="model.id">
+			<h4>Model abilities</h4>
+			<div class="row">
+				<label class="col-1 col-form-label"></label>
+				<div class="col-11">
+					<Ability
+						v-for="(value,index) in abilities"
+						:abilitiesList="abilitiesList"
+						v-bind:ability="value"
+						:key="value.id"
+						v-on:remove="removeAbility(value,index)"
+					></Ability>
+					<Ability :ability="ability" :abilitiesList="abilitiesList" v-on:add="addAbility"></Ability>
+				</div>
+			</div>
+
+			<h4>Model weapons</h4>
+			<div class="row">
+				<label class="col-1 col-form-label"></label>
+				<div class="col-11">
+					<Weapon v-for="(value,index) in weapons" :abilitiesList="abilitiesList" v-bind:weapon="value" :key="value.id" v-on:remove="removeWeapon(index)"></Weapon>
+					<Weapon :weapon="weapon" :abilitiesList="abilitiesList" v-on:add="addWeapon"></Weapon>
+				</div>
+			</div>
+		</div>
 	</div>
 </template>
 
 <script>
+import Ability from "./ability.vue";
+import Weapon from "./weapon.vue";
 export default {
 	name: "Model",
-	props: ["model"],
+	props: ["abilitiesList", "model"],
+	components: {
+		Ability, Weapon
+	},
 	watch: {
 		model: function(newVal, oldVal) {
 			if (newVal.id === oldVal.id) {
@@ -154,12 +184,39 @@ export default {
 		}
 	},
 	created: function() {
+		console.log("created", this.model);
 		this.get(this.model.id);
 	},
 	data() {
-		return {};
+		return {
+			abilities: [],
+			ability: {},
+			weapons: [],
+			weapon: {
+				model_id: this.model.id,
+				advantages: []
+			}
+		};
 	},
 	methods: {
+		get: function(modelID) {
+			this.card = {};
+			if (!modelID) {
+				return;
+			}
+			this.$http
+				.get("http://localhost:9901/models/" + modelID + "/abilities")
+				.then(function(res) {
+					console.log(res);
+					this.abilities = res.data;
+				});
+			this.$http
+				.get("http://localhost:9901/models/" + modelID + "/weapons")
+				.then(function(res) {
+					console.log(res);
+					this.weapons = res.data;
+				});
+		},
 		save: function(model) {
 			if (model.id == null) {
 				model.id = 0;
@@ -168,33 +225,16 @@ export default {
 				.put("http://localhost:9901/models/" + model.id, model)
 				.then(function(res) {
 					console.log(res);
-					console.log(res.data);
 					if (res.status === 201) {
 						model.id = res.data;
-						this.$emit("add");
+						this.$emit("add", model);
 					}
 				});
 		},
-		get: function(id) {
-			if (!id) {
-				return;
-			}
+		remove: function(model) {
+			console.log("REMOVE FROM MODEL", model.id);
 			this.$http
-				.get("http://localhost:9901/models/" + id)
-				.then(function(res) {
-					console.log(res);
-					if (res.status === 200) {
-						// this.model = res.data;
-						this.model.name = res.data.name;
-					}
-				})
-				.catch(function(err) {
-					console.log(err);
-				});
-		},
-		remove: function(id) {
-			this.$http
-				.delete("http://localhost:9901/models/" + id)
+				.delete("http://localhost:9901/models/" + model.id)
 				.then(function(res) {
 					if (res.status === 204) {
 						this.$emit("remove");
@@ -203,6 +243,47 @@ export default {
 				.catch(function(err) {
 					console.log(err);
 				});
+		},
+		removeAbility: function(ability, index) {
+			console.log("remove abi", ability, index);
+			this.$http
+				.delete(
+					"http://localhost:9901/models/" +
+						this.model.id +
+						"/abilities/" +
+						ability.id
+				)
+				.then(function(res) {
+					if (res.status === 204) {
+						this.abilities.splice(index, 1);
+					}
+				});
+		},
+		addAbility: function(ability) {
+			this.$http
+				.put(
+					"http://localhost:9901/models/" +
+						this.model.id +
+						"/abilities/" +
+						ability.id +
+						"?magical=" +
+						ability.magical
+				)
+				.then(function(res) {
+					if (res.status === 200) {
+						this.abilities.push(ability);
+						this.ability = {};
+					}
+				});
+		},
+		removeWeapon: function(index) {
+			console.log("REMOVE FROM MODEL", index);
+
+			this.weapons.splice(index, 1);
+		},
+		addWeapon: function(weapon) {
+			this.weapons.push(weapon);
+			this.weapon = { model_id: this.model.id, advantages: [] };
 		}
 	}
 };

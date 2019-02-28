@@ -38,40 +38,41 @@ CREATE TABLE models (
     arm varchar(2), 
     cmd varchar(2), 
     magic_ability varchar(2), 
-    advantages varchar(255),
     base_size varchar(2),
+    m_order int,
+    advantages varchar(255),
     PRIMARY KEY (id)
 );
 
-INSERT INTO models VALUES (0, 1, "Chef & recrues", "5", "6", "6", "4", "12", "15", "8", "", "cma", "30");
-INSERT INTO models VALUES (0, 2, "Chef & recrues", "6", "7", "7", "4", "14", "13", "7", "", "", "30");
-INSERT INTO models VALUES (0, 3, "Bouche", "-", "10", "6", "-", "10", "18", "8", "", "officer,soulless", "50");
-INSERT INTO models VALUES (0, 3, "Tentacule", "5", "6", "6", "-", "10", "15", "-", "", "pathfinder,soulless", "40");
-INSERT INTO models VALUES (0, 4, "Sevryn1", "6", "5", "7", "4", "14", "12", "6", "7", "immunity_frost,officer,pathfinder", "30");
-INSERT INTO models VALUES (0, 4, "Rhylyss1", "6", "5", "7", "4", "14", "12", "6", "7", "immunity_frost,pathfinder", "30");
-INSERT INTO models VALUES (0, 4, "Vysarr1", "6", "5", "7", "4", "14", "12", "6", "7", "immunity_frost,pathfinder", "30");
+INSERT INTO models VALUES (0, 1, "Chef & recrues", "5", "6", "6", "4", "12", "15", "8", "", ,"30" ,1, "cma");
+INSERT INTO models VALUES (0, 2, "Chef & recrues", "6", "7", "7", "4", "14", "13", "7", "", "30", 1, "");
+INSERT INTO models VALUES (0, 3, "Bouche", "-", "10", "6", "-", "10", "18", "8", "", "50", 1, "officer,soulless");
+INSERT INTO models VALUES (0, 3, "Tentacule", "5", "6", "6", "-", "10", "15", "-", "", "40", 2, "pathfinder,soulless");
+INSERT INTO models VALUES (0, 4, "Sevryn1", "6", "5", "7", "4", "14", "12", "6", "7", "30", 1, "immunity_frost,officer,pathfinder");
+INSERT INTO models VALUES (0, 4, "Rhylyss1", "6", "5", "7", "4", "14", "12", "6", "7", "30", 2, "immunity_frost,pathfinder");
+INSERT INTO models VALUES (0, 4, "Vysarr1", "6", "5", "7", "4", "14", "12", "6", "7", "30", 3, "immunity_frost,pathfinder");
 -- INSERT INTO models VALUES (0, 1, "", "", "", "", "", "", "", "", "", "", "");
 
 CREATE TABLE abilities (
     id int unsigned not null auto_increment, 
-    type int not null, 
     original_name varchar(100) not null, 
     name varchar(100) not null, 
+    magical boolean, 
     description text,
     PRIMARY KEY (id)
 );
 
-INSERT INTO abilities VALUES (0, 3, "Ice bolt", "Eclair gelé (*attaque)", "Eclair Gelé est une attaque magique de POR 10. La figurine touchée subit un jet de dégats de froid PUI 12. Sur une touche critique la figurine touchée devient stationnaire à moins qu'elle ait Immunité Froid.");
-INSERT INTO abilities VALUES (0, 3, "Ice cage", "Prison gelée (*attaque)", "Prison Gelée est une attaque magique de POR 10. La figurine touchée subit une malus cumulatif de -2 DEF pour un tour à moins qu'elle ait Immunité Froid. Quand une figurine sans imunité froid est touchée 3 fois ou plus par Prison Gelée pendant le même tour, elle devient stationnaire.");
-INSERT INTO abilities VALUES (0, 3, "kiss of Lyliss", "Baiser de Lyliss (*attaque)", "Baiser de Lyliss est une attaque magique de POR 10. Quand une figurine de faction alliée fait un jet de dégats contre une figurine/unité touchée par Baiser de Lyliss, ajouter +2 au résultat des dés. Baiser de Lyliss dure 1 tour.");
-INSERT INTO abilities VALUES (0, 3, "Cloak of mist", "Manteau Brumeux (*action)", "Les figurines de cette unité gagne dissimulation. Les figurines hors formation ne sont pas affectées. Manteau Brumeux dure 1 round.");
-INSERT INTO abilities VALUES (0, 3, "Disbinding", "Détachement (*action)", "Les sorts à entretien ennemi et les animi sur les figurines de cette unité expirent immédiatement.");
-INSERT INTO abilities VALUES (0, 2, "Vengeance", "Vengeance", "Pendant la phase de maintenance, si une figurine ou plus de cette unité a été endommagé par une attaque ennemie lors du round précédent, chaque modèle dans cette unité peut avancer de 3"" et faire une attaque de mêlée basique.");
-INSERT INTO abilities VALUES (0, 2, "wall of steel", "Mur d'Acier", "Tant que la figurine est SàS avec une figurine ou plus de cette unité, elle gagne +2 ARM.");
-INSERT INTO abilities VALUES (0, 4, "consume", "Consumer", "Si cette attaque touche une figurine de petite base non-warlock, non-warcaster, la figurine touchée est retirée du jeu.");
-INSERT INTO abilities VALUES (0, 4, "back attack", "Attaque arrière", "Cette figurine peut cibler des modèles dans son arc arrière lorsqu'elle déclare une attaque avec cette arme et sa porté de mêlée n'est pas limité à son arc avant avec cette arme.");
-INSERT INTO abilities VALUES (0, 4, "grip", "Etreinte", "Si cette arme touche une figurine ennemie sur une base large ou plus petite, imédiatement après la résolution de l'attaque cette figurine peut être retirée du jeu. Quand c'est le cas, la figurine touchée est poussée directement vers la Bouche jusqu'à ce qu'elle contacte une figurine, un obstacle ou une obstruction. Après avoir bougé la figurine, la Bouche peut immédiatement faire une attaque de mêlée basique ciblant celle-ci.");
-INSERT INTO abilities VALUES (0, 1, "test card abi", "Test abilité de carte", "Si cette arme touche une figurine ennemie sur une base large ou plus petite, imédiatement après la résolution de l'attaque cette figurine peut être retirée du jeu. Quand c'est le cas, la figurine touchée est poussée directement vers la Bouche jusqu'à ce qu'elle contacte une figurine, un obstacle ou une obstruction. Après avoir bougé la figurine, la Bouche peut immédiatement faire une attaque de mêlée basique ciblant celle-ci.");
+INSERT INTO abilities VALUES (0, "Ice bolt", "Eclair gelé (*attaque)", 1, "Eclair Gelé est une attaque magique de POR 10. La figurine touchée subit un jet de dégats de froid PUI 12. Sur une touche critique la figurine touchée devient stationnaire à moins qu'elle ait Immunité Froid.");
+INSERT INTO abilities VALUES (0, "Ice cage", "Prison gelée (*attaque)", 1, "Prison Gelée est une attaque magique de POR 10. La figurine touchée subit une malus cumulatif de -2 DEF pour un tour à moins qu'elle ait Immunité Froid. Quand une figurine sans imunité froid est touchée 3 fois ou plus par Prison Gelée pendant le même tour, elle devient stationnaire.");
+INSERT INTO abilities VALUES (0, "kiss of Lyliss", "Baiser de Lyliss (*attaque)", 1, "Baiser de Lyliss est une attaque magique de POR 10. Quand une figurine de faction alliée fait un jet de dégats contre une figurine/unité touchée par Baiser de Lyliss, ajouter +2 au résultat des dés. Baiser de Lyliss dure 1 tour.");
+INSERT INTO abilities VALUES (0, "Cloak of mist", "Manteau Brumeux (*action)", 1, "Les figurines de cette unité gagne dissimulation. Les figurines hors formation ne sont pas affectées. Manteau Brumeux dure 1 round.");
+INSERT INTO abilities VALUES (0, "Disbinding", "Détachement (*action)", 1, "Les sorts à entretien ennemi et les animi sur les figurines de cette unité expirent immédiatement.");
+INSERT INTO abilities VALUES (0, "Vengeance", "Vengeance", 0, "Pendant la phase de maintenance, si une figurine ou plus de cette unité a été endommagé par une attaque ennemie lors du round précédent, chaque modèle dans cette unité peut avancer de 3"" et faire une attaque de mêlée basique.");
+INSERT INTO abilities VALUES (0, "wall of steel", "Mur d'Acier", 0, "Tant que la figurine est SàS avec une figurine ou plus de cette unité, elle gagne +2 ARM.");
+INSERT INTO abilities VALUES (0, "consume", "Consumer", 0, "Si cette attaque touche une figurine de petite base non-warlock, non-warcaster, la figurine touchée est retirée du jeu.");
+INSERT INTO abilities VALUES (0, "back attack", "Attaque arrière", 0, "Cette figurine peut cibler des modèles dans son arc arrière lorsqu'elle déclare une attaque avec cette arme et sa porté de mêlée n'est pas limité à son arc avant avec cette arme.");
+INSERT INTO abilities VALUES (0, "grip", "Etreinte", 0, "Si cette arme touche une figurine ennemie sur une base large ou plus petite, imédiatement après la résolution de l'attaque cette figurine peut être retirée du jeu. Quand c'est le cas, la figurine touchée est poussée directement vers la Bouche jusqu'à ce qu'elle contacte une figurine, un obstacle ou une obstruction. Après avoir bougé la figurine, la Bouche peut immédiatement faire une attaque de mêlée basique ciblant celle-ci.");
+INSERT INTO abilities VALUES (0, "test card abi", "Test abilité de carte", 0, "Si cette arme touche une figurine ennemie sur une base large ou plus petite, imédiatement après la résolution de l'attaque cette figurine peut être retirée du jeu. Quand c'est le cas, la figurine touchée est poussée directement vers la Bouche jusqu'à ce qu'elle contacte une figurine, un obstacle ou une obstruction. Après avoir bougé la figurine, la Bouche peut immédiatement faire une attaque de mêlée basique ciblant celle-ci.");
 
 CREATE TABLE card_ability (
     card_id int not null,

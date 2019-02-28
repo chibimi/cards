@@ -6,9 +6,9 @@ import (
 
 type Ability struct {
 	ID           int    `json:"id,omitempty" db:"id"`
-	Type         int    `json:"type,omitempty" db:"type"`
 	OriginalName string `json:"original_name,omitempty" db:"original_name"`
 	Name         string `json:"name,omitempty" db:"name"`
+	Magical      bool   `json:"magical,omitempty" db:"magical"`
 	Description  string `json:"description,omitempty" db:"description"`
 }
 
@@ -44,7 +44,7 @@ func (s *Service) DeleteAbility(id int) error {
 
 func (s *Service) SaveAbility(ability *Ability) (int, error) {
 	stmt, err := s.db.PrepareNamed(`INSERT INTO abilities VALUES(
-		:id, :type, :original_name, :name, :description
+		:id, :original_name, :name, :magical, :description
 	)`)
 	if err != nil {
 		return 0, errors.Wrap(err, "prepare statement")
@@ -61,7 +61,7 @@ func (s *Service) SaveAbility(ability *Ability) (int, error) {
 
 func (s *Service) UpdateAbility(ability *Ability) error {
 	stmt, err := s.db.PrepareNamed(`UPDATE abilities SET 
-	type = :type, name = :name, original_name = :original_name, description = :description WHERE id = :id`)
+	name = :name, original_name = :original_name, magical = :magical, description = :description WHERE id = :id`)
 	if err != nil {
 		return errors.Wrap(err, "prepare statement")
 	}
@@ -109,7 +109,6 @@ func (s *Service) AddCardAbility(cardID, abilityID int) error {
 	}
 	return nil
 }
-
 func (s *Service) DeleteCardAbility(cardID, abilityID int) error {
 	stmt, err := s.db.Prepare(`DELETE FROM card_ability WHERE card_id = ? AND ability_id = ?`)
 	if err != nil {
@@ -124,27 +123,33 @@ func (s *Service) DeleteCardAbility(cardID, abilityID int) error {
 	return nil
 }
 
-func (s *Service) ListModelAbilities(modelID int) ([]Ability, error) {
-	stmt, err := s.db.Preparex("SELECT id, type, name, description FROM abilities AS a LEFT JOIN model_ability AS ma ON a.id = ma.ability_id WHERE ma.model_id = ? AND a.type = ?")
+func (s *Service) AddModelAbility(modelID, abilityID int) error {
+	stmt, err := s.db.Prepare(`INSERT INTO model_ability VALUES(?, ?)`)
 	if err != nil {
-		return nil, errors.Wrap(err, "prepare statement")
+		return errors.Wrap(err, "prepare statement")
 	}
 	defer stmt.Close()
 
-	rows, err := stmt.Queryx(modelID, 2)
+	_, err = stmt.Exec(modelID, abilityID)
 	if err != nil {
-		return nil, errors.Wrap(err, "execute query")
+		return errors.Wrap(err, "execute query")
 	}
-	res := []Ability{}
-	for rows.Next() {
-		r := Ability{}
-		if err := rows.StructScan(&r); err != nil {
-			return nil, errors.Wrap(err, "struct scan")
-		}
-		res = append(res, r)
-	}
-	return res, nil
+	return nil
 }
+func (s *Service) DeleteModelAbility(modelID, abilityID int) error {
+	stmt, err := s.db.Prepare(`DELETE FROM model_ability WHERE model_id = ? AND ability_id = ?`)
+	if err != nil {
+		return errors.Wrap(err, "prepare statement")
+	}
+	defer stmt.Close()
+
+	_, err = stmt.Exec(modelID, abilityID)
+	if err != nil {
+		return errors.Wrap(err, "execute query")
+	}
+	return nil
+}
+
 func (s *Service) ListMagicAbilities(modelID int) ([]Ability, error) {
 	stmt, err := s.db.Preparex("SELECT id, type, name, description FROM abilities AS a LEFT JOIN model_ability AS ma ON a.id = ma.ability_id WHERE ma.model_id = ? AND a.type = ?")
 	if err != nil {

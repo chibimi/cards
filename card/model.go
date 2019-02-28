@@ -19,6 +19,7 @@ type Model struct {
 	CMD          string   `json:"cmd,omitempty" db:"cmd"`
 	BaseSize     string   `json:"base_size,omitempty" db:"base_size"`
 	MagicAbility string   `json:"magic_ability,omitempty" db:"magic_ability"`
+	Order        int      `json:"order,omitempty,string" db:"m_order"`
 	Advantages   []string `json:"advantages" db:"-"`
 	AdvantagesDB string   `json:"-" db:"advantages"`
 }
@@ -41,6 +42,29 @@ func (s *Service) GetModel(id int) (*Model, error) {
 	return res, nil
 }
 
+func (s *Service) GetModelAbilities(id int) ([]Ability, error) {
+	stmt, err := s.db.Preparex("SELECT id, original_name, name, magical, description FROM model_ability AS l LEFT JOIN abilities AS a ON l.ability_id = a.id WHERE l.model_id = ?")
+	if err != nil {
+		return nil, errors.Wrap(err, "prepare statement")
+	}
+	defer stmt.Close()
+
+	rows, err := stmt.Queryx(id)
+	if err != nil {
+		return nil, errors.Wrap(err, "execute query")
+	}
+
+	res := []Ability{}
+	for rows.Next() {
+		r := Ability{}
+		if err := rows.StructScan(&r); err != nil {
+			return nil, errors.Wrap(err, "struct scan")
+		}
+		res = append(res, r)
+	}
+	return res, nil
+}
+
 func (s *Service) DeleteModel(id int) error {
 	stmt, err := s.db.Preparex("DELETE FROM models WHERE id = ?")
 	if err != nil {
@@ -57,7 +81,7 @@ func (s *Service) DeleteModel(id int) error {
 
 func (s *Service) SaveModel(model *Model) (int, error) {
 	stmt, err := s.db.PrepareNamed(`INSERT INTO models VALUES(
-		:id, :card_id, :name, :spd, :str, :mat, :rat, :def, :arm, :cmd, :magic_ability, :advantages, :base_size
+		:id, :card_id, :name, :spd, :str, :mat, :rat, :def, :arm, :cmd, :magic_ability, :base_size, :m_order, :advantages
 	)`)
 	if err != nil {
 		return 0, errors.Wrap(err, "prepare statement")
@@ -78,7 +102,7 @@ func (s *Service) UpdateModel(model *Model) error {
 	stmt, err := s.db.PrepareNamed(`UPDATE models SET 
 	card_id = :card_id, name = :name, 
 	spd = :spd, str = :str, mat = :mat, rat = :rat, def = :def, arm = :arm, cmd = :cmd, magic_ability = :magic_ability, 
-	advantages = :advantages, base_size = :base_size WHERE id = :id`)
+	advantages = :advantages, base_size = :base_size, m_order = :m_order WHERE id = :id`)
 	if err != nil {
 		return errors.Wrap(err, "prepare statement")
 	}
@@ -93,14 +117,14 @@ func (s *Service) UpdateModel(model *Model) error {
 	return nil
 }
 
-func (s *Service) ListModels(cardID int) ([]Model, error) {
-	stmt, err := s.db.Preparex("SELECT * FROM models WHERE card_id = ?")
+func (s *Service) ListModels() ([]Model, error) {
+	stmt, err := s.db.Preparex("SELECT * FROM models")
 	if err != nil {
 		return nil, errors.Wrap(err, "prepare statement")
 	}
 	defer stmt.Close()
 
-	rows, err := stmt.Queryx(cardID)
+	rows, err := stmt.Queryx()
 	if err != nil {
 		return nil, errors.Wrap(err, "execute query")
 	}

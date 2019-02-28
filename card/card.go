@@ -1,6 +1,8 @@
 package card
 
 import (
+	"strings"
+
 	"github.com/pkg/errors"
 )
 
@@ -33,7 +35,6 @@ func (s *Service) GetCard(id int) (*Card, error) {
 	defer stmt.Close()
 
 	res := &Card{}
-
 	if err := stmt.Get(res, id); err != nil {
 		return nil, errors.Wrap(err, "execute query")
 	}
@@ -65,7 +66,7 @@ func (s *Service) GetRelatedCards(id int) ([]Card, error) {
 }
 
 func (s *Service) GetCardAbilities(id int) ([]Ability, error) {
-	stmt, err := s.db.Preparex("SELECT id, type, original_name, name, description FROM card_ability AS l LEFT JOIN abilities AS a ON l.ability_id = a.id WHERE l.card_id = ?")
+	stmt, err := s.db.Preparex("SELECT id, original_name, name, magical, description FROM card_ability AS l LEFT JOIN abilities AS a ON l.ability_id = a.id WHERE l.card_id = ?")
 	if err != nil {
 		return nil, errors.Wrap(err, "prepare statement")
 	}
@@ -82,6 +83,30 @@ func (s *Service) GetCardAbilities(id int) ([]Ability, error) {
 		if err := rows.StructScan(&r); err != nil {
 			return nil, errors.Wrap(err, "struct scan")
 		}
+		res = append(res, r)
+	}
+	return res, nil
+}
+
+func (s *Service) GetCardModels(id int) ([]Model, error) {
+	stmt, err := s.db.Preparex("SELECT * FROM models WHERE card_id = ? ORDER BY m_order")
+	if err != nil {
+		return nil, errors.Wrap(err, "prepare statement")
+	}
+	defer stmt.Close()
+
+	rows, err := stmt.Queryx(id)
+	if err != nil {
+		return nil, errors.Wrap(err, "execute query")
+	}
+
+	res := []Model{}
+	for rows.Next() {
+		r := Model{}
+		if err := rows.StructScan(&r); err != nil {
+			return nil, errors.Wrap(err, "struct scan")
+		}
+		r.Advantages = strings.Split(r.AdvantagesDB, ",")
 		res = append(res, r)
 	}
 	return res, nil
