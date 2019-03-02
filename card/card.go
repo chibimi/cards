@@ -10,7 +10,7 @@ type Card struct {
 	ID         int    `json:"id,omitempty" db:"id"`
 	FactionID  int    `json:"faction_id,omitempty" db:"faction_id"`
 	CategoryID int    `json:"category_id,omitempty" db:"category_id"`
-	MainCardID int    `json:"main_card_id,omitempty" db:"main_card_id"`
+	MainCardID int    `json:"main_card_id,omitempty,string" db:"main_card_id"`
 	Name       string `json:"name,omitempty" db:"name"`
 	Properties string `json:"properties,omitempty" db:"properties"`
 	Models     string `json:"models,omitempty" db:"models"`
@@ -18,13 +18,7 @@ type Card struct {
 	Cost       string `json:"cost,omitempty" db:"cost"`
 	CostMax    string `json:"cost_max,omitempty" db:"cost_max"`
 	FA         string `json:"fa,omitempty" db:"fa"`
-
-	Resource  string `json:"resource,omitempty" db:"resource"`
-	Threshold string `json:"threshold,omitempty" db:"threshold"`
-
-	Damage string `json:"damage,omitempty" db:"damage"`
-
-	Status string `json:"status,omitempty" db:"status"`
+	Status     string `json:"status,omitempty" db:"status"`
 }
 
 func (s *Service) GetCard(id int) (*Card, error) {
@@ -127,7 +121,7 @@ func (s *Service) GetCardSpells(id int) ([]Spell, error) {
 }
 
 func (s *Service) GetCardModels(id int) ([]Model, error) {
-	stmt, err := s.db.Preparex("SELECT * FROM models WHERE card_id = ? ORDER BY m_order")
+	stmt, err := s.db.Preparex("SELECT * FROM models WHERE card_id = ?")
 	if err != nil {
 		return nil, errors.Wrap(err, "prepare statement")
 	}
@@ -189,8 +183,7 @@ func (s *Service) DeleteCard(id int) error {
 
 func (s *Service) SaveCard(card *Card) (int, error) {
 	stmt, err := s.db.PrepareNamed(`INSERT INTO cards VALUES(
-		:id, :main_card_id, :faction_id, :category_id, :name, :properties, :models, :models_max, :cost, :cost_max, :fa, :status,
-		:resource, :threshold, :damage
+		:id, :main_card_id, :faction_id, :category_id, :name, :properties, :models, :models_max, :cost, :cost_max, :fa, :status
 	)`)
 	if err != nil {
 		return 0, errors.Wrap(err, "prepare statement")
@@ -208,8 +201,7 @@ func (s *Service) SaveCard(card *Card) (int, error) {
 func (s *Service) UpdateCard(card *Card) error {
 	stmt, err := s.db.PrepareNamed(`UPDATE cards SET 
 	faction_id = :faction_id, category_id = :category_id, main_card_id = :main_card_id, name = :name, properties = :properties, 
-	models = :models, models_max = :models_max, cost = :cost, cost_max = :cost_max, fa = :fa, status = :status, 
-	resource = :resource, threshold = :threshold, damage = :damage
+	models = :models, models_max = :models_max, cost = :cost, cost_max = :cost_max, fa = :fa, status = :status
 	WHERE id = :id`)
 	if err != nil {
 		return errors.Wrap(err, "prepare statement")

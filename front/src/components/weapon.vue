@@ -1,7 +1,6 @@
 <template>
 	<div class="w-100">
-		<div class="form-group row">
-
+		<div class="form-group row px-3">
 			<span class="col-2 text-left">Name</span>
 			<span class="col-2 text-left">Type</span>
 			<span class="col-1 text-left">rng</span>
@@ -15,10 +14,10 @@
 			
 			<input v-model="weapon.name" type="text" class="form-control col-2" placeholder="Name">
 			<select v-model="weapon.type" class="form-control col-2">
-					<option value=1>Meele</option>
-					<option value=2>Ranged</option>
-					<option value=3>Mount</option>
-				</select>
+				<option value="1">Meele</option>
+				<option value="2">Ranged</option>
+				<option value="3">Mount</option>
+			</select>
 			<input v-model="weapon.rng" type="text" class="form-control col-1" placeholder="rng">
 			<input v-model="weapon.pow" type="text" class="form-control col-1" placeholder="pow">
 			<input v-model="weapon.rof" type="text" class="form-control col-1" placeholder="rof">
@@ -35,11 +34,79 @@
 			<div v-if="!weapon.id" class="col-2 pl-1 pr-0">
 				<button type="submit" class="form-control btn btn-primary" @click="save(weapon)">Add</button>
 			</div>
+
+			<div class="col-12 text-left px-0 mt-2">
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" type="checkbox" v-model="weapon.advantages" value="blessed">
+					<label class="form-check-label">Blessed</label>
+				</div>
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" type="checkbox" v-model="weapon.advantages" value="chain">
+					<label class="form-check-label">Chain</label>
+				</div>
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" type="checkbox" v-model="weapon.advantages" value="type_corrosion">
+					<label class="form-check-label">Type: Corrosion</label>
+				</div>
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" type="checkbox" v-model="weapon.advantages" value="continuous_corrosion">
+					<label class="form-check-label">Cont. Corrosion</label>
+				</div>
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" type="checkbox" v-model="weapon.advantages" value="crit_corrotion">
+					<label class="form-check-label">Crit. Corrosion</label>
+				</div>
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" type="checkbox" v-model="weapon.advantages" value="type_electricity">
+					<label class="form-check-label">Type: Electricity</label>
+				</div>
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" type="checkbox" v-model="weapon.advantages" value="disruption">
+					<label class="form-check-label">Dusruption</label>
+				</div>
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" type="checkbox" v-model="weapon.advantages" value="crit_disruption">
+					<label class="form-check-label">Crit. Disruption</label>
+				</div>
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" type="checkbox" v-model="weapon.advantages" value="type_fire">
+					<label class="form-check-label">Type: Fire</label>
+				</div>
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" type="checkbox" v-model="weapon.advantages" value="continuous_fire">
+					<label class="form-check-label">Cont. Fire</label>
+				</div>
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" type="checkbox" v-model="weapon.advantages" value="crit_fire">
+					<label class="form-check-label">Crit. Fire</label>
+				</div>
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" type="checkbox" v-model="weapon.advantages" value="magical">
+					<label class="form-check-label">Magical</label>
+				</div>
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" type="checkbox" v-model="weapon.advantages" value="open_fist">
+					<label class="form-check-label">Open Fist</label>
+				</div>
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" type="checkbox" v-model="weapon.advantages" value="shield_1">
+					<label class="form-check-label">Shield +1</label>
+				</div>
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" type="checkbox" v-model="weapon.advantages" value="shield_2">
+					<label class="form-check-label">Shield +2</label>
+				</div>
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" type="checkbox" v-model="weapon.advantages" value="weapon_master">
+					<label class="form-check-label">Weapon Master</label>
+				</div>
+			</div>
 		</div>
-		<hr>
+
 		<!-- <div v-if="weapon.id">
-			<h4>Weapon abilities</h4>
 			<div class="row">
+				<label v-if="abilities.length>0" class="col-1 col-form-label"></label>
+				<h4 v-if="abilities.length>0" class="col-11">{{weapon.name}} abilites</h4>
 				<label class="col-1 col-form-label"></label>
 				<div class="col-11">
 					<Ability
@@ -49,20 +116,30 @@
 						:key="value.id"
 						v-on:remove="removeAbility(value,index)"
 					></Ability>
-					<Ability :ability="ability" :abilitiesList="abilitiesList" v-on:add="addAbility"></Ability>
+					<div class="card border-secondary">
+						<h5
+							class="card-header bg-secondary text-light card-icon py-1"
+							data-toggle="collapse"
+							data-target="#new_weapon_ability"
+							aria-expanded="false"
+							aria-controls="new_weapon_ability"
+						>New weapon Ability for {{weapon.name}}</h5>
+						<div class="collapse card-body p-1" id="new_weapon_ability">
+							<Ability :ability="ability" :abilitiesList="abilitiesList" v-on:add="addAbility"></Ability>
+						</div>
+					</div>
 				</div>
 			</div>
+			<hr>
 		</div> -->
 	</div>
 </template>
 
 <script>
-import Ability from "./ability.vue";
 export default {
 	name: "Weapon",
 	props: ["abilitiesList", "weapon"],
 	components: {
-		Ability
 	},
 	watch: {
 		model: function(newVal, oldVal) {
@@ -81,7 +158,7 @@ export default {
 	data() {
 		return {
 			abilities: [],
-			ability: {},
+			ability: {}
 		};
 	},
 	methods: {

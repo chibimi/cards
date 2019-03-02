@@ -52,27 +52,7 @@
 					<input v-model="model.def" type="text" class="form-control" placeholder="DEF">
 					<input v-model="model.arm" type="text" class="form-control" placeholder="ARM">
 					<input v-model="model.cmd" type="text" class="form-control" placeholder="CMD">
-					<input
-						v-if="model.category_id===1"
-						v-model="model.focus"
-						type="text"
-						class="form-control"
-						placeholder="Focus"
-					>
-					<input
-						v-if="model.category_id===2 || model.category_id===4"
-						v-model="model.fury"
-						type="text"
-						class="form-control"
-						placeholder="Fury"
-					>
-					<input
-						v-if="model.category_id===1"
-						v-model="model.threshold"
-						type="text"
-						class="form-control"
-						placeholder="Threshold"
-					>
+					
 					<input v-model="model.cost" type="text" class="form-control" placeholder="Cost">
 					<input v-model="model.fa" type="text" class="form-control" placeholder="FA">
 				</form>
@@ -180,6 +160,7 @@
 				</div>
 			</div>
 		</div>
+
 
 		<div class="row">
 			<label class="col-2 col-form-label"></label>

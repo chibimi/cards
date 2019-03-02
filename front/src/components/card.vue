@@ -39,9 +39,11 @@
 				<Ref :id="id" :faction="faction" :category="category" v-on:new_card="newCard" v-on:remove_card="removeCard"></Ref>
 			</div>
 			<div class="tab-pane fade" id="nav-models" role="tabpanel" aria-labelledby="nav-models-tab">
-				<Models :id="id"></Models>
+				<Models v-if="id>0" :id="id"></Models>
 			</div>
-			<div class="tab-pane fade" id="nav-abilities" role="tabpanel" aria-labelledby="nav-abilities-tab">abilities</div>
+			<div class="tab-pane fade" id="nav-abilities" role="tabpanel" aria-labelledby="nav-abilities-tab">
+								<CardAbilities v-if="id>0" :id="id"></CardAbilities>
+			</div>
 			<div class="tab-pane fade" id="nav-spells" role="tabpanel" aria-labelledby="nav-spells-tab">spells</div>
 			<div class="tab-pane fade" id="nav-feat" role="tabpanel" aria-labelledby="nav-feat-tab">feat</div>
 		</div>
@@ -49,7 +51,7 @@
 </template>
 
 <script>
-// import Ability from "./ability.vue";
+import CardAbilities from "./card_abilities.vue";
 import Models from "./models.vue";
 // import Spell from "./spell.vue";
 // import Feat from "./feat.vue";
@@ -57,7 +59,7 @@ import Ref from "./ref.vue";
 export default {
 	name: "Card",
 	props: ["selected", "faction", "category"],
-	components: { Ref, Models },
+	components: { Ref, Models, CardAbilities },
 	watch: {
 		selected: function(newVal) {
 			this.id = newVal

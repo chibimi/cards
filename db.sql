@@ -15,16 +15,13 @@ CREATE TABLE cards (
     cost_max varchar(50), 
     fa varchar(2), 
     status varchar(10), 
-    resource varchar(2),  
-    threshold varchar(2), 
-    damage varchar(100),
     PRIMARY KEY (id)
 );
 
-INSERT INTO cards VALUES (0, 0, 11, 5, "Blighted Nyss Swordmen", "Unité de la légion", "6", "9", "10", "15", "2", "TODO", "", "", "");
-INSERT INTO cards VALUES (0, 0, 11, 5, "Blighted Nyss Legionaires", "Unité de la légion", "6", "9", "10", "15", "2", "TODO", "", "", "");
-INSERT INTO cards VALUES (0, 0, 11, 5, "Hellmouth", "Unité de la légion", "4", "6", "", "", "2", "TODO", "", "", "8*1");
-INSERT INTO cards VALUES (0, 0, 11, 5, "Blackfrost Shard", "Unité de nyss corrompus de la légion", "3", "10", "","", "C", "TODO", "", "", "5*3");
+INSERT INTO cards VALUES (0, 0, 11, 5, "Blighted Nyss Swordmen", "Unité de la légion", "6", "9", "10", "15", "2", "TODO");
+INSERT INTO cards VALUES (0, 0, 11, 5, "Blighted Nyss Legionaires", "Unité de la légion", "6", "9", "10", "15", "2", "TODO");
+INSERT INTO cards VALUES (0, 0, 11, 5, "Hellmouth", "Unité de la légion", "4", "6", "", "", "2", "TODO");
+INSERT INTO cards VALUES (0, 0, 11, 5, "Blackfrost Shard", "Unité de nyss corrompus de la légion", "3", "10", "","", "C", "TODO");
 
 CREATE TABLE models (
     id int unsigned not null auto_increment, 
@@ -38,19 +35,21 @@ CREATE TABLE models (
     arm varchar(2), 
     cmd varchar(2), 
     magic_ability varchar(2), 
+    damage varchar(100),
+    resource varchar(2),  
+    threshold varchar(2), 
     base_size varchar(2),
-    m_order int,
     advantages varchar(255),
     PRIMARY KEY (id)
 );
 
-INSERT INTO models VALUES (0, 1, "Chef & recrues", "5", "6", "6", "4", "12", "15", "8", "", ,"30" ,1, "cma");
-INSERT INTO models VALUES (0, 2, "Chef & recrues", "6", "7", "7", "4", "14", "13", "7", "", "30", 1, "");
-INSERT INTO models VALUES (0, 3, "Bouche", "-", "10", "6", "-", "10", "18", "8", "", "50", 1, "officer,soulless");
-INSERT INTO models VALUES (0, 3, "Tentacule", "5", "6", "6", "-", "10", "15", "-", "", "40", 2, "pathfinder,soulless");
-INSERT INTO models VALUES (0, 4, "Sevryn1", "6", "5", "7", "4", "14", "12", "6", "7", "30", 1, "immunity_frost,officer,pathfinder");
-INSERT INTO models VALUES (0, 4, "Rhylyss1", "6", "5", "7", "4", "14", "12", "6", "7", "30", 2, "immunity_frost,pathfinder");
-INSERT INTO models VALUES (0, 4, "Vysarr1", "6", "5", "7", "4", "14", "12", "6", "7", "30", 3, "immunity_frost,pathfinder");
+INSERT INTO models VALUES (0, 1, "Chef & recrues", "5", "6", "6", "4", "12", "15", "8", "", "","","","30" ,"cma");
+INSERT INTO models VALUES (0, 2, "Chef & recrues", "6", "7", "7", "4", "14", "13", "7", "",  "","","","30", "");
+INSERT INTO models VALUES (0, 3, "Bouche", "-", "10", "6", "-", "10", "18", "8", "",  "8","","","50", "officer,soulless");
+INSERT INTO models VALUES (0, 3, "Tentacule", "5", "6", "6", "-", "10", "15", "-", "",  "","","","40", "pathfinder,soulless");
+INSERT INTO models VALUES (0, 4, "Sevryn1", "6", "5", "7", "4", "14", "12", "6", "7",  "8","","","30", "immunity_frost,officer,pathfinder");
+INSERT INTO models VALUES (0, 4, "Rhylyss1", "6", "5", "7", "4", "14", "12", "6", "7",  "8","","","30", "immunity_frost,pathfinder");
+INSERT INTO models VALUES (0, 4, "Vysarr1", "6", "5", "7", "4", "14", "12", "6", "7",  "8","","","30", "immunity_frost,pathfinder");
 -- INSERT INTO models VALUES (0, 1, "", "", "", "", "", "", "", "", "", "", "");
 
 CREATE TABLE abilities (

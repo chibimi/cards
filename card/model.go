@@ -19,7 +19,9 @@ type Model struct {
 	CMD          string   `json:"cmd,omitempty" db:"cmd"`
 	BaseSize     string   `json:"base_size,omitempty" db:"base_size"`
 	MagicAbility string   `json:"magic_ability,omitempty" db:"magic_ability"`
-	Order        int      `json:"order,omitempty,string" db:"m_order"`
+	Resource     string   `json:"resource,omitempty" db:"resource"`
+	Threshold    string   `json:"threshold,omitempty" db:"threshold"`
+	Damage       string   `json:"damage,omitempty" db:"damage"`
 	Advantages   []string `json:"advantages" db:"-"`
 	AdvantagesDB string   `json:"-" db:"advantages"`
 }
@@ -81,7 +83,7 @@ func (s *Service) DeleteModel(id int) error {
 
 func (s *Service) SaveModel(model *Model) (int, error) {
 	stmt, err := s.db.PrepareNamed(`INSERT INTO models VALUES(
-		:id, :card_id, :name, :spd, :str, :mat, :rat, :def, :arm, :cmd, :magic_ability, :base_size, :m_order, :advantages
+		:id, :card_id, :name, :spd, :str, :mat, :rat, :def, :arm, :cmd, :magic_ability, :damage, :resource, :threshold, :base_size, :advantages
 	)`)
 	if err != nil {
 		return 0, errors.Wrap(err, "prepare statement")
@@ -102,7 +104,7 @@ func (s *Service) UpdateModel(model *Model) error {
 	stmt, err := s.db.PrepareNamed(`UPDATE models SET 
 	card_id = :card_id, name = :name, 
 	spd = :spd, str = :str, mat = :mat, rat = :rat, def = :def, arm = :arm, cmd = :cmd, magic_ability = :magic_ability, 
-	advantages = :advantages, base_size = :base_size, m_order = :m_order WHERE id = :id`)
+	advantages = :advantages, base_size = :base_size, resource = :resource, threshold = :threshold, damage = :damage WHERE id = :id`)
 	if err != nil {
 		return errors.Wrap(err, "prepare statement")
 	}

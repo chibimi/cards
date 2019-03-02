@@ -3,7 +3,7 @@
 		<div class="row my-4">
 			<h2 class="text-left col-6">{{card.name}}</h2>
 			<div class="col-4" >
-				<div v-if="alert" class="alert alert-error py-2" v-bind:class="{ 'alert-success': alert_success }">{{alert}}</div>
+				<div v-if="alert" class="alert py-2" v-bind:class="{ 'alert-success': alert_success,'alert-danger': !alert_success}">{{alert}}</div>
 			</div>
 			<div class="col-1 pl-0">
 				<button v-if="update" type="submit" class="form-control btn btn-primary" @click="save(card)">Save</button>
@@ -13,7 +13,6 @@
 				<button type="submit" class="form-control btn btn-danger" @click="remove(card)">Delete</button>
 			</div>
 		</div>
-
 		<div v-if="update">
 			<div class="form-group row">
 				<div class="col-6">
@@ -23,12 +22,12 @@
 					</div>
 					<div class="row">
 						<label class="col-form-label col-3">Tag</label>
-						<input v-model="card.name" type="text" class="form-control col-8" placeholder="Unité de la légion">
+						<input v-model="card.properties" type="text" class="form-control col-8" placeholder="Unité de la légion">
 					</div>
 					<div class="row">
 						<label class="col-form-label col-3">Faction</label>
 						<select v-model="card.faction_id" class="form-control col-8">
-							<option v-for="f in factions" :key="f.id" :value="f.id">{{f.name}}</option>
+							<option v-for="f in factions" :key="f.id" v-bind:value="f.id">{{f.name}}</option>
 						</select>
 					</div>
 					<div class="row">
@@ -134,9 +133,6 @@ export default {
 	created: function() {
 		if (this.id > 0) {
 			this.get(this.id);
-		}else{
-			this.card.faction_id=this.faction;
-			this.card.category_id=this.category;
 		}
 	},
 	data() {
@@ -144,11 +140,13 @@ export default {
 			factions: Factions,
 			categories: Categories,
 			card: {
-				status: "wip"
+				status: "wip",
+				category_id: this.category,
+				faction_id: this.faction,
 			},
 			update: true,
 			alert: "",
-			alert_succes: false,
+			alert_success: false,
 		};
 	},
 	methods: {
@@ -180,7 +178,7 @@ export default {
 						this.update = false;
 					}
 				}).catch(function(err){
-					this.alert = "error: "+err
+					this.alert = "error: "+err.data
 					this.alert_success = false
 				});
 		},
@@ -201,7 +199,9 @@ export default {
 		reset: function(){
 			this.update = true;
 			this.card = {
-				status: "wip"
+				status: "wip",
+				faction_id:this.faction,
+				category_id:this.category
 			};
 			this.alert= ""
 			this.alert_succes= false

@@ -12,7 +12,6 @@
 				<div v-if="alert" class="alert alert-error py-2" v-bind:class="{ 'alert-success': alert_success }">{{alert}}</div>
 			</div>
 
-
 			<div class="col-1 pl-0">
 				<button v-if="model.id" type="submit" class="form-control btn btn-success" @click="save(model)">Update</button>
 			</div>
@@ -20,23 +19,26 @@
 				<button v-if="!model.id" type="submit" class="form-control btn btn-primary" @click="save(model)">Save</button>
 				<button v-if="model.id" type="submit" class="form-control btn btn-danger" @click="remove(model)">Delete</button>
 			</div>
-
 		</div>
 
 		<div class="collapse" v-bind:id="'test_model_' + model.id" v-bind:class="{'show': !model.id }">
 			<div class="row px-3">
 				<div class="col-3 pt-4 pr-4">
 					<div class="row">
+						<label class="col-form-label col-4 px-0">Name</label>
+						<input v-model="model.name" type="text" class="form-control col-8">
+					</div>
+					<div class="row">
 						<label class="col-form-label col-4 px-0">Damage</label>
-						<input v-model="card.cost" type="text" class="form-control col-8">
+						<input v-model="model.damage" type="text" class="form-control col-8">
 					</div>
 					<div class="row">
 						<label class="col-form-label col-4 px-0">Fury/Focus</label>
-						<input v-model="card.cost" type="text" class="form-control col-8">
+						<input v-model="model.resource" type="text" class="form-control col-8">
 					</div>
 					<div class="row">
 						<label class="col-form-label col-4 px-0">Threshold</label>
-						<input v-model="card.cost" type="text" class="form-control col-8">
+						<input v-model="model.threshold" type="text" class="form-control col-8">
 					</div>
 				</div>
 				<div class="col-9 pl-3">
@@ -163,6 +165,15 @@
 
 			<div v-if="model.id" class="mt-3">
 				<div class="row">
+					<label class="col-1 col-form-label"></label>
+					<h4 class="col-11">{{model.name}} weapons</h4>
+					<label class="col-1 col-form-label"></label>
+					<div class="col-11">
+						<Weapons :id="model.id"></Weapons>
+					</div>
+				</div>
+
+				<!-- <div class="row">
 					<label v-if="weapons.length>0" class="col-1 col-form-label"></label>
 					<h4 v-if="weapons.length>0" class="col-11">{{model.name}} weapons</h4>
 					<label class="col-1 col-form-label"></label>
@@ -181,7 +192,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div>-->
 			</div>
 		</div>
 		<hr>
@@ -189,49 +200,47 @@
 </template>
 
 <script>
-import Weapon from "./weapon.vue";
+import Weapons from "./weapons.vue";
 export default {
 	name: "Model",
 	props: ["model"],
 	components: {
-		Weapon
+		Weapons
 	},
 	watch: {
 		model: function(newVal) {
-			if (newVal.id > 0) {
-				this.get(newVal.id);
-			} else {
+			if (newVal.id < 0) {
 				this.reset();
 			}
 		}
 	},
 	created: function() {
-		this.get(this.model.id);
+		// this.get(this.model.id);
 	},
 	data() {
 		return {
-			weapons: [],
-			weapon: {
-				model_id: this.model.id,
-				advantages: []
-			},
+			// weapons: [],
+			// weapon: {
+			// 	model_id: this.model.id,
+			// 	advantages: []
+			// },
 			alert: "",
 			alert_succes: false
 		};
 	},
 	methods: {
-		get: function(modelID) {
-			this.card = {};
-			if (!modelID) {
-				return;
-			}
-			this.$http
-				.get("http://localhost:9901/models/" + modelID + "/weapons")
-				.then(function(res) {
-					console.log(res);
-					this.weapons = res.data;
-				});
-		},
+		// get: function(modelID) {
+		// 	this.card = {};
+		// 	if (!modelID) {
+		// 		return;
+		// 	}
+		// 	this.$http
+		// 		.get("http://localhost:9901/models/" + modelID + "/weapons")
+		// 		.then(function(res) {
+		// 			console.log(res);
+		// 			this.weapons = res.data;
+		// 		});
+		// },
 		save: function(model) {
 			if (model.id == null) {
 				model.id = 0;
@@ -267,21 +276,21 @@ export default {
 				});
 		},
 		reset: function() {
-			this.weapons = [];
-			(this.weapon = {
-				model_id: this.model.id,
-				advantages: []
-			}),
-				(this.alert = "");
+			// this.weapons = [];
+			// this.weapon = {
+			// 	model_id: this.model.id,
+			// 	advantages: []
+			// };
+			this.alert = "";
 			this.alert_succes = false;
-		},
-		removeWeapon: function(index) {
-			this.weapons.splice(index, 1);
-		},
-		addWeapon: function(weapon) {
-			this.weapons.push(weapon);
-			this.weapon = { model_id: this.model.id, advantages: [] };
 		}
+		// removeWeapon: function(index) {
+		// 	this.weapons.splice(index, 1);
+		// },
+		// addWeapon: function(weapon) {
+		// 	this.weapons.push(weapon);
+		// 	this.weapon = { model_id: this.model.id, advantages: [] };
+		// }
 	}
 };
 </script>
