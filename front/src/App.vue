@@ -1,8 +1,8 @@
 <template>
 	<div id="app" class="container">
-		<Selector v-on:selected="setCardID"/>
+		<Selector v-on:select_card="setCardID" v-on:change_faction="setFaction" v-on:change_category="setCategory"/>
 		<div class="row">
-			<Card v-if="cardID !== null" :id="cardID" :abilitiesList="abilitiesList"/>
+			<Card v-if="cardID !== null" :selected="cardID" :faction="faction" :category="category"/>
 		</div>
 	</div>
 </template>
@@ -19,22 +19,23 @@ export default {
 	data() {
 		return {
 			cardID: null,
-			abilitiesList: []
+			faction: null,
+			category:null,
 		};
-	},
-	created: function() {
-		this.$http.get("http://localhost:9901/abilities").then(function(res) {
-			console.log(res);
-			this.abilitiesList = res.data;
-		});
 	},
 	methods: {
 		setCardID: function(cardID) {
-			if (cardID === 0) {
-				this.cardID = -1 - this.cardID;
+			if (cardID === 0&& this.cardID===0) {
+				this.cardID = -1
 			} else {
-				this.cardID = cardID;
+				this.cardID = cardID
 			}
+		},
+		setFaction: function(faction) {
+			this.faction = faction
+		},
+		setCategory: function(category) {
+			this.category = category
 		}
 	}
 };

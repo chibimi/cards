@@ -4,6 +4,7 @@ import Autocomplete from 'v-autocomplete'
 
 import App from './App.vue'
 import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap/dist/js/bootstrap.js'
 
 Vue.use(VueResource)
 Vue.use(Autocomplete)
