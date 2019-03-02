@@ -88,6 +88,44 @@ func (s *Service) GetCardAbilities(id int) ([]Ability, error) {
 	return res, nil
 }
 
+func (s *Service) GetCardFeat(id int) (*Feat, error) {
+	stmt, err := s.db.Preparex("SELECT * FROM feats WHERE card_id = ?")
+	if err != nil {
+		return nil, errors.Wrap(err, "prepare statement")
+	}
+	defer stmt.Close()
+
+	res := &Feat{}
+	if err := stmt.Get(res, id); err != nil {
+		return nil, errors.Wrap(err, "execute query")
+	}
+
+	return res, nil
+}
+
+func (s *Service) GetCardSpells(id int) ([]Spell, error) {
+	stmt, err := s.db.Preparex("SELECT id, original_name, name, cost, rng, aoe, pow, dur, off, description FROM card_spell AS l LEFT JOIN spells AS a ON l.spell_id = a.id WHERE l.card_id = ?")
+	if err != nil {
+		return nil, errors.Wrap(err, "prepare statement")
+	}
+	defer stmt.Close()
+
+	rows, err := stmt.Queryx(id)
+	if err != nil {
+		return nil, errors.Wrap(err, "execute query")
+	}
+
+	res := []Spell{}
+	for rows.Next() {
+		r := Spell{}
+		if err := rows.StructScan(&r); err != nil {
+			return nil, errors.Wrap(err, "struct scan")
+		}
+		res = append(res, r)
+	}
+	return res, nil
+}
+
 func (s *Service) GetCardModels(id int) ([]Model, error) {
 	stmt, err := s.db.Preparex("SELECT * FROM models WHERE card_id = ? ORDER BY m_order")
 	if err != nil {

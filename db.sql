@@ -134,3 +134,40 @@ CREATE TABLE weapons (
 INSERT INTO weapons VALUES (0, 3, 1, "Gueule", "2", "5", "", "", "", "", "");
 INSERT INTO weapons VALUES (0, 3, 1, "Frappe tentaculaire", "2", "4", "", "", "", "", "");
 INSERT INTO weapons VALUES (0, 4, 1, "Frappe tentaculaire", "2", "4", "", "", "", "", "");
+
+
+CREATE TABLE spells (
+    id int unsigned not null auto_increment, 
+    original_name varchar(100) not null, 
+    name varchar(100) not null, 
+    cost varchar(5),
+    rng varchar(5),
+    aoe varchar(5),
+    pow varchar(5),
+    dur varchar(5),
+    off varchar(5),
+    description text,
+    PRIMARY KEY (id)
+);
+
+INSERT INTO spells VALUES (0, "Admonition", "Sommation", "2", "6", "-", "-", "UP", "NO", "Super dodge gotcha!");
+
+CREATE TABLE card_spell (
+    card_id int not null,
+    spell_id int not null,
+    PRIMARY KEY (card_id, spell_id)
+);
+
+INSERT INTO card_spell VALUES (9, 1);
+
+CREATE TABLE feats (
+    id int unsigned not null auto_increment, 
+    card_id int unique, 
+    original_name varchar(100) not null, 
+    name varchar(100) not null, 
+    description text,
+    fluff text,
+    PRIMARY KEY (id)
+);
+
+INSERT INTO feats VALUES (0, 9, "Raven", "Corbeau", "+3 def & Super dodge gotcha!", "");

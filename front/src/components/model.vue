@@ -1,201 +1,222 @@
 <template>
 	<div class="w-100">
-		<div class="form-group row">
-
-			<span class="col-2 text-left">Name</span>
-			<span class="col-1 text-left">spd</span>
-			<span class="col-1 text-left">str</span>
-			<span class="col-1 text-left">mat</span>
-			<span class="col-1 text-left">rat</span>
-			<span class="col-1 text-left">def</span>
-			<span class="col-1 text-left">arm</span>
-			<span class="col-1 text-left">cmd</span>
-			<span class="col-1 text-left">base</span>
-			<span class="col-1 text-left"></span>
-			<span class="col-1 text-left"></span>
-
-			<input v-model="model.name" type="text" class="form-control col-2" placeholder="Name">
-			<input v-model="model.spd" type="text" class="form-control col-1" placeholder="spd">
-			<input v-model="model.str" type="text" class="form-control col-1" placeholder="str">
-			<input v-model="model.mat" type="text" class="form-control col-1" placeholder="mat">
-			<input v-model="model.rat" type="text" class="form-control col-1" placeholder="rat">
-			<input v-model="model.def" type="text" class="form-control col-1" placeholder="def">
-			<input v-model="model.arm" type="text" class="form-control col-1" placeholder="arm">
-			<input v-model="model.cmd" type="text" class="form-control col-1" placeholder="cmd">
-			<input v-model="model.base_size" type="text" class="form-control col-1" placeholder="case">
-
-			<div v-if="model.id" class="col-1 pl-1 pr-0">
-				<button type="submit" class="form-control btn btn-success" @click="save(model)">Update</button>
-			</div>
-			<div v-if="model.id" class="col-1 pl-1 pr-0">
-				<button type="submit" class="form-control btn btn-danger" @click="remove(model)">Delete</button>
-			</div>
-			<div v-if="!model.id" class="col-2 pl-1 pr-0">
-				<button type="submit" class="form-control btn btn-primary" @click="save(model)">Add</button>
+		<div class="row pt-2 pl-2">
+			<h4
+				class="text-left col-6 pt-2"
+				data-toggle="collapse"
+				v-bind:data-target="'#test_model_' + model.id"
+				v-bind:aria-expanded="!model.id"
+				v-bind:aria-controls="'test_model_' + model.id"
+			>{{model.name}}</h4>
+			<div class="col-4">
+				<div v-if="alert" class="alert alert-error py-2" v-bind:class="{ 'alert-success': alert_success }">{{alert}}</div>
 			</div>
 
-			<div class="col-12 text-left px-0 mt-2">
-				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="checkbox" v-model="model.advantages" value="advance_deploy">
-					<label class="form-check-label">Advance deploy</label>
+
+			<div class="col-1 pl-0">
+				<button v-if="model.id" type="submit" class="form-control btn btn-success" @click="save(model)">Update</button>
+			</div>
+			<div class="col-1 pl-0">
+				<button v-if="!model.id" type="submit" class="form-control btn btn-primary" @click="save(model)">Save</button>
+				<button v-if="model.id" type="submit" class="form-control btn btn-danger" @click="remove(model)">Delete</button>
+			</div>
+
+		</div>
+
+		<div class="collapse" v-bind:id="'test_model_' + model.id" v-bind:class="{'show': !model.id }">
+			<div class="row px-3">
+				<div class="col-3 pt-4 pr-4">
+					<div class="row">
+						<label class="col-form-label col-4 px-0">Damage</label>
+						<input v-model="card.cost" type="text" class="form-control col-8">
+					</div>
+					<div class="row">
+						<label class="col-form-label col-4 px-0">Fury/Focus</label>
+						<input v-model="card.cost" type="text" class="form-control col-8">
+					</div>
+					<div class="row">
+						<label class="col-form-label col-4 px-0">Threshold</label>
+						<input v-model="card.cost" type="text" class="form-control col-8">
+					</div>
 				</div>
-				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="checkbox" v-model="model.advantages" value="amphibious">
-					<label class="form-check-label">Amphibious</label>
-				</div>
-				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="checkbox" v-model="model.advantages" value="arc_node">
-					<label class="form-check-label">Acr node</label>
-				</div>
-				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="checkbox" v-model="model.advantages" value="assault">
-					<label class="form-check-label">Assault</label>
-				</div>
-				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="checkbox" v-model="model.advantages" value="cavalry">
-					<label class="form-check-label">Cavalry</label>
-				</div>
-				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="checkbox" v-model="model.advantages" value="cma">
-					<label class="form-check-label">CMA</label>
-				</div>
-				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="checkbox" v-model="model.advantages" value="cra">
-					<label class="form-check-label">CRA</label>
-				</div>
-				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="checkbox" v-model="model.advantages" value="construct">
-					<label class="form-check-label">Construct</label>
-				</div>
-				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="checkbox" v-model="model.advantages" value="eyeless_sight">
-					<label class="form-check-label">Eyeless sight</label>
-				</div>
-				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="checkbox" v-model="model.advantages" value="flight">
-					<label class="form-check-label">Flight</label>
-				</div>
-				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="checkbox" v-model="model.advantages" value="gunfighter">
-					<label class="form-check-label">Gunfighter</label>
-				</div>
-				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="checkbox" v-model="model.advantages" value="incorporeal">
-					<label class="form-check-label">Incorporeal</label>
-				</div>
-				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="checkbox" v-model="model.advantages" value="immunity_corrosion">
-					<label class="form-check-label">Immune corrosion</label>
-				</div>
-				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="checkbox" v-model="model.advantages" value="immunity_electricity">
-					<label class="form-check-label">Immune electricity</label>
-				</div>
-				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="checkbox" v-model="model.advantages" value="immunity_fire">
-					<label class="form-check-label">Immune fire</label>
-				</div>
-				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="checkbox" v-model="model.advantages" value="immunity_frost">
-					<label class="form-check-label">Immune frost</label>
-				</div>
-				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="checkbox" v-model="model.advantages" value="jackmarshal">
-					<label class="form-check-label">Jack Marshal</label>
-				</div>
-				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="checkbox" v-model="model.advantages" value="officer">
-					<label class="form-check-label">Officer</label>
-				</div>
-				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="checkbox" v-model="model.advantages" value="parry">
-					<label class="form-check-label">Parry</label>
-				</div>
-				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="checkbox" v-model="model.advantages" value="pathfinder">
-					<label class="form-check-label">Pathfinder</label>
-				</div>
-				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="checkbox" v-model="model.advantages" value="soulless">
-					<label class="form-check-label">Soulless</label>
-				</div>
-				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="checkbox" v-model="model.advantages" value="stealth">
-					<label class="form-check-label">Stealth</label>
-				</div>
-				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="checkbox" v-model="model.advantages" value="tought">
-					<label class="form-check-label">Tought</label>
-				</div>
-				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="checkbox" v-model="model.advantages" value="undead">
-					<label class="form-check-label">Undead</label>
+				<div class="col-9 pl-3">
+					<div class="form-group row my-0">
+						<span class="col text-left">spd</span>
+						<span class="col text-left">str</span>
+						<span class="col text-left">mat</span>
+						<span class="col text-left">rat</span>
+						<span class="col text-left">def</span>
+						<span class="col text-left">arm</span>
+						<span class="col text-left">cmd</span>
+						<span class="col text-left">base</span>
+					</div>
+					<div class="form-group row mt-0">
+						<input v-model="model.spd" type="text" class="form-control col" placeholder="spd">
+						<input v-model="model.str" type="text" class="form-control col" placeholder="str">
+						<input v-model="model.mat" type="text" class="form-control col" placeholder="mat">
+						<input v-model="model.rat" type="text" class="form-control col" placeholder="rat">
+						<input v-model="model.def" type="text" class="form-control col" placeholder="def">
+						<input v-model="model.arm" type="text" class="form-control col" placeholder="arm">
+						<input v-model="model.cmd" type="text" class="form-control col" placeholder="cmd">
+						<input v-model="model.base_size" type="text" class="form-control col" placeholder="case">
+					</div>
+					<div class="row">
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="checkbox" v-model="model.advantages" value="advance_deploy">
+							<label class="form-check-label">Advance deploy</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="checkbox" v-model="model.advantages" value="amphibious">
+							<label class="form-check-label">Amphibious</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="checkbox" v-model="model.advantages" value="arc_node">
+							<label class="form-check-label">Acr node</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="checkbox" v-model="model.advantages" value="assault">
+							<label class="form-check-label">Assault</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="checkbox" v-model="model.advantages" value="cavalry">
+							<label class="form-check-label">Cavalry</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="checkbox" v-model="model.advantages" value="cma">
+							<label class="form-check-label">CMA</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="checkbox" v-model="model.advantages" value="cra">
+							<label class="form-check-label">CRA</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="checkbox" v-model="model.advantages" value="construct">
+							<label class="form-check-label">Construct</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="checkbox" v-model="model.advantages" value="eyeless_sight">
+							<label class="form-check-label">Eyeless sight</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="checkbox" v-model="model.advantages" value="flight">
+							<label class="form-check-label">Flight</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="checkbox" v-model="model.advantages" value="gunfighter">
+							<label class="form-check-label">Gunfighter</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="checkbox" v-model="model.advantages" value="incorporeal">
+							<label class="form-check-label">Incorporeal</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="checkbox" v-model="model.advantages" value="immunity_corrosion">
+							<label class="form-check-label">Immune corrosion</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="checkbox" v-model="model.advantages" value="immunity_electricity">
+							<label class="form-check-label">Immune electricity</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="checkbox" v-model="model.advantages" value="immunity_fire">
+							<label class="form-check-label">Immune fire</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="checkbox" v-model="model.advantages" value="immunity_frost">
+							<label class="form-check-label">Immune frost</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="checkbox" v-model="model.advantages" value="jackmarshal">
+							<label class="form-check-label">Jack Marshal</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="checkbox" v-model="model.advantages" value="officer">
+							<label class="form-check-label">Officer</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="checkbox" v-model="model.advantages" value="parry">
+							<label class="form-check-label">Parry</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="checkbox" v-model="model.advantages" value="pathfinder">
+							<label class="form-check-label">Pathfinder</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="checkbox" v-model="model.advantages" value="soulless">
+							<label class="form-check-label">Soulless</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="checkbox" v-model="model.advantages" value="stealth">
+							<label class="form-check-label">Stealth</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="checkbox" v-model="model.advantages" value="tought">
+							<label class="form-check-label">Tought</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="checkbox" v-model="model.advantages" value="undead">
+							<label class="form-check-label">Undead</label>
+						</div>
+					</div>
 				</div>
 			</div>
 
+			<div v-if="model.id" class="mt-3">
+				<div class="row">
+					<label v-if="weapons.length>0" class="col-1 col-form-label"></label>
+					<h4 v-if="weapons.length>0" class="col-11">{{model.name}} weapons</h4>
+					<label class="col-1 col-form-label"></label>
+					<div class="col-11">
+						<Weapon v-for="(value,index) in weapons" v-bind:weapon="value" :key="value.id" v-on:remove="removeWeapon(index)"></Weapon>
+						<div class="card border-secondary">
+							<h5
+								class="card-header bg-secondary text-light card-icon py-1"
+								data-toggle="collapse"
+								data-target="#new_model_weapon"
+								aria-expanded="false"
+								aria-controls="new_model_weapon"
+							>New Weapon for {{model.name}}</h5>
+							<div class="collapse card-body p-1" id="new_model_weapon">
+								<Weapon :weapon="weapon"  v-on:add="addWeapon"></Weapon>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 		<hr>
-		<div v-if="model.id">
-			<h4>Model abilities</h4>
-			<div class="row">
-				<label class="col-1 col-form-label"></label>
-				<div class="col-11">
-					<Ability
-						v-for="(value,index) in abilities"
-						:abilitiesList="abilitiesList"
-						v-bind:ability="value"
-						:key="value.id"
-						v-on:remove="removeAbility(value,index)"
-					></Ability>
-					<Ability :ability="ability" :abilitiesList="abilitiesList" v-on:add="addAbility"></Ability>
-				</div>
-			</div>
-
-			<h4>Model weapons</h4>
-			<div class="row">
-				<label class="col-1 col-form-label"></label>
-				<div class="col-11">
-					<Weapon v-for="(value,index) in weapons" :abilitiesList="abilitiesList" v-bind:weapon="value" :key="value.id" v-on:remove="removeWeapon(index)"></Weapon>
-					<h4 class="text-left">New weapon</h4>
-					<Weapon :weapon="weapon" :abilitiesList="abilitiesList" v-on:add="addWeapon"></Weapon>
-				</div>
-			</div>
-		</div>
 	</div>
 </template>
 
 <script>
-import Ability from "./ability.vue";
 import Weapon from "./weapon.vue";
 export default {
 	name: "Model",
-	props: ["abilitiesList", "model"],
+	props: ["model"],
 	components: {
-		Ability, Weapon
+		Weapon
 	},
 	watch: {
-		model: function(newVal, oldVal) {
-			if (newVal.id === oldVal.id) {
-				return;
+		model: function(newVal) {
+			if (newVal.id > 0) {
+				this.get(newVal.id);
+			} else {
+				this.reset();
 			}
-			console.log("CHANGED MODEL", newVal, oldVal);
-			// watch it
-			this.get(newVal.id);
 		}
 	},
 	created: function() {
-		console.log("created", this.model);
 		this.get(this.model.id);
 	},
 	data() {
 		return {
-			abilities: [],
-			ability: {},
 			weapons: [],
 			weapon: {
 				model_id: this.model.id,
 				advantages: []
-			}
+			},
+			alert: "",
+			alert_succes: false
 		};
 	},
 	methods: {
@@ -204,12 +225,6 @@ export default {
 			if (!modelID) {
 				return;
 			}
-			this.$http
-				.get("http://localhost:9901/models/" + modelID + "/abilities")
-				.then(function(res) {
-					console.log(res);
-					this.abilities = res.data;
-				});
 			this.$http
 				.get("http://localhost:9901/models/" + modelID + "/weapons")
 				.then(function(res) {
@@ -221,18 +236,24 @@ export default {
 			if (model.id == null) {
 				model.id = 0;
 			}
+			this.alert = "";
 			this.$http
 				.put("http://localhost:9901/models/" + model.id, model)
 				.then(function(res) {
-					console.log(res);
+					this.alert = "save success";
+					this.alert_success = true;
 					if (res.status === 201) {
 						model.id = res.data;
 						this.$emit("add", model);
 					}
+				})
+				.catch(function(err) {
+					this.alert = "error: " + err;
+					this.alert_success = false;
 				});
 		},
 		remove: function(model) {
-			console.log("REMOVE FROM MODEL", model.id);
+			this.alert = "";
 			this.$http
 				.delete("http://localhost:9901/models/" + model.id)
 				.then(function(res) {
@@ -241,44 +262,20 @@ export default {
 					}
 				})
 				.catch(function(err) {
-					console.log(err);
+					this.alert = "error: " + err;
+					this.alert_success = false;
 				});
 		},
-		removeAbility: function(ability, index) {
-			console.log("remove abi", ability, index);
-			this.$http
-				.delete(
-					"http://localhost:9901/models/" +
-						this.model.id +
-						"/abilities/" +
-						ability.id
-				)
-				.then(function(res) {
-					if (res.status === 204) {
-						this.abilities.splice(index, 1);
-					}
-				});
-		},
-		addAbility: function(ability) {
-			this.$http
-				.put(
-					"http://localhost:9901/models/" +
-						this.model.id +
-						"/abilities/" +
-						ability.id +
-						"?magical=" +
-						ability.magical
-				)
-				.then(function(res) {
-					if (res.status === 200) {
-						this.abilities.push(ability);
-						this.ability = {};
-					}
-				});
+		reset: function() {
+			this.weapons = [];
+			(this.weapon = {
+				model_id: this.model.id,
+				advantages: []
+			}),
+				(this.alert = "");
+			this.alert_succes = false;
 		},
 		removeWeapon: function(index) {
-			console.log("REMOVE FROM MODEL", index);
-
 			this.weapons.splice(index, 1);
 		},
 		addWeapon: function(weapon) {

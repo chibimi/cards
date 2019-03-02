@@ -127,6 +127,37 @@ func (s *Service) GetCardAbilities(w http.ResponseWriter, r *http.Request, p htt
 	writeJson(w, res, http.StatusOK)
 }
 
+func (s *Service) GetCardFeat(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+	id, err := strconv.Atoi(p.ByName("id"))
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	res, err := s.src.GetCardFeat(id)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	writeJson(w, res, http.StatusOK)
+}
+func (s *Service) GetCardSpells(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+	id, err := strconv.Atoi(p.ByName("id"))
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	res, err := s.src.GetCardSpells(id)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	writeJson(w, res, http.StatusOK)
+}
+
 func (s *Service) GetCardModels(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	id, err := strconv.Atoi(p.ByName("id"))
 	if err != nil {
@@ -177,6 +208,47 @@ func (s *Service) DeleteCardAbility(w http.ResponseWriter, r *http.Request, p ht
 	}
 
 	err = s.src.DeleteCardAbility(cardID, abilityID)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	writeJson(w, nil, http.StatusNoContent)
+}
+
+func (s *Service) AddCardSpell(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+	cardID, err := strconv.Atoi(p.ByName("id"))
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+	spellID, err := strconv.Atoi(p.ByName("spell_id"))
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	err = s.src.AddCardSpell(cardID, spellID)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	writeJson(w, nil, http.StatusOK)
+}
+
+func (s *Service) DeleteCardSpell(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+	cardID, err := strconv.Atoi(p.ByName("id"))
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+	spellID, err := strconv.Atoi(p.ByName("spell_id"))
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	err = s.src.DeleteCardSpell(cardID, spellID)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
