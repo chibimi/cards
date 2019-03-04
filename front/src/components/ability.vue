@@ -43,8 +43,7 @@ export default {
 	name: "Ability",
 	props: ["abilitiesList", "ability"],
 	watch: {
-		ability: function(newVal, oldVal) {
-			console.log("CHANGED ABILITY", newVal, oldVal);
+		ability: function(newVal) {
 			this.selectedAbility = newVal;
 			if (!this.ability.id){
 				this.update=true;
@@ -53,7 +52,6 @@ export default {
 	},
 	created: function() {
 		this.selectedAbility = this.ability;
-		console.log("ON CERATE ABILITY ID", this.ability)
 		if (!this.ability.id){
 				this.update=true;
 			}
@@ -76,19 +74,28 @@ export default {
 				.put("http://localhost:9901/abilities/" + ability.id, ability)
 				.then(function(res) {
 					console.log(res);
+					if (this.ability.id > 0 && this.selectedAbility.id > 0) {
+						this.update=false;
+					}
 					if (res.status === 201) {
 						ability.id = res.data;
 						this.add(ability);
-					}
-
-					this.update=false;
+						this.new(ability);
+					} else if (res.status === 200) {
+						this.updateAbility();
+					}	
 				});
 		},
 		add: function(ability) {
 			this.$emit("add", ability);
 		},
+		new: function(ability) {
+			this.$emit("new", ability);
+		},
+		updateAbility: function() {
+			this.$emit("update");
+		},
 		remove: function() {
-			console.log("remove");
 			this.$emit("remove");
 		},
 		getLabel: function(item) {
@@ -103,13 +110,7 @@ export default {
 			);
 		},
 		selectedItem(item) {
-			console.log("SELECTED", item, this.ability);
 			this.selectedAbility = item;
-			// this.ability.id = item.id;
-			// this.selectedAbility.name = item.name;
-			// this.selectedAbility.original_name = item.original_name;
-			// this.selectedAbility.type = item.type;
-			// this.selectedAbility.description = item.description;
 		}
 	}
 };

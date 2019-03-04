@@ -169,6 +169,7 @@ export default {
 			this.$http
 				.put("http://localhost:9901/cards/" + card.id, card)
 				.then(function(res) {
+					console.log(res);
 					this.alert = "save success"
 					this.alert_success = true
 					if (res.status === 201) {

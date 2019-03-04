@@ -1,8 +1,14 @@
 <template>
 	<div class="w-100">
-
 		<h5 class="text-left">{{weapon.name}} abilities</h5>
-		<Ability v-for="(value,index) in abilities" v-bind:ability="value" :key="value.id" v-on:remove="removeAbility(value,index)"></Ability>
+		<Ability
+			v-for="(value,index) in abilities"
+			v-bind:ability="value"
+			:abilitiesList="abilitiesList"
+			:key="value.id"
+			v-on:remove="removeAbility(value,index)"
+			v-on:update="updateAbility"
+		></Ability>
 		<div class="card border-secondary">
 			<h5
 				class="card-header bg-secondary text-light card-icon py-1"
@@ -10,9 +16,9 @@
 				v-bind:data-target="'#new_weapon_ability' + weapon.id"
 				aria-expanded="false"
 				v-bind:aria-controls="'new_weapon_ability' + weapon.id"
-			>New Weapon Ability</h5>
+			>New {{weapon.name}} Ability</h5>
 			<div class="collapse card-body p-1" v-bind:id="'new_weapon_ability' + weapon.id">
-				<Ability :ability="ability" v-on:add="addAbility"></Ability>
+				<Ability :ability="ability" :abilitiesList="abilitiesList" v-on:add="addAbility" v-on:new="newAbility" v-on:update="updateAbility"></Ability>
 			</div>
 		</div>
 	</div>
@@ -22,22 +28,25 @@
 import Ability from "./ability.vue";
 export default {
 	name: "WeaponAbilities",
-	props: ["weapon","abilitiesList"],
+	props: ["weapon", "abilitiesList"],
 	components: {
 		Ability
 	},
 	watch: {
 		weapon: function(newVal) {
-			this.get(newVal.id)
+			this.get(newVal.id);
+		},
+		abilitiesList: function() {
+			this.get(this.weapon.id);
 		}
 	},
 	created: function() {
-		this.get(this.weapon.id)
+		this.get(this.weapon.id);
 	},
 	data() {
 		return {
 			abilities: [],
-			ability: {},
+			ability: {}
 		};
 	},
 	methods: {
@@ -45,6 +54,7 @@ export default {
 			this.$http
 				.get("http://localhost:9901/weapons/" + weaponID + "/abilities")
 				.then(function(res) {
+					console.log(res);
 					this.abilities = res.data;
 				});
 		},
@@ -57,6 +67,7 @@ export default {
 						ability.id
 				)
 				.then(function(res) {
+					console.log(res);
 					if (res.status === 204) {
 						this.abilities.splice(index, 1);
 					}
@@ -73,11 +84,18 @@ export default {
 						ability.magical
 				)
 				.then(function(res) {
+					console.log(res);
 					if (res.status === 200) {
 						this.abilities.push(ability);
 						this.ability = {};
 					}
 				});
+		},
+		updateAbility: function() {
+			this.$emit("update");
+		},
+		newAbility: function(ability) {
+			this.$emit("new", ability);
 		}
 	}
 };

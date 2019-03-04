@@ -1,7 +1,14 @@
 <template>
 	<div class="w-100">
-		<h4>Card abilities</h4>
-		<Ability v-for="(value,index) in abilities" v-bind:ability="value" :key="value.id" v-on:remove="removeAbility(value,index)"></Ability>
+		<h4 class="text-left">Card abilities</h4>
+		<Ability
+			v-for="(value,index) in abilities"
+			v-bind:ability="value"
+			:abilitiesList="abilitiesList"
+			:key="value.id"
+			v-on:remove="removeAbility(value,index)"
+			v-on:update="updateAbility"
+		></Ability>
 		<div class="card border-secondary">
 			<h5
 				class="card-header bg-secondary text-light card-icon py-1"
@@ -11,37 +18,36 @@
 				aria-controls="new_card_ability"
 			>New Card Ability</h5>
 			<div class="collapse card-body p-1" id="new_card_ability">
-				<Ability :ability="ability" v-on:add="addAbility"></Ability>
+				<Ability :ability="ability" :abilitiesList="abilitiesList" v-on:add="addAbility" v-on:new="newAbility" v-on:update="updateAbility"></Ability>
 			</div>
 		</div>
 		<hr>
-		<ModelAbilities v-for="(value) in models" :abilitiesList="abilitiesList" :model="value" :key="value.id"></ModelAbilities>
 	</div>
 </template>
 
 <script>
 import Ability from "./ability.vue";
-import ModelAbilities from "./model_abilities.vue";
 export default {
 	name: "CardAbilities",
-	props: ["id"],
+	props: ["id", "abilitiesList"],
 	components: {
-		Ability, ModelAbilities
+		Ability
 	},
 	watch: {
 		id: function(newVal) {
-			this.get(newVal)
+			this.get(newVal);
+		},
+		abilitiesList: function() {
+			this.get(this.id);
 		}
 	},
 	created: function() {
-		this.get(this.id)
+		this.get(this.id);
 	},
 	data() {
 		return {
-			models: [],
 			abilities: [],
-			ability: {},
-			abilitiesList:[],
+			ability: {}
 		};
 	},
 	methods: {
@@ -49,12 +55,8 @@ export default {
 			this.$http
 				.get("http://localhost:9901/cards/" + cardID + "/abilities")
 				.then(function(res) {
+					console.log(res);
 					this.abilities = res.data;
-				});
-			this.$http
-				.get("http://localhost:9901/cards/" + cardID + "/models")
-				.then(function(res) {
-					this.models = res.data;
 				});
 		},
 		removeAbility: function(ability, index) {
@@ -66,6 +68,7 @@ export default {
 						ability.id
 				)
 				.then(function(res) {
+					console.log(res);
 					if (res.status === 204) {
 						this.abilities.splice(index, 1);
 					}
@@ -77,16 +80,21 @@ export default {
 					"http://localhost:9901/cards/" +
 						this.id +
 						"/abilities/" +
-						ability.id +
-						"?magical=" +
-						ability.magical
+						ability.id
 				)
 				.then(function(res) {
+					console.log(res);
 					if (res.status === 200) {
 						this.abilities.push(ability);
 						this.ability = {};
 					}
 				});
+		},
+		updateAbility: function() {
+			this.$emit("update");
+		},
+		newAbility: function(ability) {
+			this.$emit("new", ability);
 		}
 	}
 };

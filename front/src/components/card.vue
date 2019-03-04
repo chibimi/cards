@@ -4,7 +4,7 @@
 			<div class="nav nav-tabs" id="nav-tab" role="tablist">
 				<a class="nav-item nav-link active" id="nav-ref-tab" data-toggle="tab" href="#nav-ref" role="tab" aria-controls="nav-ref" aria-selected="true">Ref</a>
 				<a
-					v-if="id>0"
+					v-if="card.id>0"
 					class="nav-item nav-link"
 					id="nav-models-tab"
 					data-toggle="tab"
@@ -36,13 +36,13 @@
 		</nav>
 		<div class="tab-content" id="nav-tabContent">
 			<div class="tab-pane fade show active" id="nav-ref" role="tabpanel" aria-labelledby="nav-ref-tab">
-				<Ref :id="id" :faction="faction" :category="category" v-on:new_card="newCard" v-on:remove_card="removeCard"></Ref>
+				<Ref :id="card.id" :faction="faction" :category="category" v-on:new_card="newCard" v-on:remove_card="removeCard"></Ref>
 			</div>
 			<div class="tab-pane fade" id="nav-models" role="tabpanel" aria-labelledby="nav-models-tab">
-				<Models v-if="id>0" :id="id"></Models>
+				<Models v-if="card.id>0" :id="card.id" :models="card.models" v-on:add="addModel" v-on:remove="removeModel" v-on:remove_weapon="removeWeapon" v-on:add_weapon="addWeapon"></Models>
 			</div>
 			<div class="tab-pane fade" id="nav-abilities" role="tabpanel" aria-labelledby="nav-abilities-tab">
-								<CardAbilities v-if="id>0" :id="id"></CardAbilities>
+				<Abilities v-if="card.id>0" :card="card"></Abilities>
 			</div>
 			<div class="tab-pane fade" id="nav-spells" role="tabpanel" aria-labelledby="nav-spells-tab">spells</div>
 			<div class="tab-pane fade" id="nav-feat" role="tabpanel" aria-labelledby="nav-feat-tab">feat</div>
@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import CardAbilities from "./card_abilities.vue";
+import Abilities from "./abilities.vue";
 import Models from "./models.vue";
 // import Spell from "./spell.vue";
 // import Feat from "./feat.vue";
@@ -59,28 +59,69 @@ import Ref from "./ref.vue";
 export default {
 	name: "Card",
 	props: ["selected", "faction", "category"],
-	components: { Ref, Models, CardAbilities },
+	components: { Ref, Models, Abilities },
 	watch: {
 		selected: function(newVal) {
-			this.id = newVal
+			this.card.id = newVal;
+			this.getModels(newVal);
 		}
 	},
 	created: function() {
-		this.id=this.selected;
+		this.card.id = this.selected;
+		this.getModels(this.selected);
 	},
 	data() {
 		return {
-			id:0,
+			card: {
+				id: 0,
+				models: []
+			}
 		};
 	},
 	methods: {
-		newCard: function(cardID){
-			this.id=cardID;
+		newCard: function(cardID) {
+			this.card.id = cardID;
 		},
-		removeCard: function(){
-			this.id=0;
+		removeCard: function() {
+			this.card.id = 0;
+		},
+		getModels: async function(cardID) {
+			this.card.models = [];
+			this.$http
+				.get("http://localhost:9901/cards/" + cardID + "/models")
+				.then(function(res) {
+					console.log(res);
+					var models = res.data;
+					this.addWeapons(models);
+				});
+		},
+		addWeapons: async function(array) {
+			for (const [i, item] of array.entries()) {
+				await this.getWeapons(i, item);
+			}
+		},
+		getWeapons: async function(i, model) {
+			await this.$http
+				.get("http://localhost:9901/models/" + model.id + "/weapons")
+				.then(function(res) {
+					console.log(res);
+					model.weapons = res.data;
+					this.card.models.splice(i, 1, model);
+				});
+		},
+		removeWeapon: function(index, weaponIndex) {
+			this.card.models[index].weapons.splice(weaponIndex, 1);
+		},
+		addWeapon: function(index, weapon) {
+			this.card.models[index].weapons.push(weapon);
+		},
+		removeModel: function(index) {
+			this.card.models.splice(index, 1);
+		},
+		addModel: function(model) {
+			this.card.models.push(model);
 		}
-	},
+	}
 };
 </script>
 

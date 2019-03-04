@@ -20,21 +20,12 @@
 import Weapon from "./weapon.vue";
 export default {
 	name: "Weapons",
-	props: ["id"],
+	props: ["id", "weapons"],
 	components: {
 		Weapon
 	},
-	watch: {
-		id: function(newVal) {
-			this.get(newVal)
-		}
-	},
-	created: function() {
-		this.get(this.id)
-	},
 	data() {
 		return {
-			weapons: [],
 			weapon: {
 				model_id: this.id,
 				advantages: []
@@ -42,27 +33,19 @@ export default {
 		};
 	},
 	methods: {
-		get: function(modelID) {
-			this.$http
-				.get("http://localhost:9901/models/" + modelID + "/weapons")
-				.then(function(res) {
-					this.weapons = res.data;
-				});
-		},
 		removeWeapon: function(index) {
-			this.weapons.splice(index, 1);
+			this.$emit("remove", index);
 		},
 		addWeapon: function(weapon) {
-			this.weapons.push(weapon);
+			this.$emit("add", weapon);
 			this.weapon = {
-				model_id: this.id, 
-				advantages: [] 
+				model_id: this.id,
+				advantages: []
 			};
 		}
 	}
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 </style>

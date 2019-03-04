@@ -102,77 +102,17 @@
 				</div>
 			</div>
 		</div>
-
-		<!-- <div v-if="weapon.id">
-			<div class="row">
-				<label v-if="abilities.length>0" class="col-1 col-form-label"></label>
-				<h4 v-if="abilities.length>0" class="col-11">{{weapon.name}} abilites</h4>
-				<label class="col-1 col-form-label"></label>
-				<div class="col-11">
-					<Ability
-						v-for="(value,index) in abilities"
-						:abilitiesList="abilitiesList"
-						v-bind:ability="value"
-						:key="value.id"
-						v-on:remove="removeAbility(value,index)"
-					></Ability>
-					<div class="card border-secondary">
-						<h5
-							class="card-header bg-secondary text-light card-icon py-1"
-							data-toggle="collapse"
-							data-target="#new_weapon_ability"
-							aria-expanded="false"
-							aria-controls="new_weapon_ability"
-						>New weapon Ability for {{weapon.name}}</h5>
-						<div class="collapse card-body p-1" id="new_weapon_ability">
-							<Ability :ability="ability" :abilitiesList="abilitiesList" v-on:add="addAbility"></Ability>
-						</div>
-					</div>
-				</div>
-			</div>
-			<hr>
-		</div> -->
 	</div>
 </template>
 
 <script>
 export default {
 	name: "Weapon",
-	props: ["abilitiesList", "weapon"],
-	components: {
-	},
-	watch: {
-		model: function(newVal, oldVal) {
-			if (newVal.id === oldVal.id) {
-				return;
-			}
-			console.log("CHANGED WEAPON", newVal, oldVal);
-			// watch it
-			this.get(newVal.id);
-		}
-	},
-	created: function() {
-		console.log("created", this.weapon);
-		this.get(this.weapon.id);
-	},
+	props: ["weapon"],
 	data() {
-		return {
-			abilities: [],
-			ability: {}
-		};
+		return {};
 	},
 	methods: {
-		get: function(weaponID) {
-			if (!weaponID) {
-				return;
-			}
-			this.$http
-				.get("http://localhost:9901/weapons/" + weaponID + "/abilities")
-				.then(function(res) {
-					console.log(res);
-					this.abilities = res.data;
-				});
-		},
 		save: function(weapon) {
 			if (weapon.id == null) {
 				weapon.id = 0;
@@ -188,10 +128,10 @@ export default {
 				});
 		},
 		remove: function(weapon) {
-			console.log("REMOVE FROM MODEL", weapon.id);
 			this.$http
 				.delete("http://localhost:9901/weapons/" + weapon.id)
 				.then(function(res) {
+					console.log(res);
 					if (res.status === 204) {
 						this.$emit("remove");
 					}
@@ -199,44 +139,11 @@ export default {
 				.catch(function(err) {
 					console.log(err);
 				});
-		},
-		removeAbility: function(ability, index) {
-			console.log("remove abi", ability, index);
-			this.$http
-				.delete(
-					"http://localhost:9901/weapons/" +
-						this.weapon.id +
-						"/abilities/" +
-						ability.id
-				)
-				.then(function(res) {
-					if (res.status === 204) {
-						this.abilities.splice(index, 1);
-					}
-				});
-		},
-		addAbility: function(ability) {
-			this.$http
-				.put(
-					"http://localhost:9901/weapons/" +
-						this.weapon.id +
-						"/abilities/" +
-						ability.id +
-						"?magical=" +
-						ability.magical
-				)
-				.then(function(res) {
-					if (res.status === 200) {
-						this.abilities.push(ability);
-						this.ability = {};
-					}
-				});
 		}
 	}
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .statline input {
 	max-width: 4rem;

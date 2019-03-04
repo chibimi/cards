@@ -1,6 +1,13 @@
 <template>
 	<div class="w-100">
-		<Model v-for="(value,index) in models" v-bind:model="value" :key="value.id" v-on:remove="removeModel(index)"></Model>
+		<Model
+			v-for="(value,index) in models2"
+			v-bind:selectedModel="value"
+			:key="value.id"
+			v-on:remove="remove(index)"
+			v-on:remove_weapon="removeWeapon(index, $event)"
+			v-on:add_weapon="addWeapon(index, $event)"
+		></Model>
 		<div class="card border-secondary">
 			<h5
 				class="card-header bg-secondary text-light card-icon py-1"
@@ -10,7 +17,7 @@
 				aria-controls="new_model"
 			>New Model</h5>
 			<div class="collapse card-body p-1" id="new_model">
-				<Model :model="model" v-on:add="addModel"></Model>
+				<Model :selectedModel="model" v-on:add="addModel"></Model>
 			</div>
 		</div>
 	</div>
@@ -20,44 +27,46 @@
 import Model from "./model.vue";
 export default {
 	name: "Models",
-	props: ["id"],
+	props: ["id", "models"],
 	components: {
 		Model
 	},
 	watch: {
-		id: function(newVal, oldVal) {
-			this.get(newVal)
-		}
-	},
-	created: function() {
-		this.get(this.id)
+		id: function(newVal) {
+			this.model.card_id = newVal;
+		},
+		models: function(newVal) {
+			this.models2 = newVal;
+		},
+		//deep: true
 	},
 	data() {
 		return {
-			models: [],
+			models2: [],
 			model: {
 				card_id: this.id,
-				advantages: []
+				advantages: [],
+				weapons: []
 			}
 		};
 	},
 	methods: {
-		get: function(cardID) {
-			this.$http
-				.get("http://localhost:9901/cards/" + cardID + "/models")
-				.then(function(res) {
-					this.models = res.data;
-				});
-		},
 		removeModel: function(index) {
-			this.models.splice(index, 1);
+			this.$emit("remove", index);
 		},
 		addModel: function(model) {
-			this.models.push(model);
+			this.$emit("add", model);
 			this.model = {
-				card_id: this.id, 
-				advantages: [] 
+				card_id: this.id,
+				advantages: [],
+				weapons: []
 			};
+		},
+		addWeapon: function(index, weapon) {
+			this.$emit("add_weapon", index, weapon);
+		},
+		removeWeapon: function(index, weaponIndex) {
+			this.$emit("remove_weapon", index, weaponIndex);
 		}
 	}
 };

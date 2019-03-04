@@ -1,8 +1,14 @@
 <template>
 	<div class="w-100">
 		<h4 class="text-left">{{model.name}} abilities</h4>
-
-		<Ability v-for="(value,index) in abilities" v-bind:ability="value" :key="value.id" v-on:remove="removeAbility(value,index)"></Ability>
+		<Ability
+			v-for="(value,index) in abilities"
+			v-bind:ability="value"
+			:abilitiesList="abilitiesList"
+			:key="value.id"
+			v-on:remove="removeAbility(value,index)"
+			v-on:update="updateAbility"
+		></Ability>
 		<div class="card border-secondary">
 			<h5
 				class="card-header bg-secondary text-light card-icon py-1"
@@ -10,14 +16,16 @@
 				v-bind:data-target="'#new_model_ability' + model.id"
 				aria-expanded="false"
 				v-bind:aria-controls="'new_model_ability' + model.id"
-			>New Card Ability</h5>
+			>New {{model.name}} Ability</h5>
 			<div class="collapse card-body p-1" v-bind:id="'new_model_ability'+model.id">
-				<Ability :ability="ability" v-on:add="addAbility"></Ability>
+				<Ability :ability="ability" :abilitiesList="abilitiesList" v-on:add="addAbility" v-on:new="newAbility" v-on:update="updateAbility"></Ability>
 			</div>
 		</div>
-				<div class="row">
+		<div class="row">
 			<span class="col-2"></span>
-			<div class="col-10"><WeaponAbilities v-for="(value) in weapons" :abilitiesList="abilitiesList" :weapon="value" :key="value.id"></WeaponAbilities></div>
+			<div class="col-10">
+				<WeaponAbilities v-for="value in model.weapons" :abilitiesList="abilitiesList" :weapon="value" :key="value.id" v-on:new="newAbility" v-on:update="updateAbility"></WeaponAbilities>
+			</div>
 		</div>
 		<hr>
 	</div>
@@ -30,21 +38,24 @@ export default {
 	name: "ModelAbilities",
 	props: ["model", "abilitiesList"],
 	components: {
-		Ability, WeaponAbilities
+		Ability,
+		WeaponAbilities
 	},
 	watch: {
 		model: function(newVal) {
-			this.get(newVal.id)
+			this.get(newVal.id);
+		},
+		abilitiesList: function() {
+			this.get(this.model.id);
 		}
 	},
 	created: function() {
-		this.get(this.model.id)
+		this.get(this.model.id);
 	},
 	data() {
 		return {
-			weapons: [],
 			abilities: [],
-			ability: {},
+			ability: {}
 		};
 	},
 	methods: {
@@ -52,12 +63,8 @@ export default {
 			this.$http
 				.get("http://localhost:9901/models/" + modelID + "/abilities")
 				.then(function(res) {
+					console.log(res);
 					this.abilities = res.data;
-				});
-			this.$http
-				.get("http://localhost:9901/models/" + modelID + "/weapons")
-				.then(function(res) {
-					this.weapons = res.data;
 				});
 		},
 		removeAbility: function(ability, index) {
@@ -69,6 +76,7 @@ export default {
 						ability.id
 				)
 				.then(function(res) {
+					console.log(res);
 					if (res.status === 204) {
 						this.abilities.splice(index, 1);
 					}
@@ -80,16 +88,21 @@ export default {
 					"http://localhost:9901/models/" +
 						this.model.id +
 						"/abilities/" +
-						ability.id +
-						"?magical=" +
-						ability.magical
+						ability.id
 				)
 				.then(function(res) {
+					console.log(res);
 					if (res.status === 200) {
 						this.abilities.push(ability);
 						this.ability = {};
 					}
 				});
+		},
+		updateAbility: function() {
+			this.$emit("update");
+		},
+		newAbility: function(ability) {
+			this.$emit("new", ability);
 		}
 	}
 };

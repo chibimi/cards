@@ -169,30 +169,9 @@
 					<h4 class="col-11">{{model.name}} weapons</h4>
 					<label class="col-1 col-form-label"></label>
 					<div class="col-11">
-						<Weapons :id="model.id"></Weapons>
+						<Weapons :id="model.id" :weapons="model.weapons" v-on:remove="removeWeapon"></Weapons>
 					</div>
 				</div>
-
-				<!-- <div class="row">
-					<label v-if="weapons.length>0" class="col-1 col-form-label"></label>
-					<h4 v-if="weapons.length>0" class="col-11">{{model.name}} weapons</h4>
-					<label class="col-1 col-form-label"></label>
-					<div class="col-11">
-						<Weapon v-for="(value,index) in weapons" v-bind:weapon="value" :key="value.id" v-on:remove="removeWeapon(index)"></Weapon>
-						<div class="card border-secondary">
-							<h5
-								class="card-header bg-secondary text-light card-icon py-1"
-								data-toggle="collapse"
-								data-target="#new_model_weapon"
-								aria-expanded="false"
-								aria-controls="new_model_weapon"
-							>New Weapon for {{model.name}}</h5>
-							<div class="collapse card-body p-1" id="new_model_weapon">
-								<Weapon :weapon="weapon"  v-on:add="addWeapon"></Weapon>
-							</div>
-						</div>
-					</div>
-				</div>-->
 			</div>
 		</div>
 		<hr>
@@ -203,52 +182,39 @@
 import Weapons from "./weapons.vue";
 export default {
 	name: "Model",
-	props: ["model"],
+	props: ["selectedModel"],
 	components: {
 		Weapons
 	},
 	watch: {
-		model: function(newVal) {
+		selectedModel: function(newVal) {
 			if (newVal.id < 0) {
 				this.reset();
 			}
+			this.model = newVal;
+			this.model.weapons = newVal.weapons
 		}
 	},
 	created: function() {
-		// this.get(this.model.id);
+		this.model = this.selectedModel;
 	},
 	data() {
 		return {
-			// weapons: [],
-			// weapon: {
-			// 	model_id: this.model.id,
-			// 	advantages: []
-			// },
+			model: {},
 			alert: "",
 			alert_succes: false
 		};
 	},
 	methods: {
-		// get: function(modelID) {
-		// 	this.card = {};
-		// 	if (!modelID) {
-		// 		return;
-		// 	}
-		// 	this.$http
-		// 		.get("http://localhost:9901/models/" + modelID + "/weapons")
-		// 		.then(function(res) {
-		// 			console.log(res);
-		// 			this.weapons = res.data;
-		// 		});
-		// },
 		save: function(model) {
 			if (model.id == null) {
 				model.id = 0;
 			}
-			this.alert = "";
+			this.reset();
 			this.$http
 				.put("http://localhost:9901/models/" + model.id, model)
 				.then(function(res) {
+					console.log(res);
 					this.alert = "save success";
 					this.alert_success = true;
 					if (res.status === 201) {
@@ -262,10 +228,11 @@ export default {
 				});
 		},
 		remove: function(model) {
-			this.alert = "";
+			this.reset();
 			this.$http
 				.delete("http://localhost:9901/models/" + model.id)
 				.then(function(res) {
+					console.log(res);
 					if (res.status === 204) {
 						this.$emit("remove");
 					}
@@ -276,26 +243,19 @@ export default {
 				});
 		},
 		reset: function() {
-			// this.weapons = [];
-			// this.weapon = {
-			// 	model_id: this.model.id,
-			// 	advantages: []
-			// };
 			this.alert = "";
 			this.alert_succes = false;
+		},
+		removeWeapon: function(index) {
+			this.$emit("remove_weapon", index);
+		},
+		addWeapon: function(weapon) {
+			this.$emit("add", weapon);
 		}
-		// removeWeapon: function(index) {
-		// 	this.weapons.splice(index, 1);
-		// },
-		// addWeapon: function(weapon) {
-		// 	this.weapons.push(weapon);
-		// 	this.weapon = { model_id: this.model.id, advantages: [] };
-		// }
 	}
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .statline input {
 	max-width: 4rem;
