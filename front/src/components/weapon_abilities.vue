@@ -1,6 +1,6 @@
 <template>
 	<div class="w-100">
-		<h5 class="text-left">{{weapon.name}} abilities</h5>
+		<h5 class="text-left mt-3">{{weapon.name}} abilities</h5>
 		<Ability
 			v-for="(value,index) in abilities"
 			v-bind:ability="value"

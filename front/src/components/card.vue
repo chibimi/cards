@@ -31,12 +31,12 @@
 					aria-controls="nav-spells"
 					aria-selected="false"
 				>Spells</a>
-				<a class="nav-item nav-link" id="nav-feat-tab" data-toggle="tab" href="#nav-feat" role="tab" aria-controls="nav-feat" aria-selected="false">Feat</a>
+				<a  v-if="card.id>0 && (card.category_id=== 1 || card.category_id===2)" class="nav-item nav-link" id="nav-feat-tab" data-toggle="tab" href="#nav-feat" role="tab" aria-controls="nav-feat" aria-selected="false">Feat</a>
 			</div>
 		</nav>
 		<div class="tab-content" id="nav-tabContent">
 			<div class="tab-pane fade show active" id="nav-ref" role="tabpanel" aria-labelledby="nav-ref-tab">
-				<Ref :id="card.id" :faction="faction" :category="category" v-on:new_card="newCard" v-on:remove_card="removeCard"></Ref>
+				<Ref :selectedCard="card" :faction="faction" :category="category" v-on:new_card="newCard" v-on:remove_card="removeCard"></Ref>
 			</div>
 			<div class="tab-pane fade" id="nav-models" role="tabpanel" aria-labelledby="nav-models-tab">
 				<Models v-if="card.id>0" :id="card.id" :models="card.models" v-on:add="addModel" v-on:remove="removeModel" v-on:remove_weapon="removeWeapon" v-on:add_weapon="addWeapon"></Models>
@@ -44,8 +44,12 @@
 			<div class="tab-pane fade" id="nav-abilities" role="tabpanel" aria-labelledby="nav-abilities-tab">
 				<Abilities v-if="card.id>0" :card="card"></Abilities>
 			</div>
-			<div class="tab-pane fade" id="nav-spells" role="tabpanel" aria-labelledby="nav-spells-tab">spells</div>
-			<div class="tab-pane fade" id="nav-feat" role="tabpanel" aria-labelledby="nav-feat-tab">feat</div>
+			<div class="tab-pane fade" id="nav-spells" role="tabpanel" aria-labelledby="nav-spells-tab">
+				<Spells v-if="card.id>0" :id="card.id"></Spells>
+			</div>
+			<div class="tab-pane fade" id="nav-feat" role="tabpanel" aria-labelledby="nav-feat-tab">
+				<Feat v-if="card.id>0 && (card.category_id=== 1 || card.category_id===2)" :id="card.id"></Feat>
+			</div>
 		</div>
 	</div>
 </template>
@@ -53,22 +57,20 @@
 <script>
 import Abilities from "./abilities.vue";
 import Models from "./models.vue";
-// import Spell from "./spell.vue";
-// import Feat from "./feat.vue";
+import Spells from "./spells.vue";
+import Feat from "./feat.vue";
 import Ref from "./ref.vue";
 export default {
 	name: "Card",
 	props: ["selected", "faction", "category"],
-	components: { Ref, Models, Abilities },
+	components: { Ref, Models, Abilities, Spells, Feat},
 	watch: {
 		selected: function(newVal) {
-			this.card.id = newVal;
-			this.getModels(newVal);
+			this.getCard(newVal);
 		}
 	},
 	created: function() {
-		this.card.id = this.selected;
-		this.getModels(this.selected);
+		this.getCard(this.selected);
 	},
 	data() {
 		return {
@@ -79,6 +81,16 @@ export default {
 		};
 	},
 	methods: {
+		getCard: async function(cardID) {
+			this.card.models = [];
+			this.$http
+				.get("http://localhost:9901/cards/" + cardID)
+				.then(function(res) {
+					console.log(res);
+					this.card = res.data;
+					this.getModels(cardID);
+				});
+		},
 		newCard: function(cardID) {
 			this.card.id = cardID;
 		},

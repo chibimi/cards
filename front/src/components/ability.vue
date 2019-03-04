@@ -18,6 +18,7 @@
 				:component-item="template"
 				:auto-select-one-item="false"
 				@item-selected="selectedItem"
+				@input="inputItem"
 				class="col-2 mt-1"
 			></v-autocomplete>
 			<input v-model="selectedAbility.original_name" type="text" class="form-control col-2" placeholder="English Name">
@@ -34,6 +35,7 @@
 					<button v-if="!ability.id && !selectedAbility.id" type="submit" class="form-control btn btn-primary" @click="save(selectedAbility)">Add</button>
 				</div>
 		</div>
+		<hr>
 	</div>
 </template>
 
@@ -53,9 +55,8 @@ export default {
 	created: function() {
 		this.selectedAbility = this.ability;
 		if (!this.ability.id){
-				this.update=true;
-			}
-
+			this.update=true;
+		}
 	},
 	data() {
 		return {
@@ -111,6 +112,11 @@ export default {
 		},
 		selectedItem(item) {
 			this.selectedAbility = item;
+		},
+		inputItem(item) {
+			if (item === null){
+				this.selectedAbility = {}
+			}
 		}
 	}
 };

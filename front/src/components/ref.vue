@@ -118,21 +118,20 @@
 import { Factions, Categories } from "./const.js";
 export default {
 	name: "Ref",
-	props: ["id", "faction", "category"],
+	props: ["selectedCard", "faction", "category"],
 	components: {},
 	watch: {
-		id: function(newVal) {
-			if (newVal > 0) {
-				this.get(newVal);
-			}else{
+		selectedCard: function(newVal) {
+			if (newVal.id < 0) {
 				this.reset();
 			}
-			
+			this.card = newVal;
+			this.card.models = newVal.models
 		}
 	},
 	created: function() {
-		if (this.id > 0) {
-			this.get(this.id);
+		if (this.selectedCard.id > 0) {
+			this.card = this.selectedCard;
 		}
 	},
 	data() {
