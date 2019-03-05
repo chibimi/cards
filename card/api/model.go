@@ -85,63 +85,6 @@ func (s *Service) DeleteModel(w http.ResponseWriter, r *http.Request, p httprout
 	writeJson(w, nil, http.StatusNoContent)
 }
 
-func (s *Service) GetModelAbilities(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
-	id, err := strconv.Atoi(p.ByName("id"))
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
-		return
-	}
-
-	res, err := s.src.GetModelAbilities(id)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-
-	writeJson(w, res, http.StatusOK)
-}
-
-func (s *Service) AddModelAbility(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
-	cardID, err := strconv.Atoi(p.ByName("id"))
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
-		return
-	}
-	abilityID, err := strconv.Atoi(p.ByName("ability_id"))
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
-		return
-	}
-
-	err = s.src.AddModelAbility(cardID, abilityID)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-
-	writeJson(w, nil, http.StatusOK)
-}
-
-func (s *Service) DeleteModelAbility(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
-	cardID, err := strconv.Atoi(p.ByName("id"))
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
-		return
-	}
-	abilityID, err := strconv.Atoi(p.ByName("ability_id"))
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
-		return
-	}
-
-	err = s.src.DeleteModelAbility(cardID, abilityID)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-	writeJson(w, nil, http.StatusNoContent)
-}
-
 func (s *Service) GetModelWeapons(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	id, err := strconv.Atoi(p.ByName("id"))
 	if err != nil {

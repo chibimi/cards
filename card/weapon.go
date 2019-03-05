@@ -1,45 +1,117 @@
 package card
 
 import (
-	"strings"
+	"encoding/json"
 
 	"github.com/pkg/errors"
 )
 
 type Weapon struct {
-	ID           int      `json:"id,omitempty" db:"id"`
-	ModelID      int      `json:"model_id,omitempty" db:"model_id"`
-	Type         int      `json:"type,omitempty,string" db:"type"`
-	Name         string   `json:"name,omitempty" db:"name"`
-	RNG          string   `json:"rng,omitempty" db:"rng"`
-	POW          string   `json:"pow,omitempty" db:"pow"`
-	ROF          string   `json:"rof,omitempty" db:"rof"`
-	AOE          string   `json:"aoe,omitempty" db:"aoe"`
-	LOC          string   `json:"loc,omitempty" db:"loc"`
-	CNT          string   `json:"cnt,omitempty" db:"cnt"`
-	Advantages   []string `json:"advantages" db:"-"`
-	AdvantagesDB string   `json:"-" db:"advantages"`
+	ID           int      `json:"id,omitempty"`
+	ModelID      int      `json:"model_id,omitempty"`
+	Type         int      `json:"type,omitempty,string"`
+	Name         string   `json:"name,omitempty"`
+	RNG          string   `json:"rng,omitempty"`
+	POW          string   `json:"pow,omitempty"`
+	ROF          string   `json:"rof,omitempty"`
+	AOE          string   `json:"aoe,omitempty"`
+	LOC          string   `json:"loc,omitempty"`
+	CNT          string   `json:"cnt,omitempty"`
+	Advantages   []string `json:"advantages"`
+	AdvantagesDB string   `json:"-"`
 }
 
+func (s *Service) ListWeapons() ([]Weapon, error) {
+	stmt, err := s.db.Prepare("SELECT data FROM weapons")
+	if err != nil {
+		return nil, errors.Wrap(err, "prepare statement")
+	}
+	defer stmt.Close()
+
+	rows, err := stmt.Query()
+	if err != nil {
+		return nil, errors.Wrap(err, "execute query")
+	}
+
+	res := []Weapon{}
+	for rows.Next() {
+		r := Weapon{}
+		data := []byte{}
+		if err := rows.Scan(&data); err != nil {
+			return nil, errors.Wrap(err, "struct scan")
+		}
+		if err := json.Unmarshal(data, &r); err != nil {
+			return nil, errors.Wrap(err, "unmarshal data")
+		}
+		res = append(res, r)
+	}
+	return res, nil
+}
 func (s *Service) GetWeapon(id int) (*Weapon, error) {
-	stmt, err := s.db.Preparex("SELECT * FROM weapons WHERE id = ?")
+	stmt, err := s.db.Prepare("SELECT data FROM weapons WHERE id = ?")
 	if err != nil {
 		return nil, errors.Wrap(err, "prepare statement")
 	}
 	defer stmt.Close()
 
 	res := &Weapon{}
+	data := []byte{}
+	row := stmt.QueryRow(id)
 
-	if err := stmt.Get(res, id); err != nil {
+	if err := row.Scan(&data); err != nil {
 		return nil, errors.Wrap(err, "execute query")
 	}
-	res.Advantages = strings.Split(res.AdvantagesDB, ",")
+	if err := json.Unmarshal(data, res); err != nil {
+		return nil, errors.Wrap(err, "unmarshal data")
+	}
 
 	return res, nil
 }
+func (s *Service) SaveWeapon(weapon *Weapon) (int, error) {
+	stmt, err := s.db.Prepare(`INSERT INTO weapons (data) VALUES(?)`)
+	if err != nil {
+		return 0, errors.Wrap(err, "prepare statement")
+	}
+	defer stmt.Close()
+
+	data, err := json.Marshal(weapon)
+	if err != nil {
+		return 0, errors.Wrap(err, "marshal data")
+	}
+	res, err := stmt.Exec(data)
+	if err != nil {
+		return 0, errors.Wrap(err, "execute query")
+	}
+	id, err := res.LastInsertId()
+	if err != nil {
+		return 0, errors.Wrap(err, "last index")
+	}
+	if _, err := s.db.Exec("UPDATE weapons SET data = json_set(data, '$.id', id) WHERE id = ?", id); err != nil {
+		return 0, errors.Wrap(err, "affect id to json")
+	}
+	return int(id), nil
+}
+
+func (s *Service) UpdateWeapon(weapon *Weapon) error {
+	stmt, err := s.db.Prepare(`UPDATE weapons SET data = ? WHERE id = ?`)
+	if err != nil {
+		return errors.Wrap(err, "prepare statement")
+	}
+	defer stmt.Close()
+
+	data, err := json.Marshal(weapon)
+	if err != nil {
+		return errors.Wrap(err, "marshal data")
+	}
+	_, err = stmt.Exec(data, weapon.ID)
+	if err != nil {
+		return errors.Wrap(err, "execute query")
+	}
+	return nil
+}
 
 func (s *Service) DeleteWeapon(id int) error {
-	stmt, err := s.db.Preparex("DELETE FROM weapons WHERE id = ?")
+	stmt, err := s.db.Prepare("DELETE FROM weapons WHERE id = ?")
 	if err != nil {
 		return errors.Wrap(err, "prepare statement")
 	}
@@ -48,88 +120,30 @@ func (s *Service) DeleteWeapon(id int) error {
 	if _, err := stmt.Exec(id); err != nil {
 		return errors.Wrap(err, "execute query")
 	}
-
 	return nil
 }
 
-func (s *Service) SaveWeapon(weapon *Weapon) (int, error) {
-	stmt, err := s.db.PrepareNamed(`INSERT INTO weapons VALUES(
-		:id, :model_id, :type, :name, :rng, :pow, :rof, :aoe, :loc, :cnt, :advantages
-	)`)
-	if err != nil {
-		return 0, errors.Wrap(err, "prepare statement")
-	}
-	defer stmt.Close()
-
-	weapon.AdvantagesDB = strings.Join(weapon.Advantages, ",")
-
-	res, err := stmt.Exec(weapon)
-	if err != nil {
-		return 0, errors.Wrap(err, "execute query")
-	}
-	id, err := res.LastInsertId()
-	return int(id), errors.Wrap(err, "last index")
-}
-
-func (s *Service) UpdateWeapon(weapon *Weapon) error {
-	stmt, err := s.db.PrepareNamed(`UPDATE weapons SET 
-	model_id = :model_id, type = :type, name = :name, 
-	rng = :rng, pow = :pow, rof = :rof, aoe = :aoe, loc = :loc, cnt = :cnt, advantages = :advantages WHERE id = :id`)
-	if err != nil {
-		return errors.Wrap(err, "prepare statement")
-	}
-	defer stmt.Close()
-
-	weapon.AdvantagesDB = strings.Join(weapon.Advantages, ",")
-
-	_, err = stmt.Exec(weapon)
-	if err != nil {
-		return errors.Wrap(err, "execute query")
-	}
-	return nil
-}
-
-func (s *Service) ListWeapons() ([]Weapon, error) {
-	stmt, err := s.db.Preparex("SELECT * FROM weapons")
+func (s *Service) GetModelWeapons(modelID int) ([]Weapon, error) {
+	stmt, err := s.db.Prepare("SELECT data FROM weapons WHERE model_id = ?")
 	if err != nil {
 		return nil, errors.Wrap(err, "prepare statement")
 	}
 	defer stmt.Close()
 
-	rows, err := stmt.Queryx()
+	rows, err := stmt.Query(modelID)
 	if err != nil {
 		return nil, errors.Wrap(err, "execute query")
 	}
+
 	res := []Weapon{}
 	for rows.Next() {
 		r := Weapon{}
-		if err := rows.StructScan(&r); err != nil {
+		data := []byte{}
+		if err := rows.Scan(&data); err != nil {
 			return nil, errors.Wrap(err, "struct scan")
 		}
-		r.Advantages = strings.Split(r.AdvantagesDB, ",")
-
-		res = append(res, r)
-	}
-	return res, nil
-}
-
-func (s *Service) GetWeaponAbilities(id int) ([]Ability, error) {
-	stmt, err := s.db.Preparex("SELECT id, original_name, name, magical, description FROM weapon_ability AS l LEFT JOIN abilities AS a ON l.ability_id = a.id WHERE l.weapon_id = ?")
-	if err != nil {
-		return nil, errors.Wrap(err, "prepare statement")
-	}
-	defer stmt.Close()
-
-	rows, err := stmt.Queryx(id)
-	if err != nil {
-		return nil, errors.Wrap(err, "execute query")
-	}
-
-	res := []Ability{}
-	for rows.Next() {
-		r := Ability{}
-		if err := rows.StructScan(&r); err != nil {
-			return nil, errors.Wrap(err, "struct scan")
+		if err := json.Unmarshal(data, &r); err != nil {
+			return nil, errors.Wrap(err, "unmarshal data")
 		}
 		res = append(res, r)
 	}

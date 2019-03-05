@@ -30,16 +30,6 @@ func (s *Service) ListCategories(w http.ResponseWriter, r *http.Request, _ httpr
 	writeJson(w, s.src.ListCategories(), http.StatusOK)
 }
 
-func (s *Service) ListAbilities(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
-	res, err := s.src.ListAbilities()
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-
-	writeJson(w, res, http.StatusOK)
-}
-
 func (s *Service) ListSpells(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	res, err := s.src.ListSpells()
 	if err != nil {

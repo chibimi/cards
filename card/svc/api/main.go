@@ -1,19 +1,19 @@
 package main
 
 import (
+	"database/sql"
 	"net/http"
 
 	"github.com/chibimi/cards/card"
 	"github.com/chibimi/cards/card/api"
 	_ "github.com/go-sql-driver/mysql"
-	"github.com/jmoiron/sqlx"
 	"github.com/julienschmidt/httprouter"
 	"github.com/rs/cors"
 	"gopkg.in/inconshreveable/log15.v2"
 )
 
 func main() {
-	db, err := sqlx.Open("mysql", "cards_api:cards_api@/cards_db")
+	db, err := sql.Open("mysql", "cards_api:cards_api@/cards_db")
 	if err != nil {
 		log15.Crit("Unable to access db", "err", err.Error())
 	}
@@ -26,8 +26,10 @@ func main() {
 	router.GET("/categories", s.ListCategories)
 
 	router.GET("/abilities", s.ListAbilities)
+	router.GET("/abilities/:id", s.GetAbility)
 	router.POST("/abilities", s.CreateAbility)
 	router.PUT("/abilities/:id", s.UpdateAbility)
+	router.DELETE("/abilities/:id", s.DeleteAbility)
 
 	router.GET("/spells", s.ListSpells)
 	router.POST("/spells", s.CreateSpell)

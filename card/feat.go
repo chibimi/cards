@@ -1,36 +1,113 @@
 package card
 
 import (
+	"encoding/json"
+
 	"github.com/pkg/errors"
 )
 
 type Feat struct {
-	ID           int    `json:"id,omitempty" db:"id"`
-	CardID       int    `json:"card_id,omitempty" db:"card_id"`
-	OriginalName string `json:"original_name,omitempty" db:"original_name"`
-	Name         string `json:"name,omitempty" db:"name"`
-	Description  string `json:"description,omitempty" db:"description"`
-	Fluff        string `json:"fluff,omitempty" db:"fluff"`
+	ID           int    `json:"id,omitempty"`
+	CardID       int    `json:"card_id,omitempty"`
+	OriginalName string `json:"original_name,omitempty"`
+	Name         string `json:"name,omitempty"`
+	Description  string `json:"description,omitempty"`
+	Fluff        string `json:"fluff,omitempty"`
+}
+
+func (s *Service) ListFeats() ([]Feat, error) {
+	stmt, err := s.db.Prepare("SELECT data FROM feats")
+	if err != nil {
+		return nil, errors.Wrap(err, "prepare statement")
+	}
+	defer stmt.Close()
+
+	rows, err := stmt.Query()
+	if err != nil {
+		return nil, errors.Wrap(err, "execute query")
+	}
+
+	res := []Feat{}
+	for rows.Next() {
+		r := Feat{}
+		data := []byte{}
+		if err := rows.Scan(&data); err != nil {
+			return nil, errors.Wrap(err, "struct scan")
+		}
+		if err := json.Unmarshal(data, &r); err != nil {
+			return nil, errors.Wrap(err, "unmarshal data")
+		}
+		res = append(res, r)
+	}
+	return res, nil
 }
 
 func (s *Service) GetFeat(id int) (*Feat, error) {
-	stmt, err := s.db.Preparex("SELECT * FROM feats WHERE id = ?")
+	stmt, err := s.db.Prepare("SELECT data FROM feats WHERE id = ?")
 	if err != nil {
 		return nil, errors.Wrap(err, "prepare statement")
 	}
 	defer stmt.Close()
 
 	res := &Feat{}
+	data := []byte{}
+	row := stmt.QueryRow(id)
 
-	if err := stmt.Get(res, id); err != nil {
+	if err := row.Scan(&data); err != nil {
 		return nil, errors.Wrap(err, "execute query")
+	}
+	if err := json.Unmarshal(data, res); err != nil {
+		return nil, errors.Wrap(err, "unmarshal data")
 	}
 
 	return res, nil
 }
 
+func (s *Service) SaveFeat(feat *Feat) (int, error) {
+	stmt, err := s.db.Prepare(`INSERT INTO feats (data) VALUES(?)`)
+	if err != nil {
+		return 0, errors.Wrap(err, "prepare statement")
+	}
+	defer stmt.Close()
+
+	data, err := json.Marshal(feat)
+	if err != nil {
+		return 0, errors.Wrap(err, "marshal data")
+	}
+	res, err := stmt.Exec(data)
+	if err != nil {
+		return 0, errors.Wrap(err, "execute query")
+	}
+	id, err := res.LastInsertId()
+	if err != nil {
+		return 0, errors.Wrap(err, "last index")
+	}
+	if _, err := s.db.Exec("UPDATE feats SET data = json_set(data, '$.id', id) WHERE id = ?", id); err != nil {
+		return 0, errors.Wrap(err, "affect id to json")
+	}
+	return int(id), nil
+}
+
+func (s *Service) UpdateFeat(feat *Feat) error {
+	stmt, err := s.db.Prepare(`UPDATE feats SET data = ? WHERE id = ?`)
+	if err != nil {
+		return errors.Wrap(err, "prepare statement")
+	}
+	defer stmt.Close()
+
+	data, err := json.Marshal(feat)
+	if err != nil {
+		return errors.Wrap(err, "marshal data")
+	}
+	_, err = stmt.Exec(data, feat.ID)
+	if err != nil {
+		return errors.Wrap(err, "execute query")
+	}
+	return nil
+}
+
 func (s *Service) DeleteFeat(id int) error {
-	stmt, err := s.db.Preparex("DELETE FROM feats WHERE id = ?")
+	stmt, err := s.db.Prepare("DELETE FROM feats WHERE id = ?")
 	if err != nil {
 		return errors.Wrap(err, "prepare statement")
 	}
@@ -39,60 +116,26 @@ func (s *Service) DeleteFeat(id int) error {
 	if _, err := stmt.Exec(id); err != nil {
 		return errors.Wrap(err, "execute query")
 	}
-
 	return nil
 }
 
-func (s *Service) SaveFeat(feat *Feat) (int, error) {
-	stmt, err := s.db.PrepareNamed(`INSERT INTO feats VALUES(
-		:id, :card_id, :original_name, :name, :description, :fluff
-	)`)
-	if err != nil {
-		return 0, errors.Wrap(err, "prepare statement")
-	}
-	defer stmt.Close()
-
-	res, err := stmt.Exec(feat)
-	if err != nil {
-		return 0, errors.Wrap(err, "execute query")
-	}
-	id, err := res.LastInsertId()
-	return int(id), errors.Wrap(err, "last index")
-}
-
-func (s *Service) UpdateFeat(feat *Feat) error {
-	stmt, err := s.db.PrepareNamed(`UPDATE feats SET 
-	card_id = :card_id, name = :name, original_name = :original_name, description = :description, fluff = :fluff WHERE id = :id`)
-	if err != nil {
-		return errors.Wrap(err, "prepare statement")
-	}
-	defer stmt.Close()
-
-	_, err = stmt.Exec(feat)
-	if err != nil {
-		return errors.Wrap(err, "execute query")
-	}
-	return nil
-}
-
-func (s *Service) ListFeats() ([]Feat, error) {
-	stmt, err := s.db.Preparex("SELECT * FROM feats")
+func (s *Service) GetCardFeat(cardID int) (*Feat, error) {
+	stmt, err := s.db.Prepare("SELECT data FROM feats WHERE card_id = ?")
 	if err != nil {
 		return nil, errors.Wrap(err, "prepare statement")
 	}
 	defer stmt.Close()
 
-	rows, err := stmt.Queryx()
-	if err != nil {
+	res := &Feat{}
+	data := []byte{}
+	row := stmt.QueryRow(cardID)
+
+	if err := row.Scan(&data); err != nil {
 		return nil, errors.Wrap(err, "execute query")
 	}
-	res := []Feat{}
-	for rows.Next() {
-		r := Feat{}
-		if err := rows.StructScan(&r); err != nil {
-			return nil, errors.Wrap(err, "struct scan")
-		}
-		res = append(res, r)
+	if err := json.Unmarshal(data, res); err != nil {
+		return nil, errors.Wrap(err, "unmarshal data")
 	}
+
 	return res, nil
 }

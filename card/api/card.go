@@ -111,22 +111,6 @@ func (s *Service) GetRelatedCards(w http.ResponseWriter, r *http.Request, p http
 	writeJson(w, res, http.StatusOK)
 }
 
-func (s *Service) GetCardAbilities(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
-	id, err := strconv.Atoi(p.ByName("id"))
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
-		return
-	}
-
-	res, err := s.src.GetCardAbilities(id)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-
-	writeJson(w, res, http.StatusOK)
-}
-
 func (s *Service) GetCardFeat(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	id, err := strconv.Atoi(p.ByName("id"))
 	if err != nil {
@@ -172,47 +156,6 @@ func (s *Service) GetCardModels(w http.ResponseWriter, r *http.Request, p httpro
 	}
 
 	writeJson(w, res, http.StatusOK)
-}
-
-func (s *Service) AddCardAbility(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
-	cardID, err := strconv.Atoi(p.ByName("id"))
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
-		return
-	}
-	abilityID, err := strconv.Atoi(p.ByName("ability_id"))
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
-		return
-	}
-
-	err = s.src.AddCardAbility(cardID, abilityID)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-
-	writeJson(w, nil, http.StatusOK)
-}
-
-func (s *Service) DeleteCardAbility(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
-	cardID, err := strconv.Atoi(p.ByName("id"))
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
-		return
-	}
-	abilityID, err := strconv.Atoi(p.ByName("ability_id"))
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
-		return
-	}
-
-	err = s.src.DeleteCardAbility(cardID, abilityID)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-	writeJson(w, nil, http.StatusNoContent)
 }
 
 func (s *Service) AddCardSpell(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
