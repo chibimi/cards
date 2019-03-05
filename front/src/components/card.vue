@@ -1,5 +1,5 @@
 <template>
-	<div class="w-100">
+	<div class="w-100 mt-4">
 		<nav>
 			<div class="nav nav-tabs" id="nav-tab" role="tablist">
 				<a class="nav-item nav-link active" id="nav-ref-tab" data-toggle="tab" href="#nav-ref" role="tab" aria-controls="nav-ref" aria-selected="true">Ref</a>
@@ -14,6 +14,7 @@
 					aria-selected="false"
 				>Models</a>
 				<a
+					v-if="card.id>0"
 					class="nav-item nav-link"
 					id="nav-abilities-tab"
 					data-toggle="tab"
@@ -23,6 +24,7 @@
 					aria-selected="false"
 				>Abilities</a>
 				<a
+					v-if="card.id>0"
 					class="nav-item nav-link"
 					id="nav-spells-tab"
 					data-toggle="tab"
@@ -30,8 +32,17 @@
 					role="tab"
 					aria-controls="nav-spells"
 					aria-selected="false"
-				>Spells</a>
-				<a  v-if="card.id>0 && (card.category_id=== 1 || card.category_id===2)" class="nav-item nav-link" id="nav-feat-tab" data-toggle="tab" href="#nav-feat" role="tab" aria-controls="nav-feat" aria-selected="false">Feat</a>
+				>Spells & Animus</a>
+				<a
+					v-if="card.id>0 && (card.category_id=== 1 || card.category_id===2)"
+					class="nav-item nav-link"
+					id="nav-feat-tab"
+					data-toggle="tab"
+					href="#nav-feat"
+					role="tab"
+					aria-controls="nav-feat"
+					aria-selected="false"
+				>Feat</a>
 			</div>
 		</nav>
 		<div class="tab-content" id="nav-tabContent">
@@ -39,7 +50,15 @@
 				<Ref :selectedCard="card" :faction="faction" :category="category" v-on:new_card="newCard" v-on:remove_card="removeCard"></Ref>
 			</div>
 			<div class="tab-pane fade" id="nav-models" role="tabpanel" aria-labelledby="nav-models-tab">
-				<Models v-if="card.id>0" :id="card.id" :models="card.models" v-on:add="addModel" v-on:remove="removeModel" v-on:remove_weapon="removeWeapon" v-on:add_weapon="addWeapon"></Models>
+				<Models
+					v-if="card.id>0"
+					:id="card.id"
+					:models="card.models"
+					v-on:add="addModel"
+					v-on:remove="removeModel"
+					v-on:remove_weapon="removeWeapon"
+					v-on:add_weapon="addWeapon"
+				></Models>
 			</div>
 			<div class="tab-pane fade" id="nav-abilities" role="tabpanel" aria-labelledby="nav-abilities-tab">
 				<Abilities v-if="card.id>0" :card="card"></Abilities>
@@ -63,7 +82,7 @@ import Ref from "./ref.vue";
 export default {
 	name: "Card",
 	props: ["selected", "faction", "category"],
-	components: { Ref, Models, Abilities, Spells, Feat},
+	components: { Ref, Models, Abilities, Spells, Feat },
 	watch: {
 		selected: function(newVal) {
 			this.getCard(newVal);
@@ -82,20 +101,29 @@ export default {
 	},
 	methods: {
 		getCard: async function(cardID) {
-			this.card.models = [];
+			this.reset();
+			if (cardID <=0){return;}
 			this.$http
 				.get("http://localhost:9901/cards/" + cardID)
 				.then(function(res) {
 					console.log(res);
-					this.card = res.data;
+					var temp =  res.data
+					temp.models = [];
+					this.card = temp;
 					this.getModels(cardID);
 				});
 		},
 		newCard: function(cardID) {
-			this.card.id = cardID;
+			this.getCard(cardID);
 		},
 		removeCard: function() {
-			this.card.id = 0;
+			this.reset();
+		},
+		reset: function(){
+			this.card= {
+				id: 0,
+				models: []
+			}
 		},
 		getModels: async function(cardID) {
 			this.card.models = [];

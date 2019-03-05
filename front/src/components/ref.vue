@@ -51,7 +51,7 @@
 					</div>
 					<div class="row">
 						<label class="col-form-label col-3">Nb model</label>
-						<input v-model="card.models" type="text" class="form-control col-2">
+						<input v-model="card.models_cnt" type="text" class="form-control col-2">
 						<label v-if="card.category_id===5" class="col-form-label col-4">Nb model max</label>
 						<input v-if="card.category_id===5" v-model="card.models_max" type="text" class="form-control col-2" placeholder>
 					</div>
@@ -95,7 +95,7 @@
 				</div>
 				<div>
 					<b>Cost:</b>
-					{{card.cost}} for {{card.models}} models
+					{{card.cost}} for {{card.models_cnt}} models
 				</div>
 				<div v-if="card.category_id===5">
 					<b>Cost max:</b>
@@ -122,8 +122,10 @@ export default {
 	components: {},
 	watch: {
 		selectedCard: function(newVal) {
-			if (newVal.id < 0) {
+			console.log("updated selectedCard",newVal)
+			if (newVal.id <= 0) {
 				this.reset();
+				return;
 			}
 			this.card = newVal;
 			this.card.models = newVal.models

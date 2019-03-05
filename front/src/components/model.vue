@@ -169,7 +169,7 @@
 					<h4 class="col-11">{{model.name}} weapons</h4>
 					<label class="col-1 col-form-label"></label>
 					<div class="col-11">
-						<Weapons :id="model.id" :weapons="model.weapons" v-on:remove="removeWeapon"></Weapons>
+						<Weapons :id="model.id" :weapons="model.weapons" v-on:remove="removeWeapon" v-on:add="addWeapon"></Weapons>
 					</div>
 				</div>
 			</div>
@@ -250,7 +250,7 @@ export default {
 			this.$emit("remove_weapon", index);
 		},
 		addWeapon: function(weapon) {
-			this.$emit("add", weapon);
+			this.$emit("add_weapon", weapon);
 		}
 	}
 };

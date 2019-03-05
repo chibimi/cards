@@ -38,12 +38,12 @@
 			<input v-if="!selectedAbility.id" v-model="selectedAbility.original_name" type="text" class="form-control col-2" placeholder="English Name">
 			<label v-if="selectedAbility.id" class="col-form-label col-2 text-left">{{selectedAbility.original_name}}</label>
 			<input v-model="selectedAbility.name" type="text" class="form-control col-2" placeholder="French Name">
-			<input v-model="selectedAbility.cost" type="text" class="form-control col-1" placeholder="spd">
-			<input v-model="selectedAbility.rng" type="text" class="form-control col-1" placeholder="spd">
-			<input v-model="selectedAbility.aoe" type="text" class="form-control col-1" placeholder="spd">
-			<input v-model="selectedAbility.pow" type="text" class="form-control col-1" placeholder="spd">
-			<input v-model="selectedAbility.dur" type="text" class="form-control col-1" placeholder="spd">
-			<input v-model="selectedAbility.off" type="text" class="form-control col-1" placeholder="spd">
+			<input v-model="selectedAbility.cost" type="text" class="form-control col-1" placeholder="cost">
+			<input v-model="selectedAbility.rng" type="text" class="form-control col-1" placeholder="rng">
+			<input v-model="selectedAbility.aoe" type="text" class="form-control col-1" placeholder="aoe">
+			<input v-model="selectedAbility.pow" type="text" class="form-control col-1" placeholder="pow">
+			<input v-model="selectedAbility.dur" type="text" class="form-control col-1" placeholder="dur">
+			<input v-model="selectedAbility.off" type="text" class="form-control col-1" placeholder="off">
 			<textarea v-model="selectedAbility.description" type="text" class="form-control col-11" rows="3" placeholder/>
 			<div class="col-1 px-0">
 				<button v-if="spell.id || selectedAbility.id" type="submit" class="form-control btn btn-success" @click="save(selectedAbility)">Update</button>

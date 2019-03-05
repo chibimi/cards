@@ -38,7 +38,6 @@ export default {
 		models: function(newVal) {
 			this.models2 = newVal;
 		},
-		//deep: true
 	},
 	data() {
 		return {

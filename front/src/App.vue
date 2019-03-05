@@ -1,5 +1,5 @@
 <template>
-	<div id="app" class="container">
+	<div id="app" class="container mt-3">
 		<Selector v-on:select_card="setCardID" v-on:change_faction="setFaction" v-on:change_category="setCategory"/>
 		<div class="row">
 			<Card v-if="cardID !== null" :selected="cardID" :faction="faction" :category="category"/>
@@ -54,7 +54,6 @@ body,
 html {
 	height: 100%;
 }
-
 .h-head {
 	height: 10vh;
 }
