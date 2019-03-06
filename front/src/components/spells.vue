@@ -52,7 +52,7 @@ export default {
 	methods: {
 		get: function(cardID) {
 			this.$http
-				.get("http://localhost:9901/cards/" + cardID + "/spells")
+				.get(process.env.VUE_APP_API_ENDPOINT+ "/cards/" + cardID + "/spells")
 				.then(function(res) {
 					console.log(res);
 					this.spells = res.data;
@@ -60,7 +60,7 @@ export default {
 		},
 		getSpells: function() {
 			this.$http
-				.get("http://localhost:9901/spells")
+				.get(process.env.VUE_APP_API_ENDPOINT+ "/spells")
 				.then(function(res) {
 					console.log(res);
 					this.spellsList = res.data;
@@ -69,7 +69,7 @@ export default {
 		removeSpell: function(spell, index) {
 			this.$http
 				.delete(
-					"http://localhost:9901/cards/" +
+					process.env.VUE_APP_API_ENDPOINT+ "/cards/" +
 						this.id +
 						"/spells/" +
 						spell.id
@@ -84,7 +84,7 @@ export default {
 		addSpell: function(spell) {
 			this.$http
 				.put(
-					"http://localhost:9901/cards/" +
+					process.env.VUE_APP_API_ENDPOINT+ "/cards/" +
 						this.id +
 						"/spells/" +
 						spell.id

@@ -118,7 +118,7 @@ export default {
 				weapon.id = 0;
 			}
 			this.$http
-				.put("http://localhost:9901/weapons/" + weapon.id, weapon)
+				.put(process.env.VUE_APP_API_ENDPOINT+ "/weapons/" + weapon.id, weapon)
 				.then(function(res) {
 					console.log(res);
 					if (res.status === 201) {
@@ -129,7 +129,7 @@ export default {
 		},
 		remove: function(weapon) {
 			this.$http
-				.delete("http://localhost:9901/weapons/" + weapon.id)
+				.delete(process.env.VUE_APP_API_ENDPOINT+ "/weapons/" + weapon.id)
 				.then(function(res) {
 					console.log(res);
 					if (res.status === 204) {

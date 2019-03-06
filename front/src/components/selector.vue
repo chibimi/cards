@@ -41,7 +41,7 @@ export default {
 			}
 			this.$http
 				.get(
-					"http://localhost:9901/cards?faction_id=" +
+					process.env.VUE_APP_API_ENDPOINT+ "/cards?faction_id=" +
 						faction +
 						"&category_id=" +
 						category

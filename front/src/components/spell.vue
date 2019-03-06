@@ -89,7 +89,7 @@ export default {
 				spell.id = 0;
 			}
 			this.$http
-				.put("http://localhost:9901/spells/" + spell.id, spell)
+				.put(process.env.VUE_APP_API_ENDPOINT+ "/spells/" + spell.id, spell)
 				.then(function(res) {
 					console.log(res);
 					if (this.spell.id > 0 && this.selectedAbility.id > 0) {

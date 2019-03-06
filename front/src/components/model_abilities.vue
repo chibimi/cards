@@ -61,7 +61,7 @@ export default {
 	methods: {
 		get: function(modelID) {
 			this.$http
-				.get("http://localhost:9901/models/" + modelID + "/abilities")
+				.get(process.env.VUE_APP_API_ENDPOINT+ "/models/" + modelID + "/abilities")
 				.then(function(res) {
 					console.log(res);
 					this.abilities = res.data;
@@ -70,7 +70,7 @@ export default {
 		removeAbility: function(ability, index) {
 			this.$http
 				.delete(
-					"http://localhost:9901/models/" +
+					process.env.VUE_APP_API_ENDPOINT+ "/models/" +
 						this.model.id +
 						"/abilities/" +
 						ability.id
@@ -85,7 +85,7 @@ export default {
 		addAbility: function(ability) {
 			this.$http
 				.put(
-					"http://localhost:9901/models/" +
+					process.env.VUE_APP_API_ENDPOINT+ "/models/" +
 						this.model.id +
 						"/abilities/" +
 						ability.id

@@ -52,7 +52,7 @@ export default {
 	methods: {
 		get: function(weaponID) {
 			this.$http
-				.get("http://localhost:9901/weapons/" + weaponID + "/abilities")
+				.get(process.env.VUE_APP_API_ENDPOINT+ "/weapons/" + weaponID + "/abilities")
 				.then(function(res) {
 					console.log(res);
 					this.abilities = res.data;
@@ -61,7 +61,7 @@ export default {
 		removeAbility: function(ability, index) {
 			this.$http
 				.delete(
-					"http://localhost:9901/weapons/" +
+					process.env.VUE_APP_API_ENDPOINT+ "/weapons/" +
 						this.weapon.id +
 						"/abilities/" +
 						ability.id
@@ -76,7 +76,7 @@ export default {
 		addAbility: function(ability) {
 			this.$http
 				.put(
-					"http://localhost:9901/weapons/" +
+					process.env.VUE_APP_API_ENDPOINT+ "/weapons/" +
 						this.weapon.id +
 						"/abilities/" +
 						ability.id +

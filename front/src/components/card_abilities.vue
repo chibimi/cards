@@ -53,7 +53,7 @@ export default {
 	methods: {
 		get: function(cardID) {
 			this.$http
-				.get("http://localhost:9901/cards/" + cardID + "/abilities")
+				.get(process.env.VUE_APP_API_ENDPOINT+ "/cards/" + cardID + "/abilities")
 				.then(function(res) {
 					console.log(res);
 					this.abilities = res.data;
@@ -62,7 +62,7 @@ export default {
 		removeAbility: function(ability, index) {
 			this.$http
 				.delete(
-					"http://localhost:9901/cards/" +
+					process.env.VUE_APP_API_ENDPOINT+ "/cards/" +
 						this.id +
 						"/abilities/" +
 						ability.id
@@ -77,7 +77,7 @@ export default {
 		addAbility: function(ability) {
 			this.$http
 				.put(
-					"http://localhost:9901/cards/" +
+					process.env.VUE_APP_API_ENDPOINT+ "/cards/" +
 						this.id +
 						"/abilities/" +
 						ability.id

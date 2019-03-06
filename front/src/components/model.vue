@@ -212,7 +212,7 @@ export default {
 			}
 			this.reset();
 			this.$http
-				.put("http://localhost:9901/models/" + model.id, model)
+				.put(process.env.VUE_APP_API_ENDPOINT+ "/models/" + model.id, model)
 				.then(function(res) {
 					console.log(res);
 					this.alert = "save success";
@@ -230,7 +230,7 @@ export default {
 		remove: function(model) {
 			this.reset();
 			this.$http
-				.delete("http://localhost:9901/models/" + model.id)
+				.delete(process.env.VUE_APP_API_ENDPOINT+ "/models/" + model.id)
 				.then(function(res) {
 					console.log(res);
 					if (res.status === 204) {

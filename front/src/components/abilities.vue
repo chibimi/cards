@@ -27,7 +27,7 @@ export default {
 	methods: {
 		get: function() {
 			this.$http
-				.get("http://localhost:9901/abilities")
+				.get(process.env.VUE_APP_API_ENDPOINT+ "/abilities")
 				.then(function(res) {
 					console.log(res);
 					this.abilitiesList = res.data;

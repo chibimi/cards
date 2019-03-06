@@ -15,7 +15,7 @@ CREATE TABLE cards (
 INSERT INTO cards (data) VALUES ('{"id": 0, "faction_id":11, "category_id":5, "name": "Blighted Nyss Swordmen", "properties":"Unité de la légion", "models_cnt":"6", "models_max":"10", "cost":"9", "cost_max":"15", "fa":"2", "status":"wip"}');
 INSERT INTO cards (data) VALUES ('{"id": 0, "main_card_id":"1", "faction_id":11, "category_id":5, "name": "Blighted Nyss Legionaires", "properties":"Unité de la légion", "models_cnt":"6", "models_max":"10", "cost":"9", "cost_max":"15", "fa":"2", "status":"wip"}');
 INSERT INTO cards (data) VALUES ('{"id": 0, "faction_id":11, "category_id":5, "name": "Hellmouth", "properties":"Unité de la légion", "models_cnt":"4", "cost":"6", "fa":"2", "status":"done"}');
-INSERT INTO cards (data) VALUES ('{"id": 0, "faction_id":11, "category_id":5, "name": "Blackfrost Shard", "properties":"Unité de nyss corrompus de la légion", "models_cnt":"3", "cost":"9", "fa":"2", "status":"wip"}');
+INSERT INTO cards (data) VALUES ('{"id": 0, "faction_id":11, "category_id":5, "name": "Blackfrost Shard", "properties":"Unité de nyss corrompus de la légion", "models_cnt":"3", "cost":"9", "fa":"C", "status":"wip"}');
 UPDATE cards SET data = json_set(data, '$.id', id);
 
 
