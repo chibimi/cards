@@ -21,7 +21,8 @@
 				@input="inputItem"
 				class="col-2 mt-1"
 			></v-autocomplete>
-			<input v-model="selectedAbility.original_name" type="text" class="form-control col-2" placeholder="English Name">
+			<input v-if="!selectedAbility.id" v-model="selectedAbility.original_name" type="text" class="form-control col-2" placeholder="English Name">
+			<label v-if="selectedAbility.id" class="col-form-label col-2 text-left">{{selectedAbility.original_name}}</label>
 			<input v-model="selectedAbility.name" type="text" class="form-control col-2" placeholder="French Name">
 			<div class="form-check form-check-inline ml-2 col-5">
 				<label class="form-check-label">Can be magical or choose type ?</label>
