@@ -6,6 +6,7 @@ import (
 
 	"github.com/chibimi/cards/card"
 	"github.com/chibimi/cards/card/api"
+	"github.com/codegangsta/negroni"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/julienschmidt/httprouter"
 	"github.com/rs/cors"
@@ -22,9 +23,6 @@ func main() {
 	s := api.NewService(card.NewService(db, log15.New()))
 
 	router := httprouter.New()
-	router.GET("/factions", s.ListFactions)
-	router.GET("/categories", s.ListCategories)
-
 	router.GET("/abilities", s.ListAbilities)
 	router.GET("/abilities/:id", s.GetAbility)
 	router.POST("/abilities", s.CreateAbility)
@@ -77,15 +75,14 @@ func main() {
 	router.PUT("/weapons/:id/abilities/:ability_id", s.AddWeaponAbility)
 	router.DELETE("/weapons/:id/abilities/:ability_id", s.DeleteWeaponAbility)
 
-	// router.GET("/models", s.ListModels)
-	// router.POST("/models", s.CreateModel)
-	// router.PUT("/models/:id", s.UpdateModel)
-	// router.GET("/models/:id", s.GetModel)
-
-	handler := cors.AllowAll().Handler(router)
+	stack := negroni.New()
+	stack.Use(cors.AllowAll())
+	stack.Use(negroni.NewLogger())
+	stack.Use(negroni.NewRecovery())
+	stack.UseHandler(router)
 
 	log15.Info("Listening on port: 9901...")
-	if err := http.ListenAndServe(":9901", handler); err != nil {
+	if err := http.ListenAndServe(":9901", stack); err != nil {
 		log15.Crit("Unable to start server", "err", err.Error())
 	}
 }
