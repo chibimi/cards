@@ -2,6 +2,7 @@ package main
 
 import (
 	"database/sql"
+	"fmt"
 	"net/http"
 
 	"github.com/chibimi/cards/card"
@@ -9,12 +10,21 @@ import (
 	"github.com/codegangsta/negroni"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/julienschmidt/httprouter"
+	"github.com/kelseyhightower/envconfig"
 	"github.com/rs/cors"
 	"gopkg.in/inconshreveable/log15.v2"
 )
 
 func main() {
-	db, err := sql.Open("mysql", "cards_api:cards_api@/cards_db")
+	cfg := struct {
+		Login    string `envconfig:"db_login"`
+		Password string `envconfig:"db_password"`
+		Host     string `envconfig:"db_host"`
+		DB       string `envconfig:"db"`
+	}{}
+	envconfig.Process("card_api", &cfg)
+
+	db, err := sql.Open("mysql", fmt.Sprintf("%s:%s@%s/%s", cfg.Login, cfg.Password, cfg.Host, cfg.DB))
 	if err != nil {
 		log15.Crit("Unable to access db", "err", err.Error())
 	}
