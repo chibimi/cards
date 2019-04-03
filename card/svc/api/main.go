@@ -21,6 +21,7 @@ func main() {
 		Password string `envconfig:"db_password"`
 		Host     string `envconfig:"db_host"`
 		DB       string `envconfig:"db"`
+		Port     int    `envconfig:"port" default:"4203"`
 	}{}
 	envconfig.Process("card_api", &cfg)
 
@@ -91,8 +92,8 @@ func main() {
 	stack.Use(negroni.NewRecovery())
 	stack.UseHandler(router)
 
-	log15.Info("Listening on port: 9901...")
-	if err := http.ListenAndServe(":9901", stack); err != nil {
+	log15.Info("Listening...", "port", cfg.Port)
+	if err := http.ListenAndServe(fmt.Sprintf(":%d", cfg.Port), stack); err != nil {
 		log15.Crit("Unable to start server", "err", err.Error())
 	}
 }
