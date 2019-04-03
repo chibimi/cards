@@ -86,6 +86,8 @@ func main() {
 	router.PUT("/weapons/:id/abilities/:ability_id", s.AddWeaponAbility)
 	router.DELETE("/weapons/:id/abilities/:ability_id", s.DeleteWeaponAbility)
 
+	router.ServeFiles("/src/*filepath", http.Dir("../../../front/dist"))
+
 	stack := negroni.New()
 	stack.Use(cors.AllowAll())
 	stack.Use(negroni.NewLogger())
