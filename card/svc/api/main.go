@@ -22,6 +22,7 @@ func main() {
 		Host     string `envconfig:"db_host"`
 		DB       string `envconfig:"db"`
 		Port     int    `envconfig:"port" default:"4203"`
+		Front    string `envconfig:"front"`
 	}{}
 	envconfig.Process("card_api", &cfg)
 
@@ -86,7 +87,7 @@ func main() {
 	router.PUT("/weapons/:id/abilities/:ability_id", s.AddWeaponAbility)
 	router.DELETE("/weapons/:id/abilities/:ability_id", s.DeleteWeaponAbility)
 
-	router.ServeFiles("/src/*filepath", http.Dir("../../../front/dist"))
+	router.ServeFiles("/src/*filepath", http.Dir(cfg.Front))
 
 	stack := negroni.New()
 	stack.Use(cors.AllowAll())
