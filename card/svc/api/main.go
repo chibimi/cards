@@ -17,12 +17,12 @@ import (
 
 func main() {
 	cfg := struct {
-		Login    string `envconfig:"db_login"`
-		Password string `envconfig:"db_password"`
-		Host     string `envconfig:"db_host"`
-		DB       string `envconfig:"db"`
-		Port     int    `envconfig:"port" default:"4203"`
-		Front    string `envconfig:"front"`
+		Login       string `envconfig:"db_login"`
+		Password    string `envconfig:"db_password"`
+		Host        string `envconfig:"db_host"`
+		DB          string `envconfig:"db"`
+		Port        int    `envconfig:"port" default:"4203"`
+		EditorFront string `envconfig:"editor_front"`
 	}{}
 	envconfig.Process("card_api", &cfg)
 
@@ -87,7 +87,7 @@ func main() {
 	router.PUT("/weapons/:id/abilities/:ability_id", s.AddWeaponAbility)
 	router.DELETE("/weapons/:id/abilities/:ability_id", s.DeleteWeaponAbility)
 
-	router.ServeFiles("/src/*filepath", http.Dir(cfg.Front))
+	router.ServeFiles("/editor/*filepath", http.Dir(cfg.EditorFront))
 
 	stack := negroni.New()
 	stack.Use(cors.AllowAll())
