@@ -153,7 +153,7 @@ export default {
 	methods: {
 		get: function(cardID) {
 			this.$http
-				.get(process.env.VUE_APP_API_ENDPOINT+ "/cards/" + cardID)
+				.get(process.env.VUE_APP_API_ENDPOINT+ "/cards/" + cardID + "?lang=" + this.$language)
 				.then(function(res) {
 					console.log(res);
 					this.card = res.data;
@@ -168,7 +168,7 @@ export default {
 			}
 			this.alert = ""
 			this.$http
-				.put(process.env.VUE_APP_API_ENDPOINT+ "/cards/" + card.id, card)
+				.put(process.env.VUE_APP_API_ENDPOINT+ "/cards/" + card.id + "?lang=" + this.$language, card)
 				.then(function(res) {
 					console.log(res);
 					this.alert = "save success"
@@ -191,7 +191,7 @@ export default {
 				.then(function(res) {
 					console.log(res);
 					if (res.status === 204) {
-												this.$emit('remove_card', card.id)
+						this.$emit('remove_card', card.id)
 					}
 				}).catch(function(err){
 					this.alert = "error: "+err

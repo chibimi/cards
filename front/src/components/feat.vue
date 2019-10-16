@@ -42,7 +42,7 @@ export default {
 		getFeat: async function(cardID) {
 			this.feat.card_id = cardID;
 			this.$http
-				.get(process.env.VUE_APP_API_ENDPOINT+ "/cards/" + cardID + "/feats")
+				.get(process.env.VUE_APP_API_ENDPOINT+ "/cards/" + cardID + "/feats?lang=" + this.$language)
 				.then(function(res) {
 					console.log(res);
 					this.feat = res.data;
@@ -56,7 +56,7 @@ export default {
 				feat.id = 0;
 			}
 			this.$http
-				.put(process.env.VUE_APP_API_ENDPOINT+ "/feats/" + feat.id, feat)
+				.put(process.env.VUE_APP_API_ENDPOINT+ "/feats/" + feat.id + "?lang=" + this.$language, feat)
 				.then(function(res) {
 					console.log(res);
 					if (res.status === 201) {

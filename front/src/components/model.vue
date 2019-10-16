@@ -212,7 +212,7 @@ export default {
 			}
 			this.reset();
 			this.$http
-				.put(process.env.VUE_APP_API_ENDPOINT+ "/models/" + model.id, model)
+				.put(process.env.VUE_APP_API_ENDPOINT+ "/models/" + model.id + "?lang=" + this.$language, model)
 				.then(function(res) {
 					console.log(res);
 					this.alert = "save success";

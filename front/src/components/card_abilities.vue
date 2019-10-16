@@ -53,7 +53,7 @@ export default {
 	methods: {
 		get: function(cardID) {
 			this.$http
-				.get(process.env.VUE_APP_API_ENDPOINT+ "/cards/" + cardID + "/abilities")
+				.get(process.env.VUE_APP_API_ENDPOINT+ "/cards/" + cardID + "/abilities?lang=" + this.$language)
 				.then(function(res) {
 					console.log(res);
 					this.abilities = res.data;
@@ -61,12 +61,7 @@ export default {
 		},
 		removeAbility: function(ability, index) {
 			this.$http
-				.delete(
-					process.env.VUE_APP_API_ENDPOINT+ "/cards/" +
-						this.id +
-						"/abilities/" +
-						ability.id
-				)
+				.delete(process.env.VUE_APP_API_ENDPOINT+ "/cards/" + this.id + "/abilities/" + ability.id)
 				.then(function(res) {
 					console.log(res);
 					if (res.status === 204) {
@@ -76,12 +71,7 @@ export default {
 		},
 		addAbility: function(ability) {
 			this.$http
-				.put(
-					process.env.VUE_APP_API_ENDPOINT+ "/cards/" +
-						this.id +
-						"/abilities/" +
-						ability.id
-				)
+				.put(process.env.VUE_APP_API_ENDPOINT+ "/cards/" + this.id + "/abilities/" + ability.id + "?lang=" + this.$language)
 				.then(function(res) {
 					console.log(res);
 					if (res.status === 200) {

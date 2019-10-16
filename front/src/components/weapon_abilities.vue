@@ -52,7 +52,7 @@ export default {
 	methods: {
 		get: function(weaponID) {
 			this.$http
-				.get(process.env.VUE_APP_API_ENDPOINT+ "/weapons/" + weaponID + "/abilities")
+				.get(process.env.VUE_APP_API_ENDPOINT+ "/weapons/" + weaponID + "/abilities?lang=" + this.$language)
 				.then(function(res) {
 					console.log(res);
 					this.abilities = res.data;
@@ -60,12 +60,7 @@ export default {
 		},
 		removeAbility: function(ability, index) {
 			this.$http
-				.delete(
-					process.env.VUE_APP_API_ENDPOINT+ "/weapons/" +
-						this.weapon.id +
-						"/abilities/" +
-						ability.id
-				)
+				.delete(process.env.VUE_APP_API_ENDPOINT+ "/weapons/" + this.weapon.id + "/abilities/" + ability.id)
 				.then(function(res) {
 					console.log(res);
 					if (res.status === 204) {
@@ -75,14 +70,7 @@ export default {
 		},
 		addAbility: function(ability) {
 			this.$http
-				.put(
-					process.env.VUE_APP_API_ENDPOINT+ "/weapons/" +
-						this.weapon.id +
-						"/abilities/" +
-						ability.id +
-						"?magical=" +
-						ability.magical
-				)
+				.put(process.env.VUE_APP_API_ENDPOINT+ "/weapons/" + this.weapon.id + "/abilities/" + ability.id + "?magical=" + ability.magical + "?lang=" + this.$language)
 				.then(function(res) {
 					console.log(res);
 					if (res.status === 200) {

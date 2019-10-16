@@ -73,7 +73,7 @@ export default {
 				ability.id = 0;
 			}
 			this.$http
-				.put(process.env.VUE_APP_API_ENDPOINT+ "/abilities/" + ability.id, ability)
+				.put(process.env.VUE_APP_API_ENDPOINT+ "/abilities/" + ability.id + "?lang=" + this.$language, ability)
 				.then(function(res) {
 					console.log(res);
 					if (this.ability.id > 0 && this.selectedAbility.id > 0) {

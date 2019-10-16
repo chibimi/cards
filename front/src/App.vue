@@ -1,8 +1,8 @@
 <template>
 	<div id="app" class="container mt-3">
-		<Selector v-on:select_card="setCardID" v-on:change_faction="setFaction" v-on:change_category="setCategory"/>
+		<Selector v-on:select_card="setCardID" v-on:change_faction="setFaction" v-on:change_category="setCategory" v-on:change_language="setLanguage"/>
 		<div class="row">
-			<Card v-if="cardID !== null" :selected="cardID" :faction="faction" :category="category"/>
+			<Card v-if="cardID !== null" :selected="cardID" :faction="faction" :category="category" :key="componentKey"/>
 		</div>
 	</div>
 </template>
@@ -18,6 +18,7 @@ export default {
 	},
 	data() {
 		return {
+			componentKey: 0,
 			cardID: null,
 			faction: null,
 			category:null,
@@ -31,11 +32,21 @@ export default {
 				this.cardID = cardID
 			}
 		},
+		setLanguage: function(language) {
+			if (language === this.$language) {
+				return
+			}
+			this.$change_language(language)
+			this.forceRerender()
+		},
 		setFaction: function(faction) {
 			this.faction = faction
 		},
 		setCategory: function(category) {
 			this.category = category
+		},
+		forceRerender() {
+			this.componentKey += 1;  
 		}
 	}
 };

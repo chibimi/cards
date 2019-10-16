@@ -104,7 +104,7 @@ export default {
 			this.reset();
 			if (cardID <=0){return;}
 			this.$http
-				.get(process.env.VUE_APP_API_ENDPOINT+ "/cards/" + cardID)
+				.get(process.env.VUE_APP_API_ENDPOINT+ "/cards/" + cardID + "?lang=" + this.$language)
 				.then(function(res) {
 					console.log(res);
 					var temp =  res.data
@@ -128,7 +128,7 @@ export default {
 		getModels: async function(cardID) {
 			this.card.models = [];
 			this.$http
-				.get(process.env.VUE_APP_API_ENDPOINT+ "/cards/" + cardID + "/models")
+				.get(process.env.VUE_APP_API_ENDPOINT+ "/cards/" + cardID + "/models?lang=" + this.$language)
 				.then(function(res) {
 					console.log(res);
 					var models = res.data;
@@ -142,7 +142,7 @@ export default {
 		},
 		getWeapons: async function(i, model) {
 			await this.$http
-				.get(process.env.VUE_APP_API_ENDPOINT+ "/models/" + model.id + "/weapons")
+				.get(process.env.VUE_APP_API_ENDPOINT+ "/models/" + model.id + "/weapons?lang=" + this.$language)
 				.then(function(res) {
 					console.log(res);
 					model.weapons = res.data;

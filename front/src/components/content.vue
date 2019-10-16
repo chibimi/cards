@@ -219,7 +219,7 @@ export default {
 			// watch it
 			this.model = {};
 			this.$http
-				.get(process.env.VUE_APP_API_ENDPOINT+ "/models/" + this.id)
+				.get(process.env.VUE_APP_API_ENDPOINT+ "/models/" + this.id + "?lang=" + this.$language)
 				.then(function(res) {
 					console.log(res);
 					this.model = res.data;
@@ -248,7 +248,7 @@ export default {
 	methods: {
 		save: function() {
 			this.$http
-				.put(process.env.VUE_APP_API_ENDPOINT+ "/models/" + this.id, this.model)
+				.put(process.env.VUE_APP_API_ENDPOINT+ "/models/" + this.id + "?lang=" + this.$language, this.model)
 				.then(function(res) {
 					console.log(res);
 					console.log(res.data);

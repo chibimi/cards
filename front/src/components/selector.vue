@@ -1,6 +1,13 @@
 <template>
 	<div class="row">
 		<form v-on:submit.prevent class="form-inline">
+			<country-flag :country="this.$language"/>
+			<select v-model="language" class="form-control" @change="changeLanguage($event)">
+				<option>EN</option>
+				<option>FR</option>
+				<option>DE</option>
+				<option>IT</option>
+			</select>
 			<label>Faction</label>
 			<select v-model="faction" class="form-control" @change="changeFaction">
 				<option v-for="f in factions" :key="f.id" :value="f.id">{{f.name}}</option>
@@ -26,6 +33,7 @@ export default {
 	components: {},
 	data() {
 		return {
+			language: "FR",
 			factions: Factions,
 			faction: 11,
 			categories: Categories,
@@ -35,17 +43,15 @@ export default {
 		};
 	},
 	methods: {
+		changeLanguage: function(language){
+			this.$emit("change_language", language.target.value);
+		},
 		getCards: function(faction, category) {
 			if (!faction || !category) {
 				return;
 			}
 			this.$http
-				.get(
-					process.env.VUE_APP_API_ENDPOINT+ "/cards?faction_id=" +
-						faction +
-						"&category_id=" +
-						category
-				)
+				.get(process.env.VUE_APP_API_ENDPOINT+ "/cards?faction_id=" + faction + "&category_id=" + category +  "&lang=" + this.$language)
 				.then(function(res) {
 					console.log(res);
 					this.cards = res.data;
@@ -65,7 +71,7 @@ export default {
 	},
 	created: function() {
 		this.getCards(this.faction, this.category);
-				this.$emit("change_faction", this.faction);
+		this.$emit("change_faction", this.faction);
 		this.$emit("change_category", this.category);
 	}
 };

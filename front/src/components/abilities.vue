@@ -27,7 +27,7 @@ export default {
 	methods: {
 		get: function() {
 			this.$http
-				.get(process.env.VUE_APP_API_ENDPOINT+ "/abilities")
+				.get(process.env.VUE_APP_API_ENDPOINT + "/abilities?lang=" + this.$language)
 				.then(function(res) {
 					console.log(res);
 					this.abilitiesList = res.data;

@@ -118,7 +118,7 @@ export default {
 				weapon.id = 0;
 			}
 			this.$http
-				.put(process.env.VUE_APP_API_ENDPOINT+ "/weapons/" + weapon.id, weapon)
+				.put(process.env.VUE_APP_API_ENDPOINT+ "/weapons/" + weapon.id + "?lang=" + this.$language, weapon)
 				.then(function(res) {
 					console.log(res);
 					if (res.status === 201) {
