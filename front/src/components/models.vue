@@ -2,11 +2,9 @@
 	<div class="w-100">
 		<Model
 			v-for="(value,index) in models2"
-			v-bind:selectedModel="value"
+			v-bind:model="value"
 			:key="value.id"
-			v-on:remove="remove(index)"
-			v-on:remove_weapon="removeWeapon(index, $event)"
-			v-on:add_weapon="addWeapon(index, $event)"
+			v-on:remove="removeModel(index)"
 		></Model>
 		<div class="card border-secondary">
 			<h5
@@ -17,7 +15,7 @@
 				aria-controls="new_model"
 			>New Model</h5>
 			<div class="collapse card-body p-1" id="new_model">
-				<Model :selectedModel="model" v-on:add="addModel"></Model>
+				<Model :model="newModel" v-on:add="addModel"></Model>
 			</div>
 		</div>
 	</div>
@@ -27,46 +25,49 @@
 import Model from "./model.vue";
 export default {
 	name: "Models",
-	props: ["id", "models"],
+	props: ["selected"],
 	components: {
 		Model
 	},
 	watch: {
-		id: function(newVal) {
-			this.model.card_id = newVal;
+		selected: function(newVal) {
+			this.get(newVal);
 		},
-		models: function(newVal) {
-			this.models2 = newVal;
-		},
+	},
+	created: function() {
+		this.get(this.selected);
 	},
 	data() {
 		return {
 			models2: [],
-			model: {
-				card_id: this.id,
+			newModel: {
+				card_id: this.selected,
 				advantages: [],
 				weapons: []
 			}
 		};
 	},
 	methods: {
+		get: function(id) {
+			this.models2 = [];
+			this.$http
+				.get(process.env.VUE_APP_API_ENDPOINT+ "/cards/" + id + "/models?lang=" + this.$language)
+				.then(function(res) {
+					console.log(res);
+					this.models2 = res.data;
+				});
+		},
 		removeModel: function(index) {
-			this.$emit("remove", index);
+			this.models2.splice(index, 1);
 		},
 		addModel: function(model) {
-			this.$emit("add", model);
-			this.model = {
+			this.models2.push(model);
+			this.newModel = {
 				card_id: this.id,
 				advantages: [],
 				weapons: []
 			};
 		},
-		addWeapon: function(index, weapon) {
-			this.$emit("add_weapon", index, weapon);
-		},
-		removeWeapon: function(index, weaponIndex) {
-			this.$emit("remove_weapon", index, weaponIndex);
-		}
 	}
 };
 </script>

@@ -169,7 +169,7 @@
 					<h4 class="col-11">{{model.name}} weapons</h4>
 					<label class="col-1 col-form-label"></label>
 					<div class="col-11">
-						<Weapons :id="model.id" :weapons="model.weapons" v-on:remove="removeWeapon" v-on:add="addWeapon"></Weapons>
+						<Weapons :model_id="model.id" />
 					</div>
 				</div>
 			</div>
@@ -182,25 +182,12 @@
 import Weapons from "./weapons.vue";
 export default {
 	name: "Model",
-	props: ["selectedModel"],
+	props: ["model"],
 	components: {
 		Weapons
 	},
-	watch: {
-		selectedModel: function(newVal) {
-			if (newVal.id < 0) {
-				this.reset();
-			}
-			this.model = newVal;
-			this.model.weapons = newVal.weapons
-		}
-	},
-	created: function() {
-		this.model = this.selectedModel;
-	},
 	data() {
 		return {
-			model: {},
 			alert: "",
 			alert_succes: false
 		};
@@ -246,12 +233,6 @@ export default {
 			this.alert = "";
 			this.alert_succes = false;
 		},
-		removeWeapon: function(index) {
-			this.$emit("remove_weapon", index);
-		},
-		addWeapon: function(weapon) {
-			this.$emit("add_weapon", weapon);
-		}
 	}
 };
 </script>
