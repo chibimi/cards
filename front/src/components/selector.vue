@@ -2,8 +2,8 @@
 	<div class="row">
 		<form v-on:submit.prevent class="form-inline">
 			<country-flag :country="this.$language"/>
-			<select v-model="language" class="form-control" @change="changeLanguage($event)">
-				<option>EN</option>
+			<select :value="this.$language" class="form-control" @change="$emit('change_language', $event.target.value)">
+				<option>UK</option>
 				<option>FR</option>
 				<option>DE</option>
 				<option>IT</option>
@@ -16,12 +16,13 @@
 			<select v-model="category" class="form-control" @change="changeCategory">
 				<option v-for="c in categories" :key="c.id" :value="c.id">{{c.name}}</option>
 			</select>
-			<label>Card</label>
-			<select v-model="card" class="form-control">
-				<option v-for="c in cards" :key="c.id" :value="c.id">[{{c.status}}] #{{c.id}} {{c.name}}</option>
+			<label>Ref</label>
+			<select v-model="ref" class="form-control">
+				<option v-for="c in refs" :key="c.id" :value="c.id">[{{c.status}}] #{{c.id}} {{c.title}}</option>
 			</select>
-			<button type="submit" class="btn btn-primary" @click="$emit('select_card', card)">Go</button>
-			<button type="submit" class="btn btn-primary" @click="$emit('select_card', 0)">New Card</button>
+			<button type="submit" class="btn btn-primary" @click="$emit('select_ref', ref)">Go</button>
+			<input v-model="newName" type="text" class="form-control">
+			<button type="submit" class="btn btn-primary" @click="newRef">New Ref</button>
 		</form>
 	</div>
 </template>
@@ -31,48 +32,64 @@ import { Factions, Categories } from "./const.js";
 export default {
 	name: "Selector",
 	components: {},
+	created: function() {
+		this.getRefs(this.faction, this.category);
+	},
 	data() {
 		return {
-			language: "FR",
+			newName: "",
 			factions: Factions,
 			faction: 11,
 			categories: Categories,
 			category: 5,
-			cards: [],
-			card: null
+			ref: null,
+			refs: [],
 		};
 	},
 	methods: {
 		changeLanguage: function(language){
-			this.$emit("change_language", language.target.value);
+			this.$change_language(language);
 		},
-		getCards: function(faction, category) {
+		getRefs: function(faction, category) {
 			if (!faction || !category) {
 				return;
 			}
 			this.$http
-				.get(process.env.VUE_APP_API_ENDPOINT+ "/cards?faction_id=" + faction + "&category_id=" + category +  "&lang=" + this.$language)
+				.get(process.env.VUE_APP_API_ENDPOINT+ "/ref?faction_id=" + faction + "&category_id=" + category +  "&lang=" + this.$language)
 				.then(function(res) {
 					console.log(res);
-					this.cards = res.data;
+					this.refs = res.data;
 				})
 				.catch(function(err) {
 					console.log(err);
 				});
 		},
 		changeFaction: function() {
-			this.getCards(this.faction, this.category);
-			this.$emit("change_faction", this.faction);
+			this.getRefs(this.faction, this.category);
 		},
 		changeCategory: function() {
-			this.getCards(this.faction, this.category);
-			this.$emit("change_category", this.category);
+			this.getRefs(this.faction, this.category);
 		},
-	},
-	created: function() {
-		this.getCards(this.faction, this.category);
-		this.$emit("change_faction", this.faction);
-		this.$emit("change_category", this.category);
+		newRef: function() {
+			if (!this.faction || !this.category || !this.newName) {
+				return;
+			}
+			var ref = {
+				faction_id: this.faction,
+				category_id: this.category,
+				title: this.newName,
+			}
+			this.$http
+				.post(process.env.VUE_APP_API_ENDPOINT+ "/ref?faction_id=" + this.faction + "&category_id=" + this.category, ref)
+				.then(function(res) {
+					console.log(res);
+					this.$emit('select_ref', res.body)
+					this.newName=""
+				})
+				.catch(function(err) {
+					console.log(err);
+				});
+		},
 	}
 };
 </script>
