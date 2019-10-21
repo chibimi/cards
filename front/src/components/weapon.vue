@@ -110,24 +110,35 @@ export default {
 	name: "Weapon",
 	props: ["weapon"],
 	data() {
-		return {};
+		return {
+			alert: "",
+			alert_succes: false
+		};
 	},
 	methods: {
 		save: function(weapon) {
 			if (weapon.id == null) {
 				weapon.id = 0;
 			}
+			this.reset();
 			this.$http
 				.put(process.env.VUE_APP_API_ENDPOINT+ "/weapons/" + weapon.id + "?lang=" + this.$language, weapon)
 				.then(function(res) {
 					console.log(res);
+					this.alert = "save success";
+					this.alert_success = true;
 					if (res.status === 201) {
 						weapon.id = res.data;
 						this.$emit("add", weapon);
 					}
+				})
+				.catch(function(err) {
+					this.alert = "error: " + err;
+					this.alert_success = false;
 				});
 		},
 		remove: function(weapon) {
+			this.reset();
 			this.$http
 				.delete(process.env.VUE_APP_API_ENDPOINT+ "/weapons/" + weapon.id)
 				.then(function(res) {
@@ -137,9 +148,14 @@ export default {
 					}
 				})
 				.catch(function(err) {
-					console.log(err);
+					this.alert = "error: " + err;
+					this.alert_success = false;
 				});
-		}
+		},
+		reset: function() {
+			this.alert = "";
+			this.alert_succes = false;
+		},
 	}
 };
 </script>

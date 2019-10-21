@@ -75,10 +75,10 @@
 </template>
 
 <script>
-import Abilities from "./abilities.vue";
+// import Abilities from "./abilities.vue";
 import Models from "./models.vue";
-import Spells from "./spells.vue";
-import Feat from "./feat.vue";
+// import Spells from "./spells.vue";
+// import Feat from "./feat.vue";
 import Card from "./card.vue";
 export default {
 	name: "Ref",
