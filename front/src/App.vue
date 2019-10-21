@@ -2,7 +2,7 @@
 	<div id="app" class="container mt-3">
 		<Selector v-on:select_ref="setRef" v-on:change_language="setLanguage" :key="componentKey" />
 		<div class="row">
-			<Ref v-if="ref !== null" :selected="ref" :key="componentKey" />
+			<Ref v-if="reference.id !== null" :reference="reference" :key="componentKey" />
 		</div>
 	</div>
 </template>
@@ -20,15 +20,23 @@ export default {
 		return {
 			componentKey: 0,
 			ref:null,
+			reference: {
+				id: null,
+			}
 		};
 	},
 	methods: {
 		setRef: function(ref){
-			if (ref === 0&& this.ref===0) {
-				this.ref = -1
+			if (ref.id === 0&& this.reference.id===0) {
+				this.reference.id = -1
 			} else {
-				this.ref = ref
+				this.reference.id = ref.id
 			}
+			// if (ref === 0&& this.ref===0) {
+			// 	this.ref = -1
+			// } else {
+			// 	this.ref = ref
+			// }
 		},
 		setLanguage: function(language) {
 			if (language === this.$language) {

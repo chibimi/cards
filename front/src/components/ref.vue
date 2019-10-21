@@ -12,7 +12,7 @@
 					aria-selected="true"
 				>Ref</a>
 				<a
-					v-if="selected>0"
+					v-if="reference.id>0"
 					class="nav-item nav-link"
 					id="nav-models-tab"
 					data-toggle="tab"
@@ -41,9 +41,9 @@
 					role="tab"
 					aria-controls="nav-spells"
 					aria-selected="false"
-				>Spells & Animus</a>
+				>Spells & Animus</a> -->
 				<a
-					v-if="card.id>0 && (card.category_id=== 1 || card.category_id===2)"
+					v-if="reference.id>0 && (reference.category_id=== 1 || reference.category_id===2)"
 					class="nav-item nav-link"
 					id="nav-feat-tab"
 					data-toggle="tab"
@@ -51,25 +51,25 @@
 					role="tab"
 					aria-controls="nav-feat"
 					aria-selected="false"
-				>Feat</a> -->
+				>Feat</a>
 			</div>
 		</nav>
 		<div class="tab-content" id="nav-tabContent">
 			<div class="tab-pane fade show active" id="nav-ref" role="tabpanel" aria-labelledby="nav-ref-tab">
-				<Card :selected="selected" />
+				<Card :ref_id="reference.id" />
 			</div>
 			<div class="tab-pane fade" id="nav-models" role="tabpanel" aria-labelledby="nav-models-tab">
-				<Models v-if="selected>0" :selected="selected" />
+				<Models v-if="reference.id>0" :ref_id="reference.id" />
 			</div>
 			<!-- <div class="tab-pane fade" id="nav-abilities" role="tabpanel" aria-labelledby="nav-abilities-tab">
 				<Abilities v-if="card.id>0" :card="card"></Abilities>
 			</div>
 			<div class="tab-pane fade" id="nav-spells" role="tabpanel" aria-labelledby="nav-spells-tab">
 				<Spells v-if="card.id>0" :id="card.id"></Spells>
-			</div>
-			<div class="tab-pane fade" id="nav-feat" role="tabpanel" aria-labelledby="nav-feat-tab">
-				<Feat v-if="card.id>0 && (card.category_id=== 1 || card.category_id===2)" :id="card.id"></Feat>
 			</div> -->
+			<div class="tab-pane fade" id="nav-feat" role="tabpanel" aria-labelledby="nav-feat-tab">
+				<Feat v-if="reference.id>0 && (reference.category_id=== 1 || reference.category_id===2)" :id="reference.id"></Feat>
+			</div>
 		</div>
 	</div>
 </template>
@@ -82,7 +82,7 @@ import Models from "./models.vue";
 import Card from "./card.vue";
 export default {
 	name: "Ref",
-	props: ["selected"],
+	props: ["reference"],
 	components: { Card, Models},
 	// components: { Card, Models, Abilities, Spells, Feat },
 };

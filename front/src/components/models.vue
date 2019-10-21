@@ -25,23 +25,23 @@
 import Model from "./model.vue";
 export default {
 	name: "Models",
-	props: ["selected"],
+	props: ["ref_id"],
 	components: {
 		Model
 	},
 	watch: {
-		selected: function(newVal) {
+		ref_id: function(newVal) {
 			this.get(newVal);
 		},
 	},
 	created: function() {
-		this.get(this.selected);
+		this.get(this.ref_id);
 	},
 	data() {
 		return {
 			models2: [],
 			newModel: {
-				card_id: this.selected,
+				card_id: this.ref_id,
 				advantages: [],
 				weapons: []
 			}

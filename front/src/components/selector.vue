@@ -18,7 +18,7 @@
 			</select>
 			<label>Ref</label>
 			<select v-model="ref" class="form-control">
-				<option v-for="c in refs" :key="c.id" :value="c.id">[{{c.status}}] #{{c.id}} {{c.title}}</option>
+				<option v-for="c in refs" :key="c.id" :value="c">[{{c.status}}] #{{c.id}} {{c.title}}</option>
 			</select>
 			<button type="submit" class="btn btn-primary" @click="$emit('select_ref', ref)">Go</button>
 			<input v-model="newName" type="text" class="form-control">

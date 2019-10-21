@@ -118,15 +118,15 @@
 import { Factions, Categories } from "./const.js";
 export default {
 	name: "Card",
-	props: ["selected"],
+	props: ["ref_id"],
 	components: {},
 	watch: {
-		selected: function(newVal) {
+		ref_id: function(newVal) {
 			this.get(newVal);
 		}
 	},
 	created: function() {
-		this.get(this.selected);
+		this.get(this.ref_id);
 	},
 	data() {
 		return {
