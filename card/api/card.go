@@ -15,8 +15,12 @@ func (s *Service) CreateCard(w http.ResponseWriter, r *http.Request, p httproute
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-
-	res, err := s.src.SaveCard(card)
+	lang := r.URL.Query().Get("lang")
+	if lang == "" {
+		http.Error(w, "require lang", http.StatusBadRequest)
+		return
+	}
+	res, err := s.src.SaveCard(card, lang)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -48,10 +52,15 @@ func (s *Service) UpdateCard(w http.ResponseWriter, r *http.Request, p httproute
 func (s *Service) GetCard(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	id, err := strconv.Atoi(p.ByName("id"))
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	res, err := s.src.GetCard(id)
+	lang := r.URL.Query().Get("lang")
+	if lang == "" {
+		http.Error(w, "require lang", http.StatusBadRequest)
+		return
+	}
+	res, err := s.src.GetCard(id, lang)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -86,7 +95,12 @@ func (s *Service) ListCards(w http.ResponseWriter, r *http.Request, p httprouter
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	res, err := s.src.ListCards(fid, cid)
+	lang := r.URL.Query().Get("lang")
+	if lang == "" {
+		http.Error(w, "require lang", http.StatusBadRequest)
+		return
+	}
+	res, err := s.src.ListCards(fid, cid, lang)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
