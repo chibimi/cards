@@ -1,0 +1,5341 @@
+[{
+    "_id": {
+        "$oid": "575f522cc2ef1621892e6396"
+    },
+    "_name": "ABUSE",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "TURN",
+    "_off": "NO",
+    "__text": "Target friendly Faction warbeast gains +2 SPD and STR for one turn but suffers d3 damage points."
+}, {
+    "_id": {
+        "$oid": "5757edc0c2ef165afaec740d"
+    },
+    "_name": "ABYSSAL GATE",
+    "_cost": "3",
+    "_rng": "8",
+    "_pow": "12",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "When Abyssal Gate damages an enemy non-warcaster, non-warlock model, after the attack is resolved you can place the enemy model anywhere completely within 3˝ of its current location. A model can be placed by Abyssal Gate only once per turn."
+}, {
+    "_id": {
+        "$oid": "575eb7eec2ef166e0a3e0954"
+    },
+    "_name": "ACIDIC TOUCH",
+    "_cost": "1",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "RND",
+    "_off": "NO",
+    "__text": "The spellcaster gains Immunity: Corrosion and its melee weapons gain Continuous Effect: Corrosion. Acidic Touch last for one round."
+}, {
+    "_id": {
+        "$oid": "5756e77bc2ef1612e2bfafd0"
+    },
+    "_name": "ADMONITION",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "When an enemy model advances and ends its movement within 6\" of target model in the spellcaster’s battlegroup, the affected model can immediately advance up to 3\", then Admonition expires. The affected model cannot be targeted by free strikes during this movement."
+}, {
+    "_id": {
+        "$oid": "575701d1c2ef165afae4aef0"
+    },
+    "_name": "AEROGENESIS",
+    "_cost": "3",
+    "_rng": "SELF",
+    "_pow": "",
+    "_aoe": "CTRL",
+    "_duration": "TURN",
+    "_off": "NO",
+    "__text": "The spellcaster and friendly Faction warrior models/units beginning their activations in its control range gain +2'' movement when advancing as part of their Normal Movement and Flight during their activations. Aerogenesis lasts for one turn."
+}, {
+    "_id": {
+        "$oid": "575e5bdbc2ef166e0a3c51b9"
+    },
+    "_name": "AFFLICTION",
+    "_cost": "2",
+    "_rng": "8",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "YES",
+    "__text": "Target model/unit suffers –2 DEF. When a damage roll resulting from a direct hit fails to exceed the ARM of an affected model, the model suffers 1 damage point."
+}, {
+    "_id": {
+        "$oid": "5755740ebd966f1469ce6fbf"
+    },
+    "_name": "AGGRAVATOR",
+    "_cost": "3",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "CTRL",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "While in the spellcaster's control range, friendly Faction warbeasts gain Hyper-Aggressive. (When a model with Hyper-Aggressive suffers damage from an enemy attack at any time except while it is advancing, after the attack is resolved it can immediately make a full advance directly toward the attacking model.)"
+}, {
+    "_id": {
+        "$oid": "57c99478c2ef16772d9d4ab1"
+    },
+    "_name": "AGITATION",
+    "_cost": "3",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "CTRL",
+    "_duration": "-",
+    "_off": "NO",
+    "__text": "Place 1 fury point on each enemy warbeast currently in the spellcaster's control range. Agitation can be cast once per activation. "
+}, {
+    "_id": {
+        "$oid": "575d4bddc2ef166e0a373510"
+    },
+    "_name": "AIRBURST",
+    "_cost": "3",
+    "_rng": "CTRL",
+    "_pow": "8",
+    "_aoe": "4",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "Target any model in the spellcaster’s control range. ignoring LOS. When resolving Airburst. ignore cover, concealment. elevation, and Stealth. Models hit suffer a POW 8 blast damage roll."
+}, {
+    "_id": {
+        "$oid": "575a5ec2c2ef166e0a2a7ea0"
+    },
+    "_name": "AMUCK",
+    "_cost": "1",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "TURN",
+    "_off": "NO",
+    "__text": "When target friendly Faction warbeast makes a power attack or special attack, its attack rolls are boosted. Amuck lasts for one turn."
+}, {
+    "_id": {
+        "$oid": "5757f450c2ef165afaec9b93"
+    },
+    "_name": "ANNIHILATION",
+    "_cost": "4",
+    "_rng": "10",
+    "_pow": "10",
+    "_aoe": "3",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "Models hit suffer a POW 10 damage roll. Models destroyed by Annihilation are removed from play and do not generate corpse tokens. When a living enemy model is destroyed by Annihilation, the spellcaster gains the destroyed model’s soul token regardless of the proximity of other models."
+}, {
+    "_id": {
+        "$oid": "5756cb09c2ef1612e2be75e1"
+    },
+    "_name": "ARCANE BLAST",
+    "_cost": "3",
+    "_rng": "10",
+    "_pow": "13",
+    "_aoe": "4",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "A magical energy blast radiates from a single point to strike all models in the AOE."
+}, {
+    "_id": {
+        "$oid": "5756a6fac2ef1612e2bd1b60"
+    },
+    "_name": "ARCANE BOLT",
+    "_cost": "2",
+    "_rng": "12",
+    "_pow": "11",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "Magical bolts of  energy streak toward the target model."
+}, {
+    "_id": {
+        "$oid": "57570276c2ef165afae4b55d"
+    },
+    "_name": "ARCANE MIGHT",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "",
+    "_aoe": "CTRL",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "While in the spellcaster's control range, friendly Faction non-warcaster warrior models can spend 1 focus point on the spellcaster to boost a melee attack or melee damage roll during their activations."
+}, {
+    "_id": {
+        "$oid": "5756a780c2ef1612e2bd1eaf"
+    },
+    "_name": "ARCANE SHIELD",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target friendly Faction model/unit gains +3 ARM. Models are not affected while out of  formation."
+}, {
+    "_id": {
+        "$oid": "57582da5bd966f5eba48f4ca"
+    },
+    "_name": "ARCANE SUPPRESSION",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "RND",
+    "_off": "NO",
+    "__text": "While within 10\" of the spellcaster, when an enemy model casts a spell, increase the COST of the spell by 1. Additionally, while within 10\" of the spellcaster, enemy models must pay double to upkeep spells. Arcane Suppression lasts for one round."
+}, {
+    "_id": {
+        "$oid": "575491e3c2ef1612e2ab8cb8"
+    },
+    "_name": "ARCANE WARD",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target friendly Faction model/unit gains +2 DEF and cannot not be targeted by enemy spells. Models are not affected while out of formation."
+}, {
+    "_id": {
+        "$oid": "5756c9b7c2ef1612e2be658b"
+    },
+    "_name": "ARCANTRIK BOLT",
+    "_cost": "2",
+    "_rng": "10",
+    "_pow": "12",
+    "_aoe": "-",
+    "_duration": "*",
+    "_off": "YES",
+    "__text": "A warjack damaged by this attack becomes stationary for one round."
+}, {
+    "_id": {
+        "$oid": "575d528ac2ef166e0a374792"
+    },
+    "_name": "ARTIFICE OF DEVIATION",
+    "_cost": "2",
+    "_rng": "CTRL",
+    "_pow": "-",
+    "_aoe": "5",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Place a 5\" AOE anywhere completely within the spellcaster’s control range. While in the AOE, friendly Faction models have cover. Enemy models treat the AOE as rough terrain."
+}, {
+    "_id": {
+        "$oid": "575d6ccfbd966f707623696a"
+    },
+    "_name": "ASHES TO ASHES",
+    "_cost": "3",
+    "_rng": "8",
+    "_pow": "10",
+    "_aoe": "*",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "If target model is hit, the d3 nearest enemy models within 4˝ of it suffer a POW 10 fire damage roll . These additional damage rolls are not considered to have been caused by an attack. Ashes to Ashes damage rolls are simultaneous."
+}, {
+    "_id": {
+        "$oid": "5756d0fbc2ef1612e2beb80a"
+    },
+    "_name": "ASSAIL",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target friendly Faction warjack can charge or make slam or trample power attacks without spending focus. The warjack gains +2˝ movement when it charges or makes a slam or trample power attack. Models slammed by the warjack are moved +2˝."
+}, {
+    "_id": {
+        "$oid": "57582ce3bd966f5eba48ecb4"
+    },
+    "_name": "ATTRACTOR",
+    "_cost": "1",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "NO",
+    "__text": "Enemy models currently within 2\" of this model are immediately pushed 2\" directly toward it in the order you choose."
+}, {
+    "_id": {
+        "$oid": "575f2538bd966f2233c3e830"
+    },
+    "_name": "AURA OF POWER",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "",
+    "_aoe": "CTRL",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "While in the spellcaster's control range, friendly Faction non-warlock warrior models can spend 1 fury point on the spellcaster to boost a melee attack or melee damage roll during their activations."
+}, {
+    "_id": {
+        "$oid": "57612222c2ef162189371a3d"
+    },
+    "_name": "AVALANCHE",
+    "_cost": "3",
+    "_rng": "8",
+    "_pow": "14",
+    "_aoe": "4",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "On a critical hit, models hit by this attack become knocked down."
+}, {
+    "_id": {
+        "$oid": "575d5b6fbd966f7076232b22"
+    },
+    "_name": "AVATAR OF SLAUGHTER",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target the Old Witch or Scrapjack. The affected model gains +2 MAT, +2 STR, Berserk, and Overtake. (When a model with Berserk destroys one or more models with a melee attack during its Combat Action. immediately after the attack is resolved it must make one additional melee attack against another model in its melee range.) \n(When a model with Overtake destroys one or more enemy models With a basic melee attack during its Combat Action. after the attack is resolved it can immediately advance up to 1\".)"
+}, {
+    "_id": {
+        "$oid": "575968f9c2ef1652b4256e16"
+    },
+    "_name": "AWAKENED SPIRIT",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target warbeast in the spellcaster’s battlegroup can cast its animus once during its activation without being forced. A warbeast that casts its animus as a result of Awakened Spirit cannot also be forced to cast its animus that activation."
+}, {
+    "_id": {
+        "$oid": "575d6ea0c2ef166e0a37aff6"
+    },
+    "_name": "AWARENESS",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "CTRL",
+    "_duration": "RND",
+    "_off": "NO",
+    "__text": "While in the spellcaster’s control range, models in its battlegroup ignore cloud effects, forest terrain, and intervening models when determining LOS. Awareness lasts for one round."
+}, {
+    "_id": {
+        "$oid": "5757ddbcc2ef165afaec2077"
+    },
+    "_name": "BACKLASH",
+    "_cost": "3",
+    "_rng": "8",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "YES",
+    "__text": "When target enemy warjack that is part of  a battlegroup is damaged, its controller suffers 1 damage point."
+}, {
+    "_id": {
+        "$oid": "5756f23bc2ef1612e2c025b4"
+    },
+    "_name": "BANISHING WARD",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Enemy upkeep spells and animi on target friendly model/unit expire. Affected models cannot be targeted by enemy spells or animi."
+}, {
+    "_id": {
+        "$oid": "575d4131c2ef166e0a371143"
+    },
+    "_name": "BATTEN DOWN THE HATCHES",
+    "_cost": "3",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "CTRL",
+    "_duration": "RND",
+    "_off": "NO",
+    "__text": "While in the spellcaster's control range, models in its battlegroup cannot become knocked down and gain +3 ARM but suffer -2 DEF. Batten Down the Hatches lasts for one round."
+}, {
+    "_id": {
+        "$oid": "5757044fbd966f5eba3eefcd"
+    },
+    "_name": "BATTERING RAM",
+    "_cost": "2",
+    "_rng": "8",
+    "_pow": "12",
+    "_aoe": null,
+    "_duration": null,
+    "_off": "YES",
+    "__text": "An enemy model hit by Battering Ram can be pushed 3'' directly away from the spell's point of origin."
+}, {
+    "_id": {
+        "$oid": "575683c7c2ef1612e2bc5c37"
+    },
+    "_name": "BATTLE HOST",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "CTRL",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Warbeasts in the spellcaster's battlegroup beginning their activations in its control range gain +2\" movement when advancing as part of their Normal Movement. The spellcaster gains +2 ARM while one or more warbeasts in its battlegroup are within 3\" of it."
+}, {
+    "_id": {
+        "$oid": "575d4c1dbd966f707622f42c"
+    },
+    "_name": "BATTLE LUST",
+    "_cost": "3",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "TURN",
+    "_off": "NO",
+    "__text": "Target friendly Faction Warrior model/unit gains an additional die on melee damage rolls. Battle Lust lasts for one turn.\n"
+}, {
+    "_id": {
+        "$oid": "575d5578c2ef166e0a3754e0"
+    },
+    "_name": "BATTLE-CHARGED",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "CTRL",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "While in the spellcaster's control range, models in its battlegroup gain Countercharge. (When an enemy model advances and ends its movement within 6\" of a model with Countercharge and in its LOS, the model with Countercharge can immediately charge it, A model can use Countercharge only once per round and not while engaged.)"
+}, {
+    "_id": {
+        "$oid": "57616b80bd966f2233cf2fb8"
+    },
+    "_name": "BEAR HANDS",
+    "_cost": "1",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "TURN",
+    "_off": "NO",
+    "__text": "When the spellcaster hits an enemy model with a basic melee attack, it can choose to knock down the enemy model or push it 3˝ directly away. Bear Hands lasts for one turn."
+}, {
+    "_id": {
+        "$oid": "575d70e3c2ef166e0a37b7eb"
+    },
+    "_name": "BEFUDDLE",
+    "_cost": "2",
+    "_rng": "10",
+    "_pow": "",
+    "_aoe": null,
+    "_duration": null,
+    "_off": "YES",
+    "__text": "On a hit, you can immediately advance target enemy non-warcaster, non-warlock model up to 3\". Affected models cannot be targeted by free strikes during this movement. A model can move only once per turn as a result of Befuddle."
+}, {
+    "_id": {
+        "$oid": "57596651c2ef1652b42550cf"
+    },
+    "_name": "BESTIAL",
+    "_cost": "3",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "CTRL",
+    "_duration": "RND",
+    "_off": "NO",
+    "__text": "While in the spellcaster’s control range, enemy models cannot cast non-animus spells or be used to channel spells. Bestial lasts for one round."
+}, {
+    "_id": {
+        "$oid": "5759bfc4bd966f5658553897"
+    },
+    "_name": "BLACK SPOT",
+    "_cost": "3",
+    "_rng": "8",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "YES",
+    "__text": "Target enemy warrior model/unit suffers –2 DEF. When a friendly Faction model destroys one or more affected models with a basic melee or ranged attack during its activation, immediately after the attack is resolved it can make one additional melee or ranged attack. Attacks gained from Black Spot cannot generate additional attacks from Black Spot."
+}, {
+    "_id": {
+        "$oid": "575702c9bd966f5eba3edf13"
+    },
+    "_name": "BLADED GALE",
+    "_cost": "3",
+    "_rng": "SP8",
+    "_pow": "13",
+    "_aoe": null,
+    "_duration": "*",
+    "_off": "YES",
+    "__text": "Models hit lose Flight for one round."
+}, {
+    "_id": {
+        "$oid": "575cf65dbd966f70762201fe"
+    },
+    "_name": "BLAZING EFFIGY",
+    "_cost": "3",
+    "_rng": "8",
+    "_pow": "*",
+    "_aoe": "*",
+    "_duration": "-",
+    "_off": "NO",
+    "__text": "Enemy models within 2˝ of target friendly Faction warjack suffer a POW 13 fire damage roll."
+}, {
+    "_id": {
+        "$oid": "5757eba2bd966f5eba468591"
+    },
+    "_name": "BLEED",
+    "_cost": "2",
+    "_rng": "8",
+    "_pow": "10",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "When Bleed damages a living enemy model, this model can remove d3 damage points."
+}, {
+    "_id": {
+        "$oid": "5756f278c2ef1612e2c027fe"
+    },
+    "_name": "BLIGHT BRINGER",
+    "_cost": "4",
+    "_rng": "10",
+    "_pow": "12",
+    "_aoe": "5",
+    "_duration": "RND",
+    "_off": "YES",
+    "__text": "The AOE remains in play for one round. While in the AOE, enemy non-warcaster models cannot spend focus points, cannot be used to channel spells, and cannot be forced."
+}, {
+    "_id": {
+        "$oid": "57557451c2ef1612e2b1f099"
+    },
+    "_name": "BLIGHT BURST",
+    "_cost": "3",
+    "_rng": "10",
+    "_pow": "13",
+    "_aoe": "4",
+    "_duration": "RND",
+    "_off": "YES",
+    "__text": "The AOE remains in play for one round. While in the AOE, enemy non-warcaster models cannot spend focus points, be used to channel spells, or be forced."
+}, {
+    "_id": {
+        "$oid": "5757dca8c2ef165afaec1ce4"
+    },
+    "_name": "BLINDING LIGHT",
+    "_cost": "3",
+    "_rng": "10",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "RND",
+    "_off": "YES",
+    "__text": "Target enemy model/unit cannot make ranged or magic attacks and suffers –2 DEF for one round."
+}, {
+    "_id": {
+        "$oid": "57719792c2ef1643cbdf9ede"
+    },
+    "_name": "BLOOD FURY",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target friendly Faction warrior model/unit gains an additional die on melee damage rolls but suffers -2 DEF."
+}, {
+    "_id": {
+        "$oid": "575f4ff9bd966f2233c4d931"
+    },
+    "_name": "BLOOD MARK",
+    "_cost": "3",
+    "_rng": "8",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "YES",
+    "__text": "Target enemy model suffers –2 ARM. The spellcaster can transfer damage from an enemy attack to the affected model one time, then Blood Mark expires."
+}, {
+    "_id": {
+        "$oid": "575d67dac2ef166e0a379605"
+    },
+    "_name": "BLOOD OF KINGS",
+    "_cost": "4",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "RND",
+    "_off": "NO",
+    "__text": "The spellcaster gains +3 SPD, STR, MAT, DEF, and ARM for one round."
+}, {
+    "_id": {
+        "$oid": "575583aabd966f1469cf18ef"
+    },
+    "_name": "BLOOD RAIN",
+    "_cost": "3",
+    "_rng": "8",
+    "_pow": "12",
+    "_aoe": "3",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "Blood Rain causes corrosion damage. Models hit suffer the Corrosion continuous effect."
+}, {
+    "_id": {
+        "$oid": "57567d26c2ef1612e2bc3422"
+    },
+    "_name": "BLOOD THORN",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target friendly Faction model's/unit's ranged and melee weapons gain Continuous Effect: Corrosion."
+}, {
+    "_id": {
+        "$oid": "575d4ad7c2ef166e0a37310a"
+    },
+    "_name": "BLOW THE MAN DOWN",
+    "_cost": "3",
+    "_rng": "8",
+    "_pow": "15",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "A model hit by Blow the Man Down becomes knocked down. On a critical hit, instead of suffering a normal damage roll a non-incorporeal model hit is slammed d6\" directly away from the spell's point of origin. Collateral damage from this slam is POW 15."
+}, {
+    "_id": {
+        "$oid": "5756cd0dc2ef1612e2be8bc9"
+    },
+    "_name": "BLUR",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target friendly Faction model/unit gains +3 DEF against ranged and magic attack rolls. Models are not affected while out of formation."
+}, {
+    "_id": {
+        "$oid": "57593586c2ef1652b423d0cf"
+    },
+    "_name": "BOILING BLOOD",
+    "_cost": "1",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "RND",
+    "_off": "NO",
+    "__text": "When the spellcaster suffers damage as a result of an enemy melee attack, after the attack is resolved the spellcaster can make a SP 8, POW 12 ranged attack that causes fire damage. Models hit suffer the Fire continuous effect. The spellcaster can make this attack even while in melee. After making this attack, Boiling Blood expires.\nBoiling Blood lasts for one round."
+}, {
+    "_id": {
+        "$oid": "575d46f3bd966f707622e34d"
+    },
+    "_name": "BOMBSHELL",
+    "_cost": "3",
+    "_rng": "10",
+    "_pow": "13",
+    "_aoe": "3",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "On a critical hit, models hit are thrown d6\" directly away from the attacker. Roll distance once for all models affected. Models thrown do not deviate. Move models farthest from the attacker ﬁrst. Instead of suffering blast damage, models hit but not directly hit suffer a POW 10 damage roll. The POW of collateral damage is 10."
+}, {
+    "_id": {
+        "$oid": "57600462bd966f2233c7ccd0"
+    },
+    "_name": "BONE SHAKER",
+    "_cost": "2",
+    "_rng": "8",
+    "_pow": "12",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "When Bone Shaker boxes a living or undead non-warcaster, non-warlock enemy warrior model, you can immediately take control of the model and make a full advance with the enemy model followed by a basic melee attack, then the boxed model is removed from play. The boxed model cannot be targeted by free strikes during this movement."
+}, {
+    "_id": {
+        "$oid": "575487e4bd966f1469c79808"
+    },
+    "_name": "BOUNDLESS CHARGE",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "TURN",
+    "_off": "NO",
+    "__text": "During its activation, target friendly Faction model can charge without spending focus or being forced and gains +2\" movement and Pathfinder when it charges. Boundless Charge lasts for one turn."
+}, {
+    "_id": {
+        "$oid": "57557736c2ef1612e2b20db3"
+    },
+    "_name": "BRACER",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target warbeast in the spellcaster's battlegroup gains +2 ARM. The affected model and any friendly models B2B with it cannot become knocked down, cannot be pushed, and cannot be moved by a slam."
+}, {
+    "_id": {
+        "$oid": "575d72fcc2ef166e0a37c2b6"
+    },
+    "_name": "BRAND OF HERESY",
+    "_cost": "3",
+    "_rng": "8",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "YES",
+    "__text": "Warjacks in the spellcaster’s battlegroup gain boosted attack and damage rolls against target model/unit."
+}, {
+    "_id": {
+        "$oid": "5757eeb0c2ef165afaec79b4"
+    },
+    "_name": "BREATH OF CORRUPTION",
+    "_cost": "3",
+    "_rng": "8",
+    "_pow": "12",
+    "_aoe": "3",
+    "_duration": "RND",
+    "_off": "YES",
+    "__text": "Models hit suffer a POW 12 corrosion damage roll  . This spell’s AOE is a cloud effect and hazard that remains in play for one round. Models entering or ending their activations in the AOE suffer 1 point of corrosion damage."
+}, {
+    "_id": {
+        "$oid": "5756f2afbd966f1469dc8b10"
+    },
+    "_name": "BREATH STEALER",
+    "_cost": "2",
+    "_rng": "10",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "RND",
+    "_off": "YES",
+    "__text": "Target model/unit suffers –2 SPD and DEF for one round. Breath Stealer can be cast only once per activation."
+}, {
+    "_id": {
+        "$oid": "575d4185c2ef166e0a37122f"
+    },
+    "_name": "BROADSIDE",
+    "_cost": "3",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "CTRL",
+    "_duration": "-",
+    "_off": "NO",
+    "__text": "Models in the spellcaster's battlegroup currently in its control range can immediately make one basic ranged attack. Broadside can be cast only once per activation."
+}, {
+    "_id": {
+        "$oid": "5756c631bd966f1469da8ef3"
+    },
+    "_name": "BULLET DODGER",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target friendly Faction model gains +2 DEF and Dodge. (A model with Dodge can advance up to 2˝ immediately after an enemy attack that missed it is resolved unless it was missed while advancing. It cannot be targeted by free strikes during this movement.)"
+}, {
+    "_id": {
+        "$oid": "575cf40dbd966f707621fa0d"
+    },
+    "_name": "BULWARK",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "",
+    "_aoe": "CTRL",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "While in the spellcaster’s control range and B2B with one or more\nmodels in its battlegroup, models in the spellcaster’s battlegroup gain\n+2 DEF and cannot become knocked down."
+}, {
+    "_id": {
+        "$oid": "575d8459bd966f707623ca51"
+    },
+    "_name": "BURNING ASH",
+    "_cost": "2",
+    "_rng": "CTRL",
+    "_pow": "-",
+    "_aoe": "3",
+    "_duration": "RND",
+    "_off": "NO",
+    "__text": "Place a 3˝ AOE cloud effect anywhere completely within the spellcaster’s control range. While in the AOE, living enemy models without Immunity: Fire suffer –2 to attack rolls. The AOE remains in play for one round."
+}, {
+    "_id": {
+        "$oid": "5756a81cbd966f1469d9731b"
+    },
+    "_name": "CALAMITY",
+    "_cost": "3",
+    "_rng": "10",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "YES",
+    "__text": "Target model/unit suffers –2 DEF and ARM."
+}, {
+    "_id": {
+        "$oid": "57596923bd966f5658520e34"
+    },
+    "_name": "CARNAGE",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "CTRL",
+    "_duration": "TURN",
+    "_off": "NO",
+    "__text": "Friendly Faction models gain +2 to melee attack rolls against enemy models in the spellcaster’s control range. Carnage lasts for one turn."
+}, {
+    "_id": {
+        "$oid": "575a6661c2ef166e0a2a9069"
+    },
+    "_name": "CARNIVORE",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target friendly Faction model/unit gains +2 to melee attack rolls against living models. When an affected model boxes a living model with a melee attack, the boxed model is removed from play and the spellcaster can remove d3 damage points."
+}, {
+    "_id": {
+        "$oid": "575cfb44c2ef166e0a3642e6"
+    },
+    "_name": "CASTIGATE",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "CTRL",
+    "_duration": "RND",
+    "_off": "NO",
+    "__text": "Enemy models cannot be used to channel spells or be forced to cast an animus while in the spellcaster’s control range. Castigate lasts for one round."
+}, {
+    "_id": {
+        "$oid": "575d837cbd966f707623c71c"
+    },
+    "_name": "CATACLYSM",
+    "_cost": "4",
+    "_rng": "8",
+    "_pow": "20",
+    "_aoe": "5",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "Reduce the base POW of Cataclysm by 1 for each full inch between the target and the spellcaster. Blast damage affects only enemy models. Cataclysm has no effect if the target model is out of range."
+}, {
+    "_id": {
+        "$oid": "5757efbebd966f5eba46a32d"
+    },
+    "_name": "CAUSTIC MIST",
+    "_cost": "2",
+    "_rng": "CTRL",
+    "_pow": "-",
+    "_aoe": "3",
+    "_duration": "RND",
+    "_off": "NO",
+    "__text": "Place a 3˝ AOE cloud effect completely within the spellcaster’s control range. A model entering or ending its activation in the AOE suffers the Corrosion continuous effect . Caustic Mist lasts for one round."
+}, {
+    "_id": {
+        "$oid": "575a6686c2ef166e0a2a90b3"
+    },
+    "_name": "CENSURE",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "CTRL",
+    "_duration": "-",
+    "_off": "NO",
+    "__text": "Upkeep spells in the spellcaster’s control range immediately expire. A spellcaster can keep any of  its upkeep spells in play by suffering d3 damage points per spell. Censure can be cast only once per activation."
+}, {
+    "_id": {
+        "$oid": "5756cea1bd966f1469daecbc"
+    },
+    "_name": "CHAIN BLAST",
+    "_cost": "3",
+    "_rng": "10",
+    "_pow": "12",
+    "_aoe": "3",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "After determining the point of impact for this attack, roll deviation for an additional 3˝ AOE from that point. Models in that AOE are hit and suffer a POW 6 blast damage roll."
+}, {
+    "_id": {
+        "$oid": "5756a7fec2ef1612e2bd219c"
+    },
+    "_name": "CHAIN LIGHTNING",
+    "_cost": "3",
+    "_rng": "10",
+    "_pow": "10",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "A model hit by Chain Lightning suffers a POW 10 electrical damage roll, and lightning arcs from that model to d3 consecutive additional models. The lightning arcs to the nearest model it has not already arced to within 4˝ of  the last model it arced to, ignoring this model. Each model the lightning arcs to suffers a POW 10 electrical damage roll. Lightning arc damage rolls are not considered to have been caused by an attack. Chain Lightning damage rolls are simultaneous."
+}, {
+    "_id": {
+        "$oid": "5756e7a9c2ef1612e2bfb1d8"
+    },
+    "_name": "CHASTEN",
+    "_cost": "2",
+    "_rng": "8",
+    "_pow": "12",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "Enemy upkeep spells and animi on target model/unit damaged by this attack expire."
+}, {
+    "_id": {
+        "$oid": "575cf462c2ef166e0a3632c0"
+    },
+    "_name": "CLEANSING FIRE",
+    "_cost": "3",
+    "_rng": "8",
+    "_pow": "14",
+    "_aoe": "3",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "Cleansing Fire causes fire damage. On a critical hit, models hit suffer the Fire continuous effect."
+}, {
+    "_id": {
+        "$oid": "57567d52bd966f1469d87f39"
+    },
+    "_name": "CLOAK OF ASH",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target friendly Faction model/unit gains Ashen Veil. Models are not affected while out of formation. (A model with Ashen Veil has concealment. Living enemy models without Immunity: Fire  suffer –2 to attack rolls while within 2\" of a model with Ashen Veil.)"
+}, {
+    "_id": {
+        "$oid": "5756cd6dbd966f1469dadef8"
+    },
+    "_name": "CONVECTION",
+    "_cost": "2",
+    "_rng": "10",
+    "_pow": "12",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "When Convection destroys a living enemy model, you can give 1 focus point to a warjack in the spellcaster’s battlegroup that is in its control range."
+}, {
+    "_id": {
+        "$oid": "575818a6c2ef165afaedcf69"
+    },
+    "_name": "COUNTERBLAST",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "RND",
+    "_off": "NO",
+    "__text": "When an enemy model advances and ends its movement in the spellcaster's command range, the spellcaster can make one basic melee or ranged attack targeting that model, then Counterblast expires. Counterblast lasts for one round."
+}, {
+    "_id": {
+        "$oid": "575d55cebd966f7076231833"
+    },
+    "_name": "COUNTERMEASURE",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "While within 5\" of target friendly Faction model/unit, enemy models cannot make ranged attacks."
+}, {
+    "_id": {
+        "$oid": "575d4b33bd966f707622f0b9"
+    },
+    "_name": "COUP DE MAIN",
+    "_cost": "3",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "CTRL",
+    "_duration": "TURN",
+    "_off": "NO",
+    "__text": "The spellcaster and friendly Privateer models activating in its control range gain +2\" movement when advancing as part of their Normal Movement. Affected warjacks can charge without spending a focus point. Coup de Main lasts for one turn."
+}, {
+    "_id": {
+        "$oid": "57591397c2ef1652b42334b5"
+    },
+    "_name": "CRAWLING CHAOS",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "RND",
+    "_off": "NO",
+    "__text": "While B2B with the spellcaster, enemy models suffer –2 DEF and cannot advance except to change facing. Crawling Chaos lasts for one round."
+}, {
+    "_id": {
+        "$oid": "575d70a4c2ef166e0a37b709"
+    },
+    "_name": "CREATOR'S WRATH",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "The spellcaster gains an additional die on melee attack and melee damage rolls. When making a melee attack, the spellcaster ignores spell effects that add to the target’s DEF or ARM."
+}, {
+    "_id": {
+        "$oid": "575802aac2ef165afaed023d"
+    },
+    "_name": "CREVASSE",
+    "_cost": "3",
+    "_rng": "8",
+    "_pow": "12",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "If Crevasse boxes its original target, you can make a SP 6 attack using the boxed model as the attack’s point of origin. The SP 6 attack can target models in the boxed model’s back arc. Models hit suffer a POW 12 magic damage roll. Models boxed by Crevasse are removed\nfrom play."
+}, {
+    "_id": {
+        "$oid": "5759c5d0bd966f565855700c"
+    },
+    "_name": "CRIPPLING GRASP",
+    "_cost": "3",
+    "_rng": "8",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "YES",
+    "__text": "Target model/unit suffers –2 SPD, STR, DEF, and ARM. Crippling Grasp can be cast only once per activation."
+}, {
+    "_id": {
+        "$oid": "5757dcd0bd966f5eba464541"
+    },
+    "_name": "CRUSADER’S CALL",
+    "_cost": "3",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "CTRL",
+    "_duration": "TURN",
+    "_off": "NO",
+    "__text": "Friendly Faction models beginning a charge in the spellcaster’s control range gain +2˝ movement. Crusader’s Call lasts for one turn."
+}, {
+    "_id": {
+        "$oid": "5757edf1bd966f5eba4698ef"
+    },
+    "_name": "CURSE OF SHADOWS",
+    "_cost": "3",
+    "_rng": "8",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "YES",
+    "__text": "Target model/unit suffers –2 ARM and cannot make free strikes. A model can advance through an affected model if it has enough movement to move completely past its base."
+}, {
+    "_id": {
+        "$oid": "57548ceabd966f1469c7c377"
+    },
+    "_name": "CYCLONE",
+    "_cost": "2",
+    "_rng": "CTRL",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "NO",
+    "__text": "The spellcaster immediately makes a full advance, ignoring free strikes during this movement. At the end of this movement, the spellcaster can make one basic melee attack against each model in its LOS that is in its melee range. Cyclone can be cast only once per activation. "
+}, {
+    "_id": {
+        "$oid": "57612332bd966f2233cd7bc0"
+    },
+    "_name": "Chosen Ground",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "CTRL",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "While in the spellcaster's control range, models in its battlegroup gain pathfinder *ICON* and Steady. (A model with Steady cannot become knocked down.)"
+}, {
+    "_id": {
+        "$oid": "5756f669c2ef1612e2c04f87"
+    },
+    "_name": "DARK GUIDANCE",
+    "_cost": "4",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "CTRL",
+    "_duration": "TURN",
+    "_off": "NO",
+    "__text": "While in the spellcaster's control range, friendly Faction models gain an additional die on their melee attack rolls this turn."
+}, {
+    "_id": {
+        "$oid": "575816ffbd966f5eba47f9ab"
+    },
+    "_name": "DARK PATH",
+    "_cost": "2",
+    "_rng": "CTRL",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "NO",
+    "__text": "Dark Path can be cast only while Cassius is in Wurmwood’s control range. Immediately place Cassius completely within 2˝ of Wurmwood or place Wurmwood completely within 2˝ of Cassius. A model cannot advance this turn after being placed by Dark Path."
+}, {
+    "_id": {
+        "$oid": "5759c607bd966f56585571dd"
+    },
+    "_name": "DARK SEDUCTION",
+    "_cost": "4",
+    "_rng": "8",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "Take control of target enemy non-warcaster, non-warlock warrior model. You can immediately make a full advance with that enemy model followed by a basic attack, then Dark Seduction expires. The enemy model cannot be targeted by free strikes during this movement. Dark Seduction can be cast only once per activation. A model can be affected by Dark Seduction only once per turn."
+}, {
+    "_id": {
+        "$oid": "5756ec4cbd966f1469dc4982"
+    },
+    "_name": "DASH",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "CTRL",
+    "_duration": "TURN",
+    "_off": "NO",
+    "__text": "The spellcaster and friendly Faction warrior models activating in its control range gain +1 SPD. While in the spellcaster's control range, friendly Faction warrior models gain Parry. Dash lasts for one turn."
+}, {
+    "_id": {
+        "$oid": "5756d120c2ef1612e2beb98b"
+    },
+    "_name": "DAUNTLESS RESOLVE",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target friendly Faction warrior model/unit gains +3 ARM and Tough. Models are not affected while out of formation."
+}, {
+    "_id": {
+        "$oid": "5756a699bd966f1469d9696f"
+    },
+    "_name": "DEADEYE",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "TURN",
+    "_off": "NO",
+    "__text": "Target friendly Faction model/unit gains an additional die on each model’s first non-spray ranged attack roll this turn. "
+}, {
+    "_id": {
+        "$oid": "5756e7cabd966f1469dc16f8"
+    },
+    "_name": "DEADLY STORM",
+    "_cost": "3",
+    "_rng": "10",
+    "_pow": "13",
+    "_aoe": "3",
+    "_duration": "RND",
+    "_off": "YES",
+    "__text": "Deadly Storm causes cold damage. The AOE is a cloud effect that remains in play for one round."
+}, {
+    "_id": {
+        "$oid": "5756837ebd966f1469d8966d"
+    },
+    "_name": "DEADWEIGHT",
+    "_cost": "2",
+    "_rng": "8",
+    "_pow": "12",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "When Deadweight destroys an enemy living or undead model, choose an enemy model within 2\" of it. The chosen model must forfeit either its Normal Movement or its Combat Action during is next activation, as its controller chooses."
+}, {
+    "_id": {
+        "$oid": "5757eff8c2ef165afaec80e0"
+    },
+    "_name": "DEATH KNELL",
+    "_cost": "4",
+    "_rng": "8",
+    "_pow": "10",
+    "_aoe": "4",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "Before dealing damage, count the number of models in the AOE. Add the result to each Death Knell damage roll."
+}, {
+    "_id": {
+        "$oid": "57581d56bd966f5eba4838ef"
+    },
+    "_name": "DEATH MARCH",
+    "_cost": "3",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target friendly Faction unit gains +2 MAT and Vengeance. (During your maintenance Phase, if one or more models in a unit with Vengeance were damaged by enemy attacks during the last round, each model in the unit can advance 3˝ and make one basic melee attack.)"
+}, {
+    "_id": {
+        "$oid": "575f28cdc2ef1621892d97fc"
+    },
+    "_name": "DEATH PACT",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "",
+    "_aoe": null,
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target friendly Faction model/unit gains +2 ARM and Undead. Models are not affected while out of formation."
+}, {
+    "_id": {
+        "$oid": "575d6d1cbd966f7076236a63"
+    },
+    "_name": "DEATH SENTENCE",
+    "_cost": "2",
+    "_rng": "8",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "YES",
+    "__text": "When a friendly Faction model misses target enemy model/unit with an attack, it can reroll the attack roll. Each attack roll can be rerolled only once as a result of Death Sentence."
+}, {
+    "_id": {
+        "$oid": "5759245fc2ef1652b42387fd"
+    },
+    "_name": "DEATH SHRIEK",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "*",
+    "_duration": "-",
+    "_off": "NO",
+    "__text": "Enemy models currently within 2˝ of  the spellcaster suffer an unboostable POW 8 damage roll."
+}, {
+    "_id": {
+        "$oid": "5756a036bd966f1469d93ab7"
+    },
+    "_name": "DEATH WARD",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target friendly Faction model/unit gains +2 ARM. If an affected warjack is damaged, choose which column suffers the damage. Models are not affected while out of formation."
+}, {
+    "_id": {
+        "$oid": "575c4f5cc2ef166e0a338c0b"
+    },
+    "_name": "DEATHBRINGERS",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "CTRL",
+    "_duration": "TURN",
+    "_off": "NO",
+    "__text": "While within the spellcaster's control range, the melee weapons of models in its battlegroup gain Grievous Wounds. Deathbringers lasts for one turn. (A model hit by a weapon with Grievous Wounds loses Tough and cannot have damage removed from it for one round.)"
+}, {
+    "_id": {
+        "$oid": "5756cc65c2ef1612e2be84d4"
+    },
+    "_name": "DECELERATION",
+    "_cost": "3",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "CTRL",
+    "_duration": "RND",
+    "_off": "NO",
+    "__text": "While in the spellcaster’s control range, friendly Faction models gain +2 ARM against ranged and magic attack damage rolls. Deceleration lasts for one round."
+}, {
+    "_id": {
+        "$oid": "575d6d63bd966f7076236b44"
+    },
+    "_name": "DEFENDER'S WARD",
+    "_cost": "3",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target friendly Faction model/unit gains +2 DEF and ARM. Models are not affected while out of formation."
+}, {
+    "_id": {
+        "$oid": "5756d789c2ef1612e2bf04aa"
+    },
+    "_name": "DEFLECTION",
+    "_cost": "3",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "CTRL",
+    "_duration": "RND",
+    "_off": "NO",
+    "__text": "While in the spellcaster’s control range, friendly Faction models gain +2 DEF against ranged and magic attacks. Deflection lasts for one round."
+}, {
+    "_id": {
+        "$oid": "5759377cc2ef1652b423dc67"
+    },
+    "_name": "DESPOILER",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "5",
+    "_duration": "RND",
+    "_off": "NO",
+    "__text": "Center a 5\" AOE cloud effect on the spellcaster. The AOE remains centered on the spellcaster for one round. If the spellcaster is destroyed or removed from play, remove the AOE from play. Enemy models entering or ending their activations in the AOE suffer 1 damage point."
+}, {
+    "_id": {
+        "$oid": "57588d27bd966f56584b7b2b"
+    },
+    "_name": "DISCONTINUITY",
+    "_cost": "3",
+    "_rng": "SELF",
+    "_pow": "",
+    "_aoe": "CTRL",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "While in the spellcaster's control range, the melee weapons of models in its battlegrouop gain Dispel. (When a weapon with Dispel hits a model/unit, upkeep spells and animi on that model/unit immediately expire.)"
+}, {
+    "_id": {
+        "$oid": "575d1f30c2ef166e0a36ab64"
+    },
+    "_name": "DISCORD",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "",
+    "_aoe": null,
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target model in the spellcaster’s battlegroup gains\nWailing. (While within 5\" of a model with Wailing, cannot give or\nreceive orders and cannot cast spells.)"
+}, {
+    "_id": {
+        "$oid": "57567d7bbd966f1469d87fd2"
+    },
+    "_name": "DISINTEGRATION",
+    "_cost": "3",
+    "_rng": "10",
+    "_pow": "13",
+    "_aoe": "-",
+    "_duration": "RND",
+    "_off": "YES",
+    "__text": "The model hit suffers –2 ARM for one round. A model boxed by Disintegration is removed from play."
+}, {
+    "_id": {
+        "$oid": "575d3ec4c2ef166e0a3700fa"
+    },
+    "_name": "DISSOLUTION",
+    "_cost": "4",
+    "_rng": "SELF",
+    "_pow": "",
+    "_aoe": "CTRL",
+    "_duration": null,
+    "_off": "NO",
+    "__text": "Enemy upkeep spells in the spellcaster’s control range immediately\nexpire. When an upkeep spell expires as a result of Dissolution, the\nmodel maintaining the spell suffers d3 damage points."
+}, {
+    "_id": {
+        "$oid": "57588d76c2ef1652b41ed8ea"
+    },
+    "_name": "DISSOLUTION BOLT",
+    "_cost": "2",
+    "_rng": "8",
+    "_pow": "12",
+    "_aoe": "-",
+    "_duration": "*",
+    "_off": "YES",
+    "__text": "A model hit by Dissolution Bolt cannot channel spells for one round."
+}, {
+    "_id": {
+        "$oid": "575d3efec2ef166e0a370186"
+    },
+    "_name": "DISTRACTION",
+    "_cost": "2",
+    "_rng": "8",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "RND",
+    "_off": "YES",
+    "__text": "Target warrior model/unit cannot make ranged attacks and suffers -2 DEF and MAT for one round."
+}, {
+    "_id": {
+        "$oid": "57584756bd966f5eba49fc72"
+    },
+    "_name": "DOG PILE",
+    "_cost": "2",
+    "_rng": "12",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "YES",
+    "__text": "Warbeasts in the spellcaster’s battlegroup can charge or make slam power attacks against target model without being forced. They can ignore forests and cloud effects when determining LOS when declaring a charge or slam attack against the affected model. They gain +2˝ movement and Pathfinder when resolving charges or slam power attacks targeting the affected model."
+}, {
+    "_id": {
+        "$oid": "5756d250c2ef1612e2beca58"
+    },
+    "_name": "DOMINATION",
+    "_cost": "4",
+    "_rng": "8",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "Take control of target enemy warjack that has a non-crippled cortex. You can make a full advance with the warjack and can then make one basic attack, then Domination expires. The enemy warjack cannot be targeted by free strikes during this movement. Domination can be cast only once per activation. A warjack can be affected by Domination only once per turn."
+}, {
+    "_id": {
+        "$oid": "5757f54ac2ef165afaeca723"
+    },
+    "_name": "DOOM SPIRAL",
+    "_cost": "2",
+    "_rng": "8",
+    "_pow": "12",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "When Doom Spiral damages a warjack that is part of a battlegroup, its controller suffers d3 damage points."
+}, {
+    "_id": {
+        "$oid": "575919e5c2ef1652b42351ff"
+    },
+    "_name": "DOPPLER BARK",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "NO",
+    "__text": "Living or undead enemy models currently within 2˝ of  the spellcaster have their base DEF reduced to 5 and cannot run, charge, or make\nslam or trample power attacks for one round."
+}, {
+    "_id": {
+        "$oid": "57593467c2ef1652b423caab"
+    },
+    "_name": "DRACONIC AURA",
+    "_cost": "1",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "NO",
+    "__text": "Enemy models currently within 2\" of the spellcaster suffer the Fire continuous effect."
+}, {
+    "_id": {
+        "$oid": "5756b7f5c2ef1612e2bdad9d"
+    },
+    "_name": "DRACONIC BLESSING",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target friendly Faction model/unit gains +2 STR and Immunity: Fire. Models are not affected while out of formation."
+}, {
+    "_id": {
+        "$oid": "5756ba0ac2ef1612e2bdc006"
+    },
+    "_name": "DRAGON'S BLOOD",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target friendly non-warlock Faction model/unit gains +2 ARM. When an affected model is disabled by a melee attack, the attacker suffers the Corrosion continuous effect. Models are not affected while out of formation."
+}, {
+    "_id": {
+        "$oid": "575a6238c2ef166e0a2a8671"
+    },
+    "_name": "DRUID’S WRATH",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "TURN",
+    "_off": "NO",
+    "__text": "Friendly Faction models gain an additional die on magic attack rolls targeting enemy models within 10˝ of the spellcaster. Druid’s Wrath lasts for one turn."
+}, {
+    "_id": {
+        "$oid": "5756cbbbc2ef1612e2be7d3a"
+    },
+    "_name": "DUST TO DUST",
+    "_cost": "2",
+    "_rng": "10",
+    "_pow": "12",
+    "_aoe": "-",
+    "_duration": "*",
+    "_off": "YES",
+    "__text": "When an enemy warrior model is boxed by Dust to Dust, center a 3˝ AOE cloud effect on it, then remove the model from play. The AOE remains in play for one round."
+}, {
+    "_id": {
+        "$oid": "57699f8ac2ef161e70c40b95"
+    },
+    "_name": "EARTH'S SANCTUARY",
+    "_cost": "1",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "*",
+    "_off": "NO",
+    "__text": "Target friendly Faction model becomes dug in. (While dug in, a model gains cover, does not suffer blast damage, and does not block LOS. The model remains dug in until it moves, is placed, or is engaged.)"
+}, {
+    "_id": {
+        "$oid": "5756cd26bd966f1469dadbe1"
+    },
+    "_name": "EARTHQUAKE",
+    "_cost": "3",
+    "_rng": "10",
+    "_pow": "-",
+    "_aoe": "5",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "Models hit by Earthquake become knocked down."
+}, {
+    "_id": {
+        "$oid": "575925ddc2ef1652b4238d5d"
+    },
+    "_name": "EARTH’S BLESSING",
+    "_cost": "1",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "RND",
+    "_off": "NO",
+    "__text": "The spellcaster cannot be pushed, knocked down, made stationary, or moved by a slam. Earth’s Blessing lasts for one round."
+}, {
+    "_id": {
+        "$oid": "5756cb50c2ef1612e2be78dc"
+    },
+    "_name": "EASY RIDER",
+    "_cost": "3",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "CTRL",
+    "_duration": "TURN",
+    "_off": "NO",
+    "__text": "The spellcaster and friendly Faction models beginning their activations in its control range gain Pathfinder. Easy Rider lasts for one turn."
+}, {
+    "_id": {
+        "$oid": "57617aa3bd966f2233cf92ac"
+    },
+    "_name": "ELASTICITY",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "TURN",
+    "_off": "NO",
+    "__text": "Target friendly Faction model’s melee weapons become RNG 2. Elasticity lasts for one turn."
+}, {
+    "_id": {
+        "$oid": "5756ce17bd966f1469dae6ef"
+    },
+    "_name": "ELECTRICAL BLAST",
+    "_cost": "3",
+    "_rng": "8",
+    "_pow": "13",
+    "_aoe": "3",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "Electrical Blast causes electrical damage. Warjacks damaged by Electrical Blast suffer Disruption. "
+}, {
+    "_id": {
+        "$oid": "5756c4fdc2ef1612e2be32ad"
+    },
+    "_name": "ELECTRIFY",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target friendly Faction model/unit gains +2 ARM and Repulsor Field. Models are not affected while out of  formation. (When a model with Repulsor Field is hit with a melee attack, after the attack is resolved the attacking model is pushed 1˝ directly away from the model hit.) "
+}, {
+    "_id": {
+        "$oid": "5754882ebd966f1469c79ad4"
+    },
+    "_name": "ELIMINATOR",
+    "_cost": "3",
+    "_rng": "8",
+    "_pow": "13",
+    "_aoe": "3",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "Immediately after this attack is resolved, the spellcaster can advance\nup to 2\" for each enemy model destroyed by the attack."
+}, {
+    "_id": {
+        "$oid": "57581761c2ef165afaedc349"
+    },
+    "_name": "ELUSIVE",
+    "_cost": "1",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "RND",
+    "_off": "NO",
+    "__text": "The spellcaster gains Dodge. Elusive lasts for one round. (A model with Dodge can advance up to 2\" immediately after an enemy attack that missed it is resolved unless it was missed while advancing. It cannot be targeted by free strikes during this movement.)"
+}, {
+    "_id": {
+        "$oid": "575d52bac2ef166e0a374843"
+    },
+    "_name": "EMPATHIC OVERLOAD",
+    "_cost": "3",
+    "_rng": "8",
+    "_pow": "12",
+    "_aoe": "4",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "Models hit by Empathic Overload suffer a POW 12 damage roll. When Empathic Overload targets a friendly model, it automatically hits."
+}, {
+    "_id": {
+        "$oid": "575583d8c2ef1612e2b29eb3"
+    },
+    "_name": "ENERGIZER",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "NO",
+    "__text": "Each model in the spellcaster's battlegroup that is currently in its control range can immediately advance up to 2\". Energizer can be cast only once per activation."
+}, {
+    "_id": {
+        "$oid": "58de2492bd966f5f71cc5a91"
+    },
+    "_name": "ENFEEDLE",
+    "_cost": "2",
+    "_rng": "8",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "YES",
+    "__text": "Target model/unit suffers –2 to attack and damage rolls."
+}, {
+    "_id": {
+        "$oid": "575cf6b3bd966f70762202da"
+    },
+    "_name": "ENGINE OF DESTRUCTION",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "TURN",
+    "_off": "NO",
+    "__text": "The spellcaster gains +2 SPD, +4 STR, and +4 MAT for one turn."
+}, {
+    "_id": {
+        "$oid": "5756f694bd966f1469dcb238"
+    },
+    "_name": "ERUPTION",
+    "_cost": "3",
+    "_rng": "8",
+    "_pow": "14",
+    "_aoe": "3",
+    "_duration": "RND",
+    "_off": "YES",
+    "__text": "Models hit suffer a POW 14 fire damage roll. This spell's AOE is a cloud effect and hazard that remains in play for one round. Models entering or ending their activations in the AOE suffer an unboostable POW 14 fire damage roll."
+}, {
+    "_id": {
+        "$oid": "575a64fdbd966f7076167ab6"
+    },
+    "_name": "ERUPTION OF LIFE",
+    "_cost": "3",
+    "_rng": "10",
+    "_pow": "13",
+    "_aoe": "-",
+    "_duration": "*",
+    "_off": "YES",
+    "__text": "If  this attack destroys a living or undead enemy model, center a\n3˝ AOE on the destroyed model, then remove that model from play. The AOE is forest terrain that remains in play for one round. Enemy models in the AOE when it is put into play are hit and suffer an unboostable POW 13 blast damage roll. This damage is not considered to have been caused by an attack."
+}, {
+    "_id": {
+        "$oid": "57567f8dc2ef1612e2bc444c"
+    },
+    "_name": "ERUPTION OF SPINES",
+    "_cost": "3",
+    "_rng": "10",
+    "_pow": "10",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "If target model is hit, the d3 nearest models within 5\" of it suffer a POW 10 damage roll. These additional damage rolls are not considered to have been caused by an attack. Eruption of Spines damage rolls are simultaneous."
+}, {
+    "_id": {
+        "$oid": "5756d0a1bd966f1469db038e"
+    },
+    "_name": "ESCORT",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "CTRL",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Warjacks in the spellcaster’s battlegroup beginning their activations in its control range gain +2˝ movement when advancing as part of  their Normal Movement. The spellcaster gains +2 ARM while one or more warjacks in its battlegroup are within 3˝ of  it."
+}, {
+    "_id": {
+        "$oid": "575fbc97bd966f2233c66756"
+    },
+    "_name": "ESSENCE BLAST",
+    "_cost": "3",
+    "_rng": "CTRL",
+    "_pow": "-",
+    "_aoe": "*",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "Choose a friendly living or undead non-warlock/warcaster Faction model in the spellcaster's control range. Make a SP 6 magic attack using the chosen model as the attack's point of origin. The SP 6 attack can target models in the chosen model's back arc. Models hit suffer a damage roll with a POW equal to 5 + the base STR of the chosen model. After the spell is resolved, remove the chosen model from play."
+}, {
+    "_id": {
+        "$oid": "5756a078bd966f1469d93c25"
+    },
+    "_name": "EXCARNATE",
+    "_cost": "3",
+    "_rng": "10",
+    "_pow": "13",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "When a living enemy warrior model is boxed by Excarnate, remove it from play. You can then add one Grunt to a friendly Faction small-based undead unit in the spellcaster’s control range. Place the Grunt in formation and completely within 3\" of the spellcaster. The Grunt must forfeit its Combat Action the turn it is put into play."
+}, {
+    "_id": {
+        "$oid": "575915b1bd966f56584fdcac"
+    },
+    "_name": "EXCESSIVE HEALING",
+    "_cost": "1",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "RND",
+    "_off": "NO",
+    "__text": "When the spellcaster is damaged by an enemy attack, immediately after the attack is resolved the spellcaster can remove d3 damage points. Excessive Healing lasts for one round."
+}, {
+    "_id": {
+        "$oid": "5756d1a4bd966f1469db0e9b"
+    },
+    "_name": "EXPLOSIVO",
+    "_cost": "1",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target friendly Faction model’s ranged weapons gain Damage Type: Magical. If  the affected model directly hits and boxes an enemy model with an attack from a ranged weapon, center a 3˝ AOE on the boxed model, then remove that model from play. Models in the AOE are hit and suffer an unboostable POW 8 magical blast damage roll."
+}, {
+    "_id": {
+        "$oid": "5756dc25c2ef1612e2bf3757"
+    },
+    "_name": "Earth Spikes",
+    "_cost": "3",
+    "_rng": "10",
+    "_pow": "13",
+    "_aoe": "3",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "When making this attack, ignore cover, concealment, and elevation. On a critical hit, models hit become knocked down."
+}, {
+    "_id": {
+        "$oid": "5756ce3bc2ef1612e2be9936"
+    },
+    "_name": "FAIL-SAFE",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target friendly Faction warjack gains +2 ARM and does not suffer the effects of  crippled systems."
+}, {
+    "_id": {
+        "$oid": "57582e7ec2ef165afaeeb6a8"
+    },
+    "_name": "FAR STRIKE",
+    "_cost": "1",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "TURN",
+    "_off": "NO",
+    "__text": "The spellcaster's ranged weapons gain Snipe. Far Strike lasts for one turn. (An attack with a weapon with Snipe gains +4 RNG.)"
+}, {
+    "_id": {
+        "$oid": "575eb2dec2ef166e0a3de798"
+    },
+    "_name": "FATE WALKER",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "TURN",
+    "_off": "NO",
+    "__text": "The Spellcaster gains Reposition [5\"]. Fate Walker last for one turn. (At the end of an activation in which it did not run or fail a charge, a model with Reposition [5\"], then its activation ends.)"
+}, {
+    "_id": {
+        "$oid": "5756a0b8c2ef1612e2bcf4b5"
+    },
+    "_name": "FEAST OF WORMS",
+    "_cost": "4",
+    "_rng": "10",
+    "_pow": "12",
+    "_aoe": "4",
+    "_duration": "UP",
+    "_off": "YES",
+    "__text": "While in the AOE, enemy models suffer –2 ARM. When a living enemy model is destroyed in the AOE, the spellcaster gains the destroyed model’s soul token regardless of the proximity of other models. The AOE remains in play as long as upkeep is paid."
+}, {
+    "_id": {
+        "$oid": "5756c65ac2ef1612e2be419e"
+    },
+    "_name": "FIRE FOR EFFECT",
+    "_cost": "3",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Boost the attack and damage rolls of  target friendly Faction model’s first ranged attack each activation."
+}, {
+    "_id": {
+        "$oid": "5756cbddbd966f1469dacdde"
+    },
+    "_name": "FIRE GROUP",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "CTRL",
+    "_duration": "TURN",
+    "_off": "NO",
+    "__text": "While models in the spellcaster’s battlegroup are in its control range, their ranged weapons gain +2 RNG. Fire Group lasts for one turn."
+}, {
+    "_id": {
+        "$oid": "575cf8fcbd966f70762210ca"
+    },
+    "_name": "FIRE STEP",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "13",
+    "_aoe": "*",
+    "_duration": "-",
+    "_off": "NO",
+    "__text": "Enemy models currently within 2˝ of the spellcaster suffer a POW 13 fire damage roll . After the damage is resolved, place the spellcaster completely within 3˝ of its current location. Fire Step can be cast only once per activation."
+}, {
+    "_id": {
+        "$oid": "575cf8c6c2ef166e0a363db2"
+    },
+    "_name": "FIRESTARTER",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target a model in the spellcaster’s battlegroup. That model’s melee and ranged weapons gain Continuous Effect: Fire ."
+}, {
+    "_id": {
+        "$oid": "575ea99dbd966f707629fd07"
+    },
+    "_name": "FIRST BLOOD",
+    "_cost": "2",
+    "_rng": "10",
+    "_pow": "10",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "When an enemy model is damaged by First Blood, immediately after the attack is resolved one warbeast in the spellcaster's battlegroup that is currently in its control range can make a full advance toward the nearest enemy model. A model can advance as a result of First Blood only once per turn."
+}, {
+    "_id": {
+        "$oid": "576b63a8bd966f1ef1d11e18"
+    },
+    "_name": "FLAMING FISTS",
+    "_cost": "1",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "RND",
+    "_off": "NO",
+    "__text": "The spellcaster gains +2 to melee damage rolls and Immunity: Fire, and its melee weapons gain Continuous Effect: Fire. Flaming Fists lasts for one round."
+}, {
+    "_id": {
+        "$oid": "5756f550c2ef1612e2c0444b"
+    },
+    "_name": "FLASHING BLADE",
+    "_cost": "1",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "NO",
+    "__text": "The spellcaster immediately makes one basic attack with one of its melee weapons against each enemy model in its LOS that is in the weapon's melee range. These attacks are simultaneous."
+}, {
+    "_id": {
+        "$oid": "5756ba2cbd966f1469da10da"
+    },
+    "_name": "FLESH EATER",
+    "_cost": "3",
+    "_rng": "10",
+    "_pow": "13",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "When a living enemy model is damaged by Flesh Eater, the spellcaster or a living warbeast in its battlegroup in its control range can remove d3 damage points."
+}, {
+    "_id": {
+        "$oid": "575f537bbd966f2233c4e867"
+    },
+    "_name": "FLESH HOOKS",
+    "_cost": "2",
+    "_rng": "10",
+    "_pow": "12",
+    "_aoe": "-",
+    "_duration": "RND",
+    "_off": "YES",
+    "__text": "Target model damaged by Flesh Hooks cannot charge or make slam or trample power attacks for one round."
+}, {
+    "_id": {
+        "$oid": "5756b80fbd966f1469d9fe09"
+    },
+    "_name": "FOG OF WAR",
+    "_cost": "3",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "CTRL",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Models gain concealment while in the spellcaster’s control range."
+}, {
+    "_id": {
+        "$oid": "575ebedcc2ef166e0a3e428f"
+    },
+    "_name": "FORCE AURA",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "RND",
+    "_off": "NO",
+    "__text": "While within 3\" of the spellcaster, friendly Faction models gain Force Barrier. Force Aura lasts for one round. (A model with Force Barrier gains +2 DEF against ranged attack rolls and does not suffer blast damage.)"
+}, {
+    "_id": {
+        "$oid": "5757e30dc2ef165afaec353d"
+    },
+    "_name": "FORCE BLAST",
+    "_cost": "3",
+    "_rng": "CTRL",
+    "_pow": "-",
+    "_aoe": "*",
+    "_duration": "-",
+    "_off": "NO",
+    "__text": "Target a model in the spellcaster’s battlegroup that is in its control range. Enemy models currently within 2˝ of  the target model are pushed 4˝ directly away from it in the order you choose."
+}, {
+    "_id": {
+        "$oid": "575d5724bd966f7076231d4a"
+    },
+    "_name": "FORCE FIELD",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "CTRL",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "The spellcaster does not suffer blast or collateral damage and cannot become knocked down. When an enemy AOE ranged attack deviates from a point in the spellcaster's control range, after the deviation distance is rolled you choose the deviation direction."
+}, {
+    "_id": {
+        "$oid": "5756c546bd966f1469da84e1"
+    },
+    "_name": "FORCE HAMMER",
+    "_cost": "4",
+    "_rng": "10",
+    "_pow": "12",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "Instead of suffering a normal damage roll, a non-incorporeal model Force Hammer hits is slammed d6˝ directly away from the spell’s point of  origin and suffers a POW 12 damage roll. Collateral damage from this slam is POW 12. "
+}, {
+    "_id": {
+        "$oid": "5763a0c8bd966f19be99082c"
+    },
+    "_name": "FORCE STRIKE",
+    "_cost": "2",
+    "_rng": "8",
+    "_pow": "12",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "On a critical hit, the model hit becomes knocked down."
+}, {
+    "_id": {
+        "$oid": "57557498bd966f1469ce7663"
+    },
+    "_name": "FORCED EVOLUTION",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target friendly living Faction warbeast gains +2 STR and DEF."
+}, {
+    "_id": {
+        "$oid": "57596a89c2ef1652b4257e6b"
+    },
+    "_name": "FORKED LIGHTNING",
+    "_cost": "3",
+    "_rng": "8",
+    "_pow": "12",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "A model hit by Forked Lightning suffers a POW 12 electrical damage roll , and lightning arcs from that model to d3 consecutive additional models. The lightning arcs to the nearest model it has not already arced to within 4˝ of the last model it arced to, ignoring this model. Each model the lightning arcs to suffers a POW 10 electrical damage roll . Lightning arc damage rolls are not considered to have been caused by an attack. Forked Lightning damage rolls are simultaneous."
+}, {
+    "_id": {
+        "$oid": "5756c9f9bd966f1469dab93d"
+    },
+    "_name": "FORTIFY",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target warjack in the spellcaster’s battlegroup gains +2 ARM. The affected model and any friendly model B2B with it cannot become knocked down, be pushed, or be moved by a slam."
+}, {
+    "_id": {
+        "$oid": "575d3f06c2ef166e0a37019c"
+    },
+    "_name": "FORTUNE",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "",
+    "_aoe": null,
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target friendly Faction model/unit can reroll its missed attack rolls.\nEach attack roll can be rerolled only once as a Fortune."
+}, {
+    "_id": {
+        "$oid": "5756d1d1c2ef1612e2bec506"
+    },
+    "_name": "FOXHOLE",
+    "_cost": "2",
+    "_rng": "CTRL",
+    "_pow": "-",
+    "_aoe": "5",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Place a 5˝ AOE anywhere completely within the spellcaster’s control range where it does not touch a model’s base, an obstruction, or an obstacle. Models completely within the AOE have cover and do not suffer blast damage. When drawing LOS to a model not completely within the AOE, ignore intervening models completely within the AOE."
+}, {
+    "_id": {
+        "$oid": "575d5f20c2ef166e0a37750d"
+    },
+    "_name": "FREEZING GRIP",
+    "_cost": "3",
+    "_rng": "8",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "RND",
+    "_off": "YES",
+    "__text": "Target model/unit becomes stationary for one round unless it has Immunity: Cold *ICON*."
+}, {
+    "_id": {
+        "$oid": "575d6e51bd966f7076236e84"
+    },
+    "_name": "FREEZING MIST",
+    "_cost": "2",
+    "_rng": "CTRL",
+    "_pow": "-",
+    "_aoe": "3",
+    "_duration": "RND",
+    "_off": "NO",
+    "__text": "Place a 3\" AOE cloud effect completely within the spellcaster’s control range While in the AOE, models without Immunity: Cold *ICON* suffer -2 to their attack rolls. The AOE remains in play for one round."
+}, {
+    "_id": {
+        "$oid": "5756dda3bd966f1469db9f27"
+    },
+    "_name": "FROST FIELD",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target friendly Faction model/unit gains Chiller. Models are not affected while out of formation. (While within 2\" of a model with Chiller, enemy models suffer –2 DEF unless they have Immunity: Cold.)"
+}, {
+    "_id": {
+        "$oid": "575683f5bd966f1469d89818"
+    },
+    "_name": "FROST HAMMER",
+    "_cost": "2",
+    "_rng": "SP8",
+    "_pow": "12",
+    "_aoe": "-",
+    "_duration": null,
+    "_off": "YES",
+    "__text": "Frost Hammer causes cold damage. On a critical hit, the model hit becomes stationary for one round unless it has Immunity: Cold."
+}, {
+    "_id": {
+        "$oid": "57632743c2ef161876551e19"
+    },
+    "_name": "FROZEN GROUND",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "RND",
+    "_off": "NO",
+    "__text": "When an enemy model without Immunity: Cold ends its activation within 3\" of the spellcaster, the enemy model becomes knocked down. Frozen Ground lasts for one round."
+}, {
+    "_id": {
+        "$oid": "57548662c2ef1612e2ab2733"
+    },
+    "_name": "FULL THROTTLE",
+    "_cost": "3",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "CTRL",
+    "_duration": "TURN",
+    "_off": "NO",
+    "__text": "Warjacks in the spellcaster’s battlegroup beginning their activations in its control range can run, charge, or make slam or trample power attacks without spending focus that activation. While in the spellcaster’s control range, models in its battlegroup gain boosted melee attack rolls. Full Throttle lasts for one turn."
+}, {
+    "_id": {
+        "$oid": "575486a1c2ef1612e2ab2920"
+    },
+    "_name": "FURY",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target friendly Faction model/unit gains +3 to melee damage rolls but suffers –1 DEF."
+}, {
+    "_id": {
+        "$oid": "57596ad0bd966f5658522011"
+    },
+    "_name": "GALE WINDS",
+    "_cost": "4",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "CTRL",
+    "_duration": "RND",
+    "_off": "YES",
+    "__text": "While in the spellcaster’s control range, friendly Faction models gain +3 DEF against ranged and magic attacks. Cloud effects in the spellcaster’s control range expire when this spell is cast. Gale Winds last lasts for one round."
+}, {
+    "_id": {
+        "$oid": "5757dbb2bd966f5eba46415a"
+    },
+    "_name": "GALLOWS",
+    "_cost": "3",
+    "_rng": "10",
+    "_pow": "13",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "When an enemy model is hit by this attack, it can be pushed d6\" directly toward Gallows’ point of origin."
+}, {
+    "_id": {
+        "$oid": "5756c689c2ef1612e2be4384"
+    },
+    "_name": "GATE CRASHER",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "NO",
+    "__text": "Place the spellcaster anywhere completely within 5˝ of  its current location. After casting Gate Crasher, for the rest of  this activation the spellcaster cannot advance and its ranged attacks must target models in its melee range. Gate Crasher can be cast only once per activation."
+}, {
+    "_id": {
+        "$oid": "575d85ebbd966f707623d24d"
+    },
+    "_name": "GATES OF DEATH",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "At the end of your turn, place the spellcaster anywhere completely within 6˝ of its current location."
+}, {
+    "_id": {
+        "$oid": "5756cee5c2ef1612e2bea053"
+    },
+    "_name": "GHOST WALK",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "TURN",
+    "_off": "NO",
+    "__text": "Target friendly Faction model/unit gains Ghostly for one turn. (A model with Ghostly can advance through terrain and obstacles without penalty and can advance through obstructions if  it has enough movement to move completely past them. It cannot be targeted by free strikes.)"
+}, {
+    "_id": {
+        "$oid": "5757dd91c2ef165afaec1fe2"
+    },
+    "_name": "GRAVE WIND",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target friendly Faction model gains +2 DEF and Poltergeist.(When an enemy model misses a model with Poltergeist with an attack,immediately after the attack is resolved you can choose to push the enemy model d3˝ directly away from the model with Poltergeist.)"
+}, {
+    "_id": {
+        "$oid": "575d4c79bd966f707622f528"
+    },
+    "_name": "GRIND",
+    "_cost": "3",
+    "_rng": "10",
+    "_pow": "14",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "When a warjack is hit by Grind. it suffers 1 damage point to its first available Movement system box."
+}, {
+    "_id": {
+        "$oid": "575802fec2ef165afaed052c"
+    },
+    "_name": "GROUND ZERO",
+    "_cost": "3",
+    "_rng": "SELF",
+    "_pow": "13",
+    "_aoe": "5",
+    "_duration": "-",
+    "_off": "NO",
+    "__text": "Center a 5˝ AOE on the spellcaster. Each other model in the AOE is hit and suffers a POW 13 damage roll. Immediately after this damage is resolved each enemy model damaged by Ground Zero is pushed d6˝ directly away from the spellcaster in the order you choose."
+}, {
+    "_id": {
+        "$oid": "5758477cc2ef165afaefbdb1"
+    },
+    "_name": "GUARDIAN BEAST",
+    "_cost": "3",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Once per turn when an enemy model advances and ends its movement within 6˝ of  the spellcaster, choose a warbeast in the spellcaster’s battlegroup that is in its control range. That warbeast can immediately make a full advance toward the enemy model and then can make one basic melee or ranged attack targeting the enemy model. The attack and damage rolls against that model are boosted."
+}, {
+    "_id": {
+        "$oid": "57768cedc2ef165b8ff9416b"
+    },
+    "_name": "GUARDIAN PROTECTOR",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "TURN",
+    "_off": "NO",
+    "__text": "Target friendly warbeast gains Righteous Vengeance. (If one or more friendly Faction warrior models were destroyed or removed from play by enemy attacks while within 5\" of a model with Righteous Vengeance during the last round, during your Maintenance Phase the model with Righteous Vengeance can advance up to 3\" and make one basic melee attack.)"
+}, {
+    "_id": {
+        "$oid": "5756cc03bd966f1469dacf7c"
+    },
+    "_name": "GUIDED FIRE",
+    "_cost": "3",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "CTRL",
+    "_duration": "TURN",
+    "_off": "NO",
+    "__text": "While in the spellcaster’s control range, models in its battlegroup gain boosted ranged attack rolls for one turn."
+}, {
+    "_id": {
+        "$oid": "575d83a7c2ef166e0a38067d"
+    },
+    "_name": "GUIDED HAND",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "TURN",
+    "_off": "NO",
+    "__text": "Target friendly Faction model/unit gains an additional die on each model’s first melee attack roll this turn."
+}, {
+    "_id": {
+        "$oid": "5757e3b9bd966f5eba466072"
+    },
+    "_name": "HALLOWED AVENGER",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target friendly Faction warjack gains Righteous Vengeance. (If one or more friendly Faction warrior models were destroyed or removed from play by enemy attacks while within 5˝ of  a model with Righteous Vengeance during the last round, during your Maintenance Phase the model with Righteous Vengeance can advance up to 3˝ and make one basic melee attack.)"
+}, {
+    "_id": {
+        "$oid": "575dcf1fbd966f7076260cdd"
+    },
+    "_name": "HAND OF DEATH",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target friendly Faction model gains Overtake and its weapons gain Grievous Wounds. (A model hit by a weapon with Grievous Wounds loses Tough  and cannot have damage removed from it for one round.) (When a model with Overtake destroys one or more enemy models with a basic melee attack during its Combat Action, after the attack is resolved it can immediately advance up to 1˝.)"
+}, {
+    "_id": {
+        "$oid": "5763a108c2ef16187657b5df"
+    },
+    "_name": "HAND OF DESTRUCTION",
+    "_cost": "2",
+    "_rng": "10",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "YES",
+    "__text": "Friendly Faction in this model's battlegroup gain an additional die on attack and damage rolls against target model/unit. Discard the lowest die in each roll."
+}, {
+    "_id": {
+        "$oid": "575d69b0c2ef166e0a379db0"
+    },
+    "_name": "HAND OF FATE",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target friendly Faction model/unit gains an additional die on attack and damage rolls. Discard the low die in each roll."
+}, {
+    "_id": {
+        "$oid": "57abfa26c2ef163c3c9da69e"
+    },
+    "_name": "HAND OF THE CREATOR",
+    "_cost": "3",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "CTRL",
+    "_duration": "-",
+    "_off": "NO",
+    "__text": "Remove d3 damage points from each friendly faction model currently in the spellcaster's control range. This spell can be cast only once per activation. "
+}, {
+    "_id": {
+        "$oid": "575a651dbd966f7076167afb"
+    },
+    "_name": "HARVEST",
+    "_cost": "3",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "CTRL",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "When a living or undead enemy model is destroyed in the spellcaster’s control range, the spellcaster can gain 1 fury point. The spellcaster’s fury point total cannot exceed its FURY as a result of  Harvest."
+}, {
+    "_id": {
+        "$oid": "5760076ac2ef162189318dc1"
+    },
+    "_name": "HAUNTING MELODY",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "CTRL",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "While in the spellcaster’s control range, living enemy models cannot give or receive orders and cannot make melee or ranged attacks targeting this model."
+}, {
+    "_id": {
+        "$oid": "575eb912c2ef166e0a3e12b6"
+    },
+    "_name": "HEIGHTENED METABOLISM",
+    "_cost": "1",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "TURN",
+    "_off": "NO",
+    "__text": "Target friendly Faction warbeast gains Snacking. Heightened Metabolism last for one turn. (When a model with Snacking boxes a living model with a melee attack, it can choose to remove the boxed model from play. When it does, the model with Snacking can remove d3 damage points.)"
+}, {
+    "_id": {
+        "$oid": "5756c6b0c2ef1612e2be455d"
+    },
+    "_name": "HEIGHTENED REFLEXES",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target friendly Faction model/unit cannot become knocked down or stationary. Models are not affected while out of  formation."
+}, {
+    "_id": {
+        "$oid": "5757f02ec2ef165afaec8215"
+    },
+    "_name": "HELLBOUND",
+    "_cost": "3",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "*",
+    "_duration": "RND",
+    "_off": "NO",
+    "__text": "The spellcaster cannot be targeted by charges or slam power attacks. While within 5˝ of the spellcaster, enemy models treat open ground as rough terrain. Hellbound lasts for one round."
+}, {
+    "_id": {
+        "$oid": "5756a853bd966f1469d97468"
+    },
+    "_name": "HELLFIRE",
+    "_cost": "3",
+    "_rng": "10",
+    "_pow": "14",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "Models disabled by Hellfire cannot make a Tough roll. Models boxed by Hellfire are removed from play."
+}, {
+    "_id": {
+        "$oid": "57581766bd966f5eba47fd1c"
+    },
+    "_name": "HELLMOUTH",
+    "_cost": "4",
+    "_rng": "8",
+    "_pow": "12",
+    "_aoe": "*",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "If this attack misses, nothing happens. If it hits, before making the damage roll, push models within 3˝ of the model hit 3˝ directly toward it in the order you choose. Then center a 3˝ AOE on the model hit. Models hit suffer a POW 12 damage roll. Models boxed by Hellmouth are removed from play."
+}, {
+    "_id": {
+        "$oid": "576155c7c2ef162189386157"
+    },
+    "_name": "HELLWROUGHT",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target warjack in the spellcaster's battlegroup gains +2 ARM and Retaliation.  (If a model with Retaliation was damaged by and enemy attack during the last round, during your Maintenance Phase it can advance up to 3\" and make one basic melee attack.)"
+}, {
+    "_id": {
+        "$oid": "5756a882c2ef1612e2bd24e1"
+    },
+    "_name": "HEX BLAST",
+    "_cost": "3",
+    "_rng": "10",
+    "_pow": "13",
+    "_aoe": "3",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "Enemy upkeep spells and animi on the model/unit directly hit by Hex Blast immediately expire."
+}, {
+    "_id": {
+        "$oid": "57557769c2ef1612e2b20fb7"
+    },
+    "_name": "HEX BOLT",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "13",
+    "_aoe": "-",
+    "_duration": "RND",
+    "_off": "YES",
+    "__text": "Models hit by Hex Bolt cannot make special actions, special attacks or power attacks for one round."
+}, {
+    "_id": {
+        "$oid": "575cf6efbd966f707622042a"
+    },
+    "_name": "HEX HAMMER",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "CTRL",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "When an enemy model declares it is casting a spell while in this model’s control range, the enemy spellcaster immediately suffers d3 damage points. If the enemy spellcaster is destroyed as a result of this damage, the spell does not take effect."
+}, {
+    "_id": {
+        "$oid": "5756ddccc2ef1612e2bf495b"
+    },
+    "_name": "HOARFROST",
+    "_cost": "3",
+    "_rng": "8",
+    "_pow": "14",
+    "_aoe": "3",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "Hoarfrost causes cold damage. On a critical hit, models in the AOE become stationary for one round unless they have Immunity: Cold."
+}, {
+    "_id": {
+        "$oid": "575fbd46c2ef1621892fe9e5"
+    },
+    "_name": "HOLLOW",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target friendly living Faction warrior model/unit gains Undead and Soul Vessel. When an affected model is destroyed, the spellcaster gains its soul token regardless of the proxomity of other models. (A model with Soul Vessel generates soul tokens as if it were a living model.)"
+}, {
+    "_id": {
+        "$oid": "5758269ac2ef165afaee6402"
+    },
+    "_name": "HORNEST'S NEST",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "TURN",
+    "_off": "NO",
+    "__text": "When a model in target friendly Faction warbeast pack destroys an enemy model with a basic melee attack during its Combat Action, after the attack is resolved it can advance up to 1\" and make an additional melee attack. Hornet's Nest lasts for one turn."
+}, {
+    "_id": {
+        "$oid": "575fbe13bd966f2233c66a2d"
+    },
+    "_name": "HOST OF SHADOWS",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "CTRL",
+    "_duration": "TURN",
+    "_off": "NO",
+    "__text": "While in the spellcaster's control range, model in its battlegroup gain Ghostly. Host of Shadows last for one turn. (A model wiht Gostly can advance through terrain an onstracles without penealty and can advance through obstructions if it has enought movement to move completely past them. It cannot be targeted by free strikes.)"
+}, {
+    "_id": {
+        "$oid": "58de24fac2ef1652ec14da18"
+    },
+    "_name": "HOST OF SHADOWS",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "CTRL",
+    "_duration": "TURN",
+    "_off": "NO",
+    "__text": "While in the spellcaster’s control range, models in its battlegroup gain Ghostly. Host of Shadows lasts for one turn. (A model with Ghostly can advance through terrain and obstacles without penalty and can advance through obstructions if it has enough movement to move completely past them. It cannot be targeted by free strikes.)"
+}, {
+    "_id": {
+        "$oid": "5759aa22c2ef1652b4280055"
+    },
+    "_name": "HOT-SHOT",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target model in the spellcaster's battlegroup gains boosted ranged attack damage rolls."
+}, {
+    "_id": {
+        "$oid": "5762983dbd966f19be923d43"
+    },
+    "_name": "HOWLING BLAST",
+    "_cost": "3",
+    "_rng": "SP10",
+    "_pow": "12",
+    "_aoe": null,
+    "_duration": null,
+    "_off": "YES",
+    "__text": "Howling Blast causes fire damage. Models hit suffer the Fire continuous effect."
+}, {
+    "_id": {
+        "$oid": "5764277fbd966f4e9e18f14c"
+    },
+    "_name": "HOWLING FLAMES",
+    "_cost": "3",
+    "_rng": "SP10",
+    "_pow": "12",
+    "_aoe": null,
+    "_duration": null,
+    "_off": "YES",
+    "__text": "Howling Flames causes fire damage. Models hit by this attack suffer the Fire continuous effect."
+}, {
+    "_id": {
+        "$oid": "575921abbd966f5658500f65"
+    },
+    "_name": "HUNTING HOWLS",
+    "_cost": "1",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "TURN",
+    "_off": "NO",
+    "__text": "Enemy models lose Stealth while within 5˝ of  the spellcaster. Hunting Howls lasts for one turn."
+}, {
+    "_id": {
+        "$oid": "5756a0eec2ef1612e2bcf5f4"
+    },
+    "_name": "ICY GRIP",
+    "_cost": "2",
+    "_rng": "8",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "YES",
+    "__text": "Target warrior model/unit without Immunity: Cold suffers –2 DEF and cannot run or make power attacks or special attacks."
+}, {
+    "_id": {
+        "$oid": "5756f6a9bd966f1469dcb2f5"
+    },
+    "_name": "IGNITE",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target friendly Faction model/unit gains +2 to melee attack damage rolls. Affected models gain Critical Fire on their melee attacks."
+}, {
+    "_id": {
+        "$oid": "575cf729c2ef166e0a363a6f"
+    },
+    "_name": "IMMOLATION",
+    "_cost": "2",
+    "_rng": "8",
+    "_pow": "12",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "Immolation causes fire damage. On a critical hit, the model hit suffers the Fire continuous effect."
+}, {
+    "_id": {
+        "$oid": "575c3a1abd966f70761f1361"
+    },
+    "_name": "IMPENDING DOOM",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "",
+    "_aoe": "*",
+    "_duration": null,
+    "_off": "NO",
+    "__text": "Enemy models within 5˝ of the spellcaster are pushed 5˝ directly\ntoward it in the order you choose."
+}, {
+    "_id": {
+        "$oid": "57c99055c2ef16772d9d2563"
+    },
+    "_name": "IMPLACABILITY",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "CTRL",
+    "_duration": "RND",
+    "_off": "NO",
+    "__text": "While in the spellcaster's control range, models in its battlegroup cannot become knocked down, cannot be placed or pushed, and cannot be moved by a slam. Implacability lasts for one round."
+}, {
+    "_id": {
+        "$oid": "5756ddedbd966f1469dba249"
+    },
+    "_name": "INCITE",
+    "_cost": "4",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "TURN",
+    "_off": "NO",
+    "__text": "Friendly Faction models gain +2 to attack and damage rolls against enemy models while the enemy models are in the spellcaster's command range. Incite lasts for one turn."
+}, {
+    "_id": {
+        "$oid": "5757debcc2ef165afaec23a9"
+    },
+    "_name": "INFERNAL MACHINE",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target warjack in the spellcaster’s battlegroup gains Murderous and +2 SPD. (A model with Murderous gains an additional die on melee attack rolls against warrior models.)"
+}, {
+    "_id": {
+        "$oid": "5759c75ec2ef1652b428cfdc"
+    },
+    "_name": "INFLUENCE",
+    "_cost": "2",
+    "_rng": "10",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "Take control of target enemy non-warcaster, non-warlock warrior model. The model immediately makes one basic attack, then Influence expires. A model can be affected by Influence only once per turn."
+}, {
+    "_id": {
+        "$oid": "575d4cc0bd966f707622f83c"
+    },
+    "_name": "INHOSPITABLE GROUND",
+    "_cost": "3",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "CTRL",
+    "_duration": "RND",
+    "_off": "NO",
+    "__text": "While in the spellcaster’s control range. enemy models treat open terrain as rough terrain. Inhospitable Ground lasts for one round."
+}, {
+    "_id": {
+        "$oid": "5757dcfcbd966f5eba4645c1"
+    },
+    "_name": "INVIOLABLE RESOLVE",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target friendly Faction model/unit gains +2 ARM and cannot be moved by a push or a slam. Models are not affected while out of formation."
+}, {
+    "_id": {
+        "$oid": "57567db7c2ef1612e2bc376d"
+    },
+    "_name": "INVOCATION OF BLOOD",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "NO",
+    "__text": "If Bethayne is flesh melded with Belphagor when this spell is cast,\nBelphagor gains +2 SPD, STR, DEF, and ARM for one round. Otherwise, Bethayne immediately makes a full advance toward Belphagor. Invocation of Blood can be cast only once per activation."
+}, {
+    "_id": {
+        "$oid": "5756d0d7c2ef1612e2beb692"
+    },
+    "_name": "IRON AGGRESSION",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target friendly Faction warjack can run, charge, or make slam or trample power attacks without spending focus and gains boosted melee attack rolls."
+}, {
+    "_id": {
+        "$oid": "575486c9bd966f1469c78ecb"
+    },
+    "_name": "IRON FLESH",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target friendly Faction warrior model/unit gains +2 ARM and does not suffer blast damage. Models are not affected while out of formation."
+}, {
+    "_id": {
+        "$oid": "57592705c2ef1652b4239153"
+    },
+    "_name": "IRRESISTIBLE FORCE",
+    "_cost": "1",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "TURN",
+    "_off": "NO",
+    "__text": "The spellcaster gains Bulldoze. Irresistible Force lasts for one turn. (When a model with Bulldoze is B2B with an enemy model during its Normal Movement, it can push that model up to 2˝ directly away from it. A model can be pushed by Bulldoze only once per activation. Bulldoze has no effect when a model makes a trample power attack.)"
+}, {
+    "_id": {
+        "$oid": "5756ca94bd966f1469dac014"
+    },
+    "_name": "JACKHAMMER",
+    "_cost": "1",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "NO",
+    "__text": "Target model in the spellcaster’s battlegroup immediately makes one basic melee attack."
+}, {
+    "_id": {
+        "$oid": "5757f579c2ef165afaeca826"
+    },
+    "_name": "JUMPSTART",
+    "_cost": "1",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "CTRL",
+    "_duration": "-",
+    "_off": "NO",
+    "__text": "Models in the spellcaster’s battlegroup that are currently in its control range stand up and are no longer stationary. Affected models can turn to face any direction. Models that were knocked down this turn are not affected by Jumpstart."
+}, {
+    "_id": {
+        "$oid": "57627a3cc2ef1618765054d5"
+    },
+    "_name": "KILLING GROUND",
+    "_cost": "3",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "CTRL",
+    "_duration": "TURN",
+    "_off": "NO",
+    "__text": "Friendly Faction models beginning a charge in the spellcaster’s control range gain Pathfinder . Warbeasts in the spellcaster’s battlegroup beginning their activations in its control range can charge or make slam power attacks against enemy models without being forced. Killing Ground lasts for one turn."
+}, {
+    "_id": {
+        "$oid": "57627a88bd966f19be91a37e"
+    },
+    "_name": "KILLING GROUND (DRANG)",
+    "_cost": "3",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "CTRL",
+    "_duration": "TURN",
+    "_off": "NO",
+    "__text": "Friendly Faction models beginning a charge in the spellcaster’s\ncontrol range gain Pathfinder . Warbeasts in the spellcaster’s\nbattlegroup beginning their activations in its control range can charge\nor make slam power attacks against enemy models without being\nforced. Killing Ground lasts for one turn."
+}, {
+    "_id": {
+        "$oid": "57568421bd966f1469d898ae"
+    },
+    "_name": "LAMENTATION",
+    "_cost": "3",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "CTRL",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "When an enemy models casts a spell while in the spellcaster's control range, double the COST of the spell. Additionally, enemy models must pay double to upkeep spells on models/units in the spellcaster's control area."
+}, {
+    "_id": {
+        "$oid": "575f2941bd966f2233c3fd9e"
+    },
+    "_name": "LAST STAND",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "",
+    "_aoe": null,
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target friendly Faction model/unit gains an additional die on its melee attack and melee damage rolls. If an affected model makes a melee attack, it is destroyed at the end of the turn."
+}, {
+    "_id": {
+        "$oid": "5756de0fbd966f1469dba862"
+    },
+    "_name": "LEASH",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Immediately after the spellcaster ends its Normal Movement, target warbeast in its battlegroup can advance up to 3\" directly toward it."
+}, {
+    "_id": {
+        "$oid": "576165f9c2ef16218938c8b3"
+    },
+    "_name": "LIGHTNING FISTS",
+    "_cost": "1",
+    "_rng": "SELF",
+    "_pow": "",
+    "_aoe": null,
+    "_duration": "RND",
+    "_off": "NO",
+    "__text": "The spellcaster gains Immunity: Electricity and its melee weapons gain Electro Leap. Lightning Fists lasts for one round. (When a model is hit by a basic attack made with a weapon with Electro Leap, you can have lightning arc to the nearest model within 4\" of the model hit, ignoring the attacking model. The model the lightning arcs to suffers an unboostable POW 10 electrical damage roll. Lightning arc damage rolls are not considered to have been caused by an attack.)"
+}, {
+    "_id": {
+        "$oid": "5756c5c7bd966f1469da8ad8"
+    },
+    "_name": "LIGHTNING SHROUD",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target warjack in the spellcaster’s battlegroup gains +2 STR and Immunity: Electricity, and its melee weapons gain Electro Leap. (When a model is hit by a basic attack made with a weapon with Electro Leap, you can have lightning arc to the nearest model within 4˝ of  the model hit, ignoring the attacking model. The model the lightning arcs to suffers an unboostable POW 10 electrical damage roll. Lightning arc damage rolls are not considered to have been caused by an attack. Resolve lightning arc damage rolls simultaneously with the damage resulting from the attack that caused the leap.)"
+}, {
+    "_id": {
+        "$oid": "5756cdafbd966f1469dae288"
+    },
+    "_name": "LIGHTNING STORM",
+    "_cost": "3",
+    "_rng": "8",
+    "_pow": "10",
+    "_aoe": "3",
+    "_duration": "RND",
+    "_off": "YES",
+    "__text": "Models hit suffer a POW 10 electrical damage roll. This spell’s AOE is a hazard that remains in play for one round. Models entering or ending their activations in the AOE suffer a POW 10 electrical damage roll."
+}, {
+    "_id": {
+        "$oid": "5759b232bd966f565854d408"
+    },
+    "_name": "LIGHTNING STRIKE",
+    "_cost": "1",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "TURN",
+    "_off": "NO",
+    "__text": "The spellcaster gains Sprint. Lightning Strike lasts for one turn. (At the end of an activation in which it destroyed or removed from play one or more enemy models with melee attacks, a model with Sprint can immediately make a full advance, then its activation ends.)"
+}, {
+    "_id": {
+        "$oid": "57596b40c2ef1652b425890d"
+    },
+    "_name": "LIGHTNING TENDRILS",
+    "_cost": "3",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target friendly Faction model/unit gains Immunity: Electricity. Affected models’ melee weapons become RNG 2 and gain Electro Leap. Models are not affected while out of formation. (When a model is hit by a basic attack made with a weapon with Electro Leap, you can have lightning arc to the nearest model within 4˝ of the model hit, ignoring the attacking model. The model the lightning arcs to suffers an unboostable POW 10 electrical damage roll . Lightning arc damage rolls are not considered to have been caused by an attack.\nResolve lightning arc damage rolls simultaneously with the damage resulting from the attack that caused the leap.)"
+}, {
+    "_id": {
+        "$oid": "5757e1bdbd966f5eba4656e0"
+    },
+    "_name": "LOCK THE TARGET",
+    "_cost": "2",
+    "_rng": "10",
+    "_pow": "10",
+    "_aoe": "-",
+    "_duration": "*",
+    "_off": "YES",
+    "__text": "A model damaged by Lock the Target cannot run, charge, make slam or trample power attacks, or be placed for one round."
+}, {
+    "_id": {
+        "$oid": "5756cca7bd966f1469dad69d"
+    },
+    "_name": "LOCOMOTION",
+    "_cost": "*",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "NO",
+    "__text": "The spellcaster spends up to 3 focus points to cast Locomotion. Target warjack in the spellcaster’s battlegroup immediately advances up to 1˝ for each focus point spent. A warjack can be targeted by Locomotion only once per activation."
+}, {
+    "_id": {
+        "$oid": "575ddba0c2ef166e0a39e0a8"
+    },
+    "_name": "LUCKY SHOT",
+    "_cost": "1",
+    "_rng": "6",
+    "_pow": "",
+    "_aoe": null,
+    "_duration": "TURN",
+    "_off": "NO",
+    "__text": "Target friendly Faction model gains +2 to AOE ranged attack rolls.\nWhen the affected model’s AOE ranged attacks deviate, you can reroll\nthe direction and/or distance of deviation. Each roll can be rerolled\nonly once as a result of Lucky Shot. Lucky Shot lasts for one turn."
+}, {
+    "_id": {
+        "$oid": "575ebfc0bd966f70762aa257"
+    },
+    "_name": "LURKER",
+    "_cost": "1",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "TURN",
+    "_off": "NO",
+    "__text": "Target friendly Faction model gains Bushwhack. Lurker last for one turn. (During its activation, a model with Bushwhack can make its Combat Action before its Normal Movement. If it does, it must make a full advance as its Normal Movement that activation.)"
+}, {
+    "_id": {
+        "$oid": "5756d201c2ef1612e2bec6e7"
+    },
+    "_name": "MAGE SIGHT",
+    "_cost": "2",
+    "_rng": "CTRL",
+    "_pow": "-",
+    "_aoe": "5",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Place a 5˝ AOE completely within the spellcaster’s control range. While a model is within the AOE, models in the spellcaster’s battlegroup ignore forests and cloud effects when drawing LOS to it and ignore Stealth when attacking it."
+}, {
+    "_id": {
+        "$oid": "57633146c2ef1618765619f9"
+    },
+    "_name": "MAGE SIGHT",
+    "_cost": "2",
+    "_rng": "CTRL",
+    "_pow": "-",
+    "_aoe": "5",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Place a 5\" AOE completely within the spellcaster's control range. While a model is within the AOE, models in the spellcaster's battlegroup ignore forests and cloud effects when drawing LOS to it and ignore Stealth when attacking it."
+}, {
+    "_id": {
+        "$oid": "575d6cf2bd966f70762369db"
+    },
+    "_name": "MAGIC BULLET",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "",
+    "_aoe": null,
+    "_duration": "TURN",
+    "_off": "NO",
+    "__text": "If target friendly Faction model’s next basic ranged attack directly hits, after resolving the attack choose another model within 4\" of the model hit. The chosen model suffers an unboostable POW 12 magical damage roll. The point of origin for this damage is the model hit.\nThis damage is not considered to have been caused by an attack. After this damage roll is resolved, Magic Bullet expires. Magic Bullet lasts for one turn."
+}, {
+    "_id": {
+        "$oid": "5756c5f5bd966f1469da8ca9"
+    },
+    "_name": "MAGNETIC FIELD",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "CTRL",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "While in the spellcaster’s control range, models in its battlegroup cannot become knocked down, cannot be placed or pushed, and cannot be moved by a slam."
+}, {
+    "_id": {
+        "$oid": "5759aac1bd966f5658549c3e"
+    },
+    "_name": "MAGNETIC HOLD",
+    "_cost": "3",
+    "_rng": "8",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "YES",
+    "__text": "Target model/unit suffers -2 SPD and DEF and cannot charge or make slam or trample power attacks. Friendly Faction construct models charging an affected model gain +2'' movement."
+}, {
+    "_id": {
+        "$oid": "5757f480c2ef165afaec9c8d"
+    },
+    "_name": "MALEDICTION",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "*",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "While within 2˝ of the spellcaster, enemy models suffer –2 DEF and ARM."
+}, {
+    "_id": {
+        "$oid": "5756de28c2ef1612e2bf4ebe"
+    },
+    "_name": "MALICE",
+    "_cost": "2",
+    "_rng": "10",
+    "_pow": "10",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "Add +1 to the damage roll for each fury point on the target model."
+}, {
+    "_id": {
+        "$oid": "5756ba4fbd966f1469da1230"
+    },
+    "_name": "MANIFEST DESTINY",
+    "_cost": "3",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "CTRL",
+    "_duration": "TURN",
+    "_off": "NO",
+    "__text": "While in the spellcaster's control range, models in its battlegroup gain an additional die on melee attack and melee damage rolls. Discard the lowest die of each roll. Manifest Destiny lasts for one turn."
+}, {
+    "_id": {
+        "$oid": "575fbe96c2ef1621892fec95"
+    },
+    "_name": "MANIFEST VOID",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "CTRL",
+    "_duration": "RND",
+    "_off": "NO",
+    "__text": "When an enemy model cast a spell while in the spellcaster's control range, increase the spell's COST by 1. While in the spellcaster's control range, living non-Faction models gain Soulless."
+}, {
+    "_id": {
+        "$oid": "57632bfabd966f19be96ce63"
+    },
+    "_name": "MANTRAP",
+    "_cost": "3",
+    "_rng": "10",
+    "_pow": "12",
+    "_aoe": "4",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "Warrior models hit become knocked down."
+}, {
+    "_id": {
+        "$oid": "5756f4e2bd966f1469dca104"
+    },
+    "_name": "MARKED FOR DEATH",
+    "_cost": "2",
+    "_rng": "8",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "YES",
+    "__text": "Target model/unit suffers –2 DEF, loses Incorporeal and Stealth, and cannot gain Incorporeal or Stealth while affected by Marked for Death."
+}, {
+    "_id": {
+        "$oid": "575d69f0bd966f70762360e9"
+    },
+    "_name": "MARTIAL PARAGON",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "The spellcaster gains an additional die on melee attack rolls and Parry *ICON*"
+}, {
+    "_id": {
+        "$oid": "5758305ec2ef165afaeeca39"
+    },
+    "_name": "MASSACRE",
+    "_cost": "1",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "TURN",
+    "_off": "NO",
+    "__text": "The spellcaster gains Overtake. Massacre lasts for one turn. (When a model with Overtake destroys one or more enemy models with a basic melee attack during its Combat Action, after the attack is resolved it can immediately advance up to 1\".)"
+}, {
+    "_id": {
+        "$oid": "5756f83dc2ef1612e2c062bf"
+    },
+    "_name": "MIRAGE",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target friendly Faction model/unit gains Apparition. (During your Control Phase, place models with Apparition anywhere completely within 2\" of their current locations.)"
+}, {
+    "_id": {
+        "$oid": "575d712bbd966f707623788f"
+    },
+    "_name": "MISFORTUNE",
+    "_cost": "3",
+    "_rng": "10",
+    "_pow": "12",
+    "_aoe": null,
+    "_duration": null,
+    "_off": "YES",
+    "__text": "A model damaged by Misfortune becomes knocked down"
+}, {
+    "_id": {
+        "$oid": "576007a1c2ef162189318f31"
+    },
+    "_name": "MIST WALKER",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "RND",
+    "_off": "NO",
+    "__text": "Target model in the spellcaster’s battlegroup gains Pathfinder and Prowl for one round. (While a model with Prowl has concealment, it gains Stealth .)"
+}, {
+    "_id": {
+        "$oid": "5756a8abbd966f1469d97970"
+    },
+    "_name": "MOBILITY",
+    "_cost": "3",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "CTRL",
+    "_duration": "TURN",
+    "_off": "NO",
+    "__text": "Models in the spellcaster’s battlegroup currently in its control range gain +2 SPD and Pathfinder  for one turn."
+}, {
+    "_id": {
+        "$oid": "5757e011c2ef165afaec2887"
+    },
+    "_name": "MOCKERY OF LIFE",
+    "_cost": "2",
+    "_rng": "CTRL",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "NO",
+    "__text": "Return one destroyed undead Grunt to a friendly Faction unit with one unmarked damage box. Place the returned Grunt in the spellcaster’s control range, in formation, and completely within 3\" of another model in its unit. The Grunt must forfeit its Combat Action the turn it is returned to play."
+}, {
+    "_id": {
+        "$oid": "575e5dc3bd966f707628b086"
+    },
+    "_name": "MOLTEN METAL",
+    "_cost": "2",
+    "_rng": "10",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "Target warjack suffer 1 point of fire damage to each column on its damage grid."
+}, {
+    "_id": {
+        "$oid": "5756846cbd966f1469d899b9"
+    },
+    "_name": "MORTALITY",
+    "_cost": "3",
+    "_rng": "10",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "RND",
+    "_off": "YES",
+    "__text": "Target model/unit suffers -2 DEF and ARM, loses Tough, and cannot have damage removed from it. Mortality lasts for one round."
+}, {
+    "_id": {
+        "$oid": "57712f1bbd966f44fab2d42a"
+    },
+    "_name": "MOSH PIT",
+    "_cost": "3",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "CTRL",
+    "_duration": "TURN",
+    "_off": "NO",
+    "__text": "While in the spellcaster's control range, fiendly Faction models gain Knockdown on their melee weapons. Mosh Pit lasts for one turn. (When a model is hit with an attack by a weapon with Knockdown, it becomes knocked down.)"
+}, {
+    "_id": {
+        "$oid": "576920d0c2ef161e70bd5108"
+    },
+    "_name": "MOVING SHADOWS",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "CTRL",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "While in the spellcaster’s control range, models in its battlegroup gain Run & Gun. (At the end of its activation, if it destroyed one or more enemy models with ranged attacks that activation, a model with Run & Gun can make a full advance.)"
+}, {
+    "_id": {
+        "$oid": "575d5c6dbd966f7076232e5b"
+    },
+    "_name": "MURDER OF CROWS",
+    "_cost": "3",
+    "_rng": "CTRL",
+    "_pow": "*",
+    "_aoe": "5",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Place a 5\" AOE anywhere completely Within the spellcaster’s control range. This AOE is a cloud effect and hazard. A model that is not part of the spellcaster’s battlegroup that enters or ends its activation in the AOE suffers an unboostable POW 8 damage roll."
+}, {
+    "_id": {
+        "$oid": "5756b836bd966f1469d9ff7d"
+    },
+    "_name": "MUTAGENESIS",
+    "_cost": "3",
+    "_rng": "8",
+    "_pow": "12",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "Target model boxed by Mutagenesis is removed from play. When Mutagenesis boxes an enemy model and the spellcaster was the spell's point of origin, the spellcaster can replace the boxed model when it is removed from play. The spellcaster cannot advance this activation after replacing another model as a result of Mutagenesis. Mutagenesis can be cast only once per activation."
+}, {
+    "_id": {
+        "$oid": "57584e2dc2ef165afaf00557"
+    },
+    "_name": "MUZZLE",
+    "_cost": "2",
+    "_rng": "10",
+    "_pow": "12",
+    "_aoe": "-",
+    "_duration": "*",
+    "_off": "YES",
+    "__text": "An enemy warbeast damaged by Muzzle cannot advance toward the spellcaster for one round."
+}, {
+    "_id": {
+        "$oid": "5757e091c2ef165afaec2a41"
+    },
+    "_name": "MYSTIC WARDS",
+    "_cost": "2",
+    "_rng": "CTRL",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target a model in the spellcaster’s battlegroup that is in its control range. Enemy animi and enemy upkeep spells on that model immediately expire. While within 5˝ of target model, enemy models cannot cast, channel, or upkeep spells."
+}, {
+    "_id": {
+        "$oid": "575e5c0ec2ef166e0a3c5213"
+    },
+    "_name": "NONOKRION BRAND",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target friendly Faction model/unit ignores intervening models when making attacks. The weapons of affected models gain Damage Type: Magical ."
+}, {
+    "_id": {
+        "$oid": "575486f7bd966f1469c79077"
+    },
+    "_name": "OBLITERATION",
+    "_cost": "4",
+    "_rng": "10",
+    "_pow": "15",
+    "_aoe": "5",
+    "_duration": null,
+    "_off": "YES",
+    "__text": "The force of this attack blasts apart the earth itself."
+}, {
+    "_id": {
+        "$oid": "57627ac6bd966f19be91a490"
+    },
+    "_name": "OBLITERATION (DRANG)",
+    "_cost": "4",
+    "_rng": "10",
+    "_pow": "15",
+    "_aoe": "5",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "The force of this attack blasts apart the earth itself."
+}, {
+    "_id": {
+        "$oid": "575d3bf2bd966f707622bcdc"
+    },
+    "_name": "OCCULT WHISPERS",
+    "_cost": "3",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "TURN",
+    "_off": "NO",
+    "__text": "While in the spellcaster’s control range, friendly Faction models gain an additional die on their magic attack rolls. Occult Whispers lasts for one turn. "
+}, {
+    "_id": {
+        "$oid": "5756e7f5c2ef1612e2bfb4cf"
+    },
+    "_name": "OCCULTATION",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target friendly Faction model/unit gains Stealth. Models are not affected while out of formation."
+}, {
+    "_id": {
+        "$oid": "5756d16cc2ef1612e2bebce2"
+    },
+    "_name": "ONSLAUGHT",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "CTRL",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "The spellcaster and friendly Faction models beginning their activations in its control range gain Relentless Charge for one turn. (While advancing as part of a charge, a model with Relentless Charge gains Pathfinder.)"
+}, {
+    "_id": {
+        "$oid": "576818a6c2ef161e70b8a4b1"
+    },
+    "_name": "OPEN FIRE",
+    "_cost": "2",
+    "_rng": "CTRL",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "NO",
+    "__text": "Target warjack in this model's battlegroup that is in its control range can immediately make one basic melee or ranged attack. A model can be targeted by Open Fire only once per turn."
+}, {
+    "_id": {
+        "$oid": "57582f78bd966f5eba490850"
+    },
+    "_name": "ORNERY",
+    "_cost": "1",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "RND",
+    "_off": "NO",
+    "__text": "The spellcaster gains Retaliatory Strike. Ornery lasts for one round and expires after the spellcaster makes a Retaliatory Strike attack. (If a model with Retaliatory Strike is hit by a melee attack made by an enemy model during your opponent's turn, after that attack is resolved the model with Retaliatory Strike can immediately make one basic melee attack against that model.)"
+}, {
+    "_id": {
+        "$oid": "583609b1f36d28568d323e7c"
+    },
+    "_name": "ORNERY",
+    "_cost": "12",
+    "_rng": "8",
+    "_pow": "15",
+    "_aoe": "5",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "The spellcaster gains Retaliatory Strike. Ornery lasts for one round and expires after the spellcaster makes a Retaliatory Strike attack. (If a model with Retaliatory Strike is hit by a melee attack made by an enemy model during your opponent's turn, after that attack is resolved the model with Retaliatory Strike can immediately make one basic melee attack against that model.)"
+}, {
+    "_id": {
+        "$oid": "5757f5acbd966f5eba46cc76"
+    },
+    "_name": "OVERRUN",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "TURN",
+    "_off": "NO",
+    "__text": "When target model in the spellcaster’s battlegroup destroys one or more enemy models with an attack, immediately after the attack is resolved one model in the spellcaster’s battlegroup that is in its control range can make a full advance, then Overrun expires. A model can advance only once per turn as a result of Overrun. Overrun lasts for one turn."
+}, {
+    "_id": {
+        "$oid": "57567fa2bd966f1469d887a4"
+    },
+    "_name": "PARASITE",
+    "_cost": "3",
+    "_rng": "8",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "YES",
+    "__text": "Target model/unit suffers –3 ARM and the spellcaster gains +1 ARM."
+}, {
+    "_id": {
+        "$oid": "575d87d3c2ef166e0a381992"
+    },
+    "_name": "PENITENCE",
+    "_cost": "3",
+    "_rng": "8",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target friendly Faction model/unit. When one or more affected models are damaged by an enemy attack, immediately after the attack is resolved the attacker suffers 1 point of fire damage ."
+}, {
+    "_id": {
+        "$oid": "575d7340bd966f7076238932"
+    },
+    "_name": "PERDITION",
+    "_cost": "2",
+    "_rng": "10",
+    "_pow": "10",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "When an enemy model is damaged by Perdition, immediately after the attack is resolved one warjack in the spellcaster’s battlegroup that is currently in its control range can make a full advance toward the nearest enemy model. A model can advance as a result of Perdition only once per turn."
+}, {
+    "_id": {
+        "$oid": "575d530cbd966f7076230b9f"
+    },
+    "_name": "PERSEVERANCE",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target friendly Faction model/unit gains +2 ARM, cannot be pushed, and cannot be moved by a slam or throw. Models are not affected while out of formation."
+}, {
+    "_id": {
+        "$oid": "575fc094bd966f2233c67007"
+    },
+    "_name": "PETRIFY",
+    "_cost": "3",
+    "_rng": "10",
+    "_pow": "13",
+    "_aoe": "3",
+    "_duration": "RND",
+    "_off": "YES",
+    "__text": "Warrior models hit by Petrify become stationary for one round."
+}, {
+    "_id": {
+        "$oid": "575d4b83c2ef166e0a3733fd"
+    },
+    "_name": "PHANTASM",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "When target friendly Faction model/unit is targeted by a ranged attack, the attack suffers -5 RNG. Models are not affected while out of formation."
+}, {
+    "_id": {
+        "$oid": "5757ddeec2ef165afaec211b"
+    },
+    "_name": "PHANTOM HUNTER",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "TURN",
+    "_off": "NO",
+    "__text": "Target model in the spellcaster’s battlegroup ignores LOS when making charges and attacks. That model ignores concealment, cover, and Stealth when resolving attacks. Phantom Hunter lasts for one turn."
+}, {
+    "_id": {
+        "$oid": "575fe5a6bd966f2233c71199"
+    },
+    "_name": "PIG FARM",
+    "_cost": "1",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "TURN",
+    "_off": "NO",
+    "__text": "The spellcaster gains an additional die on melee damage rolls against living models and Snacking. Pig Farm lasts for one turn. (When a model with Snacking a living model with a melee attack, it can choose to remove the boxed model from play. When it does, the model with Snacking can remove d3 damage points.)"
+}, {
+    "_id": {
+        "$oid": "576168fac2ef16218938e66b"
+    },
+    "_name": "PIGPEN",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "*",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "While within 3˝ of the spellcaster, enemy models treat open terrain as rough terrain."
+}, {
+    "_id": {
+        "$oid": "575a63f7c2ef166e0a2a8a65"
+    },
+    "_name": "PILLAR OF SALT",
+    "_cost": "2",
+    "_rng": "CTRL",
+    "_pow": "-",
+    "_aoe": "3",
+    "_duration": "RND",
+    "_off": "NO",
+    "__text": "Place a 3˝ AOE anywhere completely within the spellcaster’s control range where it does not overlap a model’s base. The AOE is an obstruction that blocks LOS and provides cover. The AOE can be targeted and charged as if  it were a huge-based model. The AOE has DEF 5 and ARM 20, is automatically hit by melee attacks, and is removed from play if  it suffers 1 or more damage points. The AOE remains in play for one round."
+}, {
+    "_id": {
+        "$oid": "5756f85bc2ef1612e2c063db"
+    },
+    "_name": "PIN CUSHION",
+    "_cost": "2",
+    "_rng": "10",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "YES",
+    "__text": "Friendly Faction models gain an additional die on ranged attack and ranged damage rolls against target model/unit. Discard the lowest die in each roll."
+}, {
+    "_id": {
+        "$oid": "5756ce6bbd966f1469daea9b"
+    },
+    "_name": "POLARITY SHIELD",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target friendly Faction model/unit gains Polarity Field. Models are not affected while out of  formation. (A model with Polarity Field cannot be charged or slam power attacked by a model beginning the charge or slam in its front arc.)"
+}, {
+    "_id": {
+        "$oid": "5756d028c2ef1612e2beaf23"
+    },
+    "_name": "POSITIVE CHARGE",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "TURN",
+    "_off": "NO",
+    "__text": "Target friendly Faction warjack gains +2 to melee attack and melee damage rolls. While within 3˝ of the affected warjack, friendly Faction models gain +2 on melee attack and melee damage rolls. Positive Charge lasts for one turn."
+}, {
+    "_id": {
+        "$oid": "575d41ddc2ef166e0a37130d"
+    },
+    "_name": "POWDER KEG",
+    "_cost": "3",
+    "_rng": "8",
+    "_pow": "14",
+    "_aoe": "5",
+    "_duration": "*",
+    "_off": "YES",
+    "__text": "On a critical hit, models hit lose their initial attacks and cannot make power attacks or special attacks for one round."
+}, {
+    "_id": {
+        "$oid": "575ebbe1c2ef166e0a3e2dbd"
+    },
+    "_name": "PRESCIENCE",
+    "_cost": "1",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "TURN",
+    "_off": "NO",
+    "__text": "Target friendly Faction model gains Future Sight. Prescience last for one turn."
+}, {
+    "_id": {
+        "$oid": "575922bdbd966f565850131d"
+    },
+    "_name": "PRIMAL",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "*",
+    "_off": "NO",
+    "__text": "Target friendly living Faction warbeast gains +2 STR and MAT for one round and automatically frenzies during your next Control Phase."
+}, {
+    "_id": {
+        "$oid": "57596963bd966f56585210ca"
+    },
+    "_name": "PRIMAL SHOCK",
+    "_cost": "2",
+    "_rng": "CTRL",
+    "_pow": "*",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "Choose a friendly Faction warbeast in the spellcaster’s control range. Target a model within 8˝ of the chosen warbeast and make a magic attack against it. The chosen warbeast is the attack’s point of origin. If the enemy model is hit, it suffers a damage roll with a POW equal to the warbeast’s base STR."
+}, {
+    "_id": {
+        "$oid": "575d57a4bd966f7076231eb4"
+    },
+    "_name": "PRIMED",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target friendly Faction warrior model/unit gains +2 to melee attack and melee damage rolls but suffers -2 ARM. If an affected model is disabled by an enemy attack, center a 3\" AOE on it and remove that model from play. Models in the AOE are hit and suffer an unboostable POW 14 blast damage roll."
+}, {
+    "_id": {
+        "$oid": "575dcdb7c2ef166e0a39a16b"
+    },
+    "_name": "PROSTRATION",
+    "_cost": "2",
+    "_rng": "8",
+    "_pow": "12",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "Target model hit becomes knocked down."
+}, {
+    "_id": {
+        "$oid": "5756f510bd966f1469dca2be"
+    },
+    "_name": "PSYCHIC VAMPIRE",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "CTRL",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "When an enemy model declares it is casting a spell while in this model's control range, the enemy spellcaster immediately suffers 1 damage point and this model can remove 1 damage point. If the enemy spellcaster is destroyed as a result of this damage, the spell does not take effect."
+}, {
+    "_id": {
+        "$oid": "57557797bd966f1469ce952b"
+    },
+    "_name": "PSYCHO SURGERY",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "CTRL",
+    "_duration": "-",
+    "_off": "NO",
+    "__text": "Each model in the spellcaster's battlegroup currently in its control range can immediately remove d3 + 1 damage points. This spell can be cast only once per activation."
+}, {
+    "_id": {
+        "$oid": "575a5d6cbd966f70761669e0"
+    },
+    "_name": "PUISSANCE",
+    "_cost": "1",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "TURN",
+    "_off": "NO",
+    "__text": "Target friendly Faction warbeast’s melee weapons gain Beat Back. Puissance lasts for one turn. (Immediately after a basic attack with a weapon with Beat Back is resolved during this model’s Combat Action, the enemy model hit can be pushed 1˝ directly away from the attacking model. After the enemy model is pushed, the attacking model can advance up to 1˝ directly toward it.)"
+}, {
+    "_id": {
+        "$oid": "5769a0abbd966f1ef1c7d825"
+    },
+    "_name": "PULVERIZER",
+    "_cost": "3",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target friendly model gains +2 STR and its melee weapons gain Beat Back. (Immediately after a basic attack with a weapon with Beat Back is resolved during this model's Combat Action, the enemy model hit can be pushed 1\" directly away from the attacking model. After the enemy model is pushed, the attacking model can advance up to 1\" directly toward it\".)"
+}, {
+    "_id": {
+        "$oid": "575d74fcbd966f7076238f13"
+    },
+    "_name": "PURIFICATION",
+    "_cost": "4",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "CTRL",
+    "_duration": "-",
+    "_off": "NO",
+    "__text": "Continuous effects, animi, and upkeep spells in the spellcaster’s control range immediately expire."
+}, {
+    "_id": {
+        "$oid": "57567fc6c2ef1612e2bc451d"
+    },
+    "_name": "PURSUIT",
+    "_cost": "2",
+    "_rng": "8",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "YES",
+    "__text": "If target enemy model/unit advances during its activation, one model in the spellcaster's battlegroup that is in its control range can immediately make a full advance."
+}, {
+    "_id": {
+        "$oid": "5762690abd966f19be915acb"
+    },
+    "_name": "QUAGMIRE",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "While B2B with target friendly Faction model/unit, enemy models suffer –2 DEF and cannot advance except to change facing."
+}, {
+    "_id": {
+        "$oid": "5757dee9c2ef165afaec244b"
+    },
+    "_name": "QUICKEN",
+    "_cost": "3",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target friendly Faction model/unit gains +2 SPD and DEF against ranged and magic attack rolls."
+}, {
+    "_id": {
+        "$oid": "5764273ebd966f4e9e18eff3"
+    },
+    "_name": "QUICKNESS",
+    "_cost": "*",
+    "_rng": "SELF",
+    "_pow": "",
+    "_aoe": null,
+    "_duration": null,
+    "_off": "NO",
+    "__text": "The spellcaster can spend up to 3 fury points to advance up to 2\" immediately for each fury point spent. Quickness can be cast only once per activation."
+}, {
+    "_id": {
+        "$oid": "575835e2bd966f5eba494d9c"
+    },
+    "_name": "RADIANCE OF MORROW",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "",
+    "_aoe": "CTRL",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "While in the spellcaster's control range during their activations, friendly non-warcasters Morrowan models can spend focus points on this model to boost one attack or damage roll for each focus point spend."
+}, {
+    "_id": {
+        "$oid": "575d3bc7bd966f707622bc6c"
+    },
+    "_name": "RAGE",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "",
+    "_aoe": null,
+    "_duration": "TURN",
+    "_off": "NO",
+    "__text": "Target friendly Faction warbeast gains +3 STR. Rage lasts for one turn.\n"
+}, {
+    "_id": {
+        "$oid": "575d8289bd966f707623c216"
+    },
+    "_name": "RAISE THE DEAD",
+    "_cost": "2",
+    "_rng": "CTRL",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "NO",
+    "__text": "Return one destroyed Grunt to a friendly Faction unit with one unmarked damage box. Place the returned Grunt in the spellcaster’s control range, in formation, and completely within 3˝ of another model in its unit. The Grunt must forfeit its Combat Action the turn it is returned to play."
+}, {
+    "_id": {
+        "$oid": "575d3f51c2ef166e0a370252"
+    },
+    "_name": "RAMPAGER",
+    "_cost": "3",
+    "_rng": "10",
+    "_pow": "",
+    "_aoe": null,
+    "_duration": null,
+    "_off": "YES",
+    "__text": "Take control of target enemy warbeast. You can make one full\nadvance with the can then make one basic attack with\nit, then Rampager expires. The enemy warbeast cannot be targeted\nby free strikes movement. While the warbeast is affected\nby Rampager, it cannot be forced and you cannot use its animus.\nRampager only once per activation. A warbeast can be\naffected by Rampager only once per turn."
+}, {
+    "_id": {
+        "$oid": "5757f859bd966f5eba46e4e1"
+    },
+    "_name": "RAPID GROWTH",
+    "_cost": "2",
+    "_rng": "CTRL",
+    "_pow": "-",
+    "_aoe": "4",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Place the AOE completely within the spellcaster’s control range. The AOE is a forest that remains in play as long as its upkeep is paid."
+}, {
+    "_id": {
+        "$oid": "5756ec75bd966f1469dc4b04"
+    },
+    "_name": "RAPPORT",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target warbeast in the spellcaster's battlegroup can use the spellcaster's current MAT and RAT in place of its own. When checking to see if the affected warbeast is in its controller's control range, double the range."
+}, {
+    "_id": {
+        "$oid": "57548873bd966f1469c79d22"
+    },
+    "_name": "RAVAGER",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "TURN",
+    "_off": "NO",
+    "__text": "Target warjack in the spellcaster’s battlegroup gains Berserk for one turn. While affected by Ravager, a model cannot make Chain Attacks. (When a model with Berserk destroys one or more models with a melee attack during its Combat Action, immediately after the attack is resolved it must make one additional melee attack against another model in its melee range.)"
+}, {
+    "_id": {
+        "$oid": "57570577c2ef165afae4d59f"
+    },
+    "_name": "RAZOR WALL",
+    "_cost": "2",
+    "_rng": "CTRL",
+    "_pow": "",
+    "_aoe": "WALL",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Place the wall template anywhere completely within the spellcaster's control range where it does not touch a model's base, an obstruction, or an obstacle. When a model enters or ends its activation in the wall template, it suffers 1 damage point."
+}, {
+    "_id": {
+        "$oid": "575490aac2ef1612e2ab819d"
+    },
+    "_name": "RAZOR WIND",
+    "_cost": "2",
+    "_rng": "10",
+    "_pow": "12",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "A blade of wind slices through the target model."
+}, {
+    "_id": {
+        "$oid": "5756d041c2ef1612e2beb034"
+    },
+    "_name": "REBUKE",
+    "_cost": "2",
+    "_rng": "10",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "YES",
+    "__text": "Target model/unit cannot give orders, receive orders, or make power attacks or special attacks."
+}, {
+    "_id": {
+        "$oid": "5758367ac2ef165afaef0727"
+    },
+    "_name": "RECOIL",
+    "_cost": "1",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "TURN",
+    "_off": "NO",
+    "__text": "The spellcaster gains Swift Hunter. Recoil lasts for one turn. (When a model with Swift Hunter destroys one or more enemy models with a basic ranged attack, immediately after the attack is resolved it can advance up to 2\".)"
+}, {
+    "_id": {
+        "$oid": "5759abfebd966f565854a5db"
+    },
+    "_name": "RECONSTRUCT",
+    "_cost": "3",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "When target large-based or smaller warjack in the spellcaster's battlegroup is disabled by an enemy attack at any time except while it is advancing, place it anywhere completely within 3'' of its current location. Remove 1 damage point from each system, then Reconstruct expires. "
+}, {
+    "_id": {
+        "$oid": "575d57f8c2ef166e0a375d31"
+    },
+    "_name": "REDLINE",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target warjack in the spellcaster's battlegroup gains +2 STR and SPD and can run, charge, or make slam or trample power attacks without spending focus. At the end of each of its activations, the affected warjack suffers d3 damage points."
+}, {
+    "_id": {
+        "$oid": "5756cab9c2ef1612e2be723a"
+    },
+    "_name": "REFUGE",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "At the end of an activation in which target friendly Faction model hit an enemy model with an attack, the affected model can make a full advance. It cannot be targeted by free strikes during this movement."
+}, {
+    "_id": {
+        "$oid": "575a654dc2ef166e0a2a8d8f"
+    },
+    "_name": "REGROWTH",
+    "_cost": "4",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target friendly Faction unit. During your Control Phase, the spellcaster can spend fury points to return one destroyed living small-based Grunt from that unit to play for each fury point spent. A returned Grunt must be placed in the spellcaster’ control range, in formation, and within 3˝ of  another model in its unit. The Grunt is returned with one unmarked damage box and must forfeit its Combat Action the turn it is put into play."
+}, {
+    "_id": {
+        "$oid": "5756d270bd966f1469db20c5"
+    },
+    "_name": "REPUDIATE",
+    "_cost": "2",
+    "_rng": "10",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "Enemy upkeep spells and animi on the model/unit directly hit by Repudiate immediately expire. When an upkeep spell expires as a result of  Repudiate, the model maintaining the spell suffers d3 damage points."
+}, {
+    "_id": {
+        "$oid": "575833d0c2ef165afaeeed11"
+    },
+    "_name": "REPULSION",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "NO",
+    "__text": "Enemy models currently within 2\" of the spellcaster are immediately pushed 3\" directly away from it in the order you choose."
+}, {
+    "_id": {
+        "$oid": "5756f2ddbd966f1469dc8d30"
+    },
+    "_name": "RESPAWN",
+    "_cost": "3",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "When target large-based or smaller warbeast in the spellcaster's battlegroup is disabled by an enemy attack at any time except while it is advancing, place it anywhere completely within 3\" of its current location. Remove 1 damage point from each aspect, then Respawn expires."
+}, {
+    "_id": {
+        "$oid": "575a6572bd966f7076167bd2"
+    },
+    "_name": "RESTORATION",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target friendly Faction model/unit gains +2 ARM. Models are not affected by Restoration while out of  formation. When this spell is upkept during your Control Phase, the spellcaster can remove 1 damage point for each friendly model affected by Restoration within 1˝ of it."
+}, {
+    "_id": {
+        "$oid": "575577b7bd966f1469ce9674"
+    },
+    "_name": "RETURN FIRE",
+    "_cost": "1",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "RND",
+    "_off": "NO",
+    "__text": "When target friendly Faction model is targeted by an enemy ranged attack, after the attack is resolved the affected model can make one basic melee or ranged attack, then Return Fire expires. Return Fire lasts for one round."
+}, {
+    "_id": {
+        "$oid": "5756cf1dc2ef1612e2bea2b9"
+    },
+    "_name": "REVIVE",
+    "_cost": "3",
+    "_rng": "CTRL",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "NO",
+    "__text": "Return one destroyed Grunt to a friendly Faction unit with one unmarked damage box. A returned Grunt must be placed in the spellcaster’s control range, in formation, and completely within 3˝ of another model in its unit. The Grunt must forfeit its Combat Action the turn it is put into play."
+}, {
+    "_id": {
+        "$oid": "5763a177c2ef16187657b6f4"
+    },
+    "_name": "RHYTHM OF WAR",
+    "_cost": "3",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "CTRL",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Warjacks in this models battlegroup that are in its control range can advance up to 3\" after all friendly models have ended their activations on your turn."
+}, {
+    "_id": {
+        "$oid": "5756d21fc2ef1612e2bec83f"
+    },
+    "_name": "RIFT",
+    "_cost": "3",
+    "_rng": "8",
+    "_pow": "13",
+    "_aoe": "4",
+    "_duration": "RND",
+    "_off": "YES",
+    "__text": "The AOE is rough terrain and remains in play for one round."
+}, {
+    "_id": {
+        "$oid": "575fdba0c2ef162189307206"
+    },
+    "_name": "RITES OF POWER",
+    "_cost": "1",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "TURN",
+    "_off": "NO",
+    "__text": "This model’s controller can channel spells through it. When a spell is channeled through it, this model immediately suffers d3 damage points. Rites of Power lasts for one turn."
+}, {
+    "_id": {
+        "$oid": "5759be88c2ef1652b4288b7d"
+    },
+    "_name": "RITUAL SACRIFICE",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "*",
+    "_off": "NO",
+    "__text": "Remove target friendly warrior model from play. Skarre gains d6 additional focus points at the start of her next activation. Skarre can gain the benefit of Ritual Sacrifice only once per round."
+}, {
+    "_id": {
+        "$oid": "575d44aec2ef166e0a371bc1"
+    },
+    "_name": "ROAD TO WAR",
+    "_cost": "3",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "CTRL",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "When a friendly Faction model in the spellcaster's control range destroys one or more enemy models with a melee or ranged attack during its activation, immediately after the attack is resolved one warjack in the spellcaster's battlegroup that is in its control range can advance up to 3\". A warjack can advance as a result of Road to War only once per turn."
+}, {
+    "_id": {
+        "$oid": "5758033dc2ef165afaed06cf"
+    },
+    "_name": "ROCK WALL",
+    "_cost": "2",
+    "_rng": "CTRL",
+    "_pow": "-",
+    "_aoe": "WALL",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Place a wall template anywhere completely within the spellcaster’s control range where it does not touch a model’s base, an obstruction, or an obstacle. The wall is an obstacle that provides cover."
+}, {
+    "_id": {
+        "$oid": "5758036abd966f5eba473108"
+    },
+    "_name": "ROOTS OF THE EARTH",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "RND",
+    "_off": "NO",
+    "__text": "Target friendly Faction model gains +3 ARM, cannot become knocked down, and cannot move or be placed. Roots of the Earth lasts for one round."
+}, {
+    "_id": {
+        "$oid": "575e5c3cc2ef166e0a3c5261"
+    },
+    "_name": "ROTH'S MERCY",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "When an enemy attack disables a living model in the target friendly Faction unit, you can choose a non-disabled living model in the unit to be destroyed. If another model is destroyed as a result of Roth’s Mercy, the disabled model removes 1 damage point."
+}, {
+    "_id": {
+        "$oid": "575eb42abd966f70762a4904"
+    },
+    "_name": "RUSH",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "TURN",
+    "_off": "NO",
+    "__text": "Target friendly Faction warbeast gains +2\" movement when advancing as part of its Normal Movement and gains Pathfinder *ICON*. Rush lasts for one turn."
+}, {
+    "_id": {
+        "$oid": "5757f5d7c2ef165afaecaa0d"
+    },
+    "_name": "SACRIFICIAL LAMB",
+    "_cost": "1",
+    "_rng": "CTRL",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "NO",
+    "__text": "Remove one friendly Faction warrior model in the spellcaster’s control range from play. Each warjack in the spellcaster’s battlegroup that is currently in its control range gains 1 focus point. Sacrificial Lamb can be cast only once per activation."
+}, {
+    "_id": {
+        "$oid": "575cfba4c2ef166e0a3643cf"
+    },
+    "_name": "SACROSANCT",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target a friendly Faction model/unit. When an enemy non-warcaster, non-warlock warrior model destroys one or more affected models with an attack while the affected model is in formation, immediately after the attack is resolved the attacking model becomes knocked down. Models in the target unit are not affected while out of formation."
+}, {
+    "_id": {
+        "$oid": "575ebabdc2ef166e0a3e22d2"
+    },
+    "_name": "SAFEGUARD",
+    "_cost": "1",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "RND",
+    "_off": "NO",
+    "__text": "The spellcaster cannot become knocked down or stationary and does not suffer collateral damage. When it is slammed, reduce the slam distance rolled by 3. Safeguard lasts for one round."
+}, {
+    "_id": {
+        "$oid": "57619e30bd966f2233d07268"
+    },
+    "_name": "SAND STORM",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "",
+    "_aoe": "*",
+    "_duration": "RND",
+    "_off": "NO",
+    "__text": "Enemy models cannot make ranged attacks while in the spellcaster's command range. Sand Storm lasts for one round."
+}, {
+    "_id": {
+        "$oid": "575a6422bd966f70761678e9"
+    },
+    "_name": "SANDS OF FATE",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "CTRL",
+    "_duration": "-",
+    "_off": "NO",
+    "__text": "Remove a friendly living Faction trooper model in the spellcaster’s control range from play and replace it with the spellcaster. The spellcaster cannot advance this activation after being placed by Sands of Fate."
+}, {
+    "_id": {
+        "$oid": "5756ba65bd966f1469da12ed"
+    },
+    "_name": "SCOURGE",
+    "_cost": "4",
+    "_rng": "8",
+    "_pow": "13",
+    "_aoe": "3",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "Models hit by this attack become knocked down."
+}, {
+    "_id": {
+        "$oid": "5756a857c2ef1612e2bd23c9"
+    },
+    "_name": "SCRAMBLE",
+    "_cost": "2",
+    "_rng": "10",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "RND",
+    "_off": "YES",
+    "__text": "Target warjack suffers Disruption for one round."
+}, {
+    "_id": {
+        "$oid": "575817c0bd966f5eba480096"
+    },
+    "_name": "SCURRY",
+    "_cost": "1",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "TURN",
+    "_off": "NO",
+    "__text": "The spellcaster gains Relentless Charge. Scurry lasts for one turn. (A model with Relentless Charge gains Pathfinder  while advancing as part of a charge.)"
+}, {
+    "_id": {
+        "$oid": "575fb0bbc2ef1621892fc9c2"
+    },
+    "_name": "SCUTTLER",
+    "_cost": "1",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "*",
+    "_off": "NO",
+    "__text": "Models in target friendly Faction warbeast pack immediately dig in. While dug in, a model gains cover, does not suffer blast damage, and does not block LOS. A model remains dug in until it moves, is placed, or is engaged."
+}, {
+    "_id": {
+        "$oid": "5757e042bd966f5eba465175"
+    },
+    "_name": "SCYTHING TOUCH",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target friendly Faction model gains Dark Shroud. (While in the melee range of a model with Dark Shroud, enemy models suffer –2 ARM.)"
+}, {
+    "_id": {
+        "$oid": "5757dbebc2ef165afaec1a4f"
+    },
+    "_name": "SENTRY",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target friendly Faction model gains Rapid Fire. (A model with Rapid Fire can make one basic ranged attack during your Maintenance Phase.)"
+}, {
+    "_id": {
+        "$oid": "57584e65c2ef165afaf007a9"
+    },
+    "_name": "SHADOW PACK",
+    "_cost": "3",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "CTRL",
+    "_duration": "RND",
+    "_off": "NO",
+    "__text": "While in the spellcaster’s control range, models in its battlegroup gain Stealth. Shadow Pack lasts for one round."
+}, {
+    "_id": {
+        "$oid": "5757ebe3bd966f5eba4686cf"
+    },
+    "_name": "SHADOWMANCER",
+    "_cost": "3",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "*",
+    "_duration": "RND",
+    "_off": "NO",
+    "__text": "While in spellcaster’s command range, models in its battlegroup gain Stealth  and Dark Shroud. Shadowmancer lasts for one round. (While in the melee range of a model with Dark Shroud, enemy models suffer –2 ARM.)"
+}, {
+    "_id": {
+        "$oid": "57549144bd966f1469c7eb0c"
+    },
+    "_name": "SHATTER STORM",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "YES",
+    "__text": "Target friendly Faction model/unit gains Detonator. (When a model with Detonator directly hits and boxes an enemy model with a ranged or melee attack, center a 3\" AOE on the boxed model, then remove that model from play. Models in the AOE are hit and suffer an unboostable POW 8 magical blast damage roll)."
+}, {
+    "_id": {
+        "$oid": "5769a118bd966f1ef1c7da7f"
+    },
+    "_name": "SHOCKWAVE",
+    "_cost": "3",
+    "_rng": "10",
+    "_pow": "14",
+    "_aoe": "*",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "Center a 4\" AOE on the model directly hit. Models in the AOE become knocked down."
+}, {
+    "_id": {
+        "$oid": "57588367bd966f56584b15cc"
+    },
+    "_name": "SHRAPNEL SWARM",
+    "_cost": "3",
+    "_rng": "8",
+    "_pow": "13",
+    "_aoe": "*",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "On a direct hit against an enemy model, center a 4'' AOE on the model hit. After resolving the damage roll, models in the AOE are hit and suffer 1 point of damage."
+}, {
+    "_id": {
+        "$oid": "5756cf65bd966f1469daf52c"
+    },
+    "_name": "SIDEKICK",
+    "_cost": "3",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target warjack in the spellcaster’s battlegroup gains +2 DEF and cannot become knocked down or be pushed, placed, or moved by a slam. While B2B with target model, the spellcaster gains +2 DEF and cannot become knocked down or be pushed, placed, or moved by a slam."
+}, {
+    "_id": {
+        "$oid": "575d6830c2ef166e0a37973c"
+    },
+    "_name": "SIGNS PORTENTS",
+    "_cost": "4",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "CTRL",
+    "_duration": "TURN",
+    "_off": "NO",
+    "__text": "While in the spellcaster’s control range. friendly Faction models gain an additional die on attack and damage rolls. Discard the lowest die in each roll. Signs & Portents lasts for one turn."
+}, {
+    "_id": {
+        "$oid": "575c3a70c2ef166e0a33302c"
+    },
+    "_name": "SILENCE OF DEATH",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target friendly Faction model/unit gains +2 STR and Take Down. (Models disabled by a melee attack made by a model with Take Down cannot make a Tough roll. Models boxed by a melee attack made by a model with Take Down are removed from play.)"
+}, {
+    "_id": {
+        "$oid": "5757e06dbd966f5eba46520e"
+    },
+    "_name": "SIPHON BOLT",
+    "_cost": "3",
+    "_rng": "8",
+    "_pow": "13",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "When this spell hits an enemy model with 1 or more focus or fury points on it, that model loses 1 focus or fury point and the spellcaster gains 1 focus point. Spellcasters without the Focus Manipulation special rule cannot gain focus as a result of Siphon Bolt."
+}, {
+    "_id": {
+        "$oid": "57681a30c2ef161e70b8acb8"
+    },
+    "_name": "SKY FIRE",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "*",
+    "_duration": "TURN",
+    "_off": "NO",
+    "__text": "When a friendly Faction model makes an attack with a ranged weapon with Damage Type: Electricity targeting an enemy model in the spellcaster's command range, the attacking model gains +2 to its attack roll. When an enemy model in the spellcaster's command range suffers an electrical damage roll, add +2 to the roll. Sky Fire lasts for one round."
+}, {
+    "_id": {
+        "$oid": "57596b6dc2ef1652b4258ad4"
+    },
+    "_name": "SKYBORNE",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "RND",
+    "_off": "NO",
+    "__text": "The spellcaster gains +2 SPD and DEF and Flight for one round."
+}, {
+    "_id": {
+        "$oid": "575837b3c2ef165afaef150d"
+    },
+    "_name": "SLAUGHTERHOUSE",
+    "_cost": "1",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "TURN",
+    "_off": "NO",
+    "__text": "The spellcaster's melee weapons gains Grievous Wounds. Slaughterhouse lasts for one turn. (A model hit by a weapon with Grievous Wounds loses Tough  and cannot have damage removed from it for one round.)"
+}, {
+    "_id": {
+        "$oid": "57583924bd966f5eba497429"
+    },
+    "_name": "SLIPSTREAM",
+    "_cost": "1",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "TURN",
+    "_off": "NO",
+    "__text": "When the spellcaster ends its Normal Movement, choose one other non-huge-based friendly Faction model the spellcaster moved within 2\" of. You can place the chosen model completely within 2\" of its current location, then Slipstream expires. A model can be placed as a result of Slipstream only once per turn. Slipstream lasts for one turn."
+}, {
+    "_id": {
+        "$oid": "5756cd43bd966f1469dadd19"
+    },
+    "_name": "SNIPE",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target friendly Faction model’s/unit’s ranged weapons gain +4 RNG."
+}, {
+    "_id": {
+        "$oid": "57631d07c2ef16187654dc84"
+    },
+    "_name": "SNOW SHROUD",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target friendly Faction model/unit gains concealment and Immunity: Cold. Models are not affected while out of formation."
+}, {
+    "_id": {
+        "$oid": "5757f894c2ef165afaecbaea"
+    },
+    "_name": "SOLID GROUND",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "CTRL",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "While in the spellcaster’s control range, friendly Faction models cannot become knocked down and do not suffer blast damage."
+}, {
+    "_id": {
+        "$oid": "5756f87ebd966f1469dcc649"
+    },
+    "_name": "SOOTHING SONG",
+    "_cost": "1",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "CTRL",
+    "_duration": "-",
+    "_off": "NO",
+    "__text": "Remove up to 1 fury point from each friendly living Faction warbeast currently in the spellcaster's control range. Soothing Song can be cast only once per activation."
+}, {
+    "_id": {
+        "$oid": "5757ec17bd966f5eba4687bf"
+    },
+    "_name": "SOUL GATE",
+    "_cost": "3",
+    "_rng": "CTRL",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "NO",
+    "__text": "Remove a friendly trooper model in the spellcaster’s control range from play and replace it with target warjack in the spellcaster’s battlegroup that is in its control range. The warjack cannot activate this turn after being placed by Soul Gate."
+}, {
+    "_id": {
+        "$oid": "5756a118bd966f1469d93ff3"
+    },
+    "_name": "SOUL HARVESTER",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "When target friendly Faction model/unit destroys a living enemy model with a melee attack, the spellcaster gains the destroyed model’s soul token regardless of the proximity of other models."
+}, {
+    "_id": {
+        "$oid": "575dc8e2bd966f7076253485"
+    },
+    "_name": "SOUL SLAVE",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target warbeast in the spellcaster’s battlegroup automatically passes\nthreshold checks. The spellcaster can channel spells through that\nwarbeast."
+}, {
+    "_id": {
+        "$oid": "5759c014c2ef1652b42896e2"
+    },
+    "_name": "SOUL STRIKE",
+    "_cost": "3",
+    "_rng": "10",
+    "_pow": "12",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "When a living model is directly hit and destroyed by Soul Strike, after resolving the attack you can choose one model within 4˝ of the destroyed model. That model suffers a damage roll with a POW equal to the ARM of the destroyed model. This additional damage roll is not considered to have been caused by an attack."
+}, {
+    "_id": {
+        "$oid": "575e5c6abd966f707628adeb"
+    },
+    "_name": "SOULFIRE",
+    "_cost": "2",
+    "_rng": "10",
+    "_pow": "12",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "When a living non-soulless model is boxed by Soulfire, the spellcaster gains 1 focus point and the boxed model is removed from play. If the spellcaster does not have the Focus Manipulation special rule, it cannot gain a focus point as a result of Soulfire."
+}, {
+    "_id": {
+        "$oid": "575d3c4dc2ef166e0a36fa5b"
+    },
+    "_name": "SPECTRAL FIRE",
+    "_cost": "2",
+    "_rng": "10",
+    "_pow": "10",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "Spectral Fire gains +1 POW for each focus or fury point on the target\nmodel at the time the spell was cast."
+}, {
+    "_id": {
+        "$oid": "5757eef2bd966f5eba469ea4"
+    },
+    "_name": "SPECTRAL LEECH",
+    "_cost": "2",
+    "_rng": "10",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "Remove d3 focus or fury points from target model hit by Spectral Leech."
+}, {
+    "_id": {
+        "$oid": "5757f608bd966f5eba46d6ea"
+    },
+    "_name": "SPECTRAL STEEL",
+    "_cost": "3",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target warjack in the spellcaster’s battlegroup gains +2 ARM and Ghostly. (A model with Ghostly can advance through terrain and obstacles without penalty and can advance through obstructions if it has enough movement to move completely past them. It cannot be targeted by free strikes.)"
+}, {
+    "_id": {
+        "$oid": "5757da46bd966f5eba4633ee"
+    },
+    "_name": "SPEED OF DEATH",
+    "_cost": "3",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "CTRL",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "When a model in the spellcaster’s battlegroup hits one or more enemy models with a melee or ranged attack during its activation while it is in the spellcaster’s control range, at the end of  its activation the attacking model can make a full advance. The affected model cannot be targeted by free strikes during this movement."
+}, {
+    "_id": {
+        "$oid": "5757e0b8c2ef165afaec2ae0"
+    },
+    "_name": "SPELLPIERCER",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "CTRL",
+    "_duration": "TURN",
+    "_off": "NO",
+    "__text": "While in the spellcaster’s control range, the weapons of  friendly Faction models/units gain Blessed and Damage Type: Magical. Spellpiercer lasts for one turn."
+}, {
+    "_id": {
+        "$oid": "5758350fbd966f5eba4945d5"
+    },
+    "_name": "SPINY GROWTH",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "RND",
+    "_off": "NO",
+    "__text": "The spellcaster gains +2 ARM. If a non-warrior model hits the spellcaster with a melee attack, the attacking model suffers d3 damage points immediately after the attack is resolved unless the spellcaster was destroyed or removed from play by the attack. Spiny Growth lasts for one round."
+}, {
+    "_id": {
+        "$oid": "575ebc79c2ef166e0a3e3228"
+    },
+    "_name": "SPIRIT BLADE",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "NO",
+    "__text": "Enemy upkeep spells and animi on target friendly Faction model/unit expire."
+}, {
+    "_id": {
+        "$oid": "57584c28bd966f5eba4a3027"
+    },
+    "_name": "SPIRIT DOOR",
+    "_cost": "3",
+    "_rng": "CTRL",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "NO",
+    "__text": "Choose a model in the spellcaster’s battlegroup that is in its control range. Immediately place that model completely within 2˝ of the spellcaster. If the chosen model is the spellcaster, immediately place it completely within 2˝ of another model in its battlegroup that was in its control range at the time the spell was cast. A model cannot advance or attack after being placed by Spirit Door this turn."
+}, {
+    "_id": {
+        "$oid": "57584c55bd966f5eba4a31ec"
+    },
+    "_name": "SPIRIT FANG",
+    "_cost": "2",
+    "_rng": "10",
+    "_pow": "12",
+    "_aoe": "-",
+    "_duration": "*",
+    "_off": "YES",
+    "__text": "A model damaged by this attack suffers –2 SPD and DEF for one round."
+}, {
+    "_id": {
+        "$oid": "575dc92bbd966f707625354d"
+    },
+    "_name": "SPIRIT LEECH",
+    "_cost": "3",
+    "_rng": "10",
+    "_pow": "13",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "When this spell hits an enemy model with 1 or more focus or\nfury points on it, that model loses 1 focus or fury point and the\nspellcaster gains 1 fury point. If the spellcaster does not have the Fury\nManipulation special rule, it cannot gain a fury point as a result of\nSpirit Leech."
+}, {
+    "_id": {
+        "$oid": "575dc930c2ef166e0a39923e"
+    },
+    "_name": "SPIRIT LEECH",
+    "_cost": "3",
+    "_rng": "10",
+    "_pow": "13",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "When this spell hits an enemy model with 1 or more focus or\nfury points on it, that model loses 1 focus or fury point and the\nspellcaster gains 1 fury point. If the spellcaster does not have the Fury\nManipulation special rule, it cannot gain a fury point as a result of\nSpirit Leech."
+}, {
+    "_id": {
+        "$oid": "5758500ebd966f5eba4a5a4c"
+    },
+    "_name": "SPIRIT SHIFT",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "NO",
+    "__text": "When Laris casts Spirit Shift, immediately place him completely within 2˝ of Kaya. When Kaya casts Spirit Shift, immediately place her completely within 2˝ of Laris. A model cannot advance this turn after being placed by Spirit Shift."
+}, {
+    "_id": {
+        "$oid": "575d7186bd966f70762379ae"
+    },
+    "_name": "STAR-CROSSED",
+    "_cost": "3",
+    "_rng": "SELF",
+    "_pow": "",
+    "_aoe": "CTRL",
+    "_duration": "RND",
+    "_off": "NO",
+    "__text": "While in the spellcaster’s control range, enemy models gain an additional dice on attack rolls. Discard the highest dice of each roll. Star-Crossed lasts for one round."
+}, {
+    "_id": {
+        "$oid": "5758325fc2ef165afaeede5c"
+    },
+    "_name": "STILL AS DEATH",
+    "_cost": "1",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "RND",
+    "_off": "NO",
+    "__text": "The spellcaster gains Countercharge. Still as Death lasts for one round. (When an enemy model advances and ends its movement within 6\" of a model with Countercharge and in its LOS, the model with Countercharge can immediately charge it. A model can use Countercharge only once per round and not while engaged.)"
+}, {
+    "_id": {
+        "$oid": "5776e96dbd966f5c1a9f89e7"
+    },
+    "_name": "STONE FALL",
+    "_cost": "3",
+    "_rng": "8",
+    "_pow": "13",
+    "_aoe": "4",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "On a critical hit, models hit lose their initial attacks and cannot make power attacks or special attacks for one round."
+}, {
+    "_id": {
+        "$oid": "5757f8d5bd966f5eba46e81b"
+    },
+    "_name": "STONE SKIN",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target friendly Faction model/unit gains +2 STR and ARM but suffers –1 SPD and DEF."
+}, {
+    "_id": {
+        "$oid": "575fe780bd966f2233c719f4"
+    },
+    "_name": "STONEHOLD",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Enemy models roll one less die on attack damage rolls against the spellcaster. The spellcaster and friendly Faction models B2B with it cannot become knocked down."
+}, {
+    "_id": {
+        "$oid": "5757e0dbc2ef165afaec2b63"
+    },
+    "_name": "STORM RAGER",
+    "_cost": "3",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target friendly Faction warrior model gains +2 STR, MAT, and ARM and cannot be targeted by combined ranged attacks or combined melee attacks."
+}, {
+    "_id": {
+        "$oid": "5757e3eac2ef165afaec3998"
+    },
+    "_name": "STRANGLEHOLD",
+    "_cost": "2",
+    "_rng": "10",
+    "_pow": "11",
+    "_aoe": "-",
+    "_duration": "*",
+    "_off": "YES",
+    "__text": "A model damaged by Stranglehold forfeits either its Normal Movement or its Combat Action during its next activation, as its controller chooses."
+}, {
+    "_id": {
+        "$oid": "575e5e03c2ef166e0a3c560f"
+    },
+    "_name": "STRENGTH OF GRANITE",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target model in the spellcaster’s battlegroup gains +4 STR."
+}, {
+    "_id": {
+        "$oid": "5759c3c5bd966f5658556058"
+    },
+    "_name": "STYGIAN ABYSS",
+    "_cost": "3",
+    "_rng": "10",
+    "_pow": "12",
+    "_aoe": "-",
+    "_duration": "*",
+    "_off": "YES",
+    "__text": "On a critical hit, the model hit suffers Blind for one round. (A model suffering Blind cannot make ranged or magic attacks, suffers –4 MAT and DEF, and cannot run, charge, or make slam or trample power attacks. It must forfeit either its Normal Movement or Combat Action during its next activation. Blind can be shaken.)"
+}, {
+    "_id": {
+        "$oid": "575dcc7dc2ef166e0a399d6a"
+    },
+    "_name": "SUBJUGATION OF WILL",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "CTRL",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "While in this model’s control range, warbeasts in its battlegroup gain Shield Guard. (When a friendly model is directly hit by a non-spray ranged attack during your opponent’s turn while within 3˝ of a model with Shield Guard, you can choose to have the model with Shield Guard directly hit instead. It is automatically hit and suffers all damage and effects. A model can use Shield Guard only once per round and cannot use Shield Guard if it is incorporeal, knocked down, or stationary.)"
+}, {
+    "_id": {
+        "$oid": "57613d5cbd966f2233cdffbe"
+    },
+    "_name": "SUBMERGE",
+    "_cost": "1",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "RND",
+    "_off": "NO",
+    "__text": "The spellcaster cannot be targeted by ranged or magic attacks and does not block LOS. Submerge lasts for one round."
+}, {
+    "_id": {
+        "$oid": "57583669c2ef165afaef0673"
+    },
+    "_name": "SUNBURST",
+    "_cost": "3",
+    "_rng": "10",
+    "_pow": "13",
+    "_aoe": "3",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "Sunburst blast damage affect only enemy models. Models boxed by Sunburst are removed from play."
+}, {
+    "_id": {
+        "$oid": "575a66b3c2ef166e0a2a9115"
+    },
+    "_name": "SUNDER SPIRIT",
+    "_cost": "2",
+    "_rng": "10",
+    "_pow": "12",
+    "_aoe": "-",
+    "_duration": "*",
+    "_off": "YES",
+    "__text": "An enemy warbeast damaged by Sunder Spirit loses its animus for one round."
+}, {
+    "_id": {
+        "$oid": "575a6440c2ef166e0a2a8b0a"
+    },
+    "_name": "SUNHAMMER",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "CTRL",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Enemy warbeasts and warjacks that advance more than 1˝ and end their Normal Movement in the spellcaster’s control range suffer d3 damage points."
+}, {
+    "_id": {
+        "$oid": "575d4d1bc2ef166e0a373868"
+    },
+    "_name": "SUPERIORITY",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target friendly Faction warjack gains +2 SPD, MAT, and DEF and cannot become knocked down."
+}, {
+    "_id": {
+        "$oid": "575d44f7c2ef166e0a371c98"
+    },
+    "_name": "SURE FOOT",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target friendly Faction model/unit gains +2 DEF and cannot become knocked down. Models are not affected while out of formation."
+}, {
+    "_id": {
+        "$oid": "575fdd31c2ef1621893077ca"
+    },
+    "_name": "SWAMP PIT",
+    "_cost": "2",
+    "_rng": "CTRL",
+    "_pow": "-",
+    "_aoe": "5",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Place a 5˝ AOE anywhere completely within the spellcaster’s control range where it does not touch a model’s base. The AOE is shallow water. While completely within a Swamp Pit AOE, models with Amphibious cannot be targeted by ranged attacks."
+}, {
+    "_id": {
+        "$oid": "575fe433bd966f2233c70d74"
+    },
+    "_name": "SWARM",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "RND",
+    "_off": "NO",
+    "__text": "The spellcaster gains concealment. Living enemy models suffer –2 to attack rolls while within 2˝ of the spellcaster. Swarm lasts for one round."
+}, {
+    "_id": {
+        "$oid": "5757e1e4c2ef165afaec2f50"
+    },
+    "_name": "SYNERGY",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "While in the spellcaster’s control range, models in this model’s battlegroup gain a +1 cumulative bonus on melee attack and melee damage rolls for each other model in the battlegroup that hit an enemy model with a melee attack this turn while in the spellcaster’s control range. This cumulative bonus cannot exceed +3."
+}, {
+    "_id": {
+        "$oid": "5756d299c2ef1612e2becd58"
+    },
+    "_name": "TACTICAL SUPREMACY",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target friendly Faction model/unit gains Reposition [3˝]. (At the end of  an activation in which it did not run or fail a charge, a model with Reposition [3˝] can advance up to 3˝, then its activation ends.)"
+}, {
+    "_id": {
+        "$oid": "575eaa15c2ef166e0a3dabae"
+    },
+    "_name": "TAG TEAM",
+    "_cost": "3",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "CTRL",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "While in the spellcaster's control range, models in its battlegroup gain +2 on melee attack and melee damage rolls against models within melee range of another model in the spellcaster's battlegroup."
+}, {
+    "_id": {
+        "$oid": "5756a148c2ef1612e2bcf7ca"
+    },
+    "_name": "TELEKINESIS",
+    "_cost": "2",
+    "_rng": "8",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "*",
+    "__text": "Place target model completely within 2\" of its current location. When Telekinesis targets an enemy model, it is an offensive spell and requires a magic attack roll. A model can be placed by Telekinesis only once per turn."
+}, {
+    "_id": {
+        "$oid": "5756cdd9c2ef1612e2be9523"
+    },
+    "_name": "TELEPORT",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "NO",
+    "__text": "Place the spellcaster anywhere completely within 6˝ of  its current location, then its activation ends."
+}, {
+    "_id": {
+        "$oid": "575d3ccfc2ef166e0a36fba2"
+    },
+    "_name": "TELGESH MARK",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "The spellcaster can channel spells through target friendly Faction model\nas if it were a model in the spellcaster’s battlegroup with Arc Node *ICON*."
+}, {
+    "_id": {
+        "$oid": "575d5f7ac2ef166e0a377621"
+    },
+    "_name": "TEMPEST",
+    "_cost": "4",
+    "_rng": "8",
+    "_pow": "12",
+    "_aoe": "4",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "Models hit by Tempest become knocked down and suffer a POW 12 damage roll."
+}, {
+    "_id": {
+        "$oid": "5756d817c2ef1612e2bf0aa0"
+    },
+    "_name": "TEMPORAL ACCELERATION",
+    "_cost": "3",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "TURN",
+    "_off": "NO",
+    "__text": "Target friendly Faction model gains +2˝ movement when advancing as part of  its Normal Movement and can make one additional ranged or melee attack during its activation. Temporal Acceleration lasts for one turn. Temporal Acceleration can be cast only once per activation."
+}, {
+    "_id": {
+        "$oid": "5756c3e9bd966f1469da71fe"
+    },
+    "_name": "TEMPORAL BARRIER",
+    "_cost": "4",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "CTRL",
+    "_duration": "RND",
+    "_off": "NO",
+    "__text": "While in the spellcaster’s control range, enemy models suffer –2 DEF. Enemy models beginning their activations in the spellcaster’s command range suffer –2 SPD. Temporal Barrier lasts for one round."
+}, {
+    "_id": {
+        "$oid": "5756d2bfbd966f1469db2683"
+    },
+    "_name": "TEMPORAL DISTORTION",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "RND",
+    "_off": "NO",
+    "__text": "Models in this unit gain +2 DEF. While within 5˝ of  a model in this unit, friendly Faction models gain +2 DEF and enemy models suffer –2 DEF. Temporal Distortion lasts for one round."
+}, {
+    "_id": {
+        "$oid": "57568608c2ef1612e2bc652a"
+    },
+    "_name": "TERMINAL VELOCITY",
+    "_cost": "3",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "CTRL",
+    "_duration": "TURN",
+    "_off": "NO",
+    "__text": "Warjacks in the spellcaster's battlegroup that are currently in its control range can charge or make power attacks without spending focus and gain boosted melee attack rolls against living models. When an affected model targets a living model with a charge or slam power attack, it gains +2\" movement. Terminal Velocity lasts for one turn. "
+}, {
+    "_id": {
+        "$oid": "575d8128c2ef166e0a37fc09"
+    },
+    "_name": "THE FLESH IS WEAK",
+    "_cost": "3",
+    "_rng": "8",
+    "_pow": "13",
+    "_aoe": "4",
+    "_duration": "*",
+    "_off": "YES",
+    "__text": "Living and undead models hit by The Flesh Is Weak cannot run, charge, or make slam or trample power attacks for one round."
+}, {
+    "_id": {
+        "$oid": "575dcc2abd966f707625a0eb"
+    },
+    "_name": "THE LASH",
+    "_cost": "3",
+    "_rng": "10",
+    "_pow": "13",
+    "_aoe": "4",
+    "_duration": "RND",
+    "_off": "YES",
+    "__text": "Warbeasts hit by The Lash suffer –2 THR for one round."
+}, {
+    "_id": {
+        "$oid": "5756cfd6c2ef1612e2beab97"
+    },
+    "_name": "THUNDER STRIKE",
+    "_cost": "4",
+    "_rng": "8",
+    "_pow": "14",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "Instead of  suffering a normal damage roll, a non-incorporeal model hit by Thunder Strike is slammed d6˝ directly away from the spell’s point of  origin and suffers a POW 14 damage roll. Collateral damage from this slam is POW 14."
+}, {
+    "_id": {
+        "$oid": "5756d84cbd966f1469db6540"
+    },
+    "_name": "TIME BOMB",
+    "_cost": "4",
+    "_rng": "10",
+    "_pow": "14",
+    "_aoe": "4",
+    "_duration": "*",
+    "_off": "YES",
+    "__text": "A model directly hit by Time Bomb suffers –2 SPD and DEF for one round."
+}, {
+    "_id": {
+        "$oid": "575f5281bd966f2233c4e498"
+    },
+    "_name": "TORMENT",
+    "_cost": "2",
+    "_rng": "10",
+    "_pow": "12",
+    "_aoe": null,
+    "_duration": "*",
+    "_off": "YES",
+    "__text": "When a model is damaged by Torment, for one round it loses Tough, cannot remove damage, and cannot transfer damage."
+}, {
+    "_id": {
+        "$oid": "57596ba5c2ef1652b4258d2a"
+    },
+    "_name": "TORNADO",
+    "_cost": "4",
+    "_rng": "10",
+    "_pow": "13",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "Instead of suffering a normal damage roll, a non-incorporeal model hit by Tornado is thrown d6˝ directly away from the spell’s point of origin and suffers a POW 13 damage roll. The model thrown does not deviate. Collateral damage from this throw is POW 13."
+}, {
+    "_id": {
+        "$oid": "575d87febd966f707623d936"
+    },
+    "_name": "TRUE PATH",
+    "_cost": "3",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "CTRL",
+    "_duration": "TURN",
+    "_off": "NO",
+    "__text": "The spellcaster and friendly Faction warrior models/units beginning their activations in its control range gain +2˝ movement when advancing as part of their Normal Movement and Pathfinder during their activations. True Path lasts for one turn."
+}, {
+    "_id": {
+        "$oid": "5756b86abd966f1469da0158"
+    },
+    "_name": "TWISTED FORM",
+    "_cost": "2",
+    "_rng": "8",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "RND",
+    "_off": "YES",
+    "__text": "Target warbeast suffers –2 FURY, cannot have damage removed from it, and cannot have damage transferred to it. Twisted Form lasts for one round. Twisted Form can be cast only once per activation."
+}, {
+    "_id": {
+        "$oid": "5757e205bd966f5eba465810"
+    },
+    "_name": "TWISTER",
+    "_cost": "2",
+    "_rng": "10",
+    "_pow": "10",
+    "_aoe": "3",
+    "_duration": "RND",
+    "_off": "YES",
+    "__text": "The AOE is a cloud effect that remains in play for one round."
+}, {
+    "_id": {
+        "$oid": "575a5b90c2ef166e0a2a7732"
+    },
+    "_name": "UNDERGROWTH",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "RND",
+    "_off": "NO",
+    "__text": "While within 5˝ of  the spellcaster, enemy models treat open terrain as rough terrain and suffer –2 DEF. Undergrowth lasts for one round."
+}, {
+    "_id": {
+        "$oid": "57c990f6c2ef16772d9d2af2"
+    },
+    "_name": "UNMINDING",
+    "_cost": "3",
+    "_rng": "10",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "YES",
+    "__text": "Target enemy warbeast suffers -2 FURY and THR and loses its animus. The spellcaster can cast an affected warbeast's animus as if the animus belonged to a warbeast in the spellcaster's battlegroup and control range. "
+}, {
+    "_id": {
+        "$oid": "5756baa9bd966f1469da1557"
+    },
+    "_name": "UNNATURAL AGGRESSION",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target friendly Faction model gains Hyper-Aggressive. (When a model with Hyper-Aggressive suffers damage from an enemy attack at any time except while it is advancing, after the attack is resolved it can immediately make a full advance directly toward the attacking model.)"
+}, {
+    "_id": {
+        "$oid": "575d5cd1c2ef166e0a376d0c"
+    },
+    "_name": "UNSEEN PATH",
+    "_cost": "2",
+    "_rng": "CTRL",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "NO",
+    "__text": "Unseen Path can be cast only While Scrapjack is in the Old Witch’s control range. Immediately place the Old Witch completely within 2\" of Scrapjack or place Scrapjack completely within 2\" of the Old Witch. A model cannot advance this turn after being placed by Unseen Path."
+}, {
+    "_id": {
+        "$oid": "57570693c2ef165afae4e1a2"
+    },
+    "_name": "UNSTOPPABLE FORCE",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "",
+    "_aoe": "CTRL",
+    "_duration": "TURN",
+    "_off": "NO",
+    "__text": "While in the spellcaster's control range, models in its battlegroup gain Bulldoze. Unstoppable Force lasts for one turn. (When a model with Bulldoze is B2B with an enemy model during its Normal Movement, it can push that model up to 2\" directly away from it. A model can be pushed by Bulldoze only once per activation. Bulldoze has no effect when a model makes a trample power attack.)"
+}, {
+    "_id": {
+        "$oid": "5761567dbd966f2233cea0df"
+    },
+    "_name": "VANISH",
+    "_cost": "1",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "NO",
+    "__text": "Place the spell caster anywhere completely within 3\" of its current location.  Vanish can be cast only once per activation."
+}, {
+    "_id": {
+        "$oid": "5757dfb7bd966f5eba464f44"
+    },
+    "_name": "VEIL OF MISTS",
+    "_cost": "2",
+    "_rng": "CTRL",
+    "_pow": "-",
+    "_aoe": "4",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Place a 4˝ AOE cloud effect anywhere completely within the spellcaster’s control range. This AOE does not block friendly Faction models’ LOS. While in the AOE, friendly Faction models gain Pathfinder and can move through obstructions and other models if they have enough movement to move completely past them."
+}, {
+    "_id": {
+        "$oid": "5756d069c2ef1612e2beb1cc"
+    },
+    "_name": "VELOCITY",
+    "_cost": "*",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "NO",
+    "__text": "The spellcaster can spend up to 3 focus points to immediately advance up to 2˝ for each focus point spent. Velocity can be cast only once per activation."
+}, {
+    "_id": {
+        "$oid": "57548720bd966f1469c791d4"
+    },
+    "_name": "VENGEFUL",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target friendly Faction model gains Retaliatory Strike. (If a model with Retaliatory Strike is hit by an enemy melee attack during your opponent’s turn, after that attack is resolved it can immediately make one basic melee attack against the attacking model. A model with Retaliatory Strike can make only one Retaliatory Strike per turn.)"
+}, {
+    "_id": {
+        "$oid": "57567de9bd966f1469d88162"
+    },
+    "_name": "VENOM",
+    "_cost": "2",
+    "_rng": "SP8",
+    "_pow": "10",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "Venom causes corrosion damage. Models hit suffer the Corrosion continuous effect."
+}, {
+    "_id": {
+        "$oid": "575d6da7c2ef166e0a37a9b8"
+    },
+    "_name": "VISION",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "When target friendly Faction model is directly hit by an attack, you can choose to have it suffer no damage roll from the attack, then Vision expires."
+}, {
+    "_id": {
+        "$oid": "5757f64ebd966f5eba46d89f"
+    },
+    "_name": "VOID GATE",
+    "_cost": "3",
+    "_rng": "10",
+    "_pow": "13",
+    "_aoe": "3",
+    "_duration": "RND",
+    "_off": "YES",
+    "__text": "The AOE remains in play for one round. While in the AOE, enemy models cannot cast or channel spells."
+}, {
+    "_id": {
+        "$oid": "5756ccd4bd966f1469dad871"
+    },
+    "_name": "VOLTAIC SNARE",
+    "_cost": "2",
+    "_rng": "8",
+    "_pow": "-",
+    "_aoe": "4",
+    "_duration": "RND",
+    "_off": "YES",
+    "__text": "This attack causes no damage. Warjacks hit suffer –4 DEF and cannot run, charge, or make slam or trample power attacks for one round. Voltaic Snare can be cast only once per activation."
+}, {
+    "_id": {
+        "$oid": "5757dfddc2ef165afaec27da"
+    },
+    "_name": "VORTEX OF DESTRUCTION",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Damage rolls against enemy models in the spellcaster’s melee range are automatically boosted."
+}, {
+    "_id": {
+        "$oid": "575cf769bd966f7076220513"
+    },
+    "_name": "WALL OF FIRE",
+    "_cost": "2",
+    "_rng": "CTRL",
+    "_pow": "-",
+    "_aoe": "WALL",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Place the wall template anywhere completely within the spellcaster’s control range where it does not touch a model’s base, an obstruction, or an obstacle. When a model enters or ends its activation in the wall template, it suffers an unboostable POW 12 fire damage roll and the Fire continuous effect. Models within the wall template gain concealment."
+}, {
+    "_id": {
+        "$oid": "575966a0c2ef1652b42553cb"
+    },
+    "_name": "WARPATH",
+    "_cost": "3",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "CTRL",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "When a friendly Faction model in the spellcaster’s control range destroys one or more enemy models with a melee or ranged attack during its activation, immediately after the attack is resolved one warbeast in the spellcaster’s battlegroup that is in its control range can advance up to 3˝. A warbeast can advance as a result of Warpath only once per turn."
+}, {
+    "_id": {
+        "$oid": "57588ee8c2ef1652b41ee6fa"
+    },
+    "_name": "WATCHER",
+    "_cost": "3",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Once per turn when an enemy model advances and ends its movement within 6\" of the spellcaster, you can choose a warjack in the spellcaster's battlegroup that is in its control range. That warjack can immediately make a full advance toward the enemy model and then can make one basic melee or ranged attack targeting the enemy model. The attack and damage rolls against that model are boosted."
+}, {
+    "_id": {
+        "$oid": "575d5d1dc2ef166e0a376e83"
+    },
+    "_name": "WEALD SECRETS",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target friendly Faction model/ unit gains Pathﬁnder and Hunter. \n(A model with Hunter ignores concealment and cover when making a ranged attack.)"
+}, {
+    "_id": {
+        "$oid": "57abfb8abd966f35d841f394"
+    },
+    "_name": "WHITE SQUALL",
+    "_cost": "3",
+    "_rng": "8",
+    "_pow": "12",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "YES",
+    "__text": "Instead of suffering a normal damage roll, a non-incorporeal model hit by White Squall is thrown d6\" directly away from the spell's point of origin and suffers a POW 12 damage roll. The model thrown does not deviate. Collateral damage from this throw is POW 12."
+}, {
+    "_id": {
+        "$oid": "57557500bd966f1469ce7a34"
+    },
+    "_name": "WILD AGGRESSION",
+    "_cost": "3",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "UP",
+    "_off": "NO",
+    "__text": "Target friendly living warbeast in the spellcaster's battlegroup can run, charge, or make slam or trample power attacks without being forced and gains boosted melee attack rolls."
+}, {
+    "_id": {
+        "$oid": "575a5c63c2ef166e0a2a7941"
+    },
+    "_name": "WILD GROWTH",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "4",
+    "_duration": "RND",
+    "_off": "NO",
+    "__text": "Center a 4˝ AOE on the spellcaster. The AOE is a forest that remains in play for one round. The spellcaster cannot move or be placed after casting Wild Growth. Wild Growth lasts for one round."
+}, {
+    "_id": {
+        "$oid": "57581da7c2ef165afaee034e"
+    },
+    "_name": "WIND BLAST",
+    "_cost": "2",
+    "_rng": "CTRL",
+    "_pow": "-",
+    "_aoe": "5",
+    "_duration": "RND",
+    "_off": "NO",
+    "__text": "Place a 5˝ AOE anywhere completely within the spellcaster’s control range. Cloud effects overlapping the AOE expire. Models cannot make ranged attacks while within the AOE. The AOE remains in play for one round."
+}, {
+    "_id": {
+        "$oid": "575d5fedbd966f70762339a8"
+    },
+    "_name": "WIND RUSH",
+    "_cost": "2",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "-",
+    "_off": "NO",
+    "__text": "The spellcaster can immediately make a full advance and gains +2 DEF for one round. Wind Rush can be cast only once per activation."
+}, {
+    "_id": {
+        "$oid": "5756841bbd966f1469d89898"
+    },
+    "_name": "WIND WALL",
+    "_cost": "3",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "RND",
+    "_off": "NO",
+    "__text": "The spellcaster cannot make ranged attacks after casting this spell, and non-magical ranged attacks targeting it automatically miss. While completely within 3\" of the spellcaster, models cannot make ranged attacks and non-magical ranged attacks targeting them automatically miss. Wind Wall lasts for one round."
+}, {
+    "_id": {
+        "$oid": "575a633fc2ef166e0a2a88c8"
+    },
+    "_name": "WINDSTORM",
+    "_cost": "3",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "CTRL",
+    "_duration": "RND",
+    "_off": "NO",
+    "__text": "While in the spellcaster’s control range, enemy models suffer –5 RNG on their ranged attacks. When an enemy AOE ranged attack deviates from a point in this model’s control range, after determining the deviation distance, you choose the deviation direction. Windstorm lasts for one round."
+}, {
+    "_id": {
+        "$oid": "57592548c2ef1652b4238b3a"
+    },
+    "_name": "WINTER COAT",
+    "_cost": "1",
+    "_rng": "SELF",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "RND",
+    "_off": "NO",
+    "__text": "The spellcaster gains Immunity: Cold and Freezer. Winter Coat lasts for one round. (When an enemy model without Immunity: Cold ends its activation within 2˝ of a model with Freezer, the enemy model becomes stationary for one round.)"
+}, {
+    "_id": {
+        "$oid": "5758317bc2ef165afaeed585"
+    },
+    "_name": "WRAITHBANE",
+    "_cost": "2",
+    "_rng": "6",
+    "_pow": "-",
+    "_aoe": "-",
+    "_duration": "TURN",
+    "_off": "NO",
+    "__text": "Target friendly Faction model's weapons gain Blessed and Damage Type: Magical. Wraithbane lasts for one turn."
+}]
