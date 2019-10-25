@@ -30,13 +30,8 @@ export default {
 			if (ref.id === 0&& this.reference.id===0) {
 				this.reference.id = -1
 			} else {
-				this.reference.id = ref.id
+				this.reference = ref
 			}
-			// if (ref === 0&& this.ref===0) {
-			// 	this.ref = -1
-			// } else {
-			// 	this.ref = ref
-			// }
 		},
 		setLanguage: function(language) {
 			if (language === this.$language) {

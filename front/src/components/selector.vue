@@ -83,7 +83,8 @@ export default {
 				.post(process.env.VUE_APP_API_ENDPOINT+ "/ref?faction_id=" + this.faction + "&category_id=" + this.category, ref)
 				.then(function(res) {
 					console.log(res);
-					this.$emit('select_ref', res.body)
+					ref.id = res.body
+					this.$emit('select_ref', ref)
 					this.newName=""
 				})
 				.catch(function(err) {

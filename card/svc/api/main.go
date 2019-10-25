@@ -1,7 +1,6 @@
 package main
 
 import (
-	"database/sql"
 	"fmt"
 	"net/http"
 
@@ -9,6 +8,7 @@ import (
 	"github.com/chibimi/cards/card/api"
 	"github.com/codegangsta/negroni"
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/jmoiron/sqlx"
 	"github.com/julienschmidt/httprouter"
 	"github.com/kelseyhightower/envconfig"
 	"github.com/rs/cors"
@@ -26,15 +26,24 @@ func main() {
 	}{}
 	envconfig.Process("card_api", &cfg)
 
-	db, err := sql.Open("mysql", fmt.Sprintf("%s:%s@%s/%s", cfg.Login, cfg.Password, cfg.Host, cfg.DB))
+	db, err := sqlx.Open("mysql", fmt.Sprintf("%s:%s@%s/%s", cfg.Login, cfg.Password, cfg.Host, cfg.DB))
 	if err != nil {
 		log15.Crit("Unable to access db", "err", err.Error())
 	}
 	defer db.Close()
 
 	s := api.NewService(card.NewService(db, log15.New()))
+	ss := card.NewSService(db)
 
 	router := httprouter.New()
+	router.POST("/ref", ss.Ref.CreateRef)
+	router.GET("/ref", ss.Ref.ListRef)
+	router.GET("/ref/:id", ss.Ref.GetRef)
+	router.PUT("/ref/:id", ss.Ref.SaveRef)
+
+	router.PUT("/ref/:id/feat", ss.Feat.SaveFeat)
+	router.GET("/ref/:id/feat", ss.Feat.GetFeat)
+
 	router.GET("/abilities", s.ListAbilities)
 	router.GET("/abilities/:id", s.GetAbility)
 	router.POST("/abilities", s.CreateAbility)
@@ -45,19 +54,18 @@ func main() {
 	router.POST("/spells", s.CreateSpell)
 	router.PUT("/spells/:id", s.UpdateSpell)
 
-	router.GET("/feats", s.ListFeats)
-	router.POST("/feats", s.CreateFeat)
-	router.PUT("/feats/:id", s.UpdateFeat)
+	// router.GET("/feats", s.ListFeats)
+	// router.POST("/feats", s.CreateFeat)
+	// router.PUT("/feats/:id", s.UpdateFeat)
 
 	router.GET("/cards", s.ListCards)
-	router.GET("/cards/:id", s.GetCard)
+	// router.GET("/cards/:id", s.GetCard)
 	router.GET("/cards/:id/related", s.GetRelatedCards)
 	router.GET("/cards/:id/abilities", s.GetCardAbilities)
 	router.GET("/cards/:id/models", s.GetCardModels)
 	router.GET("/cards/:id/spells", s.GetCardSpells)
 	router.GET("/cards/:id/feats", s.GetCardFeat)
 	router.POST("/cards", s.CreateCard)
-	router.PUT("/cards/:id", s.UpdateCard)
 	router.DELETE("/cards/:id", s.DeleteCard)
 
 	router.GET("/models/", s.ListModels)

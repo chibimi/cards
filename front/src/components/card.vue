@@ -139,9 +139,9 @@ export default {
 		};
 	},
 	methods: {
-		get: function(cardID) {
+		get: function(refID) {
 			this.$http
-				.get(process.env.VUE_APP_API_ENDPOINT+ "/cards/" + cardID + "?lang=" + this.$language)
+				.get(process.env.VUE_APP_API_ENDPOINT+ "/ref/" + refID + "?lang=" + this.$language)
 				.then(function(res) {
 					console.log(res);
 					this.card = res.data;
@@ -156,7 +156,7 @@ export default {
 			}
 			this.alert = ""
 			this.$http
-				.put(process.env.VUE_APP_API_ENDPOINT+ "/cards/" + card.id + "?lang=" + this.$language, card)
+				.put(process.env.VUE_APP_API_ENDPOINT+ "/ref/" + card.id + "?lang=" + this.$language, card)
 				.then(function(res) {
 					console.log(res);
 					this.alert = "save success"

@@ -78,12 +78,12 @@
 // import Abilities from "./abilities.vue";
 import Models from "./models.vue";
 // import Spells from "./spells.vue";
-// import Feat from "./feat.vue";
+import Feat from "./feat.vue";
 import Card from "./card.vue";
 export default {
 	name: "Ref",
 	props: ["reference"],
-	components: { Card, Models},
+	components: { Card, Models, Feat},
 	// components: { Card, Models, Abilities, Spells, Feat },
 };
 </script>
