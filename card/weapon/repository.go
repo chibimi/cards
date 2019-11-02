@@ -1,6 +1,7 @@
 package weapon
 
 import (
+	"database/sql"
 	"encoding/json"
 
 	"github.com/jmoiron/sqlx"
@@ -159,4 +160,17 @@ func (r *Repository) Delete(id int) error {
 		return errors.Wrap(err, "execute query")
 	}
 	return nil
+}
+
+func (r *Repository) GetLang(id int, lang string) (*Weapon, error) {
+	stmt := `
+	SELECT name FROM weapons_lang WHERE ability_id = ? AND lang = ?
+	`
+	res := &Weapon{}
+	err := r.db.Get(res, stmt, id, lang)
+	if err != nil && err != sql.ErrNoRows {
+		return nil, errors.Wrap(err, "execute query")
+	}
+
+	return res, nil
 }

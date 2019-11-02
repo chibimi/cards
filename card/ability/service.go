@@ -49,3 +49,7 @@ func (s *Service) AddAbilityWeapon(weapon, spell int) error {
 func (s *Service) DeleteAbilityWeapon(weapon, spell int) error {
 	return s.repo.DeleteAbilityWeapon(weapon, spell)
 }
+
+func (s *Service) GetLang(id int, lang string) (*Ability, error) {
+	return s.repo.GetLang(id, lang)
+}

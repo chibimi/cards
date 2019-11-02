@@ -1,6 +1,8 @@
 package spell
 
 import (
+	"database/sql"
+
 	"github.com/jmoiron/sqlx"
 	"github.com/pkg/errors"
 )
@@ -124,4 +126,17 @@ func (r *Repository) DeleteSpellRef(ref, spell int) error {
 		return errors.Wrap(err, "execute query")
 	}
 	return nil
+}
+
+func (r *Repository) GetLang(id int, lang string) (*Spell, error) {
+	stmt := `
+	SELECT name, description FROM spells_lang WHERE spell_id = ? AND lang = ?
+	`
+	res := &Spell{}
+	err := r.db.Get(res, stmt, id, lang)
+	if err != nil && err != sql.ErrNoRows {
+		return nil, errors.Wrap(err, "execute query")
+	}
+
+	return res, nil
 }

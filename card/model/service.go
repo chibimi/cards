@@ -27,3 +27,7 @@ func (s *Service) Save(m *Model, lang string) error {
 func (s *Service) Delete(id int) error {
 	return s.repo.Delete(id)
 }
+
+func (s *Service) GetLang(id int, lang string) (*Model, error) {
+	return s.repo.GetLang(id, lang)
+}

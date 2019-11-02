@@ -1,6 +1,7 @@
 package reference
 
 import (
+	"database/sql"
 	"encoding/json"
 
 	"github.com/jmoiron/sqlx"
@@ -138,4 +139,17 @@ func (r *Repository) Save(ref *Reference, lang string) error {
 	}
 
 	return nil
+}
+
+func (r *Repository) GetLang(id int, lang string) (*Reference, error) {
+	stmt := `
+	SELECT name, properties FROM refs_lang WHERE ref_id = ? AND lang = ?
+	`
+	res := &Reference{}
+	err := r.db.Get(res, stmt, id, lang)
+	if err != nil && err != sql.ErrNoRows {
+		return nil, errors.Wrap(err, "execute query")
+	}
+
+	return res, nil
 }

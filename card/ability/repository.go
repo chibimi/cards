@@ -1,6 +1,8 @@
 package ability
 
 import (
+	"database/sql"
+
 	"github.com/jmoiron/sqlx"
 	"github.com/pkg/errors"
 )
@@ -200,4 +202,17 @@ func (r *Repository) DeleteAbilityWeapon(weapon, ability int) error {
 		return errors.Wrap(err, "execute query")
 	}
 	return nil
+}
+
+func (r *Repository) GetLang(id int, lang string) (*Ability, error) {
+	stmt := `
+	SELECT name, description FROM abilities_lang WHERE ability_id = ? AND lang = ?
+	`
+	res := &Ability{}
+	err := r.db.Get(res, stmt, id, lang)
+	if err != nil && err != sql.ErrNoRows {
+		return nil, errors.Wrap(err, "execute query")
+	}
+
+	return res, nil
 }
