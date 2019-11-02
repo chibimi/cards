@@ -14,4 +14,6 @@ type Reference struct {
 	Name       string `json:"name,omitempty" db:"name"`
 	Properties string `json:"properties,omitempty" db:"properties"`
 	Status     string `json:"status,omitempty" db:"status"`
+	MercFor    []int  `json:"mercenary_for,omitempty"`
+	MinFor     []int  `json:"minion_for,omitempty"`
 }
