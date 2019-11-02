@@ -24,7 +24,7 @@
 		<div class="row">
 			<span class="col-2"></span>
 			<div class="col-10">
-				<WeaponAbilities v-for="value in model.weapons" :abilitiesList="abilitiesList" :weapon="value" :key="value.id" v-on:new="newAbility" v-on:update="updateAbility"></WeaponAbilities>
+				<WeaponAbilities v-for="value in weapons" :abilitiesList="abilitiesList" :weapon="value" :key="value.id" v-on:new="newAbility" v-on:update="updateAbility"></WeaponAbilities>
 			</div>
 		</div>
 		<hr>
@@ -44,6 +44,7 @@ export default {
 	watch: {
 		model: function(newVal) {
 			this.get(newVal.id);
+			this.getWeapons(newVal.id);
 		},
 		abilitiesList: function() {
 			this.get(this.model.id);
@@ -51,17 +52,27 @@ export default {
 	},
 	created: function() {
 		this.get(this.model.id);
+		this.getWeapons(this.model.id);
 	},
 	data() {
 		return {
 			abilities: [],
-			ability: {}
+			ability: {},
+			weapons: []
 		};
 	},
 	methods: {
+		getWeapons: function(modelID) {
+			this.$http
+				.get(process.env.VUE_APP_API_ENDPOINT+ "/model/" + modelID + "/weapon?lang=" + this.$language)
+				.then(function(res) {
+					console.log(res);
+					this.weapons = res.data;
+				});
+		},
 		get: function(modelID) {
 			this.$http
-				.get(process.env.VUE_APP_API_ENDPOINT+ "/models/" + modelID + "/abilities?lang=" + this.$language)
+				.get(process.env.VUE_APP_API_ENDPOINT+ "/model/" + modelID + "/ability?lang=" + this.$language)
 				.then(function(res) {
 					console.log(res);
 					this.abilities = res.data;
@@ -69,7 +80,7 @@ export default {
 		},
 		removeAbility: function(ability, index) {
 			this.$http
-				.delete(process.env.VUE_APP_API_ENDPOINT+ "/models/" + this.model.id + "/abilities/" + ability.id)
+				.delete(process.env.VUE_APP_API_ENDPOINT+ "/model/" + this.model.id + "/ability/" + ability.id)
 				.then(function(res) {
 					console.log(res);
 					if (res.status === 204) {
@@ -79,7 +90,7 @@ export default {
 		},
 		addAbility: function(ability) {
 			this.$http
-				.put(process.env.VUE_APP_API_ENDPOINT+ "/models/" + this.model.id + "/abilities/" + ability.id + "?lang=" + this.$language)
+				.put(process.env.VUE_APP_API_ENDPOINT+ "/model/" + this.model.id + "/ability/" + ability.id + "?lang=" + this.$language)
 				.then(function(res) {
 					console.log(res);
 					if (res.status === 200) {

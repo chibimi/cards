@@ -29,17 +29,17 @@
 import Spell from "./spell.vue";
 export default {
 	name: "Spells",
-	props: ["id"],
+	props: ["ref_id"],
 	components: {
 		Spell
 	},
 	watch: {
-		id: function(newVal) {
+		ref_id: function(newVal) {
 			this.get(newVal);
 		}
 	},
 	created: function() {
-		this.get(this.id);
+		this.get(this.ref_id);
 		this.getSpells();
 	},
 	data() {
@@ -50,14 +50,6 @@ export default {
 		};
 	},
 	methods: {
-		get: function(cardID) {
-			this.$http
-				.get(process.env.VUE_APP_API_ENDPOINT+ "/ref/" + cardID + "/spell?lang=" + this.$language)
-				.then(function(res) {
-					console.log(res);
-					this.spells = res.data;
-				});
-		},
 		getSpells: function() {
 			this.$http
 				.get(process.env.VUE_APP_API_ENDPOINT+ "/spells?lang=" + this.$language)
@@ -66,9 +58,24 @@ export default {
 					this.spellsList = res.data;
 				});
 		},
+		updateSpell: function() {
+			this.getSpells();
+
+		},
+		newSpell: function(spell) {
+			this.spellsList.push(spell);
+		},
+		get: function(cardID) {
+			this.$http
+				.get(process.env.VUE_APP_API_ENDPOINT+ "/ref/" + cardID + "/spell?lang=" + this.$language)
+				.then(function(res) {
+					console.log(res);
+					this.spells = res.data;
+				});
+		},
 		removeSpell: function(spell, index) {
 			this.$http
-				.delete(process.env.VUE_APP_API_ENDPOINT+ "/ref/" + this.id + "/spell/" + spell.id)
+				.delete(process.env.VUE_APP_API_ENDPOINT+ "/ref/" + this.ref_id + "/spell/" + spell.id)
 				.then(function(res) {
 					console.log(res);
 					if (res.status === 204) {
@@ -78,7 +85,7 @@ export default {
 		},
 		addSpell: function(spell) {
 			this.$http
-				.put(process.env.VUE_APP_API_ENDPOINT+ "/ref/" + this.id + "/spell/" + spell.id + "?lang=" + this.$language)
+				.put(process.env.VUE_APP_API_ENDPOINT+ "/ref/" + this.ref_id + "/spell/" + spell.id + "?lang=" + this.$language)
 				.then(function(res) {
 					console.log(res);
 					if (res.status === 201) {
@@ -86,13 +93,6 @@ export default {
 						this.spell = {};
 					}
 				});
-		},
-		updateSpell: function() {
-			this.getSpells();
-
-		},
-		newSpell: function(spell) {
-			this.spellsList.push(spell);
 		}
 	}
 };

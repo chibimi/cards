@@ -28,19 +28,19 @@
 <script>
 export default {
 	name: "Feat",
-	props: ["id"],
+	props: ["ref_id"],
 	watch: {
-		id: function(newVal) {
+		ref_id: function(newVal) {
 			this.get(newVal);
 		}
 	},
 	created: function() {
-		this.get(this.id);
+		this.get(this.ref_id);
 	},
 	data() {
 		return {
 			feat: {
-				ref_id: this.id
+				ref_id: this.ref_id
 			},
 			update: false
 		};

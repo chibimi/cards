@@ -29,7 +29,7 @@
 import Ability from "./ability.vue";
 export default {
 	name: "CardAbilities",
-	props: ["id", "abilitiesList"],
+	props: ["ref_id", "abilitiesList"],
 	components: {
 		Ability
 	},
@@ -38,11 +38,11 @@ export default {
 			this.get(newVal);
 		},
 		abilitiesList: function() {
-			this.get(this.id);
+			this.get(this.ref_id);
 		}
 	},
 	created: function() {
-		this.get(this.id);
+		this.get(this.ref_id);
 	},
 	data() {
 		return {
@@ -51,9 +51,9 @@ export default {
 		};
 	},
 	methods: {
-		get: function(cardID) {
+		get: function(refID) {
 			this.$http
-				.get(process.env.VUE_APP_API_ENDPOINT+ "/cards/" + cardID + "/abilities?lang=" + this.$language)
+				.get(process.env.VUE_APP_API_ENDPOINT+ "/ref/" + refID + "/ability?lang=" + this.$language)
 				.then(function(res) {
 					console.log(res);
 					this.abilities = res.data;
@@ -61,7 +61,7 @@ export default {
 		},
 		removeAbility: function(ability, index) {
 			this.$http
-				.delete(process.env.VUE_APP_API_ENDPOINT+ "/cards/" + this.id + "/abilities/" + ability.id)
+				.delete(process.env.VUE_APP_API_ENDPOINT+ "/ref/" + this.ref_id + "/ability/" + ability.id)
 				.then(function(res) {
 					console.log(res);
 					if (res.status === 204) {
@@ -71,7 +71,7 @@ export default {
 		},
 		addAbility: function(ability) {
 			this.$http
-				.put(process.env.VUE_APP_API_ENDPOINT+ "/cards/" + this.id + "/abilities/" + ability.id + "?lang=" + this.$language)
+				.put(process.env.VUE_APP_API_ENDPOINT+ "/ref/" + this.ref_id + "/ability/" + ability.id + "?lang=" + this.$language)
 				.then(function(res) {
 					console.log(res);
 					if (res.status === 200) {
