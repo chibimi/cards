@@ -1,6 +1,7 @@
 package card
 
 import (
+	"github.com/chibimi/cards/card/ability"
 	"github.com/chibimi/cards/card/feat"
 	"github.com/chibimi/cards/card/model"
 	"github.com/chibimi/cards/card/reference"
@@ -15,19 +16,21 @@ type SConfig struct {
 type SService struct {
 	Ref *reference.Service
 	// Card *card.Service
-	Feat   *feat.Service
-	Model  *model.Service
-	Weapon *weapon.Service
-	Spell  *spell.Service
+	Feat    *feat.Service
+	Model   *model.Service
+	Weapon  *weapon.Service
+	Spell   *spell.Service
+	Ability *ability.Service
 }
 
 func NewSService(db *sqlx.DB) *SService {
 	return &SService{
 		Ref: reference.NewService(reference.NewRepository(db)),
 		// Card: card.NewService(card.NewRepository(db)),
-		Feat:   feat.NewService(feat.NewRepository(db)),
-		Model:  model.NewService(model.NewRepository(db)),
-		Weapon: weapon.NewService(weapon.NewRepository(db)),
-		Spell:  spell.NewService(spell.NewRepository(db)),
+		Feat:    feat.NewService(feat.NewRepository(db)),
+		Model:   model.NewService(model.NewRepository(db)),
+		Weapon:  weapon.NewService(weapon.NewRepository(db)),
+		Spell:   spell.NewService(spell.NewRepository(db)),
+		Ability: ability.NewService(ability.NewRepository(db)),
 	}
 }
