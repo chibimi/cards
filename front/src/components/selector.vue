@@ -1,28 +1,28 @@
 <template>
 	<div class="row">
-		<form v-on:submit.prevent class="form-inline">
+		<form v-on:submit.prevent class="form-inline w-100">
 			<country-flag :country="this.$language"/>
-			<select :value="this.$language" class="form-control" @change="$emit('change_language', $event.target.value)">
+			<select :value="this.$language" class="form-control form-control-sm" @change="$emit('change_language', $event.target.value)">
 				<option>UK</option>
 				<option>FR</option>
 				<option>DE</option>
 				<option>IT</option>
 			</select>
-			<label>Faction</label>
-			<select v-model="faction" class="form-control" @change="changeFaction">
+			<!-- <label>Faction</label> -->
+			<select v-model="faction" class="form-control form-control-sm w-15" @change="changeFaction">
 				<option v-for="f in factions" :key="f.id" :value="f.id">{{f.name}}</option>
 			</select>
-			<label>Category</label>
-			<select v-model="category" class="form-control" @change="changeCategory">
+			<!-- <label>Category</label> -->
+			<select v-model="category" class="form-control form-control-sm w-15" @change="changeCategory">
 				<option v-for="c in categories" :key="c.id" :value="c.id">{{c.name}}</option>
 			</select>
-			<label>Ref</label>
-			<select v-model="ref" class="form-control">
+			<!-- <label>Ref</label> -->
+			<select v-model="ref" class="form-control form-control-sm w-25">
 				<option v-for="c in refs" :key="c.id" :value="c">[{{c.status}}] #{{c.id}} {{c.title}}</option>
 			</select>
-			<button type="submit" class="btn btn-primary" @click="$emit('select_ref', ref)">Go</button>
-			<input v-model="newName" type="text" class="form-control">
-			<button type="submit" class="btn btn-primary" @click="newRef">New Ref</button>
+			<button type="submit" class="btn btn-primary btn-sm" @click="$emit('select_ref', ref)">Go</button>
+			<input v-model="newName" type="text" class="form-control form-control-sm w-25" placeholder="new ref name">
+			<button type="submit" class="btn btn-primary btn-sm" @click="newRef">New Ref</button>
 		</form>
 	</div>
 </template>
@@ -96,4 +96,16 @@ export default {
 </script>
 
 <style>
+.w-10 {
+    width: 10% !important;
+}
+.w-15 {
+    width: 15% !important;
+}
+.w-20 {
+    width: 20% !important;
+}
+.w-30 {
+    width: 30% !important;
+}
 </style>

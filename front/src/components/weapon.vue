@@ -122,7 +122,7 @@ export default {
 			}
 			this.reset();
 			this.$http
-				.put(process.env.VUE_APP_API_ENDPOINT+ "/weapons/" + weapon.id + "?lang=" + this.$language, weapon)
+				.put(process.env.VUE_APP_API_ENDPOINT+ "/weapon/" + weapon.id + "?lang=" + this.$language, weapon)
 				.then(function(res) {
 					console.log(res);
 					this.alert = "save success";
@@ -140,7 +140,7 @@ export default {
 		remove: function(weapon) {
 			this.reset();
 			this.$http
-				.delete(process.env.VUE_APP_API_ENDPOINT+ "/weapons/" + weapon.id)
+				.delete(process.env.VUE_APP_API_ENDPOINT+ "/weapon/" + weapon.id)
 				.then(function(res) {
 					console.log(res);
 					if (res.status === 204) {

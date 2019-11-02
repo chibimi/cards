@@ -32,8 +32,9 @@
 					aria-controls="nav-abilities"
 					aria-selected="false"
 				>Abilities</a>
+				-->
 				<a
-					v-if="card.id>0"
+					v-if="reference.id>0"
 					class="nav-item nav-link"
 					id="nav-spells-tab"
 					data-toggle="tab"
@@ -41,7 +42,7 @@
 					role="tab"
 					aria-controls="nav-spells"
 					aria-selected="false"
-				>Spells & Animus</a> -->
+				>Spells & Animus</a> 
 				<a
 					v-if="reference.id>0 && (reference.category_id=== 1 || reference.category_id===2)"
 					class="nav-item nav-link"
@@ -63,10 +64,10 @@
 			</div>
 			<!-- <div class="tab-pane fade" id="nav-abilities" role="tabpanel" aria-labelledby="nav-abilities-tab">
 				<Abilities v-if="card.id>0" :card="card"></Abilities>
-			</div>
+			</div>-->
 			<div class="tab-pane fade" id="nav-spells" role="tabpanel" aria-labelledby="nav-spells-tab">
-				<Spells v-if="card.id>0" :id="card.id"></Spells>
-			</div> -->
+				<Spells v-if="reference.id>0" :id="reference.id"></Spells>
+			</div> 
 			<div class="tab-pane fade" id="nav-feat" role="tabpanel" aria-labelledby="nav-feat-tab">
 				<Feat v-if="reference.id>0 && (reference.category_id=== 1 || reference.category_id===2)" :id="reference.id"></Feat>
 			</div>
@@ -77,13 +78,13 @@
 <script>
 // import Abilities from "./abilities.vue";
 import Models from "./models.vue";
-// import Spells from "./spells.vue";
+import Spells from "./spells.vue";
 import Feat from "./feat.vue";
 import Card from "./card.vue";
 export default {
 	name: "Ref",
 	props: ["reference"],
-	components: { Card, Models, Feat},
+	components: { Card, Models, Feat, Spells},
 	// components: { Card, Models, Abilities, Spells, Feat },
 };
 </script>

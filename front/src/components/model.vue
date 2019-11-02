@@ -199,7 +199,7 @@ export default {
 			}
 			this.reset();
 			this.$http
-				.put(process.env.VUE_APP_API_ENDPOINT+ "/models/" + model.id + "?lang=" + this.$language, model)
+				.put(process.env.VUE_APP_API_ENDPOINT+ "/model/" + model.id + "?lang=" + this.$language, model)
 				.then(function(res) {
 					console.log(res);
 					this.alert = "save success";
@@ -217,7 +217,7 @@ export default {
 		remove: function(model) {
 			this.reset();
 			this.$http
-				.delete(process.env.VUE_APP_API_ENDPOINT+ "/models/" + model.id)
+				.delete(process.env.VUE_APP_API_ENDPOINT+ "/model/" + model.id)
 				.then(function(res) {
 					console.log(res);
 					if (res.status === 204) {

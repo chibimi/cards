@@ -41,7 +41,7 @@ export default {
 		return {
 			models2: [],
 			newModel: {
-				card_id: this.ref_id,
+				ref_id: this.ref_id,
 				advantages: [],
 				weapons: []
 			}
@@ -51,7 +51,7 @@ export default {
 		get: function(id) {
 			this.models2 = [];
 			this.$http
-				.get(process.env.VUE_APP_API_ENDPOINT+ "/cards/" + id + "/models?lang=" + this.$language)
+				.get(process.env.VUE_APP_API_ENDPOINT+ "/ref/" + id + "/model?lang=" + this.$language)
 				.then(function(res) {
 					console.log(res);
 					this.models2 = res.data;
@@ -63,7 +63,7 @@ export default {
 		addModel: function(model) {
 			this.models2.push(model);
 			this.newModel = {
-				card_id: this.id,
+				ref_id: this.id,
 				advantages: [],
 				weapons: []
 			};

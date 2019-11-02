@@ -1,7 +1,7 @@
 <template>
 	<div class="w-100">
 		<div v-if="!update" class="row px-3">
-			<span class="col-2 text-left">{{selectedAbility.name}} ({{selectedAbility.original_name}})</span>
+			<span class="col-2 text-left">{{selectedAbility.name}} ({{selectedAbility.title}})</span>
 			<span class="col-2 text-left">
 				Cost: {{selectedAbility.cost}}, Range: {{selectedAbility.rng}}<br>
 				AoE: {{selectedAbility.aoe}}, Pow: {{selectedAbility.pow}}<br>
@@ -35,8 +35,8 @@
 				@input="inputItem"
 				class="col-2 mt-1"
 			></v-autocomplete>
-			<input v-if="!selectedAbility.id" v-model="selectedAbility.original_name" type="text" class="form-control col-2" placeholder="English Name">
-			<label v-if="selectedAbility.id" class="col-form-label col-2 text-left">{{selectedAbility.original_name}}</label>
+			<input v-if="!selectedAbility.id" v-model="selectedAbility.title" type="text" class="form-control col-2" placeholder="English Name">
+			<label v-if="selectedAbility.id" class="col-form-label col-2 text-left">{{selectedAbility.title}}</label>
 			<input v-model="selectedAbility.name" type="text" class="form-control col-2" placeholder="French Name">
 			<input v-model="selectedAbility.cost" type="text" class="form-control col-1" placeholder="cost">
 			<input v-model="selectedAbility.rng" type="text" class="form-control col-1" placeholder="rng">
@@ -120,11 +120,11 @@ export default {
 			if (!item) {
 				return;
 			}
-			return item.original_name;
+			return item.title;
 		},
 		updateItems(text) {
 			this.items = this.spellsList.filter(item =>
-				item.original_name.toLowerCase().startsWith(text.toLowerCase())
+				item.title.toLowerCase().startsWith(text.toLowerCase())
 			);
 		},
 		selectedItem(item) {

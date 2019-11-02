@@ -46,7 +46,7 @@ export default {
 		get: function(id) {
 			this.models2 = [];
 			this.$http
-				.get(process.env.VUE_APP_API_ENDPOINT+ "/models/" + id + "/weapons?lang=" + this.$language)
+				.get(process.env.VUE_APP_API_ENDPOINT+ "/model/" + id + "/weapon?lang=" + this.$language)
 				.then(function(res) {
 					console.log(res);
 					this.weapons2 = res.data;

@@ -1,7 +1,7 @@
 <template>
   <div class="text-left">
     <b>#{{item.id}}</b>
-    <span>{{ item.original_name }}</span>
+    <span>{{ item.title }}</span>
   </div>
 </template>
 
