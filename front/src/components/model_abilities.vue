@@ -1,6 +1,6 @@
 <template>
 	<div class="w-100">
-		<h4 class="text-left">{{model.name}} abilities</h4>
+		<h4 class="text-left">{{model.name || vo.name}} abilities</h4>
 		<Ability
 			v-for="(value,index) in abilities"
 			v-bind:ability="value"
@@ -56,6 +56,7 @@ export default {
 	},
 	data() {
 		return {
+			vo: {},
 			abilities: [],
 			ability: {},
 			weapons: []
@@ -77,6 +78,12 @@ export default {
 					console.log(res);
 					this.abilities = res.data;
 				});
+			this.$http
+				.get(process.env.VUE_APP_API_ENDPOINT+ "/model/" + modelID + "/vo")
+				.then(function(res) {
+					console.log(res);
+					this.vo = res.data;
+				});
 		},
 		removeAbility: function(ability, index) {
 			this.$http
@@ -90,7 +97,7 @@ export default {
 		},
 		addAbility: function(ability) {
 			this.$http
-				.put(process.env.VUE_APP_API_ENDPOINT+ "/model/" + this.model.id + "/ability/" + ability.id + "?lang=" + this.$language)
+				.put(process.env.VUE_APP_API_ENDPOINT+ "/model/" + this.model.id + "/ability/" + ability.id + "?type=0&lang=" + this.$language)
 				.then(function(res) {
 					console.log(res);
 					if (res.status === 200) {

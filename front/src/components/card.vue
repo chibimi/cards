@@ -17,11 +17,11 @@
 			<div class="form-group row">
 				<div class="col-6">
 					<div class="row">
-						<label class="col-form-label col-3">Name</label>
+						<label class="col-form-label col-3">Name <Tooltip :txt="vo.name"/></label>
 						<input v-model="card.name" type="text" class="form-control col-8" placeholder="Fyanna, Torment of Everblight">
 					</div>
 					<div class="row">
-						<label class="col-form-label col-3">Tag</label>
+						<label class="col-form-label col-3">Tag <Tooltip :txt="vo.properties"/></label>
 						<input v-model="card.properties" type="text" class="form-control col-8" placeholder="Unité de la légion">
 					</div>
 					<div class="row">
@@ -116,10 +116,11 @@
 
 <script>
 import { Factions, Categories } from "./const.js";
+import Tooltip from "./tooltip.vue";
 export default {
 	name: "Card",
 	props: ["ref_id"],
-	components: {},
+	components: {Tooltip},
 	watch: {
 		ref_id: function(newVal) {
 			this.get(newVal);
@@ -133,6 +134,7 @@ export default {
 			factions: Factions,
 			categories: Categories,
 			card: {},
+			vo: {},
 			update: true,
 			alert: "",
 			alert_success: false,
@@ -148,6 +150,12 @@ export default {
 					if (this.card.id > 0 && this.card.status !== "wip") {
 						this.update = false;
 					}
+				});
+			this.$http
+				.get(process.env.VUE_APP_API_ENDPOINT+ "/ref/" + refID + "/vo")
+				.then(function(res) {
+					console.log(res);
+					this.vo = res.data;
 				});
 		},
 		save: function(card) {

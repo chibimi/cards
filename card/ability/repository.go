@@ -146,10 +146,10 @@ func (r *Repository) ListByModel(model int, lang string) ([]Ability, error) {
 	return res, nil
 }
 
-func (r *Repository) AddAbilityModel(model, ability int) error {
-	stmt := `INSERT INTO model_ability VALUES(?, ?)`
+func (r *Repository) AddAbilityModel(model, ability, typ int) error {
+	stmt := `INSERT INTO model_ability VALUES(?, ?, ?)`
 
-	_, err := r.db.Exec(stmt, model, ability)
+	_, err := r.db.Exec(stmt, model, ability, typ)
 	if err != nil {
 		return errors.Wrap(err, "execute query")
 	}
@@ -211,6 +211,23 @@ func (r *Repository) GetLang(id int, lang string) (*Ability, error) {
 	res := &Ability{}
 	err := r.db.Get(res, stmt, id, lang)
 	if err != nil && err != sql.ErrNoRows {
+		return nil, errors.Wrap(err, "execute query")
+	}
+
+	return res, nil
+}
+
+func (r *Repository) Get(id int, lang string) (*Ability, error) {
+	stmt := `
+	SELECT r.*, IFNULL(s.name, "") as name, IFNULL(s.description, "") as description FROM (
+		SELECT * FROM abilities WHERE id = ?
+	) as r LEFT JOIN (
+		SELECT * FROM abilities_lang WHERE ability_id = ? AND lang = ?
+	) as s ON r.id = s.ability_id
+	`
+	res := &Ability{}
+	err := r.db.Get(res, stmt, id, id, lang)
+	if err != nil {
 		return nil, errors.Wrap(err, "execute query")
 	}
 

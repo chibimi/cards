@@ -33,8 +33,8 @@ func (s *Service) DeleteAbilityRef(ref, spell int) error {
 func (s *Service) ListByModel(model int, lang string) ([]Ability, error) {
 	return s.repo.ListByModel(model, lang)
 }
-func (s *Service) AddAbilityModel(model, spell int) error {
-	return s.repo.AddAbilityModel(model, spell)
+func (s *Service) AddAbilityModel(model, spell, typ int) error {
+	return s.repo.AddAbilityModel(model, spell, typ)
 }
 func (s *Service) DeleteAbilityModel(model, spell int) error {
 	return s.repo.DeleteAbilityModel(model, spell)
@@ -50,6 +50,9 @@ func (s *Service) DeleteAbilityWeapon(weapon, spell int) error {
 	return s.repo.DeleteAbilityWeapon(weapon, spell)
 }
 
+func (s *Service) Get(id int, lang string) (*Ability, error) {
+	return s.repo.Get(id, lang)
+}
 func (s *Service) GetLang(id int, lang string) (*Ability, error) {
 	return s.repo.GetLang(id, lang)
 }

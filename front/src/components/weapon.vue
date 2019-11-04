@@ -1,7 +1,7 @@
 <template>
 	<div class="w-100">
 		<div class="form-group row px-3">
-			<span class="col-2 text-left">Name</span>
+			<span class="col-2 text-left">Name <Tooltip :txt="vo.name"/></span>
 			<span class="col-2 text-left">Type</span>
 			<span class="col-1 text-left">rng</span>
 			<span class="col-1 text-left">pow</span>
@@ -106,16 +106,38 @@
 </template>
 
 <script>
+import Tooltip from "./tooltip.vue";
 export default {
 	name: "Weapon",
 	props: ["weapon"],
+	components: { Tooltip },
+	watch: {
+		weapon: function(newVal) {
+			this.getVO(newVal.id);
+		}
+	},
+	created: function() {
+		this.getVO(this.weapon.id);
+	},
 	data() {
 		return {
+			vo: {},
 			alert: "",
 			alert_succes: false
 		};
 	},
 	methods: {
+		getVO: function(id) {
+			if (id == null) {
+				return;
+			}
+			this.$http
+				.get(process.env.VUE_APP_API_ENDPOINT+ "/weapon/" + id + "/vo")
+				.then(function(res) {
+					console.log(res);
+					this.vo = res.data;
+				});
+		},
 		save: function(weapon) {
 			if (weapon.id == null) {
 				weapon.id = 0;

@@ -7,7 +7,7 @@
 				v-bind:data-target="'#test_model_' + model.id"
 				v-bind:aria-expanded="!model.id"
 				v-bind:aria-controls="'test_model_' + model.id"
-			>{{model.name}}</h4>
+			>{{model.name || vo.name}}</h4>
 			<div class="col-4">
 				<div v-if="alert" class="alert alert-error py-2" v-bind:class="{ 'alert-success': alert_success }">{{alert}}</div>
 			</div>
@@ -25,7 +25,7 @@
 			<div class="row px-3">
 				<div class="col-3 pt-4 pr-4">
 					<div class="row">
-						<label class="col-form-label col-4 px-0">Name</label>
+						<label class="col-form-label col-4 px-0">Name <Tooltip :txt="vo.name"/></label>
 						<input v-model="model.name" type="text" class="form-control col-8">
 					</div>
 					<div class="row">
@@ -180,19 +180,40 @@
 
 <script>
 import Weapons from "./weapons.vue";
+import Tooltip from "./tooltip.vue";
 export default {
 	name: "Model",
 	props: ["model"],
 	components: {
-		Weapons
+		Weapons, Tooltip
+	},
+	watch: {
+		model: function(newVal) {
+			this.getVO(newVal.id);
+		}
+	},
+	created: function() {
+		this.getVO(this.model.id);
 	},
 	data() {
 		return {
+			vo: {},
 			alert: "",
 			alert_succes: false
 		};
 	},
 	methods: {
+		getVO: function(id) {
+			if (id == null) {
+				return;
+			}
+			this.$http
+				.get(process.env.VUE_APP_API_ENDPOINT+ "/model/" + id + "/vo")
+				.then(function(res) {
+					console.log(res);
+					this.vo = res.data;
+				});
+		},
 		save: function(model) {
 			if (model.id == null) {
 				model.id = 0;

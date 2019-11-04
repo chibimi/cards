@@ -1,8 +1,8 @@
 <template>
 	<div class="w-100">
 		<div v-if="!update" class="row px-3">
-			<span class="col-2 text-left">{{selectedAbility.name}} ({{selectedAbility.original_name}})</span>
-			<span class="col-9 text-left">{{selectedAbility.description}}</span>
+			<span class="col-2 text-left">{{selectedAbility.name}} ({{selectedAbility.title}})  <Tooltip :txt="vo.description"/></span>
+			<span class="col-9 text-left">{{selectedAbility.description || vo.description}}</span>
 			<span class="col-1 form-inline text-right">
 				<button type="submit" class="btn-sm btn-success" @click="update = true">U</button>
 				<button type="submit" class="btn-sm btn-danger" @click="$emit('remove')">X</button>
@@ -21,14 +21,15 @@
 				@input="inputItem"
 				class="col-2 mt-1"
 			></v-autocomplete>
-			<input v-if="!selectedAbility.id" v-model="selectedAbility.original_name" type="text" class="form-control col-2" placeholder="English Name">
-			<label v-if="selectedAbility.id" class="col-form-label col-2 text-left">{{selectedAbility.original_name}}</label>
+			<input v-if="!selectedAbility.id" v-model="selectedAbility.title" type="text" class="form-control col-2" placeholder="English Name">
+			<label v-if="selectedAbility.id" class="col-form-label col-2 text-left">{{selectedAbility.title}}</label>
 			<input v-model="selectedAbility.name" type="text" class="form-control col-2" placeholder="French Name">
 			<div class="form-check form-check-inline ml-2 col-5">
 				<label class="form-check-label">Can be magical or choose type ?</label>
 				<input class="form-check-input ml-3" type="checkbox" v-model="selectedAbility.magical">
 			</div>
-				<textarea v-model="selectedAbility.description" type="text" class="form-control col-11" rows="3" placeholder/>
+				<div class="col-3 font-italic text-left">{{vo.description}}</div>
+				<textarea v-model="selectedAbility.description" type="text" class="form-control col-8" rows="3" placeholder/>
 				<div class="col-1 px-0">
 					<button v-if="ability.id || selectedAbility.id" type="submit" class="form-control btn btn-success" @click="save(selectedAbility)">Update</button>
 					<button v-if="ability.id" type="submit" class="form-control btn btn-danger" @click="remove(selectedAbility)">Delete</button>
@@ -42,15 +43,18 @@
 
 <script>
 import ItemTemplate from "./ItemTemplate.vue";
+import Tooltip from "./tooltip.vue";
 export default {
 	name: "Ability",
-	props: ["abilitiesList", "ability"],
+	props: ["abilitiesList", "ability", "type"],
+	components: { Tooltip },
 	watch: {
 		ability: function(newVal) {
 			this.selectedAbility = newVal;
 			if (!this.ability.id){
 				this.update=true;
 			}
+			this.get(this.selectedAbility.id);
 		}
 	},
 	created: function() {
@@ -58,9 +62,11 @@ export default {
 		if (!this.ability.id){
 			this.update=true;
 		}
+		this.get(this.selectedAbility.id);
 	},
 	data() {
 		return {
+			vo: {},
 			selectedAbility: {},
 			template: ItemTemplate,
 			items: [],
@@ -68,6 +74,23 @@ export default {
 		};
 	},
 	methods: {
+		get: function(id) {
+			if (id == null) {
+				return;
+			}
+			this.$http
+				.get(process.env.VUE_APP_API_ENDPOINT+ "/abilities/" + id + "/vo")
+				.then(function(res) {
+					console.log(res);
+					this.vo = res.data;
+				});
+			this.$http
+				.get(process.env.VUE_APP_API_ENDPOINT+ "/abilities/" + id + "?lang=" + this.$language)
+				.then(function(res) {
+					console.log(res);
+					this.selectedAbility = res.data;
+				});
+		},
 		save: function(ability) {
 			if (ability.id == null) {
 				ability.id = 0;
@@ -104,15 +127,16 @@ export default {
 			if (!item) {
 				return;
 			}
-			return item.original_name;
+			return item.title;
 		},
 		updateItems(text) {
 			this.items = this.abilitiesList.filter(item =>
-				item.original_name.toLowerCase().startsWith(text.toLowerCase())
+				item.title.toLowerCase().startsWith(text.toLowerCase())
 			);
 		},
 		selectedItem(item) {
-			this.selectedAbility = item;
+			// this.selectedAbility = item;
+			this.get(item.id)
 		},
 		inputItem(item) {
 			if (item === null){

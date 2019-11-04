@@ -164,7 +164,7 @@ func (r *Repository) Delete(id int) error {
 
 func (r *Repository) GetLang(id int, lang string) (*Weapon, error) {
 	stmt := `
-	SELECT name FROM weapons_lang WHERE ability_id = ? AND lang = ?
+	SELECT name FROM weapons_lang WHERE weapon_id = ? AND lang = ?
 	`
 	res := &Weapon{}
 	err := r.db.Get(res, stmt, id, lang)
