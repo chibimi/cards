@@ -77,7 +77,7 @@ export default {
 		},
 		addAbility: function(ability) {
 			this.$http
-				.put(process.env.VUE_APP_API_ENDPOINT+ "/weapon/" + this.weapon.id + "/ability/" + ability.id + "?magical=" + ability.magical + "?lang=" + this.$language)
+				.put(process.env.VUE_APP_API_ENDPOINT+ "/weapon/" + this.weapon.id + "/ability/" + ability.id + "?type=0&lang=" + this.$language)
 				.then(function(res) {
 					console.log(res);
 					if (res.status === 200) {

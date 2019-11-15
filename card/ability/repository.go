@@ -17,8 +17,8 @@ func NewRepository(db *sqlx.DB) *Repository {
 
 func (r *Repository) Create(sp *Ability, lang string) (int, error) {
 	stmt := `
-	INSERT INTO abilities (title, type) 
-	VALUES(:title, :type)
+	INSERT INTO abilities (title) 
+	VALUES(:title)
 	`
 
 	res, err := r.db.NamedExec(stmt, sp)
@@ -66,7 +66,7 @@ func (r *Repository) Save(sp *Ability, lang string) error {
 	}
 	stmt := `
 	UPDATE abilities SET 
-	title = :title, type = :type
+	title = :title
 	WHERE id = :id
 	`
 	_, err = tx.NamedExec(stmt, sp)
@@ -108,10 +108,10 @@ func (r *Repository) ListByRef(ref int, lang string) ([]Ability, error) {
 	return res, nil
 }
 
-func (r *Repository) AddAbilityRef(ref, ability int) error {
-	stmt := `INSERT INTO ref_ability VALUES(?, ?)`
+func (r *Repository) AddAbilityRef(ref, ability, typ int) error {
+	stmt := `INSERT INTO ref_ability VALUES(?, ?, ?)`
 
-	_, err := r.db.Exec(stmt, ref, ability)
+	_, err := r.db.Exec(stmt, ref, ability, typ)
 	if err != nil {
 		return errors.Wrap(err, "execute query")
 	}
@@ -184,10 +184,10 @@ func (r *Repository) ListByWeapon(weapon int, lang string) ([]Ability, error) {
 	return res, nil
 }
 
-func (r *Repository) AddAbilityWeapon(weapon, ability int) error {
-	stmt := `INSERT INTO weapon_ability VALUES(?, ?)`
+func (r *Repository) AddAbilityWeapon(weapon, ability, typ int) error {
+	stmt := `INSERT INTO weapon_ability VALUES(?, ?, ?)`
 
-	_, err := r.db.Exec(stmt, weapon, ability)
+	_, err := r.db.Exec(stmt, weapon, ability, typ)
 	if err != nil {
 		return errors.Wrap(err, "execute query")
 	}

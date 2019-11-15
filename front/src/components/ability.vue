@@ -23,7 +23,7 @@
 			></v-autocomplete>
 			<input v-if="!selectedAbility.id" v-model="selectedAbility.title" type="text" class="form-control col-2" placeholder="English Name">
 			<label v-if="selectedAbility.id" class="col-form-label col-2 text-left">{{selectedAbility.title}}</label>
-			<input v-model="selectedAbility.name" type="text" class="form-control col-2" placeholder="French Name">
+			<input v-model="selectedAbility.name" type="text" class="form-control col-2" placeholder="Translated Name">
 			<div class="form-check form-check-inline ml-2 col-5">
 				<label class="form-check-label">Can be magical or choose type ?</label>
 				<input class="form-check-input ml-3" type="checkbox" v-model="selectedAbility.magical">

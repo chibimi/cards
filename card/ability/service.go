@@ -23,31 +23,31 @@ func (s *Service) Save(sp *Ability, lang string) error {
 func (s *Service) ListByRef(ref int, lang string) ([]Ability, error) {
 	return s.repo.ListByRef(ref, lang)
 }
-func (s *Service) AddAbilityRef(ref, spell int) error {
-	return s.repo.AddAbilityRef(ref, spell)
+func (s *Service) AddAbilityRef(ref, ability, typ int) error {
+	return s.repo.AddAbilityRef(ref, ability, typ)
 }
-func (s *Service) DeleteAbilityRef(ref, spell int) error {
-	return s.repo.DeleteAbilityRef(ref, spell)
+func (s *Service) DeleteAbilityRef(ref, ability int) error {
+	return s.repo.DeleteAbilityRef(ref, ability)
 }
 
 func (s *Service) ListByModel(model int, lang string) ([]Ability, error) {
 	return s.repo.ListByModel(model, lang)
 }
-func (s *Service) AddAbilityModel(model, spell, typ int) error {
-	return s.repo.AddAbilityModel(model, spell, typ)
+func (s *Service) AddAbilityModel(model, ability, typ int) error {
+	return s.repo.AddAbilityModel(model, ability, typ)
 }
-func (s *Service) DeleteAbilityModel(model, spell int) error {
-	return s.repo.DeleteAbilityModel(model, spell)
+func (s *Service) DeleteAbilityModel(model, ability int) error {
+	return s.repo.DeleteAbilityModel(model, ability)
 }
 
 func (s *Service) ListByWeapon(weapon int, lang string) ([]Ability, error) {
 	return s.repo.ListByWeapon(weapon, lang)
 }
-func (s *Service) AddAbilityWeapon(weapon, spell int) error {
-	return s.repo.AddAbilityWeapon(weapon, spell)
+func (s *Service) AddAbilityWeapon(weapon, ability, typ int) error {
+	return s.repo.AddAbilityWeapon(weapon, ability, typ)
 }
-func (s *Service) DeleteAbilityWeapon(weapon, spell int) error {
-	return s.repo.DeleteAbilityWeapon(weapon, spell)
+func (s *Service) DeleteAbilityWeapon(weapon, ability int) error {
+	return s.repo.DeleteAbilityWeapon(weapon, ability)
 }
 
 func (s *Service) Get(id int, lang string) (*Ability, error) {

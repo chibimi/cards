@@ -24,7 +24,7 @@ type referenceDB struct {
 
 func (r *Repository) Create(ref *Reference) (int, error) {
 	stmt := `
-	INSERT INTO refs (faction_id, category_id, title, main_card_id, models_cnt, models_max, cost, cost_max, fa, merc_for, minion_for) 
+	INSERT INTO refs (faction_id, category_id, title, main_card_id, models_cnt, models_max, cost, cost_max, fa, mercenary_for, minion_for) 
 	VALUES(:faction_id, :category_id, :title, :main_card_id, :models_cnt, :models_max, :cost, :cost_max, :fa, :mercenary_for, :minion_for)
 	`
 	merc, err := json.Marshal(ref.MercFor)

@@ -95,5 +95,13 @@ export const Categories = [{
 	{
 		id: 9,
 		name: "Structure"
-	}
+	},
+	{
+		id: 10,
+		name: "Infernal Master"
+	},
+	{
+		id: 11,
+		name: "Horror"
+	},
 ];
