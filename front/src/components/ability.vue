@@ -19,14 +19,13 @@
 				:auto-select-one-item="false"
 				@item-selected="selectedItem"
 				@input="inputItem"
+				placeholder="English Name"
 				class="col-2 mt-1"
 			></v-autocomplete>
-			<input v-if="!selectedAbility.id" v-model="selectedAbility.title" type="text" class="form-control col-2" placeholder="English Name">
-			<label v-if="selectedAbility.id" class="col-form-label col-2 text-left">{{selectedAbility.title}}</label>
-			<input v-model="selectedAbility.name" type="text" class="form-control col-2" placeholder="Translated Name">{{selectedAbility.id}}
+			<input v-model="selectedAbility.name" type="text" class="form-control col-2" placeholder="Translated Name">
 			<div class="form-check form-check-inline ml-2 col-5">
 				<label class="form-check-label">Type</label>
-				<select v-model="selectedAbility.type" class="form-control col-4 mx-1">
+				<select v-model="type" class="form-control col-4 mx-1">
 					<option value="0"></option>
 					<option value="1">Magic Ability</option>
 					<option value="2">Battle Plan</option>
@@ -51,7 +50,7 @@ import ItemTemplate from "./ItemTemplate.vue";
 import Tooltip from "./tooltip.vue";
 export default {
 	name: "Ability",
-	props: ["abilitiesList", "ability", "type"],
+	props: ["abilitiesList", "ability"],
 	components: { Tooltip },
 	watch: {
 		ability: function(newVal) {
@@ -73,6 +72,7 @@ export default {
 		return {
 			vo: {},
 			selectedAbility: {},
+			type: 0,
 			template: ItemTemplate,
 			items: [],
 			update: false
@@ -117,6 +117,7 @@ export default {
 				});
 		},
 		add: function(ability) {
+			ability.type = this.type
 			this.$emit("add", ability);
 		},
 		new: function(ability) {
@@ -135,7 +136,12 @@ export default {
 			return item.title;
 		},
 		updateItems(text) {
+			this.selectedAbility.title = text
+			this.selectedAbility.id = null
 			this.items = this.abilitiesList.filter(item =>
+				item.title != null
+			)
+			.filter(item =>
 				item.title.toLowerCase().startsWith(text.toLowerCase())
 			);
 		},
@@ -145,7 +151,7 @@ export default {
 		},
 		inputItem(item) {
 			if (item === null){
-				this.selectedAbility = {type: 0}
+				this.type = 0
 			}
 		}
 	}
