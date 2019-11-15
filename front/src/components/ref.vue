@@ -20,8 +20,7 @@
 					role="tab"
 					aria-controls="nav-models"
 					aria-selected="false"
-				>Models</a>
-				
+				>Models</a>	
 				<a
 					v-if="reference.id>0"
 					class="nav-item nav-link"
@@ -31,8 +30,8 @@
 					role="tab"
 					aria-controls="nav-abilities"
 					aria-selected="false"
-				>Abilities</a>
-				
+					v-on:click="abilitiesKey++"
+				>Abilities</a>	
 				<a
 					v-if="reference.id>0"
 					class="nav-item nav-link"
@@ -44,7 +43,7 @@
 					aria-selected="false"
 				>Spells & Animus</a> 
 				<a
-					v-if="reference.id>0 && (reference.category_id=== 1 || reference.category_id===2)"
+					v-if="reference.id>0 && (reference.category_id=== 1 || reference.category_id===2|| reference.category_id===10)"
 					class="nav-item nav-link"
 					id="nav-feat-tab"
 					data-toggle="tab"
@@ -62,14 +61,14 @@
 			<div class="tab-pane fade" id="nav-models" role="tabpanel" aria-labelledby="nav-models-tab">
 				<Models v-if="reference.id>0" :ref_id="reference.id" />
 			</div>
-			<div class="tab-pane fade" id="nav-abilities" role="tabpanel" aria-labelledby="nav-abilities-tab">
-				<Abilities v-if="reference.id>0" :ref_id="reference.id"></Abilities>
+			<div class="tab-pane fade" id="nav-abilities" role="tabpanel" aria-labelledby="nav-abilities-tab">	
+				<Abilities v-if="reference.id>0" :ref_id="reference.id" :key="abilitiesKey"></Abilities>
 			</div>
 			<div class="tab-pane fade" id="nav-spells" role="tabpanel" aria-labelledby="nav-spells-tab">
 				<Spells v-if="reference.id>0" :ref_id="reference.id"></Spells>
 			</div> 
 			<div class="tab-pane fade" id="nav-feat" role="tabpanel" aria-labelledby="nav-feat-tab">
-				<Feat v-if="reference.id>0 && (reference.category_id=== 1 || reference.category_id===2)" :ref_id="reference.id"></Feat>
+				<Feat v-if="reference.id>0 && (reference.category_id=== 1 || reference.category_id===2|| reference.category_id===10)" :ref_id="reference.id"></Feat>
 			</div>
 		</div>
 	</div>
@@ -85,7 +84,11 @@ export default {
 	name: "Ref",
 	props: ["reference"],
 	components: { Card, Models, Feat, Spells, Abilities},
-	// components: { Card, Models, Abilities, Spells, Feat },
+	data() {
+		return {
+			abilitiesKey: 0,
+		};
+	  }
 };
 </script>
 
