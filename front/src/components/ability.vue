@@ -23,7 +23,7 @@
 			></v-autocomplete>
 			<input v-if="!selectedAbility.id" v-model="selectedAbility.title" type="text" class="form-control col-2" placeholder="English Name">
 			<label v-if="selectedAbility.id" class="col-form-label col-2 text-left">{{selectedAbility.title}}</label>
-			<input v-model="selectedAbility.name" type="text" class="form-control col-2" placeholder="Translated Name">
+			<input v-model="selectedAbility.name" type="text" class="form-control col-2" placeholder="Translated Name">{{selectedAbility.id}}
 			<div class="form-check form-check-inline ml-2 col-5">
 				<label class="form-check-label">Type</label>
 				<select v-model="selectedAbility.type" class="form-control col-4 mx-1">
@@ -31,16 +31,16 @@
 					<option value="1">Magic Ability</option>
 					<option value="2">Battle Plan</option>
 					<option value="3">Attack Type</option>
-				</select>
+				</select> {{selectedAbility.type}}
 			</div>
-				<div class="col-3 font-italic text-left">{{vo.description}}</div>
-				<textarea v-model="selectedAbility.description" type="text" class="form-control col-8" rows="3" placeholder/>
-				<div class="col-1 px-0">
-					<button v-if="ability.id || selectedAbility.id" type="submit" class="form-control btn btn-success" @click="save(selectedAbility)">Update</button>
-					<button v-if="ability.id" type="submit" class="form-control btn btn-danger" @click="remove(selectedAbility)">Delete</button>
-					<button v-if="!ability.id && selectedAbility.id" type="submit" class="form-control btn btn-primary" @click="add(selectedAbility)">Add</button>
-					<button v-if="!ability.id && !selectedAbility.id" type="submit" class="form-control btn btn-primary" @click="save(selectedAbility)">Add</button>
-				</div>
+			<textarea v-model="selectedAbility.description" type="text" class="form-control col-10" rows="3" placeholder/>
+			<div class="col-2 px-0">
+				<button v-if="ability.id || selectedAbility.id" type="submit" class="form-control btn btn-success" @click="save(selectedAbility)">Update</button>
+				<button v-if="ability.id" type="submit" class="form-control btn btn-danger" @click="remove(selectedAbility)">Delete</button>
+				<button v-if="!ability.id && selectedAbility.id" type="submit" class="form-control btn btn-primary" @click="add(selectedAbility)">Add</button>
+				<button v-if="!ability.id && !selectedAbility.id" type="submit" class="form-control btn btn-primary" @click="save(selectedAbility)">Add</button>
+			</div>
+			<div v-if="selectedAbility.id" class="col-12 font-italic text-left">{{vo.description}}</div>
 		</div>
 		<hr>
 	</div>
@@ -145,7 +145,7 @@ export default {
 		},
 		inputItem(item) {
 			if (item === null){
-				this.selectedAbility = {}
+				this.selectedAbility = {type: 0}
 			}
 		}
 	}

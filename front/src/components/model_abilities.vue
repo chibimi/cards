@@ -58,7 +58,9 @@ export default {
 		return {
 			vo: {},
 			abilities: [],
-			ability: {},
+			ability: {
+				type: 0,
+			},
 			weapons: []
 		};
 	},
@@ -102,7 +104,7 @@ export default {
 					console.log(res);
 					if (res.status === 201) {
 						this.abilities.push(ability);
-						this.ability = {};
+						this.ability = {type: 0};
 					}
 				});
 		},
