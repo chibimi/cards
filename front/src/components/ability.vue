@@ -31,7 +31,7 @@
 					<option value="1">Magic Ability</option>
 					<option value="2">Battle Plan</option>
 					<option value="3">Attack Type</option>
-				</select> {{selectedAbility.type}}
+				</select>
 			</div>
 			<textarea v-model="selectedAbility.description" type="text" class="form-control col-10" rows="3" placeholder/>
 			<div class="col-2 px-0">

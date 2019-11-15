@@ -88,7 +88,7 @@ export default {
 		return {
 			abilitiesKey: 0,
 		};
-	  }
+	}
 };
 </script>
 
