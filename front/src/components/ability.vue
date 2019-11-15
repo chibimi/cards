@@ -25,8 +25,13 @@
 			<label v-if="selectedAbility.id" class="col-form-label col-2 text-left">{{selectedAbility.title}}</label>
 			<input v-model="selectedAbility.name" type="text" class="form-control col-2" placeholder="Translated Name">
 			<div class="form-check form-check-inline ml-2 col-5">
-				<label class="form-check-label">Can be magical or choose type ?</label>
-				<input class="form-check-input ml-3" type="checkbox" v-model="selectedAbility.magical">
+				<label class="form-check-label">Type</label>
+				<select v-model="selectedAbility.type" class="form-control col-4 mx-1">
+					<option value="0"></option>
+					<option value="1">Magic Ability</option>
+					<option value="2">Battle Plan</option>
+					<option value="3">Attack Type</option>
+				</select>
 			</div>
 				<div class="col-3 font-italic text-left">{{vo.description}}</div>
 				<textarea v-model="selectedAbility.description" type="text" class="form-control col-8" rows="3" placeholder/>

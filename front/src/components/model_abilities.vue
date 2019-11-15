@@ -97,10 +97,10 @@ export default {
 		},
 		addAbility: function(ability) {
 			this.$http
-				.put(process.env.VUE_APP_API_ENDPOINT+ "/model/" + this.model.id + "/ability/" + ability.id + "?type=0&lang=" + this.$language)
+				.put(process.env.VUE_APP_API_ENDPOINT+ "/model/" + this.model.id + "/ability/" + ability.id + "?type=" + ability.type + "&lang=" + this.$language)
 				.then(function(res) {
 					console.log(res);
-					if (res.status === 200) {
+					if (res.status === 201) {
 						this.abilities.push(ability);
 						this.ability = {};
 					}
