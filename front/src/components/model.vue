@@ -62,103 +62,10 @@
 						<input v-model="model.cmd" type="text" class="form-control col" placeholder="cmd">
 						<input v-model="model.base_size" type="text" class="form-control col" placeholder="case">
 					</div>
-					<div class="row">
-						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" v-model="model.advantages" value="advance_deploy">
-							<label class="form-check-label">Advance deploy</label>
-						</div>
-						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" v-model="model.advantages" value="amphibious">
-							<label class="form-check-label">Amphibious</label>
-						</div>
-						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" v-model="model.advantages" value="arc_node">
-							<label class="form-check-label">Acr node</label>
-						</div>
-						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" v-model="model.advantages" value="assault">
-							<label class="form-check-label">Assault</label>
-						</div>
-						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" v-model="model.advantages" value="cavalry">
-							<label class="form-check-label">Cavalry</label>
-						</div>
-						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" v-model="model.advantages" value="cma">
-							<label class="form-check-label">CMA</label>
-						</div>
-						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" v-model="model.advantages" value="cra">
-							<label class="form-check-label">CRA</label>
-						</div>
-						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" v-model="model.advantages" value="construct">
-							<label class="form-check-label">Construct</label>
-						</div>
-						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" v-model="model.advantages" value="eyeless_sight">
-							<label class="form-check-label">Eyeless sight</label>
-						</div>
-						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" v-model="model.advantages" value="flight">
-							<label class="form-check-label">Flight</label>
-						</div>
-						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" v-model="model.advantages" value="gunfighter">
-							<label class="form-check-label">Gunfighter</label>
-						</div>
-						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" v-model="model.advantages" value="incorporeal">
-							<label class="form-check-label">Incorporeal</label>
-						</div>
-						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" v-model="model.advantages" value="immunity_corrosion">
-							<label class="form-check-label">Immune corrosion</label>
-						</div>
-						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" v-model="model.advantages" value="immunity_electricity">
-							<label class="form-check-label">Immune electricity</label>
-						</div>
-						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" v-model="model.advantages" value="immunity_fire">
-							<label class="form-check-label">Immune fire</label>
-						</div>
-						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" v-model="model.advantages" value="immunity_frost">
-							<label class="form-check-label">Immune frost</label>
-						</div>
-						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" v-model="model.advantages" value="jackmarshal">
-							<label class="form-check-label">Jack Marshal</label>
-						</div>
-						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" v-model="model.advantages" value="officer">
-							<label class="form-check-label">Officer</label>
-						</div>
-						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" v-model="model.advantages" value="parry">
-							<label class="form-check-label">Parry</label>
-						</div>
-						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" v-model="model.advantages" value="pathfinder">
-							<label class="form-check-label">Pathfinder</label>
-						</div>
-						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" v-model="model.advantages" value="soulless">
-							<label class="form-check-label">Soulless</label>
-						</div>
-						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" v-model="model.advantages" value="stealth">
-							<label class="form-check-label">Stealth</label>
-						</div>
-						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" v-model="model.advantages" value="tought">
-							<label class="form-check-label">Tought</label>
-						</div>
-						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" v-model="model.advantages" value="undead">
-							<label class="form-check-label">Undead</label>
-						</div>
+					<div class="row">							
+						<label v-for="a in advantages" :key="a.label" v-bind:value="a.label" class="form-check form-check-inline form-check-label" >
+							<input class="form-check-input" type="checkbox" v-model="model.advantages" :value="a.label">{{a.name}}
+						</label>	
 					</div>
 				</div>
 			</div>
@@ -181,6 +88,8 @@
 <script>
 import Weapons from "./weapons.vue";
 import Tooltip from "./tooltip.vue";
+import { ModelAdvantages } from "./const.js";
+
 export default {
 	name: "Model",
 	props: ["model"],
@@ -199,7 +108,8 @@ export default {
 		return {
 			vo: {},
 			alert: "",
-			alert_succes: false
+			alert_succes: false,
+			advantages: ModelAdvantages
 		};
 	},
 	methods: {

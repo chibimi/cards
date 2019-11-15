@@ -36,70 +36,9 @@
 			</div>
 
 			<div class="col-12 text-left px-0 mt-2">
-				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="checkbox" v-model="weapon.advantages" value="blessed">
-					<label class="form-check-label">Blessed</label>
-				</div>
-				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="checkbox" v-model="weapon.advantages" value="chain">
-					<label class="form-check-label">Chain</label>
-				</div>
-				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="checkbox" v-model="weapon.advantages" value="type_corrosion">
-					<label class="form-check-label">Type: Corrosion</label>
-				</div>
-				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="checkbox" v-model="weapon.advantages" value="continuous_corrosion">
-					<label class="form-check-label">Cont. Corrosion</label>
-				</div>
-				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="checkbox" v-model="weapon.advantages" value="crit_corrotion">
-					<label class="form-check-label">Crit. Corrosion</label>
-				</div>
-				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="checkbox" v-model="weapon.advantages" value="type_electricity">
-					<label class="form-check-label">Type: Electricity</label>
-				</div>
-				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="checkbox" v-model="weapon.advantages" value="disruption">
-					<label class="form-check-label">Dusruption</label>
-				</div>
-				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="checkbox" v-model="weapon.advantages" value="crit_disruption">
-					<label class="form-check-label">Crit. Disruption</label>
-				</div>
-				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="checkbox" v-model="weapon.advantages" value="type_fire">
-					<label class="form-check-label">Type: Fire</label>
-				</div>
-				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="checkbox" v-model="weapon.advantages" value="continuous_fire">
-					<label class="form-check-label">Cont. Fire</label>
-				</div>
-				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="checkbox" v-model="weapon.advantages" value="crit_fire">
-					<label class="form-check-label">Crit. Fire</label>
-				</div>
-				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="checkbox" v-model="weapon.advantages" value="magical">
-					<label class="form-check-label">Magical</label>
-				</div>
-				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="checkbox" v-model="weapon.advantages" value="open_fist">
-					<label class="form-check-label">Open Fist</label>
-				</div>
-				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="checkbox" v-model="weapon.advantages" value="shield_1">
-					<label class="form-check-label">Shield +1</label>
-				</div>
-				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="checkbox" v-model="weapon.advantages" value="shield_2">
-					<label class="form-check-label">Shield +2</label>
-				</div>
-				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="checkbox" v-model="weapon.advantages" value="weapon_master">
-					<label class="form-check-label">Weapon Master</label>
-				</div>
+				<label v-for="a in advantages" :key="a.label" v-bind:value="a.label" class="form-check form-check-inline form-check-label" >
+					<input class="form-check-input" type="checkbox" v-model="weapon.advantages" :value="a.label">{{a.name}}
+				</label>
 			</div>
 		</div>
 	</div>
@@ -107,6 +46,8 @@
 
 <script>
 import Tooltip from "./tooltip.vue";
+import { WeaponAdvantages } from "./const.js";
+
 export default {
 	name: "Weapon",
 	props: ["weapon"],
@@ -123,7 +64,8 @@ export default {
 		return {
 			vo: {},
 			alert: "",
-			alert_succes: false
+			alert_succes: false,
+			advantages: WeaponAdvantages
 		};
 	},
 	methods: {

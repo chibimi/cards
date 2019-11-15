@@ -105,3 +105,131 @@ export const Categories = [{
 		name: "Horror"
 	},
 ];
+
+export const ModelAdvantages = [
+	{
+		label: "advance_deploy",
+		name: "Advance Deployement"
+	}, {
+		label: "amphibious",
+		name: "Amphibious"
+	}, {
+		label: "arc_node",
+		name: "Arc Node"
+	}, {
+		label: "assault",
+		name: "Assault"
+	}, {
+		label: "cavalry",
+		name: "Cavalry"
+	}, {
+		label: "cma",
+		name: "CMA"
+	}, {
+		label: "cra",
+		name: "CRA"
+	}, {
+		label: "construct",
+		name: "Construct"
+	}, {
+		label: "eyeless_sight",
+		name: "Eyeless Sight"
+	}, {
+		label: "flight",
+		name: "Flight"
+	}, {
+		label: "gunfighter",
+		name: "Gunfighter"
+	}, {
+		label: "incorporeal",
+		name: "Incorporeal"
+	}, {
+		label: "immunity_corrosion",
+		name: "Immune corrosion "
+	}, {
+		label: "immunity_electricity",
+		name: "Immune electricity"
+	}, {
+		label: "immunity_fire",
+		name: "Immune fire"
+	}, {
+		label: "immunity_frost",
+		name: "Immune frost"
+	}, {
+		label: "jackmarshal",
+		name: "Jackmarshal"
+	}, {
+		label: "officer",
+		name: "Officer"
+	}, {
+		label: "parry",
+		name: "Parry"
+	}, {
+		label: "pathfinder",
+		name: "Pathfinder"
+	}, {
+		label: "soulless",
+		name: "Soulless"
+	}, {
+		label: "stealth",
+		name: "Stealth"
+	}, {
+		label: "tought",
+		name: "Tought"
+	}, {
+		label: "undead",
+		name: "Undead"
+	}
+];
+
+export const WeaponAdvantages = [
+	{
+		label: "blessed",
+		name: "Blessed"
+	}, {
+		label: "chain",
+		name: "Chain"
+	}, {
+		label: "type_corrosion",
+		name: "Type: Corrosion"
+	}, {
+		label: "continuous_corrosion",
+		name: "Cont. Corrosion"
+	}, {
+		label: "crit_corrotion",
+		name: "Crit. Corrosion"
+	}, {
+		label: "type_electricity",
+		name: "Type: Electricity"
+	}, {
+		label: "disruption",
+		name: "Dusruption"
+	}, {
+		label: "crit_disruption",
+		name: "Crit. Disruption"
+	}, {
+		label: "type_fire",
+		name: "Type: Fire"
+	}, {
+		label: "continuous_fire",
+		name: "Cont. Fire"
+	}, {
+		label: "crit_fire",
+		name: "Crit. Fire"
+	}, {
+		label: "magical",
+		name: "Magical"
+	}, {
+		label: "open_fist",
+		name: "Open Fist"
+	}, {
+		label: "shield_1",
+		name: "Shield +1"
+	}, {
+		label: "shield_2",
+		name: "Shield +2"
+	}, {
+		label: "weapon_master",
+		name: "Weapon Master"
+	}
+]
