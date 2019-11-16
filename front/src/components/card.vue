@@ -25,8 +25,8 @@
 						<input v-model="card.name" type="text" class="form-control col-8" placeholder="Translated Full name">
 					</div>
 					<div class="row">
-						<label class="col-form-label col-3">Type</label>
-						<input v-model="card.properties" type="text" class="form-control col-8" placeholder="Translated Type'Legion Unit'">
+						<label class="col-form-label col-3">Type <Tooltip :txt="help.type"/></label>
+						<input v-model="card.properties" type="text" class="form-control col-8" placeholder="Translated Type">
 					</div>
 					<div class="row">
 						<label class="col-form-label col-3">Faction</label>
@@ -60,7 +60,7 @@
 						<input v-if="card.category_id===5" v-model="card.models_max" type="text" class="form-control col-2" placeholder>
 					</div>
 					<div class="row">
-						<label class="col-form-label col-3">Main ID</label>
+						<label class="col-form-label col-3">Main ID <Tooltip :txt="help.main_id"/></label>
 						<input v-model="card.main_card_id" type="text" class="form-control col-2">
 						<label class="col-form-label col-4">Status</label>
 						<select v-model="card.status" class="form-control col-3">
@@ -142,6 +142,10 @@ export default {
 			update: true,
 			alert: "",
 			alert_success: false,
+			help: {
+				main_id: "ID of the secondary card in case of reference having 2 distinct models like Bethayne & Belphagor. Main ID can be found in the model selector after the # (#ID)",
+				type: "Tags just under the card name. Example: 'Blighted Nyss Unit'",
+			}
 		};
 	},
 	methods: {

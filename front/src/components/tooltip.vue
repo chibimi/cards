@@ -1,6 +1,6 @@
 <template>
     <div class="tooltip">
-        VO
+        ?
         <span class="tooltiptext">{{txt}}</span>
     </div>
 </template>
@@ -24,7 +24,7 @@ export default {
 
 .tooltip .tooltiptext {
   visibility: hidden;
-  width: 200px;
+  width: 300px;
   background-color: #555;
   color: #fff;
   text-align: center;
