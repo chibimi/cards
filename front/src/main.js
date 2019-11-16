@@ -7,6 +7,8 @@ import App from './App.vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap/dist/js/bootstrap.js'
 
+export const EventBus = new Vue();
+
 Vue.use(VueResource)
 Vue.use(Autocomplete)
 Vue.use(CountryFlag)

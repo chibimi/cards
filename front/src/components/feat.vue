@@ -1,6 +1,5 @@
 <template>
 	<div class="w-100  mt-4" >
-
 		<input v-model="feat.name" type="text" class="form-control" placeholder="Name">
 		<textarea v-model="feat.description" type="text" class="form-control mt-2" rows="4" placeholder="Feat description"/>
 		<textarea v-model="feat.fluff" type="text" class="form-control mt-2" rows="4" placeholder="Feat fluff (optionnal)"/>
@@ -11,11 +10,12 @@
 		<div class="col-12">
 			<div v-if="alert" class="alert alert-error" v-bind:class="{ 'alert-success': alert_success }">{{alert}}</div>
 		</div>
-		<button type="submit" class="form-control btn btn-primary" @click="save(feat)">Save</button>
 	</div>
 </template>
 
 <script>
+import { EventBus } from '../main.js';
+
 export default {
 	name: "Feat",
 	props: ["ref_id"],
@@ -29,15 +29,17 @@ export default {
 		this.reset();
 		this.get(this.ref_id);
 	},
+	mounted: function(){
+		EventBus.$on('mega_save', () => {
+			this.save(this.feat)
+		})
+	},
 	data() {
 		return {
 			vo: {},
 			feat: {
 				ref_id: this.ref_id
 			},
-			alert: "",
-			alert_succes: false,
-			update: false
 		};
 	},
 	methods: {
@@ -55,7 +57,6 @@ export default {
 					this.feat = res.data;
 					if (!this.feat.ref_id) {
 						this.feat.ref_id = this.ref_id;
-						this.update = true;
 					}
 				});
 		},
@@ -72,12 +73,8 @@ export default {
 				.put(process.env.VUE_APP_API_ENDPOINT+ "/ref/" + feat.ref_id + "/feat?lang=" + this.$language, feat)
 				.then(function(res) {
 					console.log(res);
-					this.alert = "save success";
-					this.alert_success = true;
 				})
 				.catch(function(err) {
-					this.alert = "error: " + err;
-					this.alert_success = false;
 				});
 		}
 	}

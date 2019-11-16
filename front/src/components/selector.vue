@@ -29,11 +29,19 @@
 
 <script>
 import { Factions, Categories } from "./const.js";
+import { EventBus } from '../main.js';
+
 export default {
 	name: "Selector",
 	components: {},
 	created: function() {
 		this.getRefs(this.faction, this.category);
+	},
+	mounted: function(){
+		EventBus.$on('refresh_selector', (ref_id) => {
+			this.getRefs(this.faction, this.category);
+			this.ref = ref_id;
+		})
 	},
 	data() {
 		return {

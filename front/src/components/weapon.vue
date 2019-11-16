@@ -1,24 +1,24 @@
 <template>
 	<div class="w-100">
-		<div class="row px-3">
-			<div class="col-4">
+		<div class="row px-3 py-0">
+			<div class="col-4 py-0">
 				<div class="form-group row my-0">
-					<span class="col-6 text-left">English Name</span>
-					<span class="col-§ text-left">Name</span>
+					<span class="col-6 text-bottom">English Name</span>
+					<span class="col-6">Name</span>
 				</div>
 			</div>
-			<div class="col-8">
+			<div class="col-6">
 				<div class="form-group row my-0">
-					<span class="col-2 text-left">Type</span>
-					<span class="col-1 text-left">rng</span>
-					<span class="col-1 text-left">pow</span>
-					<span class="col-1 text-left">rof</span>
-					<span class="col-1 text-left">aoe</span>
-					<span class="col-1 text-left">loc</span>
-					<span class="col-1 text-left">cnt</span>
-					<span class="col-1 text-left"></span>
-					<span class="col-1 text-left"></span>
+					<span class="col-2  ">Type</span>
+					<span class="col  ">rng</span>
+					<span class="col  ">pow</span>
+					<span class="col  ">rof</span>
+					<span class="col  ">aoe</span>
+					<span class="col">loc</span>
+					<span class="col">cnt</span>
 				</div>
+			</div>
+			<div class="col-2">
 			</div>
 
 			<div class="col-4">
@@ -27,32 +27,33 @@
 					<input v-model="weapon.name" type="text" class="form-control col-6" placeholder="Name">
 				</div>
 			</div>
-			<div class="col-8">
+
+			<div class="col-6">
 				<div class="form-group row my-0">
 					<select v-model="weapon.type" class="form-control col-2">
 						<option value="1">Meele</option>
 						<option value="2">Ranged</option>
 						<option value="3">Mount</option>
 					</select>
-					<input v-model="weapon.rng" type="text" class="form-control col-1" placeholder="rng">
-					<input v-model="weapon.pow" type="text" class="form-control col-1" placeholder="pow">
-					<input v-model="weapon.rof" type="text" class="form-control col-1" placeholder="rof">
-					<input v-model="weapon.aoe" type="text" class="form-control col-1" placeholder="aoe">
-					<input v-model="weapon.loc" type="text" class="form-control col-1" placeholder="loc">
-					<input v-model="weapon.cnt" type="text" class="form-control col-1" placeholder="cnt">
+					<input v-model="weapon.rng" type="text" class="form-control col" placeholder="rng">
+					<input v-model="weapon.pow" type="text" class="form-control col" placeholder="pow">
+					<input v-model="weapon.rof" type="text" class="form-control col" placeholder="rof">
+					<input v-model="weapon.aoe" type="text" class="form-control col" placeholder="aoe">
+					<input v-model="weapon.loc" type="text" class="form-control col" placeholder="loc">
+					<input v-model="weapon.cnt" type="text" class="form-control col" placeholder="cnt">
 
-					<div v-if="weapon.id" class="col-2 pl-1 pr-0">
-						<button type="submit" class="form-control btn btn-success" @click="save(weapon)">Update</button>
-					</div>
-					<div v-if="weapon.id" class="col-2 pl-1 pr-0">
-						<button type="submit" class="form-control btn btn-danger" @click="remove(weapon)">Delete</button>
-					</div>
-					<div v-if="!weapon.id" class="col-2 pl-1 pr-0">
-						<button type="submit" class="form-control btn btn-primary" @click="save(weapon)">Add</button>
-					</div>
 				</div>
 			</div>
 
+			<div class="col-2">
+				<div v-if="weapon.id" class="">
+					<button type="submit" class="form-control btn btn-danger" @click="remove(weapon)">Delete</button>
+				</div>
+				<div v-if="!weapon.id" class="">
+					<button type="submit" class="form-control btn btn-primary" @click="save(weapon)">Add</button>
+				</div>
+			</div>
+</div><div class="row px-3">
 			<div class="col-12 text-left px-0 mt-2">
 				<label v-for="a in advantages" :key="a.label" v-bind:value="a.label" class="form-check form-check-inline form-check-label" >
 					<input class="form-check-input" type="checkbox" v-model="weapon.advantages" :value="a.label">{{a.name}}
@@ -63,13 +64,13 @@
 </template>
 
 <script>
-import Tooltip from "./tooltip.vue";
 import { WeaponAdvantages } from "./const.js";
+import { EventBus } from '../main.js';
 
 export default {
 	name: "Weapon",
 	props: ["weapon"],
-	components: { Tooltip },
+	components: { },
 	watch: {
 		weapon: function(newVal) {
 			this.getVO(newVal.id);
@@ -77,6 +78,14 @@ export default {
 	},
 	created: function() {
 		this.getVO(this.weapon.id);
+	},
+	mounted: function(){
+		EventBus.$on('mega_save', () => {
+			if (this.weapon.id == null) {
+				return;
+			}
+			this.save(this.weapon)
+		})
 	},
 	data() {
 		return {

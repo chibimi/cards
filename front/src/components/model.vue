@@ -9,12 +9,8 @@
 				v-bind:aria-controls="'test_model_' + model.id"
 				ref="model"
 			>{{model.name || model.title}}</h4>
-			<div class="col-4">
+			<div class="col-5">
 				<div v-if="alert" class="alert alert-error py-2" v-bind:class="{ 'alert-success': alert_success }">{{alert}}</div>
-			</div>
-
-			<div class="col-1 pl-0">
-				<button v-if="model.id" type="submit" class="form-control btn btn-success" @click="save(model)">Update</button>
 			</div>
 			<div class="col-1 pl-0">
 				<button v-if="!model.id" type="submit" class="form-control btn btn-primary" @click="save(model)">Save</button>
@@ -92,14 +88,14 @@
 
 <script>
 import Weapons from "./weapons.vue";
-import Tooltip from "./tooltip.vue";
 import { ModelAdvantages } from "./const.js";
+import { EventBus } from '../main.js';
 
 export default {
 	name: "Model",
 	props: ["model"],
 	components: {
-		Weapons, Tooltip
+		Weapons
 	},
 	watch: {
 		model: function(newVal) {
@@ -108,6 +104,14 @@ export default {
 	},
 	created: function() {
 		this.getVO(this.model.id);
+	},
+	mounted: function(){
+		EventBus.$on('mega_save', () => {
+			if (this.model.id == null) {
+				return;
+			}
+			this.save(this.model)
+		})
 	},
 	data() {
 		return {

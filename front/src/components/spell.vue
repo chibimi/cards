@@ -20,7 +20,6 @@
 		</div>
 
 		<div v-if="update" class="row px-3">
-			<!-- <span v-if="!spell.id" class="col-2 text-left"></span> -->
 			<span v-if="!spell.id" class="col-2 text-left">English Name</span>
 			<span class="col-2 text-left">Name</span>
 			<span class="col-1 text-left">Cost</span>
@@ -30,6 +29,7 @@
 			<span class="col-1 text-left">Dur</span>
 			<span class="col-1 text-left">Off</span>
 			<span class="col-2"></span>
+
 			<span v-if="spell.id" class="col-2 text-left"></span>
 			<v-autocomplete
 				v-if="!spell.id"
@@ -43,14 +43,15 @@
 				placeholder="English Name"
 				class="col-2 mt-1"
 			></v-autocomplete>
-			<input v-model="selectedAbility.name" type="text" class="form-control col-2" placeholder="French Name">
+			<input v-model="selectedAbility.name" type="text" class="form-control col-2" placeholder="Translated Name">
 			<input v-model="selectedAbility.cost" type="text" class="form-control col-1" placeholder="cost">
 			<input v-model="selectedAbility.rng" type="text" class="form-control col-1" placeholder="rng">
 			<input v-model="selectedAbility.aoe" type="text" class="form-control col-1" placeholder="aoe">
 			<input v-model="selectedAbility.pow" type="text" class="form-control col-1" placeholder="pow">
 			<input v-model="selectedAbility.dur" type="text" class="form-control col-1" placeholder="dur">
 			<input v-model="selectedAbility.off" type="text" class="form-control col-1" placeholder="off">
-			<textarea v-model="selectedAbility.description" type="text" class="form-control col-11" rows="3" placeholder/>
+			<span class="col-2 py-1 danger">USE ENGLIGH HERE</span>
+			<textarea v-model="selectedAbility.description" type="text" class="form-control col-11" rows="3" placeholder="Translated spell description"/>
 			<div class="col-1 px-0">
 				<button v-if="spell.id || selectedAbility.id" type="submit" class="form-control btn btn-success" @click="save(selectedAbility)">Update</button>
 				<button v-if="spell.id" type="submit" class="form-control btn btn-danger" @click="remove(selectedAbility)">Delete</button>
@@ -173,4 +174,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.danger{
+	color: #c50b0b;
+	/* font-weight: bold; */
+}
 </style>

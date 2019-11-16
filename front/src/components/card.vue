@@ -1,18 +1,5 @@
 <template>
 	<div class="w-100">
-		<div class="row my-4">
-			<h2 class="text-left col-6">{{card.title}} <span class="font-italic h5">{{vo.properties}}</span> </h2>
-			<div class="col-4" >
-				<div v-if="alert" class="alert py-2" v-bind:class="{ 'alert-success': alert_success,'alert-danger': !alert_success}">{{alert}}</div>
-			</div>
-			<div class="col-1 pl-0">
-				<button v-if="update" type="submit" class="form-control btn btn-primary" @click="save(card)">Save</button>
-				<button v-else type="submit" class="form-control btn btn-success" @click="update = !update">Update</button>
-			</div>
-			<div class="col-1 pl-0">
-				<button type="submit" class="form-control btn btn-danger" @click="remove(card)">Delete</button>
-			</div>
-		</div>
 		<div v-if="update">
 			<div class="form-group row">
 				<div class="col-6">
@@ -62,12 +49,6 @@
 					<div class="row">
 						<label class="col-form-label col-3">Main ID <Tooltip :txt="help.main_id"/></label>
 						<input v-model="card.main_card_id" type="text" class="form-control col-2">
-						<label class="col-form-label col-4">Status</label>
-						<select v-model="card.status" class="form-control col-3">
-							<option value="wip">WIP</option>
-							<option value="tbv">A valider</option>
-							<option value="done">Terminée</option>
-						</select>
 					</div>
 				</div>
 			</div>
@@ -121,17 +102,28 @@
 <script>
 import { Factions, Categories } from "./const.js";
 import Tooltip from "./tooltip.vue";
+import { EventBus } from '../main.js';
+
 export default {
 	name: "Card",
-	props: ["ref_id"],
+	props: ["ref_id", "ref_status"],
 	components: {Tooltip},
 	watch: {
 		ref_id: function(newVal) {
 			this.get(newVal);
+		},
+		ref_status: function(newVal) {
+			this.card.status = newVal;
+			this.update = !(this.card.id > 0 && this.card.status !== "wip")
 		}
 	},
 	created: function() {
 		this.get(this.ref_id);
+	},
+	mounted: function(){
+		EventBus.$on('mega_save', () => {
+			this.save(this.card)
+		})
 	},
 	data() {
 		return {
@@ -180,6 +172,7 @@ export default {
 					if (this.card.id > 0 && this.card.status !== "wip") {
 						this.update = false;
 					}
+					EventBus.$emit('refresh_selector', card.id);
 				}).catch(function(err){
 					this.alert = "error: "+err.data
 					this.alert_success = false

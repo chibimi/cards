@@ -9,7 +9,6 @@
 				{{selectedAbility.description}}<br>
 				<span class="vo">{{vo.description}}</span>
 			</span>
-			<!-- <span class="col-8 text-left">{{selectedAbility.description || vo.description}}</span> -->
 			<span class="col-1 form-inline text-right">
 				<button type="submit" class="btn-sm btn-success" @click="update = true">U</button>
 				<button type="submit" class="btn-sm btn-danger" @click="$emit('remove')">X</button>
@@ -33,7 +32,7 @@
 			<div class="form-check form-check-inline ml-2 col-5">
 				<label class="form-check-label">Type</label>
 				<select v-model="type" class="form-control col-4 mx-1">
-					<option value="0"></option>
+					<option value="0">None</option>
 					<option value="1">Magic Ability</option>
 					<option value="2">Battle Plan</option>
 					<option value="3">Attack Type</option>
@@ -54,11 +53,10 @@
 
 <script>
 import ItemTemplate from "./ItemTemplate.vue";
-import Tooltip from "./tooltip.vue";
 export default {
 	name: "Ability",
 	props: ["abilitiesList", "ability"],
-	components: { Tooltip },
+	components: {},
 	watch: {
 		ability: function(newVal) {
 			this.selectedAbility = newVal;
