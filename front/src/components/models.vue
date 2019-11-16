@@ -5,6 +5,7 @@
 			v-bind:model="value"
 			:key="value.id"
 			v-on:remove="removeModel(index)"
+			:ref="'model_' + value.id"
 		></Model>
 		<div class="card border-secondary">
 			<h5
@@ -13,6 +14,7 @@
 				data-target="#new_model"
 				aria-expanded="false"
 				aria-controls="new_model"
+				ref="newModel"
 			>New Model</h5>
 			<div class="collapse card-body p-1" id="new_model">
 				<Model :model="newModel" v-on:add="addModel"></Model>
@@ -60,14 +62,25 @@ export default {
 		removeModel: function(index) {
 			this.models2.splice(index, 1);
 		},
-		addModel: function(model) {
+		addModel: async function(model) {
 			this.models2.push(model);
 			this.newModel = {
 				ref_id: this.id,
 				advantages: [],
 				weapons: []
 			};
+			this.$refs.newModel.click();
+			
+			var modelRef = "model_"+model.id;
+			while(this.$refs[modelRef] === undefined){
+				await this.sleep(100)
+			}
+			this.$refs[modelRef][0].open();
+
 		},
+		sleep: function(ms) {
+			return new Promise(resolve => setTimeout(resolve, ms));
+		}
 	}
 };
 </script>

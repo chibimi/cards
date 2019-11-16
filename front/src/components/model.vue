@@ -7,6 +7,7 @@
 				v-bind:data-target="'#test_model_' + model.id"
 				v-bind:aria-expanded="!model.id"
 				v-bind:aria-controls="'test_model_' + model.id"
+				ref="model"
 			>{{model.name || vo.name}}</h4>
 			<div class="col-4">
 				<div v-if="alert" class="alert alert-error py-2" v-bind:class="{ 'alert-success': alert_success }">{{alert}}</div>
@@ -167,6 +168,9 @@ export default {
 		reset: function() {
 			this.alert = "";
 			this.alert_succes = false;
+		},
+		open: function() {
+			this.$refs.model.click();
 		},
 	}
 };
