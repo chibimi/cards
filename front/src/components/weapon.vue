@@ -87,6 +87,9 @@ export default {
 			this.save(this.weapon)
 		})
 	},
+	beforeDestroy(){
+		EventBus.$off('mega_save')
+	},
 	data() {
 		return {
 			vo: {},
@@ -124,8 +127,7 @@ export default {
 					}
 				})
 				.catch(function(err) {
-					this.alert = "error: " + err;
-					this.alert_success = false;
+					EventBus.$emit('err_save', "weapon", weapon.id, err.data);
 				});
 		},
 		remove: function(weapon) {

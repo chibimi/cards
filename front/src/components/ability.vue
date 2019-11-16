@@ -38,10 +38,11 @@
 					<option value="3">Attack Type</option>
 				</select>
 			</div>
-			<textarea v-model="selectedAbility.description" type="text" class="form-control col-10" rows="3" placeholder/>
-			<div class="col-2 px-0">
-				<button v-if="ability.id || selectedAbility.id" type="submit" class="form-control btn btn-success" @click="save(selectedAbility)">Update</button>
-				<button v-if="ability.id" type="submit" class="form-control btn btn-danger" @click="remove(selectedAbility)">Delete</button>
+			<textarea v-model="selectedAbility.description" type="text" class="form-control col-10" rows="3" placeholder="Translated ability description"/>
+			<div class="col-2 pl-2">
+				<button v-if="ability.id || selectedAbility.id" type="submit" class="form-control btn-sm btn-success" @click="save(selectedAbility)">Update</button>
+				<button v-if="ability.id" type="submit" class="form-control btn-sm btn-primary my-1" @click="update = false">Cancel</button>
+				<button v-if="ability.id" type="submit" class="form-control btn-sm btn-danger" @click="remove(selectedAbility)">Delete</button>
 				<button v-if="!ability.id && selectedAbility.id" type="submit" class="form-control btn btn-primary" @click="add(selectedAbility)">Add</button>
 				<button v-if="!ability.id && !selectedAbility.id" type="submit" class="form-control btn btn-primary" @click="save(selectedAbility)">Add</button>
 			</div>
@@ -118,7 +119,7 @@ export default {
 						this.new(ability);
 					} else if (res.status === 200) {
 						this.updateAbility();
-					}	
+					}
 				});
 		},
 		add: function(ability) {

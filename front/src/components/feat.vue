@@ -1,9 +1,9 @@
 <template>
-	<div class="w-100  mt-4" >
+	<div class="w-100  mt-4">
 		<input v-model="feat.name" type="text" class="form-control" placeholder="Name">
 		<textarea v-model="feat.description" type="text" class="form-control mt-2" rows="4" placeholder="Feat description"/>
 		<textarea v-model="feat.fluff" type="text" class="form-control mt-2" rows="4" placeholder="Feat fluff (optionnal)"/>
-		<div v-if="vo.ref_id" class="col-12 font-italic text-left">
+		<div v-if="vo.ref_id" class="col-12 vo text-left pl-0">
 			<p><b>{{vo.name}}:</b> {{vo.description}}</p>
 			<p>{{vo.fluff}}</p>
 		</div>
@@ -33,6 +33,9 @@ export default {
 		EventBus.$on('mega_save', () => {
 			this.save(this.feat)
 		})
+	},
+	beforeDestroy(){
+		EventBus.$off('mega_save')
 	},
 	data() {
 		return {
@@ -75,6 +78,7 @@ export default {
 					console.log(res);
 				})
 				.catch(function(err) {
+					EventBus.$emit('err_save', "feat", feat.ref_id, err.data);
 				});
 		}
 	}

@@ -6,6 +6,7 @@ import CountryFlag from 'vue-country-flag'
 import App from './App.vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap/dist/js/bootstrap.js'
+import '@fortawesome/fontawesome-free/css/all.css'
 
 export const EventBus = new Vue();
 

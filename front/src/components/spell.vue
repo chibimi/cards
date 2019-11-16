@@ -52,9 +52,10 @@
 			<input v-model="selectedAbility.off" type="text" class="form-control col-1" placeholder="off">
 			<span class="col-2 py-1 danger">USE ENGLIGH HERE</span>
 			<textarea v-model="selectedAbility.description" type="text" class="form-control col-11" rows="3" placeholder="Translated spell description"/>
-			<div class="col-1 px-0">
-				<button v-if="spell.id || selectedAbility.id" type="submit" class="form-control btn btn-success" @click="save(selectedAbility)">Update</button>
-				<button v-if="spell.id" type="submit" class="form-control btn btn-danger" @click="remove(selectedAbility)">Delete</button>
+			<div class="col-1 pl-2">
+				<button v-if="spell.id || selectedAbility.id" type="submit" class="form-control btn-sm btn-success" @click="save(selectedAbility)">Update</button>
+				<button v-if="spell.id" type="submit" class="form-control btn-sm btn-primary my-1" @click="update = false">Cancel</button>			
+				<button v-if="spell.id" type="submit" class="form-control btn-sm btn-danger" @click="remove(selectedAbility)">Delete</button>
 				<button v-if="!spell.id && selectedAbility.id" type="submit" class="form-control btn btn-primary" @click="add(selectedAbility)">Add</button>
 				<button v-if="!spell.id && !selectedAbility.id" type="submit" class="form-control btn btn-primary" @click="save(selectedAbility)">Add</button>
 			</div>

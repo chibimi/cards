@@ -7,14 +7,15 @@
 				<option value="tbv">A valider</option>
 				<option value="done">Terminée</option>
 			</select>
-			<!-- <div class="col-4" >
-				<div v-if="alert" class="alert py-2" v-bind:class="{ 'alert-success': alert_success,'alert-danger': !alert_success}">{{alert}}</div>
-			</div> -->
 			<div class="col-1 pl-0">
 				<button type="submit" class="form-control btn btn-primary" @click="save()">Save</button>
 			</div>
 			<div class="col-1 pl-0">
 				<button type="submit" class="form-control btn btn-danger" @click="remove(reference.id)">Delete</button>
+			</div>
+
+			<div class="col-12" >
+				<div v-if="alert" class="alert py-2" v-bind:class="{ 'alert-success': alert_success,'alert-danger': !alert_success}"><pre class="mb-0">{{alert}}</pre></div>
 			</div>
 		</div>
 		<nav>
@@ -112,9 +113,13 @@ export default {
 	},
 	mounted: function(){
 		this.status = this.reference.status;
-		EventBus.$on('mega_save', function(){
-			console.log(`SAVE REF`)
+		EventBus.$on('err_save', (component, id, err) => {
+			this.alert = this.alert + "Error in " + component + " " + id + ": " + err + "\n"; 
+			this.alert_success = false
 		});
+	},
+	beforeDestroy(){
+		EventBus.$off('err_save')
 	},
 	data() {
 		return {
@@ -130,8 +135,23 @@ export default {
 			this.alert_success = false
 		},
 		save: function() {
+			this.reset();
 			EventBus.$emit('mega_save');
+			this.sleep(1000).then(() => {
+				if (this.alert === ""){
+					this.alert = "save success"
+					this.alert_success = true
+				}
+			})
+			this.sleep(5000).then(() => {
+				if (this.alert_success){
+					this.reset()
+				}
+			})
 		},
+		sleep: function(ms) {
+			return new Promise(resolve => setTimeout(resolve, ms));
+		}
 		// remove: function(card) {
 		// 				this.alert = ""
 		// 	this.$http

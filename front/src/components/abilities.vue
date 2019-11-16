@@ -1,6 +1,5 @@
 <template>
 	<div class="w-100  mt-4">
-		<CardAbilities :abilitiesList="abilitiesList" :ref_id="ref_id" v-on:new="newAbility" v-on:update="updateAbility"></CardAbilities>
 		<ModelAbilities v-for="value in models" v-bind:model="value" :key="value.id" :abilitiesList="abilitiesList" v-on:new="newAbility" v-on:update="updateAbility"></ModelAbilities>
 	</div>
 </template>

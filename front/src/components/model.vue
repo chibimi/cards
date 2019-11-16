@@ -8,7 +8,7 @@
 				v-bind:aria-expanded="!model.id"
 				v-bind:aria-controls="'test_model_' + model.id"
 				ref="model"
-			>{{model.name || model.title}}</h4>
+			><i class="fa fa-angle-right"></i>  {{model.name || model.title}}</h4>
 			<div class="col-5">
 				<div v-if="alert" class="alert alert-error py-2" v-bind:class="{ 'alert-success': alert_success }">{{alert}}</div>
 			</div>
@@ -25,10 +25,10 @@
 						<label class="col-form-label col-4 px-0">English Name</label>
 						<input v-model="model.title" type="text" class="form-control col-8">
 					</div>
-					<div class="row">
+					<!-- <div class="row">
 						<label class="col-form-label col-4 px-0">Name</label>
 						<input v-model="model.name" type="text" class="form-control col-8">
-					</div>
+					</div> -->
 					<div class="row">
 						<label class="col-form-label col-4 px-0">Damage</label>
 						<input v-model="model.damage" type="text" class="form-control col-8">
@@ -113,6 +113,9 @@ export default {
 			this.save(this.model)
 		})
 	},
+	beforeDestroy(){
+		EventBus.$off('mega_save')
+	},
 	data() {
 		return {
 			vo: {},
@@ -150,8 +153,7 @@ export default {
 					}
 				})
 				.catch(function(err) {
-					this.alert = "error: " + err;
-					this.alert_success = false;
+					EventBus.$emit('err_save', "model", model.id, err.data);
 				});
 		},
 		remove: function(model) {
