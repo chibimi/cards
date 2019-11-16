@@ -29,7 +29,7 @@ func loadSpells(db *sqlx.DB, src string) error {
 		if err != nil {
 			return err
 		}
-		_, err = db.Exec("INSERT INTO spells_lang (spell_id, lang, name, description) VALUES (?,?,?,?)", id, "UK", strings.Title(a.Name), a.Text)
+		_, err = db.Exec("INSERT INTO spells_lang (spell_id, lang, name, description) VALUES (?,?,?,?)", id, "US", strings.Title(a.Name), a.Text)
 		if err != nil {
 			return err
 		}

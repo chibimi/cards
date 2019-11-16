@@ -124,7 +124,7 @@ func (s *Service) GetVO(w http.ResponseWriter, r *http.Request, p httprouter.Par
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	res, err := s.GetLang(id, "UK")
+	res, err := s.GetLang(id, "US")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return

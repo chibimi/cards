@@ -99,12 +99,12 @@ func loadRefs(db *sqlx.DB, src string) error {
 			return err
 		}
 		ids[ref.ID] = int(refID)
-		_, err = db.Exec("INSERT INTO refs_lang (ref_id, lang, status, name, properties) VALUES (?,?,?,?,?)", refID, "UK", "wip", ref.FullName, ref.Qualification)
+		_, err = db.Exec("INSERT INTO refs_lang (ref_id, lang, status, name, properties) VALUES (?,?,?,?,?)", refID, "US", "wip", ref.FullName, ref.Qualification)
 		if err != nil {
 			return errors.Wrap(err, "refs lang")
 		}
 
-		_, err = db.Exec("INSERT INTO feats (ref_id, lang, name, description, fluff) VALUES (?,?,?,?,?)", refID, "UK", strings.Title(strings.ToLower(ref.Feat.Title)), ref.Feat.Text, "")
+		_, err = db.Exec("INSERT INTO feats (ref_id, lang, name, description, fluff) VALUES (?,?,?,?,?)", refID, "US", strings.Title(strings.ToLower(ref.Feat.Title)), ref.Feat.Text, "")
 		if err != nil {
 			return errors.Wrap(err, "feats")
 		}
@@ -149,7 +149,7 @@ func loadRefs(db *sqlx.DB, src string) error {
 			if err != nil {
 				return err
 			}
-			_, err = db.Exec("INSERT INTO models_lang (model_id, lang, name) VALUES (?,?,?)", modelID, "UK", strings.Title(strings.ToLower(model.Basestats.Name)))
+			_, err = db.Exec("INSERT INTO models_lang (model_id, lang, name) VALUES (?,?,?)", modelID, "US", strings.Title(strings.ToLower(model.Basestats.Name)))
 			if err != nil {
 				return errors.Wrap(err, "models_lang")
 			}
@@ -203,7 +203,7 @@ func loadRefs(db *sqlx.DB, src string) error {
 				if err != nil {
 					return err
 				}
-				_, err = db.Exec("INSERT INTO weapons_lang (weapon_id, lang, name) VALUES (?,?,?)", weaponID, "UK", strings.Title(strings.ToLower(wp.Name)))
+				_, err = db.Exec("INSERT INTO weapons_lang (weapon_id, lang, name) VALUES (?,?,?)", weaponID, "US", strings.Title(strings.ToLower(wp.Name)))
 				if err != nil {
 					return errors.Wrap(err, "weapons_lang")
 				}
@@ -243,7 +243,7 @@ func loadRefs(db *sqlx.DB, src string) error {
 				if err != nil {
 					return err
 				}
-				_, err = db.Exec("INSERT INTO weapons_lang (weapon_id, lang, name) VALUES (?,?,?)", weaponID, "UK", strings.Title(strings.ToLower(wp.Name)))
+				_, err = db.Exec("INSERT INTO weapons_lang (weapon_id, lang, name) VALUES (?,?,?)", weaponID, "US", strings.Title(strings.ToLower(wp.Name)))
 				if err != nil {
 					return errors.Wrap(err, "weapons_lang")
 				}

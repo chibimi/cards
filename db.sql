@@ -34,7 +34,7 @@ CREATE TABLE refs_lang (
 
 INSERT INTO refs_lang (ref_id, lang, name, properties, status) VALUES (1, "FR", "Epéeistes Nyss", "Unité de Nyss de la légion", "wip");
 INSERT INTO refs_lang (ref_id, lang, name, properties, status) VALUES (3, "FR", "Gueule l'enfer", "Unité de la légion", "done");
-INSERT INTO refs_lang (ref_id, lang, name, properties, status) VALUES (3, "UK", "Hellmouth", "Legion Unit", "tbv");
+INSERT INTO refs_lang (ref_id, lang, name, properties, status) VALUES (3, "US", "Hellmouth", "Legion Unit", "tbv");
 INSERT INTO refs_lang (ref_id, lang, name, properties, status) VALUES (4, "FR", "Shard GlaceNoire", "Unité de Nyss de la légion", "wip");
 
 

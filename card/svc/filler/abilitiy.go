@@ -31,7 +31,7 @@ func loadAbilities(db *sqlx.DB, src string) error {
 		if err != nil {
 			return err
 		}
-		_, err = db.Exec("INSERT INTO abilities_lang (ability_id, lang, name, description) VALUES (?,?,?,?)", id, "UK", strings.Title(a.Title), a.Text)
+		_, err = db.Exec("INSERT INTO abilities_lang (ability_id, lang, name, description) VALUES (?,?,?,?)", id, "US", strings.Title(a.Title), a.Text)
 		if err != nil {
 			return err
 		}

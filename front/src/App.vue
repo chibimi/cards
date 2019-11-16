@@ -66,4 +66,8 @@ html {
 .h-content {
 	height: 90vh;
 }
+::-webkit-input-placeholder {
+	color: #AeAeAe !important;
+	font-style: italic !important;
+}
 </style>

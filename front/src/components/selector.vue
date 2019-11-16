@@ -3,7 +3,7 @@
 		<form v-on:submit.prevent class="form-inline w-100">
 			<country-flag :country="this.$language"/>
 			<select :value="this.$language" class="form-control form-control-sm" @change="$emit('change_language', $event.target.value)">
-				<option>UK</option>
+				<option>US</option>
 				<option>FR</option>
 				<option>DE</option>
 				<option>IT</option>
