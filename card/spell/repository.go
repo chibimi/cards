@@ -140,3 +140,20 @@ func (r *Repository) GetLang(id int, lang string) (*Spell, error) {
 
 	return res, nil
 }
+
+func (r *Repository) Get(id int, lang string) (*Spell, error) {
+	stmt := `
+	SELECT r.*, IFNULL(s.name, "") as name, IFNULL(s.description, "") as description FROM (
+		SELECT * FROM spells WHERE id = ?
+	) as r LEFT JOIN (
+		SELECT * FROM spells_lang WHERE spell_id = ? AND lang = ?
+	) as s ON r.id = s.spell_id
+	`
+	res := &Spell{}
+	err := r.db.Get(res, stmt, id, id, lang)
+	if err != nil {
+		return nil, errors.Wrap(err, "execute query")
+	}
+
+	return res, nil
+}

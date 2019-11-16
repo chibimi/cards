@@ -14,8 +14,8 @@
 		</div>
 
 		<div v-if="update" class="row px-3">
-			<span v-if="!spell.id" class="col-2 text-left"></span>
-			<span class="col-2 text-left">Original Name</span>
+			<!-- <span v-if="!spell.id" class="col-2 text-left"></span> -->
+			<span class="col-2 text-left">English Name</span>
 			<span class="col-2 text-left">Name</span>
 			<span class="col-1 text-left">Cost</span>
 			<span class="col-1 text-left">Range</span>
@@ -23,6 +23,7 @@
 			<span class="col-1 text-left">Pow</span>
 			<span class="col-1 text-left">Dur</span>
 			<span class="col-1 text-left">Off</span>
+			<span class="col-2"></span>
 			<span v-if="spell.id" class="col-2 text-left"></span>
 			<v-autocomplete
 				v-if="!spell.id"
@@ -33,10 +34,9 @@
 				:auto-select-one-item="false"
 				@item-selected="selectedItem"
 				@input="inputItem"
+				placeholder="English Name"
 				class="col-2 mt-1"
 			></v-autocomplete>
-			<input v-if="!selectedAbility.id" v-model="selectedAbility.title" type="text" class="form-control col-2" placeholder="English Name">
-			<label v-if="selectedAbility.id" class="col-form-label col-2 text-left">{{selectedAbility.title}}</label>
 			<input v-model="selectedAbility.name" type="text" class="form-control col-2" placeholder="French Name">
 			<input v-model="selectedAbility.cost" type="text" class="form-control col-1" placeholder="cost">
 			<input v-model="selectedAbility.rng" type="text" class="form-control col-1" placeholder="rng">
@@ -51,6 +51,7 @@
 				<button v-if="!spell.id && selectedAbility.id" type="submit" class="form-control btn btn-primary" @click="add(selectedAbility)">Add</button>
 				<button v-if="!spell.id && !selectedAbility.id" type="submit" class="form-control btn btn-primary" @click="save(selectedAbility)">Add</button>
 			</div>
+			<div v-if="selectedAbility.id" class="col-12 font-italic text-left">{{vo.description}}</div>
 		</div>	
 		<hr>
 	</div>
@@ -67,6 +68,7 @@ export default {
 			if (!this.spell.id){
 				this.update=true;
 			}
+			this.get(this.selectedAbility.id);
 		}
 	},
 	created: function() {
@@ -74,9 +76,11 @@ export default {
 		if (!this.spell.id){
 			this.update=true;
 		}
+		this.get(this.selectedAbility.id);
 	},
 	data() {
 		return {
+			vo: {},
 			selectedAbility: {},
 			template: ItemTemplate,
 			items: [],
@@ -84,6 +88,23 @@ export default {
 		};
 	},
 	methods: {
+		get: function(id) {
+			if (id == null) {
+				return;
+			}
+			this.$http
+				.get(process.env.VUE_APP_API_ENDPOINT+ "/spells/" + id + "/vo")
+				.then(function(res) {
+					console.log(res);
+					this.vo = res.data;
+				});
+			this.$http
+				.get(process.env.VUE_APP_API_ENDPOINT+ "/spells/" + id + "?lang=" + this.$language)
+				.then(function(res) {
+					console.log(res);
+					this.selectedAbility = res.data;
+				});
+		},
 		save: function(spell) {
 			if (spell.id == null) {
 				spell.id = 0;
@@ -123,12 +144,17 @@ export default {
 			return item.title;
 		},
 		updateItems(text) {
+			this.selectedAbility.title = text
+			this.selectedAbility.id = null
 			this.items = this.spellsList.filter(item =>
+				item.title != null
+			).filter(item =>
 				item.title.toLowerCase().startsWith(text.toLowerCase())
 			);
 		},
 		selectedItem(item) {
-			this.selectedAbility = item;
+			// this.selectedAbility = item;
+			this.get(item.id)
 		},
 		inputItem(item) {
 			if (item === null){

@@ -68,6 +68,7 @@ func main() {
 	router.DELETE("/weapon/:id/ability/:ability_id", ss.Ability.DeleteAbilityWeaponEndpoint)
 
 	router.GET("/spells/:id/vo", ss.Spell.GetVO)
+	router.GET("/spells/:id", ss.Spell.GetEndpoint)
 	router.GET("/spells", ss.Spell.ListEndpoint)
 	router.POST("/spells", ss.Spell.CreateEndpoint)
 	router.PUT("/spells/:id", ss.Spell.SaveEndpoint)

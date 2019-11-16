@@ -29,7 +29,9 @@ func (s *Service) AddSpellRef(ref, spell int) error {
 func (s *Service) DeleteSpellRef(ref, spell int) error {
 	return s.repo.DeleteSpellRef(ref, spell)
 }
-
+func (s *Service) Get(id int, lang string) (*Spell, error) {
+	return s.repo.Get(id, lang)
+}
 func (s *Service) GetLang(id int, lang string) (*Spell, error) {
 	return s.repo.GetLang(id, lang)
 }

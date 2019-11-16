@@ -140,8 +140,7 @@ export default {
 			this.selectedAbility.id = null
 			this.items = this.abilitiesList.filter(item =>
 				item.title != null
-			)
-			.filter(item =>
+			).filter(item =>
 				item.title.toLowerCase().startsWith(text.toLowerCase())
 			);
 		},
