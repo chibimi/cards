@@ -1,38 +1,56 @@
 <template>
 	<div class="w-100">
-		<div class="form-group row px-3">
-			<span class="col-2 text-left">Name <Tooltip :txt="vo.name"/></span>
-			<span class="col-2 text-left">Type</span>
-			<span class="col-1 text-left">rng</span>
-			<span class="col-1 text-left">pow</span>
-			<span class="col-1 text-left">rof</span>
-			<span class="col-1 text-left">aoe</span>
-			<span class="col-1 text-left">loc</span>
-			<span class="col-1 text-left">cnt</span>
-			<span class="col-1 text-left"></span>
-			<span class="col-1 text-left"></span>
-			
-			<input v-model="weapon.name" type="text" class="form-control col-2" placeholder="Name">
-			<select v-model="weapon.type" class="form-control col-2">
-				<option value="1">Meele</option>
-				<option value="2">Ranged</option>
-				<option value="3">Mount</option>
-			</select>
-			<input v-model="weapon.rng" type="text" class="form-control col-1" placeholder="rng">
-			<input v-model="weapon.pow" type="text" class="form-control col-1" placeholder="pow">
-			<input v-model="weapon.rof" type="text" class="form-control col-1" placeholder="rof">
-			<input v-model="weapon.aoe" type="text" class="form-control col-1" placeholder="aoe">
-			<input v-model="weapon.loc" type="text" class="form-control col-1" placeholder="loc">
-			<input v-model="weapon.cnt" type="text" class="form-control col-1" placeholder="cnt">
+		<div class="row px-3">
+			<div class="col-4">
+				<div class="form-group row my-0">
+					<span class="col-6 text-left">English Name</span>
+					<span class="col-§ text-left">Name</span>
+				</div>
+			</div>
+			<div class="col-8">
+				<div class="form-group row my-0">
+					<span class="col-2 text-left">Type</span>
+					<span class="col-1 text-left">rng</span>
+					<span class="col-1 text-left">pow</span>
+					<span class="col-1 text-left">rof</span>
+					<span class="col-1 text-left">aoe</span>
+					<span class="col-1 text-left">loc</span>
+					<span class="col-1 text-left">cnt</span>
+					<span class="col-1 text-left"></span>
+					<span class="col-1 text-left"></span>
+				</div>
+			</div>
 
-			<div v-if="weapon.id" class="col-1 pl-1 pr-0">
-				<button type="submit" class="form-control btn btn-success" @click="save(weapon)">Update</button>
+			<div class="col-4">
+				<div class="form-group row my-0">
+					<input v-model="weapon.title" type="text" class="form-control col-6" placeholder="English Name">
+					<input v-model="weapon.name" type="text" class="form-control col-6" placeholder="Name">
+				</div>
 			</div>
-			<div v-if="weapon.id" class="col-1 pl-1 pr-0">
-				<button type="submit" class="form-control btn btn-danger" @click="remove(weapon)">Delete</button>
-			</div>
-			<div v-if="!weapon.id" class="col-2 pl-1 pr-0">
-				<button type="submit" class="form-control btn btn-primary" @click="save(weapon)">Add</button>
+			<div class="col-8">
+				<div class="form-group row my-0">
+					<select v-model="weapon.type" class="form-control col-2">
+						<option value="1">Meele</option>
+						<option value="2">Ranged</option>
+						<option value="3">Mount</option>
+					</select>
+					<input v-model="weapon.rng" type="text" class="form-control col-1" placeholder="rng">
+					<input v-model="weapon.pow" type="text" class="form-control col-1" placeholder="pow">
+					<input v-model="weapon.rof" type="text" class="form-control col-1" placeholder="rof">
+					<input v-model="weapon.aoe" type="text" class="form-control col-1" placeholder="aoe">
+					<input v-model="weapon.loc" type="text" class="form-control col-1" placeholder="loc">
+					<input v-model="weapon.cnt" type="text" class="form-control col-1" placeholder="cnt">
+
+					<div v-if="weapon.id" class="col-2 pl-1 pr-0">
+						<button type="submit" class="form-control btn btn-success" @click="save(weapon)">Update</button>
+					</div>
+					<div v-if="weapon.id" class="col-2 pl-1 pr-0">
+						<button type="submit" class="form-control btn btn-danger" @click="remove(weapon)">Delete</button>
+					</div>
+					<div v-if="!weapon.id" class="col-2 pl-1 pr-0">
+						<button type="submit" class="form-control btn btn-primary" @click="save(weapon)">Add</button>
+					</div>
+				</div>
 			</div>
 
 			<div class="col-12 text-left px-0 mt-2">

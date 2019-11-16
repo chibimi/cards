@@ -140,8 +140,8 @@ func loadRefs(db *sqlx.DB, src string) error {
 			rsc := getModelResource(model)
 			hp := getModelHP(model)
 			bs := model.Basestats
-			res, err := db.Exec("INSERT INTO models (ref_id, spd, str, mat, rat, def, arm, cmd, magic_ability, damage, resource, threshold, base_size, advantages) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
-				refID, bs.Spd, bs.Str, bs.Mat, bs.Rat, bs.Def, bs.Arm, bs.Cmd, magic, hp, rsc, bs.Thr, "", advantages)
+			res, err := db.Exec("INSERT INTO models (title, ref_id, spd, str, mat, rat, def, arm, cmd, magic_ability, damage, resource, threshold, base_size, advantages) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+				strings.Title(strings.ToLower(bs.Name)), refID, bs.Spd, bs.Str, bs.Mat, bs.Rat, bs.Def, bs.Arm, bs.Cmd, magic, hp, rsc, bs.Thr, "", advantages)
 			if err != nil {
 				return errors.Wrap(err, "models")
 			}
@@ -194,8 +194,8 @@ func loadRefs(db *sqlx.DB, src string) error {
 					return err
 				}
 
-				res, err := db.Exec("INSERT INTO weapons (model_id, type, rng, pow, rof, aoe, loc, cnt, advantages) VALUES (?,?,?,?,?,?,?,?,?)",
-					modelID, "2", wp.Rng, wp.Pow, wp.Rof, wp.Aoe, wp.Location, wp.Count, advantages)
+				res, err := db.Exec("INSERT INTO weapons (title, model_id, type, rng, pow, rof, aoe, loc, cnt, advantages) VALUES (?,?,?,?,?,?,?,?,?,?)",
+					strings.Title(strings.ToLower(wp.Name)), modelID, "2", wp.Rng, wp.Pow, wp.Rof, wp.Aoe, wp.Location, wp.Count, advantages)
 				if err != nil {
 					return errors.Wrap(err, "ranged weapons")
 				}
@@ -234,8 +234,8 @@ func loadRefs(db *sqlx.DB, src string) error {
 				if strings.ToLower(wp.Name) == "mount" {
 					typ = "3"
 				}
-				res, err := db.Exec("INSERT INTO weapons (model_id, type, rng, pow, rof, aoe, loc, cnt, advantages) VALUES (?,?,?,?,?,?,?,?,?)",
-					modelID, typ, wp.Rng, wp.Pow, wp.Rof, wp.Aoe, wp.Location, wp.Count, advantages)
+				res, err := db.Exec("INSERT INTO weapons (title, model_id, type, rng, pow, rof, aoe, loc, cnt, advantages) VALUES (?,?,?,?,?,?,?,?,?,?)",
+					strings.Title(strings.ToLower(wp.Name)), modelID, typ, wp.Rng, wp.Pow, wp.Rof, wp.Aoe, wp.Location, wp.Count, advantages)
 				if err != nil {
 					return errors.Wrap(err, "melee weapons")
 				}

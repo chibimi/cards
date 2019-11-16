@@ -3,6 +3,7 @@ package model
 type Model struct {
 	ID           int      `json:"id,omitempty" db:"id"`
 	RefID        int      `json:"ref_id,omitempty" db:"ref_id"`
+	Title        string   `json:"title,omitempty" db:"title"`
 	Name         string   `json:"name,omitempty" db:"name"`
 	SPD          string   `json:"spd,omitempty" db:"spd"`
 	STR          string   `json:"str,omitempty" db:"str"`

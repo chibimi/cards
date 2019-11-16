@@ -112,6 +112,7 @@ CREATE TABLE ref_spell (
 CREATE TABLE models (
     id int unsigned not null auto_increment, 
     ref_id int not null,
+    title text,
     spd text,
     str text,
     mat text,
@@ -138,6 +139,7 @@ CREATE TABLE models_lang (
 CREATE TABLE weapons (
     id int unsigned not null auto_increment, 
     model_id int not null,
+    title text,
     type text,
     rng text,
     pow text,

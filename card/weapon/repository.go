@@ -23,8 +23,8 @@ type weaponDB struct {
 
 func (r *Repository) Create(wp *Weapon, lang string) (int, error) {
 	stmt := `
-	INSERT INTO weapons (model_id, type, rng, pow, rof, aoe, loc, cnt, advantages) 
-	VALUES(:model_id, :type, :rng, :pow, :rof, :aoe, :loc, :cnt, :advantages)
+	INSERT INTO weapons (title, model_id, type, rng, pow, rof, aoe, loc, cnt, advantages) 
+	VALUES(:title, :model_id, :type, :rng, :pow, :rof, :aoe, :loc, :cnt, :advantages)
 	`
 
 	adv, err := json.Marshal(wp.Advantages)
@@ -118,7 +118,7 @@ func (r *Repository) Save(wp *Weapon, lang string) error {
 	}
 	stmt := `
 	UPDATE weapons SET 
-	model_id = :model_id, type = :type, rng = :rng, pow = :pow, rof = :rof , aoe = :aoe, loc = :loc, cnt = :cnt, advantages = :advantages
+	title = :title, model_id = :model_id, type = :type, rng = :rng, pow = :pow, rof = :rof , aoe = :aoe, loc = :loc, cnt = :cnt, advantages = :advantages
 	WHERE id = :id
 	`
 	adv, err := json.Marshal(wp.Advantages)

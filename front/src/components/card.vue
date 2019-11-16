@@ -1,7 +1,7 @@
 <template>
 	<div class="w-100">
 		<div class="row my-4">
-			<h2 class="text-left col-6">{{card.title}}</h2>
+			<h2 class="text-left col-6">{{card.title}} <span class="font-italic h5">{{vo.properties}}</span> </h2>
 			<div class="col-4" >
 				<div v-if="alert" class="alert py-2" v-bind:class="{ 'alert-success': alert_success,'alert-danger': !alert_success}">{{alert}}</div>
 			</div>
@@ -17,12 +17,16 @@
 			<div class="form-group row">
 				<div class="col-6">
 					<div class="row">
-						<label class="col-form-label col-3">Name <Tooltip :txt="vo.name"/></label>
-						<input v-model="card.name" type="text" class="form-control col-8" placeholder="Fyanna, Torment of Everblight">
+						<label class="col-form-label col-3">English Name</label>
+						<input v-model="card.title" type="text" class="form-control col-8" placeholder="English Name">
 					</div>
 					<div class="row">
-						<label class="col-form-label col-3">Tag <Tooltip :txt="vo.properties"/></label>
-						<input v-model="card.properties" type="text" class="form-control col-8" placeholder="Unité de la légion">
+						<label class="col-form-label col-3">Name</label>
+						<input v-model="card.name" type="text" class="form-control col-8" placeholder="Translated Full name">
+					</div>
+					<div class="row">
+						<label class="col-form-label col-3">Type</label>
+						<input v-model="card.properties" type="text" class="form-control col-8" placeholder="Translated Type'Legion Unit'">
 					</div>
 					<div class="row">
 						<label class="col-form-label col-3">Faction</label>

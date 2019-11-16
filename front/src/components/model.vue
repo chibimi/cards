@@ -23,9 +23,13 @@
 
 		<div class="collapse" v-bind:id="'test_model_' + model.id" v-bind:class="{'show': !model.id }">
 			<div class="row px-3">
-				<div class="col-3 pt-4 pr-4">
+				<div class="col-4 pt-4 pr-4">
 					<div class="row">
-						<label class="col-form-label col-4 px-0">Name <Tooltip :txt="vo.name"/></label>
+						<label class="col-form-label col-4 px-0">English Name</label>
+						<input v-model="model.title" type="text" class="form-control col-8">
+					</div>
+					<div class="row">
+						<label class="col-form-label col-4 px-0">Name</label>
 						<input v-model="model.name" type="text" class="form-control col-8">
 					</div>
 					<div class="row">
@@ -41,7 +45,7 @@
 						<input v-model="model.threshold" type="text" class="form-control col-8">
 					</div>
 				</div>
-				<div class="col-9 pl-3">
+				<div class="col-8 pl-3">
 					<div class="form-group row my-0">
 						<span class="col text-left">spd</span>
 						<span class="col text-left">str</span>

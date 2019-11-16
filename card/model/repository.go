@@ -23,8 +23,8 @@ type modelDB struct {
 
 func (r *Repository) Create(m *Model, lang string) (int, error) {
 	stmt := `
-	INSERT INTO models (ref_id, spd, str, mat, rat, def, arm, cmd, base_size, magic_ability, resource, threshold, damage, advantages) 
-	VALUES(:ref_id, :spd, :str, :mat, :rat, :def, :arm, :cmd, :base_size, :magic_ability, :resource, :threshold, :damage, :advantages)
+	INSERT INTO models (title, ref_id, spd, str, mat, rat, def, arm, cmd, base_size, magic_ability, resource, threshold, damage, advantages) 
+	VALUES(:title, :ref_id, :spd, :str, :mat, :rat, :def, :arm, :cmd, :base_size, :magic_ability, :resource, :threshold, :damage, :advantages)
 	`
 	adv, err := json.Marshal(m.Advantages)
 	if err != nil {
@@ -116,7 +116,7 @@ func (r *Repository) Save(m *Model, lang string) error {
 		return errors.Wrap(err, "create transaction")
 	}
 	stmt := `
-	UPDATE models SET ref_id = :ref_id, spd = :spd, str = :str, mat = :mat, rat = :rat, def = :def, arm = :arm, cmd = :cmd, 
+	UPDATE models SET title = :title, ref_id = :ref_id, spd = :spd, str = :str, mat = :mat, rat = :rat, def = :def, arm = :arm, cmd = :cmd, 
 	base_size = :base_size, magic_ability = :magic_ability, resource = :resource, threshold = :threshold, 
 	damage = :damage, advantages = :advantages
 	WHERE id = :id

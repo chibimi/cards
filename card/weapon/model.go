@@ -4,6 +4,7 @@ type Weapon struct {
 	ID         int      `json:"id,omitempty" db:"id"`
 	ModelID    int      `json:"model_id,omitempty" db:"model_id"`
 	Type       int      `json:"type,omitempty,string" db:"type"`
+	Title      string   `json:"title,omitempty" db:"title"`
 	Name       string   `json:"name,omitempty" db:"name"`
 	RNG        string   `json:"rng,omitempty" db:"rng"`
 	POW        string   `json:"pow,omitempty" db:"pow"`
