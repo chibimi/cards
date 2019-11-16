@@ -29,7 +29,7 @@
 				placeholder="English Name"
 				class="col-2 mt-1"
 			></v-autocomplete>
-			<input v-model="selectedAbility.name" type="text" class="form-control col-2" placeholder="Translated Name">
+			<input v-model="selectedAbility.name" type="text" class="form-control col-3" placeholder="Translated Name">
 			<div class="form-check form-check-inline ml-2 col-5">
 				<label class="form-check-label">Type</label>
 				<select v-model="type" class="form-control col-4 mx-1">
@@ -46,7 +46,7 @@
 				<button v-if="!ability.id && selectedAbility.id" type="submit" class="form-control btn btn-primary" @click="add(selectedAbility)">Add</button>
 				<button v-if="!ability.id && !selectedAbility.id" type="submit" class="form-control btn btn-primary" @click="save(selectedAbility)">Add</button>
 			</div>
-			<div v-if="selectedAbility.id" class="col-12 font-italic text-left">{{vo.description}}</div>
+			<div v-if="selectedAbility.id" class="col-12 text-left vo px-0">{{vo.name}}: {{vo.description}}</div>
 		</div>
 		<hr>
 	</div>

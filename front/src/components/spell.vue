@@ -21,7 +21,7 @@
 
 		<div v-if="update" class="row px-3">
 			<!-- <span v-if="!spell.id" class="col-2 text-left"></span> -->
-			<span class="col-2 text-left">English Name</span>
+			<span v-if="!spell.id" class="col-2 text-left">English Name</span>
 			<span class="col-2 text-left">Name</span>
 			<span class="col-1 text-left">Cost</span>
 			<span class="col-1 text-left">Range</span>
@@ -57,7 +57,7 @@
 				<button v-if="!spell.id && selectedAbility.id" type="submit" class="form-control btn btn-primary" @click="add(selectedAbility)">Add</button>
 				<button v-if="!spell.id && !selectedAbility.id" type="submit" class="form-control btn btn-primary" @click="save(selectedAbility)">Add</button>
 			</div>
-			<div v-if="selectedAbility.id" class="col-12 font-italic text-left">{{vo.description}}</div>
+			<div v-if="selectedAbility.id" class="col-12 text-left vo px-0">{{vo.name}}: {{vo.description}}</div>
 		</div>	
 		<hr>
 	</div>
