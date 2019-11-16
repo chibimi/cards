@@ -70,4 +70,7 @@ html {
 	color: #AeAeAe !important;
 	font-style: italic !important;
 }
+.vo{
+	color: #828da9;
+}
 </style>

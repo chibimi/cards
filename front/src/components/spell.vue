@@ -1,12 +1,18 @@
 <template>
 	<div class="w-100">
 		<div v-if="!update" class="row px-3">
-			<span class="col-2 text-left">{{selectedAbility.name}} ({{selectedAbility.title}})</span>
+			<span class="col-2 text-left">
+				{{selectedAbility.name}} <br>
+				<span class="vo">{{selectedAbility.title}}</span>
+			</span>
 			<span class="col-2 text-left">
 				Cost: {{selectedAbility.cost}}, Range: {{selectedAbility.rng}}<br>
 				AoE: {{selectedAbility.aoe}}, Pow: {{selectedAbility.pow}}<br>
 				Dur: {{selectedAbility.dur}}, Off: {{selectedAbility.off}}</span>
-			<span class="col-7 text-left">{{selectedAbility.description}}</span>
+			<span class="col-7 text-left">
+				{{selectedAbility.description}}<br>
+				<span class="vo">{{vo.description}}</span>
+			</span>
 			<span class="col-1 form-inline text-right">
 				<button type="submit" class="btn-sm btn-success" @click="update = true">U</button>
 				<button type="submit" class="btn-sm btn-danger" @click="$emit('remove')">X</button>
