@@ -8,27 +8,24 @@
 </template>
 
 <script>
-import Ref from "./components/ref.vue";
-import Selector from "./components/selector.vue";
+import Ref from "./components/ref.vue"
+import Selector from "./components/selector.vue"
 
 export default {
 	name: "app",
-	components: {
-		Ref,
-		Selector
-	},
+	components: { Ref, Selector },
 	data() {
 		return {
 			componentKey: 0,
-			ref:null,
+			ref: null,
 			reference: {
 				id: null,
-			}
-		};
+			},
+		}
 	},
 	methods: {
-		setRef: function(ref){
-			if (ref.id === 0&& this.reference.id===0) {
+		setRef: function(ref) {
+			if (ref.id === 0 && this.reference.id === 0) {
 				this.reference.id = -1
 			} else {
 				this.reference = ref
@@ -42,10 +39,10 @@ export default {
 			this.forceRerender()
 		},
 		forceRerender() {
-			this.componentKey += 1;  
-		}
-	}
-};
+			this.componentKey += 1
+		},
+	},
+}
 </script>
 
 <style>
@@ -68,10 +65,10 @@ html {
 	height: 90vh;
 }
 ::-webkit-input-placeholder {
-	color: #AeAeAe !important;
+	color: #aeaeae !important;
 	font-style: italic !important;
 }
-.vo{
+.vo {
 	color: #828da9;
 }
 </style>

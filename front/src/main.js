@@ -16,8 +16,8 @@ Vue.use(CountryFlag)
 
 Vue.config.productionTip = false
 Vue.prototype.$language = 'FR'
-Vue.prototype.$change_language = function (l) {
-	Vue.prototype.$language = l;
+Vue.prototype.$change_language = function (lang) {
+	Vue.prototype.$language = lang;
 }
 
 new Vue({
