@@ -1,0 +1,10 @@
+@import '~bootstrap/scss/bootstrap.scss';
+
+select, input {
+    @extend .form-control;
+}
+
+button {
+    @extend .btn;
+    @extend .btn-primary;
+}

@@ -4,9 +4,9 @@ import Autocomplete from 'v-autocomplete'
 import CountryFlag from 'vue-country-flag'
 
 import App from './App.vue'
-import 'bootstrap/dist/css/bootstrap.css'
+
 import 'bootstrap/dist/js/bootstrap.js'
-import '@fortawesome/fontawesome-free/css/all.css'
+import './custom.scss'
 
 export const EventBus = new Vue();
 
@@ -14,12 +14,18 @@ Vue.use(VueResource)
 Vue.use(Autocomplete)
 Vue.use(CountryFlag)
 
-Vue.config.productionTip = false
-Vue.prototype.$language = 'FR'
-Vue.prototype.$change_language = function (lang) {
-	Vue.prototype.$language = lang;
-}
+let globalData = new Vue({
+	data: { $language: 'FR' }
+})
+Vue.mixin({
+	computed: {
+		$language: {
+			get: function () { return globalData.$data.$language },
+			set: function (newVal) { globalData.$data.$language = newVal; }
+		}
+	}
+})
 
 new Vue({
-	render: h => h(App),
-}).$mount('#app')
+	render: h => h(App)
+}).$mount("#app");
