@@ -1,6 +1,6 @@
 @import '~bootstrap/scss/bootstrap.scss';
 
-select, input {
+select, input, textarea {
     @extend .form-control;
 }
 

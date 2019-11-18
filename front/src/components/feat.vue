@@ -1,89 +1,86 @@
 <template>
-	<div class="w-100  mt-4">
-		<input v-model="feat.name" type="text" class="form-control" placeholder="Name">
-		<textarea v-model="feat.description" type="text" class="form-control mt-2" rows="4" placeholder="Feat description"/>
-		<textarea v-model="feat.fluff" type="text" class="form-control mt-2" rows="4" placeholder="Feat fluff (optionnal)"/>
-		<div v-if="vo.ref_id" class="col-12 vo text-left pl-0">
-			<p><b>{{vo.name}}:</b> {{vo.description}}</p>
-			<p>{{vo.fluff}}</p>
-		</div>
-		<div class="col-12">
-			<div v-if="alert" class="alert alert-error" v-bind:class="{ 'alert-success': alert_success }">{{alert}}</div>
+	<div class="feat">
+		<input v-model="feat.name" placeholder="Name" />
+		<textarea v-model="feat.description" class="mt-2" rows="4" placeholder="Feat description" />
+		<textarea v-model="feat.fluff" class="mt-2" rows="4" placeholder="Feat fluff (optionnal)" />
+		<div v-if="vo.ref_id" class="vo pl-0">
+			<p><b>{{ vo.name }}:</b> {{ vo.description }}</p>
+			<p>{{ vo.fluff }}</p>
 		</div>
 	</div>
 </template>
 
 <script>
-import { EventBus } from '../main.js';
+import { EventBus } from '../main.js'
 
 export default {
-	name: "Feat",
-	props: ["ref_id"],
+	name: 'Feat',
+	props: ['ref_id'],
 	watch: {
 		ref_id: function(newVal) {
-			this.reset();
-			this.get(newVal);
-		}
+			this.get(newVal)
+		},
 	},
 	created: function() {
-		this.reset();
-		this.get(this.ref_id);
+		this.get(this.ref_id)
 	},
-	mounted: function(){
+	mounted: function() {
 		EventBus.$on('mega_save', () => {
 			this.save(this.feat)
 		})
 	},
-	beforeDestroy(){
+	beforeDestroy() {
 		EventBus.$off('mega_save')
 	},
 	data() {
 		return {
 			vo: {},
 			feat: {
-				ref_id: this.ref_id
+				ref_id: this.ref_id,
 			},
-		};
+		}
 	},
 	methods: {
 		get: function(refID) {
+			this.$http.get(process.env.VUE_APP_API_ENDPOINT + `/ref/${refID}/feat?lang=US`).then(function(res) {
+				console.debug(res)
+				this.vo = res.data
+			})
 			this.$http
-				.get(process.env.VUE_APP_API_ENDPOINT+ "/ref/" + refID + "/feat?lang=US")
+				.get(process.env.VUE_APP_API_ENDPOINT + `/ref/${refID}/feat?lang=${this.$language}`)
 				.then(function(res) {
-					console.log(res);
-					this.vo = res.data;
-				});
-			this.$http
-				.get(process.env.VUE_APP_API_ENDPOINT+ "/ref/" + refID + "/feat?lang=" + this.$language)
-				.then(function(res) {
-					console.log(res);
-					this.feat = res.data;
+					console.debug(res)
+					this.feat = res.data
 					if (!this.feat.ref_id) {
-						this.feat.ref_id = this.ref_id;
+						this.feat.ref_id = this.ref_id
 					}
-				});
-		},
-		reset: function() {
-			this.alert = "";
-			this.alert_succes = false;
+				})
+				.catch(function(err) {
+					console.error(err)
+				})
 		},
 		save: function(feat) {
 			if (feat.ref_id == null) {
 				return
 			}
-			this.reset();
 			this.$http
-				.put(process.env.VUE_APP_API_ENDPOINT+ "/ref/" + feat.ref_id + "/feat?lang=" + this.$language, feat)
+				.put(process.env.VUE_APP_API_ENDPOINT + `/ref/${feat.ref_id}/feat?lang=${this.$language}`, feat)
 				.then(function(res) {
-					console.log(res);
+					console.debug(res)
 				})
 				.catch(function(err) {
-					EventBus.$emit('err_save', "feat", feat.ref_id, err.data);
-				});
-		}
-	}
-};
+					console.error(err)
+					EventBus.$emit('err_save', 'feat', feat.ref_id, err.data)
+				})
+		},
+	},
+}
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import '../custom.scss';
+
+.feat {
+	@extend .row;
+}
 </style>
