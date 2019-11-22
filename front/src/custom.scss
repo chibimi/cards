@@ -5,6 +5,25 @@ select, input, textarea {
 }
 
 button {
+	@extend .form-control;
     @extend .btn;
     @extend .btn-primary;
+}
+
+.card {
+	@extend .card;
+	@extend .border-secondary;
+	
+
+	.header {
+		@extend .card-header;
+		@extend .bg-secondary;
+		@extend .text-light;
+		@extend .text-center;
+		@extend .py-1;
+	}
+}
+
+.vo {
+	color: #828da9;
 }

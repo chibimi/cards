@@ -26,7 +26,14 @@ export default {
 
 #app {
 	@extend .container;
-
+	font-family: 'Avenir', Helvetica, Arial, sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	color: #2c3e50;
+}
+::-webkit-input-placeholder {
+	color: #aeaeae !important;
+	font-style: italic !important;
 }
 // FIXME
 // #app {

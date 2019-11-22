@@ -1,38 +1,39 @@
 <template>
-	<div class="w-100">
-		<div v-if="!update" class="row px-3">
-			<span class="col-2 text-left">
-				{{selectedAbility.name}} <br>
-				<span class="vo">{{selectedAbility.title}}</span>
+	<div class="spell">
+		<div v-if="!update" class="row">
+			<span class="col-2">
+				{{ spell.name }} <br />
+				<span class="vo">{{ spell.title }}</span>
 			</span>
-			<span class="col-2 text-left">
-				Cost: {{selectedAbility.cost}}, Range: {{selectedAbility.rng}}<br>
-				AoE: {{selectedAbility.aoe}}, Pow: {{selectedAbility.pow}}<br>
-				Dur: {{selectedAbility.dur}}, Off: {{selectedAbility.off}}</span>
-			<span class="col-7 text-left">
-				{{selectedAbility.description}}<br>
-				<span class="vo">{{vo.description}}</span>
+			<span class="col-2">
+				Cost: {{ spell.cost }}, Range: {{ spell.rng }}<br />
+				AoE: {{ spell.aoe }}, Pow: {{ spell.pow }}<br />
+				Dur: {{ spell.dur }}, Off: {{ spell.off }}
 			</span>
-			<span class="col-1 form-inline text-right">
-				<button type="submit" class="btn-sm btn-success" @click="update = true">U</button>
-				<button type="submit" class="btn-sm btn-danger" @click="$emit('remove')">X</button>
+			<span class="col-7">
+				{{ spell.description }}<br />
+				<span class="vo">{{ vo.description }}</span>
+			</span>
+			<span class="col-1">
+				<button class="btn-success mb-1" @click="update = true">Update</button>
+				<button class="btn-danger" @click="$emit('remove')">Delete</button>
 			</span>
 		</div>
 
-		<div v-if="update" class="row px-3">
-			<span v-if="!spell.id" class="col-2 text-left">English Name</span>
-			<span class="col-2 text-left">Name</span>
-			<span class="col-1 text-left">Cost</span>
-			<span class="col-1 text-left">Range</span>
-			<span class="col-1 text-left">Aoe</span>
-			<span class="col-1 text-left">Pow</span>
-			<span class="col-1 text-left">Dur</span>
-			<span class="col-1 text-left">Off</span>
+		<div v-if="update" class="row">
+			<span v-if="newSpell" class="col-2 ">English Name</span>
+			<span class="col-2 ">Name</span>
+			<span class="col-1 ">Cost</span>
+			<span class="col-1 ">Range</span>
+			<span class="col-1 ">Aoe</span>
+			<span class="col-1 ">Pow</span>
+			<span class="col-1 ">Dur</span>
+			<span class="col-1 ">Off</span>
 			<span class="col-2"></span>
+			<span v-if="!newSpell" class="col-2"></span>
 
-			<span v-if="spell.id" class="col-2 text-left"></span>
 			<v-autocomplete
-				v-if="!spell.id"
+				v-if="newSpell"
 				:items="items"
 				:get-label="getLabel"
 				@update-items="updateItems"
@@ -41,142 +42,142 @@
 				@item-selected="selectedItem"
 				@input="inputItem"
 				placeholder="English Name"
-				class="col-2 mt-1"
+				class="col-2 pr-0"
 			></v-autocomplete>
-			<input v-model="selectedAbility.name" type="text" class="form-control col-2" placeholder="Translated Name">
-			<input v-model="selectedAbility.cost" type="text" class="form-control col-1" placeholder="cost">
-			<input v-model="selectedAbility.rng" type="text" class="form-control col-1" placeholder="rng">
-			<input v-model="selectedAbility.aoe" type="text" class="form-control col-1" placeholder="aoe">
-			<input v-model="selectedAbility.pow" type="text" class="form-control col-1" placeholder="pow">
-			<input v-model="selectedAbility.dur" type="text" class="form-control col-1" placeholder="dur">
-			<input v-model="selectedAbility.off" type="text" class="form-control col-1" placeholder="off">
-			<span class="col-2 py-1 danger">USE ENGLIGH HERE</span>
-			<textarea v-model="selectedAbility.description" type="text" class="form-control col-11" rows="3" placeholder="Translated spell description"/>
-			<div class="col-1 pl-2">
-				<button v-if="spell.id || selectedAbility.id" type="submit" class="form-control btn-sm btn-success" @click="save(selectedAbility)">Update</button>
-				<button v-if="spell.id" type="submit" class="form-control btn-sm btn-primary my-1" @click="update = false">Cancel</button>			
-				<button v-if="spell.id" type="submit" class="form-control btn-sm btn-danger" @click="remove(selectedAbility)">Delete</button>
-				<button v-if="!spell.id && selectedAbility.id" type="submit" class="form-control btn btn-primary" @click="add(selectedAbility)">Add</button>
-				<button v-if="!spell.id && !selectedAbility.id" type="submit" class="form-control btn btn-primary" @click="save(selectedAbility)">Add</button>
+
+			<input v-model="spell.name" class="col-2" :class="{ 'ml-3': !newSpell }" placeholder="Translated Name" />
+			<input v-model="spell.cost" class="col-1" placeholder="cost" />
+			<input v-model="spell.rng" class="col-1" placeholder="rng" />
+			<input v-model="spell.aoe" class="col-1" placeholder="aoe" />
+			<input v-model="spell.pow" class="col-1" placeholder="pow" />
+			<input v-model="spell.dur" class="col-1" placeholder="dur" />
+			<input v-model="spell.off" class="col-1" placeholder="off" />
+			<span class="col-2 py-1 text-danger">USE ENGLIGH HERE</span>
+			<span v-if="!newSpell" class="col-2"></span>
+			<div class="col-11">
+				<textarea v-model="spell.description" rows="3" placeholder="Translated spell description" />
 			</div>
-			<div v-if="selectedAbility.id" class="col-12 text-left vo px-0">{{vo.name}}: {{vo.description}}</div>
-		</div>	
-		<hr>
+
+			<div class="col-1 pl-0">
+				<button v-if="spell.id && !newSpell" class="btn-success" @click="save(spell)">Update</button>
+				<button v-if="spell.id && !newSpell" class="my-1" @click="update = false">Cancel</button>
+				<button v-if="newSpell" @click="save(spell)">Add</button>
+			</div>
+
+			<div v-if="spell.id" class="col-12 vo">{{ vo.name }}: {{ vo.description }}</div>
+		</div>
+		<hr />
 	</div>
 </template>
 
 <script>
-import ItemTemplate from "./ItemTemplate.vue";
+import ItemTemplate from './ItemTemplate.vue'
 export default {
-	name: "Spell",
-	props: ["spellsList", "spell"],
-	watch: {
-		spell: function(newVal) {
-			this.selectedAbility = newVal;
-			if (!this.spell.id){
-				this.update=true;
-			}
-			this.get(this.selectedAbility.id);
-		}
-	},
+	name: 'Spell',
+	props: ['spellsList', 'spell_id'],
+	watch: {},
 	created: function() {
-		this.selectedAbility = this.spell;
-		if (!this.spell.id){
-			this.update=true;
+		if (!this.spell_id) {
+			this.update = true
+			this.newSpell = true
 		}
-		this.get(this.selectedAbility.id);
+		this.get(this.spell_id)
 	},
 	data() {
 		return {
+			spell: {},
 			vo: {},
-			selectedAbility: {},
 			template: ItemTemplate,
 			items: [],
-			update: false
-		};
+			update: false,
+			newSpell: false,
+		}
 	},
 	methods: {
 		get: function(id) {
 			if (id == null) {
-				return;
+				return
 			}
+			this.$http.get(process.env.VUE_APP_API_ENDPOINT + `/spells/${id}?lang=UK`).then(function(res) {
+				console.log(res)
+				this.vo = res.data
+			})
+			.catch(function(err) {
+					console.error(err)
+			})
 			this.$http
-				.get(process.env.VUE_APP_API_ENDPOINT+ "/spells/" + id + "/vo")
+				.get(process.env.VUE_APP_API_ENDPOINT + `/spells/${id}?lang=${this.$language}`)
 				.then(function(res) {
-					console.log(res);
-					this.vo = res.data;
-				});
-			this.$http
-				.get(process.env.VUE_APP_API_ENDPOINT+ "/spells/" + id + "?lang=" + this.$language)
-				.then(function(res) {
-					console.log(res);
-					this.selectedAbility = res.data;
-				});
+					console.log(res)
+					this.spell = res.data
+				})
+				.catch(function(err) {
+					console.error(err)
+				})
 		},
 		save: function(spell) {
 			if (spell.id == null) {
-				spell.id = 0;
+				spell.id = 0
 			}
 			this.$http
-				.put(process.env.VUE_APP_API_ENDPOINT+ "/spells/" + spell.id + "?lang=" + this.$language, spell)
+				.put(process.env.VUE_APP_API_ENDPOINT + `/spells/${spell.id}?lang=${this.$language}`, spell)
 				.then(function(res) {
-					console.log(res);
-					if (this.spell.id > 0 && this.selectedAbility.id > 0) {
-						this.update=false;
-					}
+					console.debug(res) 
 					if (res.status === 201) {
-						spell.id = res.data;
-						this.add(spell);
-						this.new(spell);
-					} else if (res.status === 200) {
-						this.updateSpell();
-					}	
-				});
-		},
-		add: function(spell) {
-			this.$emit("add", spell);
-		},
-		new: function(spell) {
-			this.$emit("new", spell);
-		},
-		updateSpell: function() {
-			this.$emit("update");
+						spell.id = res.data
+					}
+					if (!this.newSpell) {
+						this.update = false
+					} else {
+						this.$emit('add', spell)
+						this.spell = {}
+					}
+					this.updateSpellList()
+				})
+				.catch(function(err) {
+					console.error(err)
+				})
 		},
 		remove: function() {
-			this.$emit("remove");
+			this.$emit('remove')
 		},
+		updateSpellList: function() {
+			this.$emit('update')
+		},
+
+
+		// Handle Autocomplete
 		getLabel: function(item) {
 			if (!item) {
-				return;
+				return
 			}
-			return item.title;
+			return item.title
 		},
 		updateItems(text) {
-			this.selectedAbility.title = text
-			this.selectedAbility.id = null
-			this.items = this.spellsList.filter(item =>
-				item.title != null
-			).filter(item =>
-				item.title.toLowerCase().startsWith(text.toLowerCase())
-			);
+			this.spell.title = text
+			this.spell.id = null
+			this.items = this.spellsList
+				.filter(item => item.title != null)
+				.filter(item => item.title.toLowerCase().startsWith(text.toLowerCase()))
 		},
 		selectedItem(item) {
-			// this.selectedAbility = item;
 			this.get(item.id)
 		},
 		inputItem(item) {
-			if (item === null){
-				this.selectedAbility = {}
+			if (item === null) {
+				this.spell = {}
 			}
-		}
-	}
-};
+		},
+	},
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-.danger{
-	color: #c50b0b;
-	/* font-weight: bold; */
+<style lang="scss" scoped>
+@import '../custom.scss';
+.spell {
+	button {
+		@extend .btn-sm;
+	}
 }
 </style>

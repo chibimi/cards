@@ -62,6 +62,6 @@
     "useTabs:": true,
     "semi": false,
     "printWidth": 120,
-    "singleQuote": false
+    "singleQuote": true
   }
 }

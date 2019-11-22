@@ -8,8 +8,8 @@
 				<option value="done">Terminée</option>
 			</select>
 			<div class="col-2">
-				<button type="submit" class="mr-2" v-on:click="save()">Save</button>
-				<button type="submit" class="btn-danger" v-on:click="remove(ref.id)">Delete</button>
+				<button class="mr-2" v-on:click="save()">Save</button>
+				<button class="btn-danger" v-on:click="remove(ref.id)">Delete</button>
 			</div>
 		</div>
 
@@ -38,8 +38,7 @@
 				abi
 			</div>
 			<div class="tab-pane fade" id="nav-spells" role="tabpanel" aria-labelledby="nav-spells-tab">
-				<!-- <Spells v-if="ref.id>0" :ref_id="ref.id"></Spells> -->
-				spell
+				<Spells v-if="ref.id>0" :ref_id="ref.id"></Spells>
 			</div>
 			<div class="tab-pane fade" id="nav-feat" role="tabpanel" aria-labelledby="nav-feat-tab">
 				<Feat v-if="ref.id > 0 && [1, 2, 10].includes(ref.category_id)" :ref_id="ref.id"></Feat>
@@ -51,15 +50,14 @@
 <script>
 // import Abilities from "./abilities.vue";
 // import Models from "./models.vue";
-// import Spells from "./spells.vue";
+import Spells from "./spells.vue";
 import Feat from './feat.vue'
 import Card from "./card.vue";
 import { EventBus } from '../main.js'
 export default {
 	name: 'Ref',
 	props: ['ref_id'],
-	// components: { Card, Models, Feat, Spells, Abilities},
-	components: { Card, Feat },
+	components: { Card, Spells, Feat },
 	watch: {
 		ref_id: function(newVal) {
 			console.log('watch', newVal)
@@ -79,7 +77,6 @@ export default {
 	},
 	data() {
 		return {
-			// status: "wip",
 			ref: {},
 			alert: '',
 			alert_success: false,
@@ -141,10 +138,9 @@ export default {
 <style lang="scss" scoped>
 @import '../custom.scss';
 .ref {
-	// @extend .mt-3;
 	.header {
 		@extend .row;
-		// @extend .my-4;
+		@extend .form-inline;
 	}
 
 	.error {
@@ -167,8 +163,7 @@ export default {
 	.content {
 		@extend .tab-content;
 		@extend .container;
+		@extend .px-0;
 	}
-
-
 }
 </style>
