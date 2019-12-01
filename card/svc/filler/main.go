@@ -165,7 +165,7 @@ func loadRefs(db *sqlx.DB, src string) error {
 					fmt.Println("not found", title)
 					continue
 				}
-				_, err = db.Exec("INSERT INTO model_ability (model_id, ability_id) VALUES (?,?)", modelID, abilityID)
+				_, err = db.Exec("INSERT INTO model_ability (model_id, ability_id, type) VALUES (?,?,0)", modelID, abilityID)
 				if err != nil {
 					return errors.Wrap(err, "model abi")
 				}
@@ -219,7 +219,7 @@ func loadRefs(db *sqlx.DB, src string) error {
 						fmt.Println("not found", title)
 						continue
 					}
-					_, err = db.Exec("INSERT INTO weapon_ability (weapon_id, ability_id) VALUES (?,?)", weaponID, abilityID)
+					_, err = db.Exec("INSERT INTO weapon_ability (weapon_id, ability_id, type) VALUES (?,?,0)", weaponID, abilityID)
 					if err != nil {
 						return errors.Wrap(err, "wp abi")
 					}
@@ -259,7 +259,7 @@ func loadRefs(db *sqlx.DB, src string) error {
 						fmt.Println("not found", title)
 						continue
 					}
-					_, err = db.Exec("INSERT INTO weapon_ability (weapon_id, ability_id) VALUES (?,?)", weaponID, abilityID)
+					_, err = db.Exec("INSERT INTO weapon_ability (weapon_id, ability_id, type) VALUES (?,?,0)", weaponID, abilityID)
 					if err != nil {
 						return errors.Wrap(err, "wp abi")
 					}

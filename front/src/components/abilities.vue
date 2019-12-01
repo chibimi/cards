@@ -1,12 +1,11 @@
 <template>
-	<div class="w-100 mt-4">
+	<div class="mt-4">
 		<ModelAbilities
 			v-for="value in models"
 			v-bind:model="value"
 			:key="value.id"
 			:abilitiesList="abilitiesList"
-			v-on:new="newAbility"
-			v-on:update="updateAbility"
+			v-on:update="getAbilities"
 		></ModelAbilities>
 	</div>
 </template>
@@ -34,16 +33,10 @@ export default {
 	},
 	methods: {
 		getAbilities: function() {
-			this.$http.get(process.env.VUE_APP_API_ENDPOINT + "/abilities?lang=" + this.$language).then(function(res) {
+			this.$http.get(process.env.VUE_APP_API_ENDPOINT + `/abilities?lang=${this.$language}`).then(function(res) {
 				console.debug(res)
 				this.abilitiesList = res.data
 			})
-		},
-		updateAbility: function() {
-			this.getAbilities()
-		},
-		newAbility: function(ability) {
-			this.abilitiesList.push(ability)
 		},
 		getModels: function(refID) {
 			this.models = []

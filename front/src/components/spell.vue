@@ -98,13 +98,15 @@ export default {
 			if (id == null) {
 				return
 			}
-			this.$http.get(process.env.VUE_APP_API_ENDPOINT + `/spells/${id}?lang=UK`).then(function(res) {
-				console.log(res)
-				this.vo = res.data
-			})
-			.catch(function(err) {
+			this.$http
+				.get(process.env.VUE_APP_API_ENDPOINT + `/spells/${id}?lang=UK`)
+				.then(function(res) {
+					console.debug(res)
+					this.vo = res.data
+				})
+				.catch(function(err) {
 					console.error(err)
-			})
+				})
 			this.$http
 				.get(process.env.VUE_APP_API_ENDPOINT + `/spells/${id}?lang=${this.$language}`)
 				.then(function(res) {
@@ -122,7 +124,7 @@ export default {
 			this.$http
 				.put(process.env.VUE_APP_API_ENDPOINT + `/spells/${spell.id}?lang=${this.$language}`, spell)
 				.then(function(res) {
-					console.debug(res) 
+					console.debug(res)
 					if (res.status === 201) {
 						spell.id = res.data
 					}
@@ -132,19 +134,12 @@ export default {
 						this.$emit('add', spell)
 						this.spell = {}
 					}
-					this.updateSpellList()
+					this.$emit('update')
 				})
 				.catch(function(err) {
 					console.error(err)
 				})
 		},
-		remove: function() {
-			this.$emit('remove')
-		},
-		updateSpellList: function() {
-			this.$emit('update')
-		},
-
 
 		// Handle Autocomplete
 		getLabel: function(item) {
@@ -172,7 +167,6 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
 @import '../custom.scss';
 .spell {

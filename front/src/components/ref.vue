@@ -34,8 +34,7 @@
 				model
 			</div>
 			<div class="tab-pane fade" id="nav-abilities" role="tabpanel" aria-labelledby="nav-abilities-tab">
-				<!-- <Abilities v-if="ref.id>0" :ref_id="ref.id" :key="abilitiesKey"></Abilities> -->
-				abi
+				<Abilities v-if="ref.id>0" :ref_id="ref.id" :key="abilitiesKey"></Abilities>
 			</div>
 			<div class="tab-pane fade" id="nav-spells" role="tabpanel" aria-labelledby="nav-spells-tab">
 				<Spells v-if="ref.id>0" :ref_id="ref.id"></Spells>
@@ -48,7 +47,7 @@
 </template>
 
 <script>
-// import Abilities from "./abilities.vue";
+import Abilities from "./abilities.vue";
 // import Models from "./models.vue";
 import Spells from "./spells.vue";
 import Feat from './feat.vue'
@@ -57,7 +56,7 @@ import { EventBus } from '../main.js'
 export default {
 	name: 'Ref',
 	props: ['ref_id'],
-	components: { Card, Spells, Feat },
+	components: { Card, Abilities, Spells, Feat },
 	watch: {
 		ref_id: function(newVal) {
 			console.log('watch', newVal)

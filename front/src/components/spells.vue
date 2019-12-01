@@ -14,7 +14,7 @@
 				New Spell
 			</h5>
 			<div class="collapse card-body p-1" id="new_spell">
-				<Spell :spell_id="spell.id" :spellsList="spellsList" @add="addSpell" @update="getSpells"></Spell>
+				<Spell :spellsList="spellsList" @add="addSpell" @update="getSpells"></Spell>
 			</div>
 		</div>
 		<hr />
@@ -49,9 +49,6 @@ export default {
 				this.spellsList = res.data
 			})
 		},
-		newSpell: function(spell) {
-			this.spellsList.push(spell)
-		},
 		get: function(cardID) {
 			this.$http
 				.get(process.env.VUE_APP_API_ENDPOINT + `/ref/${cardID}/spell?lang=${this.$language}`)
@@ -85,5 +82,4 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

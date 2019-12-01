@@ -1,23 +1,23 @@
 <template>
-	<div class="w-100">
-		<div v-if="!update" class="row px-3">
-			<span class="col-3 text-left">
-				{{selectedAbility.name}} <br>
-				<span class="vo">{{selectedAbility.title}}</span>
+	<div class="ability">
+		<div v-if="!update" class="row">
+			<span class="col-3">
+				{{ ability.name }} <br />
+				<span class="vo">{{ ability.title }}</span>
 			</span>
-			<span class="col-8 text-left">
-				{{selectedAbility.description}}<br>
-				<span class="vo">{{vo.description}}</span>
+			<span class="col-8">
+				{{ ability.description }}<br />
+				<span class="vo">{{ vo.description }}</span>
 			</span>
-			<span class="col-1 form-inline text-right">
-				<button type="submit" class="btn-sm btn-success" @click="update = true">U</button>
-				<button type="submit" class="btn-sm btn-danger" @click="$emit('remove')">X</button>
+			<span class="col-1">
+				<button class="btn-success mb-1" @click="update = true">Update</button>
+				<button class="btn-danger" @click="$emit('remove')">Delete</button>
 			</span>
 		</div>
 
-		<div v-if="update" class="row px-3">
+		<div v-if="update" class="row">
 			<v-autocomplete
-				v-if="!ability.id"
+				v-if="newAbility"
 				:items="items"
 				:get-label="getLabel"
 				@update-items="updateItems"
@@ -26,143 +26,136 @@
 				@item-selected="selectedItem"
 				@input="inputItem"
 				placeholder="English Name"
-				class="col-2 mt-1"
+				class="col-2 pr-0"
 			></v-autocomplete>
-			<input v-model="selectedAbility.name" type="text" class="form-control col-3" placeholder="Translated Name">
-			<div class="form-check form-check-inline ml-2 col-5">
-				<label class="form-check-label">Type</label>
-				<select v-model="type" class="form-control col-4 mx-1">
+			<input v-model="ability.name" class="col-3" :class="{ 'ml-3': !newAbility }" placeholder="Translated Name" />
+			<div class="form-check-inline col-5">
+				<label>Type</label>
+				<select v-model="ability.type">
 					<option value="0">None</option>
 					<option value="1">Magic Ability</option>
 					<option value="2">Battle Plan</option>
 					<option value="3">Attack Type</option>
 				</select>
 			</div>
-			<textarea v-model="selectedAbility.description" type="text" class="form-control col-10" rows="3" placeholder="Translated ability description"/>
-			<div class="col-2 pl-2">
-				<button v-if="ability.id || selectedAbility.id" type="submit" class="form-control btn-sm btn-success" @click="save(selectedAbility)">Update</button>
-				<button v-if="ability.id" type="submit" class="form-control btn-sm btn-primary my-1" @click="update = false">Cancel</button>
-				<button v-if="ability.id" type="submit" class="form-control btn-sm btn-danger" @click="remove(selectedAbility)">Delete</button>
-				<button v-if="!ability.id && selectedAbility.id" type="submit" class="form-control btn btn-primary" @click="add(selectedAbility)">Add</button>
-				<button v-if="!ability.id && !selectedAbility.id" type="submit" class="form-control btn btn-primary" @click="save(selectedAbility)">Add</button>
+			{{ability}}
+			<div class="col-11">
+				<textarea v-model="ability.description" rows="3" placeholder="Translated ability description" />
 			</div>
-			<div v-if="selectedAbility.id" class="col-12 text-left vo px-0">{{vo.name}}: {{vo.description}}</div>
+			<div class="col-1">
+				<button v-if="ability.id && !newAbility" class="btn-success" @click="save(ability)">Update</button>
+				<button v-if="ability.id && !newAbility" class="my-1" @click="update = false">Cancel</button>
+				<button v-if="newAbility" @click="save(ability)">Add</button>
+			</div>
+			<div v-if="ability.id" class="col-12 vo">{{ vo.name }}: {{ vo.description }}</div>
 		</div>
-		<hr>
+		<hr />
 	</div>
 </template>
 
 <script>
-import ItemTemplate from "./ItemTemplate.vue";
+import ItemTemplate from './ItemTemplate.vue'
 export default {
-	name: "Ability",
-	props: ["abilitiesList", "ability"],
+	name: 'Ability',
+	props: ['abilitiesList', 'ability_id', 'ability_type'],
 	components: {},
-	watch: {
-		ability: function(newVal) {
-			this.selectedAbility = newVal;
-			if (!this.ability.id){
-				this.update=true;
-			}
-			this.get(this.selectedAbility.id);
-		}
-	},
+	watch: {},
 	created: function() {
-		this.selectedAbility = this.ability;
-		if (!this.ability.id){
-			this.update=true;
+		if (!this.ability_id) {
+			this.update = true
+			this.newAbility = true
 		}
-		this.get(this.selectedAbility.id);
+		this.get(this.ability_id)
 	},
 	data() {
 		return {
+			ability: {},
 			vo: {},
-			selectedAbility: {},
-			type: 0,
 			template: ItemTemplate,
 			items: [],
-			update: false
-		};
+			update: false,
+			newAbility: false,
+		}
 	},
 	methods: {
 		get: function(id) {
 			if (id == null) {
-				return;
+				return
 			}
+			this.$http.get(process.env.VUE_APP_API_ENDPOINT + `/abilities/${id}?lang=UK`).then(function(res) {
+				console.debug(res)
+				this.vo = res.data
+			})
+			.catch(function(err) {
+				console.error(err)
+			})
 			this.$http
-				.get(process.env.VUE_APP_API_ENDPOINT+ "/abilities/" + id + "/vo")
+				.get(process.env.VUE_APP_API_ENDPOINT + `/abilities/${id}?lang=${this.$language}`)
 				.then(function(res) {
-					console.log(res);
-					this.vo = res.data;
-				});
-			this.$http
-				.get(process.env.VUE_APP_API_ENDPOINT+ "/abilities/" + id + "?lang=" + this.$language)
-				.then(function(res) {
-					console.log(res);
-					this.selectedAbility = res.data;
-				});
+					console.log(res)
+					this.ability = res.data
+					this.ability.type = this.ability_type
+				})
+				.catch(function(err) {
+					console.error(err)
+				})
 		},
 		save: function(ability) {
 			if (ability.id == null) {
-				ability.id = 0;
+				ability.id = 0
 			}
 			this.$http
-				.put(process.env.VUE_APP_API_ENDPOINT+ "/abilities/" + ability.id + "?lang=" + this.$language, ability)
+				.put(process.env.VUE_APP_API_ENDPOINT + `/abilities/${ability.id}?lang=${this.$language}`, ability)
 				.then(function(res) {
-					console.log(res);
-					if (this.ability.id > 0 && this.selectedAbility.id > 0) {
-						this.update=false;
-					}
+					console.debug(res)
 					if (res.status === 201) {
-						ability.id = res.data;
-						this.add(ability);
-						this.new(ability);
-					} else if (res.status === 200) {
-						this.updateAbility();
+						ability.id = res.data
 					}
-				});
+					if (!this.newAbility) {
+						this.$emit('add', ability, false)
+						this.update = false
+					} else {
+						this.$emit('add', ability, true)
+						this.ability = {}
+					}
+					this.$emit('update')
+				})
+				.catch(function(err) {
+					console.error(err)
+				})
 		},
-		add: function(ability) {
-			ability.type = this.type
-			this.$emit("add", ability);
-		},
-		new: function(ability) {
-			this.$emit("new", ability);
-		},
-		updateAbility: function() {
-			this.$emit("update");
-		},
-		remove: function() {
-			this.$emit("remove");
-		},
+
+		// Handle Autocomplete
 		getLabel: function(item) {
 			if (!item) {
-				return;
+				return
 			}
-			return item.title;
+			return item.title
 		},
 		updateItems(text) {
-			this.selectedAbility.title = text
-			this.selectedAbility.id = null
-			this.items = this.abilitiesList.filter(item =>
-				item.title != null
-			).filter(item =>
-				item.title.toLowerCase().startsWith(text.toLowerCase())
-			);
+			this.ability.title = text
+			this.ability.id = null
+			this.items = this.abilitiesList
+				.filter(item => item.title != null)
+				.filter(item => item.title.toLowerCase().startsWith(text.toLowerCase()))
 		},
 		selectedItem(item) {
-			// this.selectedAbility = item;
 			this.get(item.id)
 		},
 		inputItem(item) {
-			if (item === null){
-				this.type = 0
+			if (item === null) {
+				this.ability = {}
 			}
-		}
-	}
-};
+		},
+	},
+}
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style lang="scss" scoped>
+@import '../custom.scss';
+.ability {
+	button {
+		@extend .btn-sm;
+	}
+}
 </style>

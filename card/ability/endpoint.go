@@ -161,6 +161,7 @@ func (s *Service) ListByModelEndpoint(w http.ResponseWriter, r *http.Request, p 
 
 	utils.WriteJson(w, res, http.StatusOK)
 }
+
 func (s *Service) AddAbilityModelEndpoint(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	rid, err := strconv.Atoi(p.ByName("id"))
 	if err != nil {
@@ -186,6 +187,7 @@ func (s *Service) AddAbilityModelEndpoint(w http.ResponseWriter, r *http.Request
 
 	utils.WriteJson(w, nil, http.StatusCreated)
 }
+
 func (s *Service) DeleteAbilityModelEndpoint(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	rid, err := strconv.Atoi(p.ByName("id"))
 	if err != nil {
