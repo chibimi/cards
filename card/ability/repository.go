@@ -186,9 +186,10 @@ func (r *Repository) ListByWeapon(weapon int, lang string) ([]Ability, error) {
 }
 
 func (r *Repository) AddAbilityWeapon(weapon, ability, typ int) error {
-	stmt := `INSERT INTO weapon_ability VALUES(?, ?, ?)`
+	stmt := `INSERT INTO weapon_ability VALUES(?, ?, ?)
+	ON DUPLICATE KEY UPDATE weapon_id = ?, ability_id = ?, type = ?`
 
-	_, err := r.db.Exec(stmt, weapon, ability, typ)
+	_, err := r.db.Exec(stmt, weapon, ability, typ, weapon, ability, typ)
 	if err != nil {
 		return errors.Wrap(err, "execute query")
 	}

@@ -8,24 +8,28 @@ import App from './App.vue'
 import 'bootstrap/dist/js/bootstrap.js'
 import './custom.scss'
 
-export const EventBus = new Vue();
+export const EventBus = new Vue()
 
 Vue.use(VueResource)
 Vue.use(Autocomplete)
 Vue.use(CountryFlag)
 
 let globalData = new Vue({
-	data: { $language: 'FR' }
+	data: { $language: 'FR' },
 })
 Vue.mixin({
 	computed: {
 		$language: {
-			get: function () { return globalData.$data.$language },
-			set: function (newVal) { globalData.$data.$language = newVal; }
-		}
-	}
+			get: function() {
+				return globalData.$data.$language
+			},
+			set: function(newVal) {
+				globalData.$data.$language = newVal
+			},
+		},
+	},
 })
 
 new Vue({
-	render: h => h(App)
-}).$mount("#app");
+	render: h => h(App),
+}).$mount('#app')
