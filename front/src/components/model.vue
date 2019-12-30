@@ -25,10 +25,10 @@
 						<label class="col-form-label col-4 px-0">English Name</label>
 						<input v-model="model.title" type="text" class="form-control col-8">
 					</div>
-					<!-- <div class="row">
+					<div class="row">
 						<label class="col-form-label col-4 px-0">Name</label>
 						<input v-model="model.name" type="text" class="form-control col-8">
-					</div> -->
+					</div>
 					<div class="row">
 						<label class="col-form-label col-4 px-0">Damage</label>
 						<input v-model="model.damage" type="text" class="form-control col-8">
@@ -63,11 +63,9 @@
 						<input v-model="model.cmd" type="text" class="form-control col" placeholder="cmd">
 						<input v-model="model.base_size" type="text" class="form-control col" placeholder="case">
 					</div>
-					<div class="row">							
 						<label v-for="a in advantages" :key="a.label" v-bind:value="a.label" class="form-check form-check-inline form-check-label" >
 							<input class="form-check-input" type="checkbox" v-model="model.advantages" :value="a.label">{{a.name}}
-						</label>	
-					</div>
+						</label>
 				</div>
 			</div>
 
@@ -77,7 +75,7 @@
 					<h4 class="col-11">{{model.name}} weapons</h4>
 					<label class="col-1 col-form-label"></label>
 					<div class="col-11">
-						<Weapons :model_id="model.id" />
+						<!-- <Weapons :model_id="model.id" /> -->
 					</div>
 				</div>
 			</div>
@@ -87,23 +85,23 @@
 </template>
 
 <script>
-import Weapons from "./weapons.vue";
+// import Weapons from "./weapons.vue";
 import { ModelAdvantages } from "./const.js";
 import { EventBus } from '../main.js';
 
 export default {
 	name: "Model",
 	props: ["model"],
-	components: {
-		Weapons
-	},
+	// components: {
+	// 	Weapons
+	// },
 	watch: {
-		model: function(newVal) {
-			this.getVO(newVal.id);
-		}
+		// model: function(newVal) {
+		// 	this.getVO(newVal.id);
+		// }
 	},
 	created: function() {
-		this.getVO(this.model.id);
+		// this.getVO(this.model.id);
 	},
 	mounted: function(){
 		EventBus.$on('mega_save', () => {
@@ -119,28 +117,17 @@ export default {
 	data() {
 		return {
 			vo: {},
-			alert: "",
-			alert_succes: false,
+			// alert: "",
+			// alert_succes: false,
 			advantages: ModelAdvantages
 		};
 	},
 	methods: {
-		getVO: function(id) {
-			if (id == null) {
-				return;
-			}
-			this.$http
-				.get(process.env.VUE_APP_API_ENDPOINT+ "/model/" + id + "/vo")
-				.then(function(res) {
-					console.log(res);
-					this.vo = res.data;
-				});
-		},
 		save: function(model) {
 			if (model.id == null) {
 				model.id = 0;
 			}
-			this.reset();
+			// this.reset();
 			this.$http
 				.put(process.env.VUE_APP_API_ENDPOINT+ "/model/" + model.id + "?lang=" + this.$language, model)
 				.then(function(res) {
@@ -182,7 +169,8 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import '../custom.scss';
 .statline input {
 	max-width: 4rem;
 }

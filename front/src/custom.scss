@@ -1,6 +1,6 @@
 @import '~bootstrap/scss/bootstrap.scss';
 
-select, input, textarea {
+select, input[type]:not([type=checkbox]), textarea {
     @extend .form-control;
 }
 
@@ -13,7 +13,7 @@ button {
 .card {
 	@extend .card;
 	@extend .border-secondary;
-	
+
 
 	.header {
 		@extend .card-header;
