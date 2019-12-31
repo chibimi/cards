@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<h5>{{ weapon.name || weapon.title }} abilities</h5>
+		<h5 class="my-3">{{ weapon.name || weapon.title }} abilities</h5>
 		<Ability
 			v-for="(val, idx) in abilities"
 			v-bind:ability_id="val.id"
@@ -20,7 +20,7 @@
 			>
 				New Ability for {{ weapon.name || weapon.title }}
 			</h5>
-			<div class="collapse card-body p-1" v-bind:id="'new_weapon_ability' + weapon.id">
+			<div class="collapse card-body p-2" v-bind:id="'new_weapon_ability' + weapon.id">
 				<Ability :abilitiesList="abilitiesList" v-on:add="addAbility" v-on:update="$emit('update')"></Ability>
 			</div>
 		</div>

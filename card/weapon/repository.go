@@ -1,7 +1,6 @@
 package weapon
 
 import (
-	"database/sql"
 	"encoding/json"
 
 	"github.com/jmoiron/sqlx"
@@ -23,7 +22,7 @@ type weaponDB struct {
 
 func (r *Repository) Create(wp *Weapon, lang string) (int, error) {
 	stmt := `
-	INSERT INTO weapons (title, model_id, type, rng, pow, rof, aoe, loc, cnt, advantages) 
+	INSERT INTO weapons (title, model_id, type, rng, pow, rof, aoe, loc, cnt, advantages)
 	VALUES(:title, :model_id, :type, :rng, :pow, :rof, :aoe, :loc, :cnt, :advantages)
 	`
 
@@ -117,7 +116,7 @@ func (r *Repository) Save(wp *Weapon, lang string) error {
 		return errors.Wrap(err, "create transaction")
 	}
 	stmt := `
-	UPDATE weapons SET 
+	UPDATE weapons SET
 	title = :title, model_id = :model_id, type = :type, rng = :rng, pow = :pow, rof = :rof , aoe = :aoe, loc = :loc, cnt = :cnt, advantages = :advantages
 	WHERE id = :id
 	`
@@ -160,17 +159,4 @@ func (r *Repository) Delete(id int) error {
 		return errors.Wrap(err, "execute query")
 	}
 	return nil
-}
-
-func (r *Repository) GetLang(id int, lang string) (*Weapon, error) {
-	stmt := `
-	SELECT name FROM weapons_lang WHERE weapon_id = ? AND lang = ?
-	`
-	res := &Weapon{}
-	err := r.db.Get(res, stmt, id, lang)
-	if err != nil && err != sql.ErrNoRows {
-		return nil, errors.Wrap(err, "execute query")
-	}
-
-	return res, nil
 }

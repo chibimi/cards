@@ -13,7 +13,7 @@
 			<h5 class="header" data-toggle="collapse" data-target="#new_spell" aria-expanded="false">
 				New Spell
 			</h5>
-			<div class="collapse card-body p-1" id="new_spell">
+			<div class="collapse card-body p-2" id="new_spell">
 				<Spell :spellsList="spellsList" @add="addSpell" @update="getSpells"></Spell>
 			</div>
 		</div>

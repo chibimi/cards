@@ -1,7 +1,6 @@
 package model
 
 import (
-	"database/sql"
 	"encoding/json"
 
 	"github.com/jmoiron/sqlx"
@@ -23,7 +22,7 @@ type modelDB struct {
 
 func (r *Repository) Create(m *Model, lang string) (int, error) {
 	stmt := `
-	INSERT INTO models (title, ref_id, spd, str, mat, rat, def, arm, cmd, base_size, magic_ability, resource, threshold, damage, advantages) 
+	INSERT INTO models (title, ref_id, spd, str, mat, rat, def, arm, cmd, base_size, magic_ability, resource, threshold, damage, advantages)
 	VALUES(:title, :ref_id, :spd, :str, :mat, :rat, :def, :arm, :cmd, :base_size, :magic_ability, :resource, :threshold, :damage, :advantages)
 	`
 	adv, err := json.Marshal(m.Advantages)
@@ -116,8 +115,8 @@ func (r *Repository) Save(m *Model, lang string) error {
 		return errors.Wrap(err, "create transaction")
 	}
 	stmt := `
-	UPDATE models SET title = :title, ref_id = :ref_id, spd = :spd, str = :str, mat = :mat, rat = :rat, def = :def, arm = :arm, cmd = :cmd, 
-	base_size = :base_size, magic_ability = :magic_ability, resource = :resource, threshold = :threshold, 
+	UPDATE models SET title = :title, ref_id = :ref_id, spd = :spd, str = :str, mat = :mat, rat = :rat, def = :def, arm = :arm, cmd = :cmd,
+	base_size = :base_size, magic_ability = :magic_ability, resource = :resource, threshold = :threshold,
 	damage = :damage, advantages = :advantages
 	WHERE id = :id
 	`
@@ -160,17 +159,4 @@ func (r *Repository) Delete(id int) error {
 		return errors.Wrap(err, "execute query")
 	}
 	return nil
-}
-
-func (r *Repository) GetLang(id int, lang string) (*Model, error) {
-	stmt := `
-	SELECT name FROM models_lang WHERE model_id = ? AND lang = ?
-	`
-	res := &Model{}
-	err := r.db.Get(res, stmt, id, lang)
-	if err != nil && err != sql.ErrNoRows {
-		return nil, errors.Wrap(err, "execute query")
-	}
-
-	return res, nil
 }

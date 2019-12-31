@@ -6,6 +6,7 @@
 			:key="val.id"
 			v-on:remove="removeWeapon(val, idx)"
 			:ref="'weapon_' + val.id"
+			class="px-0"
 		></Weapon>
 		<div class="card">
 			<h5
@@ -17,7 +18,7 @@
 			>
 				New Weapon
 			</h5>
-			<div class="collapse card-body p-1" v-bind:id="'new_weapon_' + model_id">
+			<div class="collapse card-body p-2" v-bind:id="'new_weapon_' + model_id">
 				<Weapon :weapon="weapon" v-on:add="addWeapon"></Weapon>
 			</div>
 		</div>

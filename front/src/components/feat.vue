@@ -82,5 +82,6 @@ export default {
 
 .feat {
 	@extend .row;
+	@extend .mx-0;
 }
 </style>

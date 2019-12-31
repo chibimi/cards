@@ -1,7 +1,6 @@
 package reference
 
 import (
-	"database/sql"
 	"encoding/json"
 
 	"github.com/jmoiron/sqlx"
@@ -24,7 +23,7 @@ type referenceDB struct {
 
 func (r *Repository) Create(ref *Reference) (int, error) {
 	stmt := `
-	INSERT INTO refs (faction_id, category_id, title, main_card_id, models_cnt, models_max, cost, cost_max, fa, mercenary_for, minion_for) 
+	INSERT INTO refs (faction_id, category_id, title, main_card_id, models_cnt, models_max, cost, cost_max, fa, mercenary_for, minion_for)
 	VALUES(:faction_id, :category_id, :title, :main_card_id, :models_cnt, :models_max, :cost, :cost_max, :fa, :mercenary_for, :minion_for)
 	`
 	merc, err := json.Marshal(ref.MercFor)
@@ -54,7 +53,7 @@ func (r *Repository) Create(ref *Reference) (int, error) {
 func (r *Repository) List(faction, category int, lang string) ([]Reference, error) {
 	stmt := `
 	SELECT r.*, IFNULL(s.status, "wip") as status FROM (
-		SELECT id, faction_id, category_id, title FROM refs WHERE faction_id = ? AND category_id = ? 
+		SELECT id, faction_id, category_id, title FROM refs WHERE faction_id = ? AND category_id = ?
 	) as r LEFT JOIN (
 		SELECT ref_id, status FROM refs_lang WHERE lang = ?
 	) as s ON r.id = s.ref_id
@@ -102,8 +101,8 @@ func (r *Repository) Save(ref *Reference, lang string) error {
 		return errors.Wrap(err, "create transaction")
 	}
 	stmt := `
-	UPDATE refs SET faction_id = :faction_id, category_id = :category_id, title = :title, main_card_id = :main_card_id, 
-	models_cnt = :models_cnt, models_max = :models_max, cost = :cost, cost_max = :cost_max, fa = :fa, 
+	UPDATE refs SET faction_id = :faction_id, category_id = :category_id, title = :title, main_card_id = :main_card_id,
+	models_cnt = :models_cnt, models_max = :models_max, cost = :cost, cost_max = :cost_max, fa = :fa,
 	mercenary_for = :mercenary_for, minion_for = :minion_for
 	WHERE id = :id
 	`
@@ -139,17 +138,4 @@ func (r *Repository) Save(ref *Reference, lang string) error {
 	}
 
 	return nil
-}
-
-func (r *Repository) GetLang(id int, lang string) (*Reference, error) {
-	stmt := `
-	SELECT name, properties FROM refs_lang WHERE ref_id = ? AND lang = ?
-	`
-	res := &Reference{}
-	err := r.db.Get(res, stmt, id, lang)
-	if err != nil && err != sql.ErrNoRows {
-		return nil, errors.Wrap(err, "execute query")
-	}
-
-	return res, nil
 }

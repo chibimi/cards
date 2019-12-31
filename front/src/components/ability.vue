@@ -1,6 +1,6 @@
 <template>
 	<div class="ability">
-		<div v-if="!update" class="row">
+		<div v-if="!update" class="row mx-0">
 			<span class="col-3">
 				{{ ability.name }} <br />
 				<span class="vo">{{ ability.title }}</span>
@@ -9,10 +9,12 @@
 				{{ ability.description }}<br />
 				<span class="vo">{{ vo.description }}</span>
 			</span>
-			<span class="col-1">
-				<button class="btn-success mb-1" @click="update = true">Update</button>
-				<button class="btn-danger" @click="$emit('remove')">Delete</button>
-			</span>
+			<div class="col-1 px-0">
+				<div class="float-right">
+					<button class="btn-success mb-1" @click="update = true">Update</button>
+					<button class="btn-danger" @click="$emit('remove')">Delete</button>
+				</div>
+			</div>
 		</div>
 
 		<div v-if="update" class="row">
@@ -28,7 +30,12 @@
 				placeholder="English Name"
 				class="col-2 pr-0"
 			></v-autocomplete>
-			<input v-model="ability.name" class="col-3" :class="{ 'ml-3': !newAbility }" placeholder="Translated Name" />
+			<input
+				v-model="ability.name"
+				class="col-3"
+				:class="{ 'ml-3': !newAbility }"
+				placeholder="Translated Name"
+			/>
 			<div class="form-check-inline col-5">
 				<label>Type</label>
 				<select v-model="ability.type">
@@ -42,13 +49,16 @@
 				<textarea v-model="ability.description" rows="3" placeholder="Translated ability description" />
 			</div>
 			<div class="col-1">
-				<button v-if="ability.id && !newAbility" class="btn-success" @click="save(ability)">Update</button>
-				<button v-if="ability.id && !newAbility" class="my-1" @click="update = false">Cancel</button>
-				<button v-if="newAbility" @click="save(ability)">Add</button>
+				<div class="float-right">
+					<button v-if="ability.id && !newAbility" class="btn-success" @click="save(ability)">Update</button>
+					<button v-if="ability.id && !newAbility" class="my-1" @click="update = false">Cancel</button>
+					<button v-if="newAbility" @click="save(ability)">Add</button>
+				</div>
 			</div>
+
 			<div v-if="ability.id" class="col-12 vo">{{ vo.name }}: {{ vo.description }}</div>
 		</div>
-		<hr />
+		<hr v-if="!newAbility" />
 	</div>
 </template>
 
@@ -81,13 +91,15 @@ export default {
 			if (id == null) {
 				return
 			}
-			this.$http.get(process.env.VUE_APP_API_ENDPOINT + `/abilities/${id}?lang=UK`).then(function(res) {
-				console.debug(res)
-				this.vo = res.data
-			})
-			.catch(function(err) {
-				console.error(err)
-			})
+			this.$http
+				.get(process.env.VUE_APP_API_ENDPOINT + `/abilities/${id}?lang=UK`)
+				.then(function(res) {
+					console.debug(res)
+					this.vo = res.data
+				})
+				.catch(function(err) {
+					console.error(err)
+				})
 			this.$http
 				.get(process.env.VUE_APP_API_ENDPOINT + `/abilities/${id}?lang=${this.$language}`)
 				.then(function(res) {

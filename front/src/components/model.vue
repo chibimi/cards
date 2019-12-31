@@ -1,26 +1,28 @@
 <template>
-	<div class="w-100">
+	<div>
 		<div class="row">
 			<h4
-				class="col-11"
+				class="col-9"
 				data-toggle="collapse"
-				v-bind:data-target="'#test_model_' + model.id"
+				v-bind:data-target="'#model_' + model.id"
 				v-bind:aria-expanded="!model.id"
-				v-bind:aria-controls="'test_model_' + model.id"
+				v-bind:aria-controls="'model_' + model.id"
 				ref="model"
 			>
 				<i class="fa fa-angle-right"></i> {{ model.name || model.title }}
 			</h4>
 
-			<div class="col-1 pl-0">
-				<button v-if="!model.id" @click="$emit('add', model)">Save</button>
-				<button v-if="model.id" class="btn-danger" @click="$emit('remove')">Delete</button>
+			<div class="col-3">
+				<div class="float-right">
+					<button v-if="!model.id" @click="$emit('add', model)">Save</button>
+					<button v-if="model.id" class="btn-danger" @click="$emit('remove')">Delete</button>
+				</div>
 			</div>
 		</div>
 
-		<div class="collapse" v-bind:id="'test_model_' + model.id" v-bind:class="{ show: !model.id }">
-			<div class="row">
-				<div class="names">
+		<div class="collapse" v-bind:id="'model_' + model.id" v-bind:class="{ show: !model.id }">
+			<div class="row mx-0">
+				<div class="names pt-4">
 					<div>
 						<label>English Name</label>
 						<input v-model="model.title" />
@@ -71,16 +73,16 @@
 			</div>
 
 			<div v-if="model.id">
-				<div class="row">
+				<div class="row pt-3">
 					<div class="col-1"></div>
 					<div class="col-11">
-						<h4>{{ model.name || model.title}} weapons</h4>
+						<h4>{{ model.name || model.title }}'s weapons</h4>
 						<Weapons :model_id="model.id" />
 					</div>
 				</div>
 			</div>
 		</div>
-		<hr />
+		<hr v-if="model.id" />
 	</div>
 </template>
 

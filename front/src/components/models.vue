@@ -11,7 +11,7 @@
 			<h5 class="header" data-toggle="collapse" data-target="#new_model" aria-expanded="false" ref="newModel">
 				New Model
 			</h5>
-			<div class="collapse card-body p-1" id="new_model">
+			<div class="collapse card-body p-2" id="new_model">
 				<Model v-bind:model="model" v-on:add="addModel"></Model>
 			</div>
 		</div>

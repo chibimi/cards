@@ -27,7 +27,3 @@ func (s *Service) Save(wp *Weapon, lang string) error {
 func (s *Service) Delete(id int) error {
 	return s.repo.Delete(id)
 }
-
-func (s *Service) GetLang(id int, lang string) (*Weapon, error) {
-	return s.repo.GetLang(id, lang)
-}
