@@ -1,6 +1,6 @@
 <template>
 	<div id="app">
-		<Selector v-on:select_ref="ref_id = $event" :key="$language" />
+		<Selector class="mb-4" v-on:select_ref="ref_id = $event" :key="$language" />
 		<Ref v-if="ref_id !== null" :ref_id="ref_id" :key="$language" />
 	</div>
 </template>

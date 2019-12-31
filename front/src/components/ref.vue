@@ -2,14 +2,16 @@
 	<div class="ref">
 		<div class="header">
 			<h2 class="col-8">{{ ref.title }}</h2>
-			<select v-model="ref.status" class="col-2">
-				<option value="wip">WIP</option>
-				<option value="tbv">A valider</option>
-				<option value="done">Terminée</option>
-			</select>
-			<div class="col-2">
-				<button class="mr-2" v-on:click="save()">Save</button>
-				<button class="btn-danger" v-on:click="remove(ref.id)">Delete</button>
+			<div class="col-4">
+				<div class="float-right">
+					<select v-model="ref.status">
+						<option value="wip">WIP</option>
+						<option value="tbv">A valider</option>
+						<option value="done">Terminée</option>
+					</select>
+					<button v-on:click="save()">Save</button>
+					<button class="btn-danger" v-on:click="remove(ref.id)">Delete</button>
+				</div>
 			</div>
 		</div>
 
@@ -30,13 +32,13 @@
 				<Card :reference="ref" />
 			</div>
 			<div class="tab-pane fade" id="nav-models" role="tabpanel" aria-labelledby="nav-models-tab">
-				<Models v-if="ref.id>0" :ref_id="ref.id" />
+				<Models v-if="ref.id > 0" :ref_id="ref.id" />
 			</div>
 			<div class="tab-pane fade" id="nav-abilities" role="tabpanel" aria-labelledby="nav-abilities-tab">
-				<Abilities v-if="ref.id>0" :ref_id="ref.id" :key="abilitiesKey"></Abilities>
+				<Abilities v-if="ref.id > 0" :ref_id="ref.id" :key="abilitiesKey"></Abilities>
 			</div>
 			<div class="tab-pane fade" id="nav-spells" role="tabpanel" aria-labelledby="nav-spells-tab">
-				<Spells v-if="ref.id>0" :ref_id="ref.id"></Spells>
+				<Spells v-if="ref.id > 0" :ref_id="ref.id"></Spells>
 			</div>
 			<div class="tab-pane fade" id="nav-feat" role="tabpanel" aria-labelledby="nav-feat-tab">
 				<Feat v-if="ref.id > 0 && [1, 2, 10].includes(ref.category_id)" :ref_id="ref.id"></Feat>
@@ -46,11 +48,11 @@
 </template>
 
 <script>
-import Abilities from "./abilities.vue";
-import Models from "./models.vue";
-import Spells from "./spells.vue";
+import Abilities from './abilities.vue'
+import Models from './models.vue'
+import Spells from './spells.vue'
 import Feat from './feat.vue'
-import Card from "./card.vue";
+import Card from './card.vue'
 import { EventBus } from '../main.js'
 export default {
 	name: 'Ref',
@@ -99,10 +101,10 @@ export default {
 		},
 		save: function() {
 			this.reset()
-			EventBus.$emit("mega_save")
+			EventBus.$emit('mega_save')
 			this.sleep(1000).then(() => {
-				if (this.alert === "") {
-					this.alert = "save success"
+				if (this.alert === '') {
+					this.alert = 'save success'
 					this.alert_success = true
 				}
 			})
@@ -162,6 +164,7 @@ export default {
 		@extend .tab-content;
 		@extend .container;
 		@extend .px-0;
+		@extend .mt-4;
 	}
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-	<div class="tooltip">
+	<div class="tooltip mx-1">
 		?
 		<span class="tooltiptext">{{ txt }}</span>
 	</div>
@@ -15,9 +15,9 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .tooltip {
-	opacity: 1;
-	position: relative;
-	display: inline-block;
+	opacity: 1 !important;
+	/* position: relative; */
+	display: inline-block !important;
 	border-bottom: 1px dotted black;
 }
 

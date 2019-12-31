@@ -1,8 +1,8 @@
 <template>
 	<div class="selector">
-		<form v-on:submit.prevent>
+		<div class="col-9">
 			<!-- Languages -->
-			<country-flag :country="$language" />
+			<country-flag :country="$language" class="align-middle" />
 			<select :value="$language" @change="$language = $event.target.value">
 				<option>US</option>
 				<option>FR</option>
@@ -21,15 +21,18 @@
 			</select>
 
 			<!-- References -->
-			<select v-model="ref">
+			<select class="mw-45" v-model="ref" >
 				<option v-for="r in refs" :key="r.id" :value="r.id">[{{ r.status }}] #{{ r.id }} {{ r.title }}</option>
 			</select>
-			<button type="submit" @click="$emit('select_ref', ref)">Go</button>
-
-			<!-- Create new reference -->
-			<input v-model="newName" type="text" class="w-25" placeholder="new ref name" />
-			<button type="submit" @click="createRef(newName)">Create</button>
-		</form>
+			<button @click="$emit('select_ref', ref)">Go</button>
+		</div>
+		<div class="col-3">
+			<div class="float-right">
+				<!-- Create new reference -->
+				<input v-model="newName" placeholder="new ref english name" />
+				<button @click="createRef(newName)">Create</button>
+			</div>
+		</div>
 	</div>
 </template>
 
@@ -105,21 +108,17 @@ export default {
 
 <style lang="scss" scoped>
 @import '../custom.scss';
-
+.mw-45 {
+	min-width: 45%;
+	max-width: 45%;
+}
 .selector {
 	@extend .row;
-	form {
-		@extend .form-inline;
-		@extend .w-100;
-	}
+	@extend .form-inline;
+
 	select,
 	input {
 		@extend .form-control-sm;
-		max-width: 30% !important;
-	}
-	button {
-		@extend .btn-sm;
-		@extend .mr-2;
 	}
 }
 </style>
