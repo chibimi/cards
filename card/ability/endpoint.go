@@ -161,6 +161,7 @@ func (s *Service) ListByModelEndpoint(w http.ResponseWriter, r *http.Request, p 
 
 	utils.WriteJson(w, res, http.StatusOK)
 }
+
 func (s *Service) AddAbilityModelEndpoint(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	rid, err := strconv.Atoi(p.ByName("id"))
 	if err != nil {
@@ -186,6 +187,7 @@ func (s *Service) AddAbilityModelEndpoint(w http.ResponseWriter, r *http.Request
 
 	utils.WriteJson(w, nil, http.StatusCreated)
 }
+
 func (s *Service) DeleteAbilityModelEndpoint(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	rid, err := strconv.Atoi(p.ByName("id"))
 	if err != nil {
@@ -284,20 +286,6 @@ func (s *Service) GetEndpoint(w http.ResponseWriter, r *http.Request, p httprout
 		return
 	}
 	res, err := s.Get(id, lang)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-
-	utils.WriteJson(w, res, http.StatusOK)
-}
-func (s *Service) GetVO(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
-	id, err := strconv.Atoi(p.ByName("id"))
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
-		return
-	}
-	res, err := s.GetLang(id, "US")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return

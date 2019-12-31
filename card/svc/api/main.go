@@ -38,7 +38,6 @@ func main() {
 	router.POST("/ref", ss.Ref.CreateRef)
 	router.GET("/ref", ss.Ref.ListRef)
 	router.GET("/ref/:id", ss.Ref.GetRef)
-	router.GET("/ref/:id/vo", ss.Ref.GetVO)
 	router.PUT("/ref/:id", ss.Ref.SaveRef)
 	router.GET("/ref/:id/spell", ss.Spell.ListByRefEndpoint)
 	router.PUT("/ref/:id/spell/:spell_id", ss.Spell.AddSpellRefEndpoint)
@@ -50,7 +49,6 @@ func main() {
 	router.GET("/ref/:id/feat", ss.Feat.GetFeat)
 	router.GET("/ref/:id/model", ss.Model.ListEndpoint)
 
-	router.GET("/model/:id/vo", ss.Model.GetVO)
 	router.POST("/model", ss.Model.CreateEndpoint)
 	router.PUT("/model/:id", ss.Model.SaveEndpoint)
 	router.DELETE("/model/:id", ss.Model.DeleteEndpoint)
@@ -59,7 +57,6 @@ func main() {
 	router.DELETE("/model/:id/ability/:ability_id", ss.Ability.DeleteAbilityModelEndpoint)
 	router.GET("/model/:id/weapon", ss.Weapon.ListEndpoint)
 
-	router.GET("/weapon/:id/vo", ss.Weapon.GetVO)
 	router.POST("/weapon", ss.Weapon.CreateEndpoint)
 	router.PUT("/weapon/:id", ss.Weapon.SaveEndpoint)
 	router.DELETE("/weapon/:id", ss.Weapon.DeleteEndpoint)
@@ -67,13 +64,11 @@ func main() {
 	router.PUT("/weapon/:id/ability/:ability_id", ss.Ability.AddAbilityWeaponEndpoint)
 	router.DELETE("/weapon/:id/ability/:ability_id", ss.Ability.DeleteAbilityWeaponEndpoint)
 
-	router.GET("/spells/:id/vo", ss.Spell.GetVO)
 	router.GET("/spells/:id", ss.Spell.GetEndpoint)
 	router.GET("/spells", ss.Spell.ListEndpoint)
 	router.POST("/spells", ss.Spell.CreateEndpoint)
 	router.PUT("/spells/:id", ss.Spell.SaveEndpoint)
 
-	router.GET("/abilities/:id/vo", ss.Ability.GetVO)
 	router.GET("/abilities/:id", ss.Ability.GetEndpoint)
 	router.GET("/abilities", ss.Ability.ListEndpoint)
 	router.POST("/abilities", ss.Ability.CreateEndpoint)

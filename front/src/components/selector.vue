@@ -1,119 +1,124 @@
 <template>
-	<div class="row">
-		<form v-on:submit.prevent class="form-inline w-100">
-			<country-flag :country="this.$language"/>
-			<select :value="this.$language" class="form-control form-control-sm" @change="$emit('change_language', $event.target.value)">
+	<div class="selector">
+		<div class="col-9">
+			<!-- Languages -->
+			<country-flag :country="$language" class="align-middle" />
+			<select :value="$language" @change="$language = $event.target.value">
 				<option>US</option>
 				<option>FR</option>
 				<option>DE</option>
 				<option>IT</option>
 			</select>
-			<!-- <label>Faction</label> -->
-			<select v-model="faction" class="form-control form-control-sm w-15" @change="changeFaction">
-				<option v-for="f in factions" :key="f.id" :value="f.id">{{f.name}}</option>
+
+			<!-- Factions -->
+			<select v-model="faction" @change="getRefs(faction, category)">
+				<option v-for="f in factions" :key="f.id" :value="f.id">{{ f.name }}</option>
 			</select>
-			<!-- <label>Category</label> -->
-			<select v-model="category" class="form-control form-control-sm w-15" @change="changeCategory">
-				<option v-for="c in categories" :key="c.id" :value="c.id">{{c.name}}</option>
+
+			<!-- Categories -->
+			<select v-model="category" @change="getRefs(faction, category)">
+				<option v-for="c in categories" :key="c.id" :value="c.id">{{ c.name }}</option>
 			</select>
-			<!-- <label>Ref</label> -->
-			<select v-model="ref" class="form-control form-control-sm w-25">
-				<option v-for="c in refs" :key="c.id" :value="c">[{{c.status}}] #{{c.id}} {{c.title}}</option>
+
+			<!-- References -->
+			<select class="mw-45" v-model="ref" >
+				<option v-for="r in refs" :key="r.id" :value="r.id">[{{ r.status }}] #{{ r.id }} {{ r.title }}</option>
 			</select>
-			<button type="submit" class="btn btn-primary btn-sm" @click="$emit('select_ref', ref)">Go</button>
-			<input v-model="newName" type="text" class="form-control form-control-sm w-25" placeholder="new ref name">
-			<button type="submit" class="btn btn-primary btn-sm" @click="newRef">New Ref</button>
-		</form>
+			<button @click="$emit('select_ref', ref)">Go</button>
+		</div>
+		<div class="col-3">
+			<div class="float-right">
+				<!-- Create new reference -->
+				<input v-model="newName" placeholder="new ref english name" />
+				<button @click="createRef(newName)">Create</button>
+			</div>
+		</div>
 	</div>
 </template>
 
 <script>
-import { Factions, Categories } from "./const.js";
-import { EventBus } from '../main.js';
+import { Factions, Categories } from './const.js'
+import { EventBus } from '../main.js'
 
 export default {
-	name: "Selector",
+	name: 'Selector',
 	components: {},
 	created: function() {
-		this.getRefs(this.faction, this.category);
-	},
-	mounted: function(){
-		EventBus.$on('refresh_selector', (ref_id) => {
-			this.getRefs(this.faction, this.category);
-			this.ref = ref_id;
+		EventBus.$on('refresh_selector', ref_id => {
+			this.getRefs(this.faction, this.category)
+			this.ref = ref_id
 		})
+		this.getRefs(this.faction, this.category)
 	},
 	data() {
 		return {
-			newName: "",
 			factions: Factions,
 			faction: 11,
 			categories: Categories,
 			category: 5,
-			ref: null,
 			refs: [],
-		};
+			ref: 88,
+			newName: '',
+		}
 	},
 	methods: {
-		changeLanguage: function(language){
-			this.$change_language(language);
-		},
 		getRefs: function(faction, category) {
 			if (!faction || !category) {
-				return;
+				return
 			}
 			this.$http
-				.get(process.env.VUE_APP_API_ENDPOINT+ "/ref?faction_id=" + faction + "&category_id=" + category +  "&lang=" + this.$language)
+				.get(
+					process.env.VUE_APP_API_ENDPOINT +
+						`/ref?faction_id=${faction}&category_id=${category}&lang=${this.$language}`
+				)
 				.then(function(res) {
-					console.log(res);
-					this.refs = res.data;
+					console.debug(res)
+					this.refs = res.data
 				})
 				.catch(function(err) {
-					console.log(err);
-				});
+					console.error(err)
+				})
 		},
-		changeFaction: function() {
-			this.getRefs(this.faction, this.category);
-		},
-		changeCategory: function() {
-			this.getRefs(this.faction, this.category);
-		},
-		newRef: function() {
-			if (!this.faction || !this.category || !this.newName) {
-				return;
+		createRef: function(name) {
+			if (!this.faction || !this.category || !name) {
+				return
 			}
 			var ref = {
 				faction_id: this.faction,
 				category_id: this.category,
-				title: this.newName,
+				title: name,
 			}
 			this.$http
-				.post(process.env.VUE_APP_API_ENDPOINT+ "/ref?faction_id=" + this.faction + "&category_id=" + this.category, ref)
+				.post(
+					process.env.VUE_APP_API_ENDPOINT + `/ref?faction_id=${this.faction}&category_id=${this.category}`,
+					ref
+				)
 				.then(function(res) {
-					console.log(res);
-					ref.id = res.body
-					this.$emit('select_ref', ref)
-					this.newName=""
+					console.debug(res)
+					this.$emit('select_ref', res.body)
+					this.newName = ''
 				})
 				.catch(function(err) {
-					console.log(err);
-				});
+					console.error(err)
+				})
 		},
-	}
-};
+	},
+}
 </script>
 
-<style>
-.w-10 {
-    width: 10% !important;
+<style lang="scss" scoped>
+@import '../custom.scss';
+.mw-45 {
+	min-width: 45%;
+	max-width: 45%;
 }
-.w-15 {
-    width: 15% !important;
-}
-.w-20 {
-    width: 20% !important;
-}
-.w-30 {
-    width: 30% !important;
+.selector {
+	@extend .row;
+	@extend .form-inline;
+
+	select,
+	input {
+		@extend .form-control-sm;
+	}
 }
 </style>

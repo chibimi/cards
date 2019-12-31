@@ -1,8 +1,6 @@
 package ability
 
 import (
-	"database/sql"
-
 	"github.com/jmoiron/sqlx"
 	"github.com/pkg/errors"
 )
@@ -17,7 +15,7 @@ func NewRepository(db *sqlx.DB) *Repository {
 
 func (r *Repository) Create(sp *Ability, lang string) (int, error) {
 	stmt := `
-	INSERT INTO abilities (title) 
+	INSERT INTO abilities (title)
 	VALUES(:title)
 	`
 
@@ -65,7 +63,7 @@ func (r *Repository) Save(sp *Ability, lang string) error {
 		return errors.Wrap(err, "create transaction")
 	}
 	stmt := `
-	UPDATE abilities SET 
+	UPDATE abilities SET
 	title = :title
 	WHERE id = :id
 	`
@@ -130,7 +128,7 @@ func (r *Repository) DeleteAbilityRef(ref, ability int) error {
 
 func (r *Repository) ListByModel(model int, lang string) ([]Ability, error) {
 	stmt := `
-	SELECT r.*, IFNULL(s.name, "") as name, IFNULL(s.description, "") as description FROM (
+	SELECT r.*, IFNULL(s.name, "") as name, IFNULL(s.description, "") as description, a.type as type FROM (
 		SELECT * FROM model_ability WHERE model_id = ?
 	) as a LEFT JOIN (
 		SELECT * FROM abilities
@@ -147,9 +145,10 @@ func (r *Repository) ListByModel(model int, lang string) ([]Ability, error) {
 }
 
 func (r *Repository) AddAbilityModel(model, ability, typ int) error {
-	stmt := `INSERT INTO model_ability VALUES(?, ?, ?)`
+	stmt := `INSERT INTO model_ability VALUES(?, ?, ?)
+	ON DUPLICATE KEY UPDATE model_id = ?, ability_id = ?, type = ?`
 
-	_, err := r.db.Exec(stmt, model, ability, typ)
+	_, err := r.db.Exec(stmt, model, ability, typ, model, ability, typ)
 	if err != nil {
 		return errors.Wrap(err, "execute query")
 	}
@@ -168,7 +167,7 @@ func (r *Repository) DeleteAbilityModel(model, ability int) error {
 
 func (r *Repository) ListByWeapon(weapon int, lang string) ([]Ability, error) {
 	stmt := `
-	SELECT r.*, IFNULL(s.name, "") as name, IFNULL(s.description, "") as description FROM (
+	SELECT r.*, IFNULL(s.name, "") as name, IFNULL(s.description, "") as description, a.type as type FROM (
 		SELECT * FROM weapon_ability WHERE weapon_id = ?
 	) as a LEFT JOIN (
 		SELECT * FROM abilities
@@ -185,9 +184,10 @@ func (r *Repository) ListByWeapon(weapon int, lang string) ([]Ability, error) {
 }
 
 func (r *Repository) AddAbilityWeapon(weapon, ability, typ int) error {
-	stmt := `INSERT INTO weapon_ability VALUES(?, ?, ?)`
+	stmt := `INSERT INTO weapon_ability VALUES(?, ?, ?)
+	ON DUPLICATE KEY UPDATE weapon_id = ?, ability_id = ?, type = ?`
 
-	_, err := r.db.Exec(stmt, weapon, ability, typ)
+	_, err := r.db.Exec(stmt, weapon, ability, typ, weapon, ability, typ)
 	if err != nil {
 		return errors.Wrap(err, "execute query")
 	}
@@ -202,19 +202,6 @@ func (r *Repository) DeleteAbilityWeapon(weapon, ability int) error {
 		return errors.Wrap(err, "execute query")
 	}
 	return nil
-}
-
-func (r *Repository) GetLang(id int, lang string) (*Ability, error) {
-	stmt := `
-	SELECT name, description FROM abilities_lang WHERE ability_id = ? AND lang = ?
-	`
-	res := &Ability{}
-	err := r.db.Get(res, stmt, id, lang)
-	if err != nil && err != sql.ErrNoRows {
-		return nil, errors.Wrap(err, "execute query")
-	}
-
-	return res, nil
 }
 
 func (r *Repository) Get(id int, lang string) (*Ability, error) {

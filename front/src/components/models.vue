@@ -1,90 +1,101 @@
 <template>
-	<div class="w-100">
+	<div>
 		<Model
-			v-for="(value,index) in models2"
-			v-bind:model="value"
-			:key="value.id"
-			v-on:remove="removeModel(index)"
-			:ref="'model_' + value.id"
+			v-for="(val, idx) in models"
+			v-bind:model="val"
+			:key="val.id"
+			v-on:remove="removeModel(val, idx)"
+			:ref="'model_' + val.id"
 		></Model>
-		<div class="card border-secondary">
-			<h5
-				class="card-header bg-secondary text-light card-icon py-1"
-				data-toggle="collapse"
-				data-target="#new_model"
-				aria-expanded="false"
-				aria-controls="new_model"
-				ref="newModel"
-			>New Model</h5>
-			<div class="collapse card-body p-1" id="new_model">
-				<Model :model="newModel" v-on:add="addModel"></Model>
+		<div class="card">
+			<h5 class="header" data-toggle="collapse" data-target="#new_model" aria-expanded="false" ref="newModel">
+				New Model
+			</h5>
+			<div class="collapse card-body p-2" id="new_model">
+				<Model v-bind:model="model" v-on:add="addModel"></Model>
 			</div>
 		</div>
 	</div>
 </template>
 
 <script>
-import Model from "./model.vue";
+import Model from './model.vue'
 export default {
-	name: "Models",
-	props: ["ref_id"],
-	components: {
-		Model
-	},
+	name: 'Models',
+	props: ['ref_id'],
+	components: { Model },
 	watch: {
 		ref_id: function(newVal) {
-			this.get(newVal);
+			this.get(newVal)
 		},
 	},
 	created: function() {
-		this.get(this.ref_id);
+		this.get(this.ref_id)
 	},
 	data() {
 		return {
-			models2: [],
-			newModel: {
+			models: [],
+			model: {
 				ref_id: this.ref_id,
 				advantages: [],
-				weapons: []
-			}
-		};
+				weapons: [],
+			},
+		}
 	},
 	methods: {
 		get: function(id) {
-			this.models2 = [];
+			this.models = []
 			this.$http
-				.get(process.env.VUE_APP_API_ENDPOINT+ "/ref/" + id + "/model?lang=" + this.$language)
+				.get(process.env.VUE_APP_API_ENDPOINT + `/ref/${id}/model?lang=${this.$language}`)
 				.then(function(res) {
-					console.log(res);
-					this.models2 = res.data;
-				});
+					console.debug(res)
+					this.models = res.data
+				})
 		},
-		removeModel: function(index) {
-			this.models2.splice(index, 1);
+		removeModel: function(model, index) {
+			this.$http
+				.delete(process.env.VUE_APP_API_ENDPOINT + `/model/${model.id}`)
+				.then(function(res) {
+					console.log(res)
+					if (res.status === 204) {
+						this.models.splice(index, 1)
+					}
+				})
 		},
-		addModel: async function(model) {
-			this.models2.push(model);
-			this.newModel = {
-				ref_id: this.id,
-				advantages: [],
-				weapons: []
-			};
-			this.$refs.newModel.click();
-			
-			var modelRef = "model_"+model.id;
-			while(this.$refs[modelRef] === undefined){
-				await this.sleep(100)
+		addModel: function(model) {
+			if (model.id == null) {
+				model.id = 0
+				model.ref_id = this.ref_id
 			}
-			this.$refs[modelRef][0].open();
-
+			this.$http
+				.put(
+					process.env.VUE_APP_API_ENDPOINT + `/model/${model.id}?lang=${this.$language}`,
+					model
+				)
+				.then(async function(res) {
+					console.debug(res)
+					if (res.status === 201) {
+						model.id = res.data
+						this.models.push(model)
+						this.model = {
+							ref_id: this.ref_id,
+							advantages: [],
+							weapons: [],
+						}
+						this.$refs.newModel.click()
+						var modelRef = 'model_' + model.id
+						while (this.$refs[modelRef] === undefined) {
+							await this.sleep(100)
+						}
+						this.$refs[modelRef][0].open()
+					}
+				})
 		},
 		sleep: function(ms) {
-			return new Promise(resolve => setTimeout(resolve, ms));
-		}
-	}
-};
+			return new Promise(resolve => setTimeout(resolve, ms))
+		},
+	},
+}
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-</style>
+<style scoped></style>

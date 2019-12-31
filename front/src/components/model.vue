@@ -1,189 +1,171 @@
 <template>
-	<div class="w-100">
-		<div class="row pt-2 pl-2">
+	<div>
+		<div class="row">
 			<h4
-				class="text-left col-6 pt-2"
+				class="col-9"
 				data-toggle="collapse"
-				v-bind:data-target="'#test_model_' + model.id"
+				v-bind:data-target="'#model_' + model.id"
 				v-bind:aria-expanded="!model.id"
-				v-bind:aria-controls="'test_model_' + model.id"
+				v-bind:aria-controls="'model_' + model.id"
 				ref="model"
-			><i class="fa fa-angle-right"></i>  {{model.name || model.title}}</h4>
-			<div class="col-5">
-				<div v-if="alert" class="alert alert-error py-2" v-bind:class="{ 'alert-success': alert_success }">{{alert}}</div>
-			</div>
-			<div class="col-1 pl-0">
-				<button v-if="!model.id" type="submit" class="form-control btn btn-primary" @click="save(model)">Save</button>
-				<button v-if="model.id" type="submit" class="form-control btn btn-danger" @click="remove(model)">Delete</button>
+			>
+				<i class="fa fa-angle-right"></i> {{ model.name || model.title }}
+			</h4>
+
+			<div class="col-3">
+				<div class="float-right">
+					<button v-if="!model.id" @click="$emit('add', model)">Save</button>
+					<button v-if="model.id" class="btn-danger" @click="$emit('remove')">Delete</button>
+				</div>
 			</div>
 		</div>
 
-		<div class="collapse" v-bind:id="'test_model_' + model.id" v-bind:class="{'show': !model.id }">
-			<div class="row px-3">
-				<div class="col-4 pt-4 pr-4">
-					<div class="row">
-						<label class="col-form-label col-4 px-0">English Name</label>
-						<input v-model="model.title" type="text" class="form-control col-8">
+		<div class="collapse" v-bind:id="'model_' + model.id" v-bind:class="{ show: !model.id }">
+			<div class="row mx-0">
+				<div class="names pt-4">
+					<div>
+						<label>English Name</label>
+						<input v-model="model.title" />
 					</div>
-					<!-- <div class="row">
-						<label class="col-form-label col-4 px-0">Name</label>
-						<input v-model="model.name" type="text" class="form-control col-8">
-					</div> -->
-					<div class="row">
-						<label class="col-form-label col-4 px-0">Damage</label>
-						<input v-model="model.damage" type="text" class="form-control col-8">
+					<div>
+						<label>Name</label>
+						<input v-model="model.name" />
 					</div>
-					<div class="row">
-						<label class="col-form-label col-4 px-0">Fury/Focus</label>
-						<input v-model="model.resource" type="text" class="form-control col-8">
+					<div>
+						<label>Damage</label>
+						<input v-model="model.damage" />
 					</div>
-					<div class="row">
-						<label class="col-form-label col-4 px-0">Threshold</label>
-						<input v-model="model.threshold" type="text" class="form-control col-8">
+					<div>
+						<label>Fury/Focus</label>
+						<input v-model="model.resource" />
+					</div>
+					<div>
+						<label>Threshold</label>
+						<input v-model="model.threshold" />
 					</div>
 				</div>
-				<div class="col-8 pl-3">
-					<div class="form-group row my-0">
-						<span class="col text-left">spd</span>
-						<span class="col text-left">str</span>
-						<span class="col text-left">mat</span>
-						<span class="col text-left">rat</span>
-						<span class="col text-left">def</span>
-						<span class="col text-left">arm</span>
-						<span class="col text-left">cmd</span>
-						<span class="col text-left">base</span>
+
+				<div class="statline">
+					<div>
+						<span>spd</span>
+						<span>str</span>
+						<span>mat</span>
+						<span>rat</span>
+						<span>def</span>
+						<span>arm</span>
+						<span>cmd</span>
+						<span>base</span>
 					</div>
-					<div class="form-group row mt-0">
-						<input v-model="model.spd" type="text" class="form-control col" placeholder="spd">
-						<input v-model="model.str" type="text" class="form-control col" placeholder="str">
-						<input v-model="model.mat" type="text" class="form-control col" placeholder="mat">
-						<input v-model="model.rat" type="text" class="form-control col" placeholder="rat">
-						<input v-model="model.def" type="text" class="form-control col" placeholder="def">
-						<input v-model="model.arm" type="text" class="form-control col" placeholder="arm">
-						<input v-model="model.cmd" type="text" class="form-control col" placeholder="cmd">
-						<input v-model="model.base_size" type="text" class="form-control col" placeholder="case">
+					<div>
+						<input v-model="model.spd" placeholder="spd" />
+						<input v-model="model.str" placeholder="str" />
+						<input v-model="model.mat" placeholder="mat" />
+						<input v-model="model.rat" placeholder="rat" />
+						<input v-model="model.def" placeholder="def" />
+						<input v-model="model.arm" placeholder="arm" />
+						<input v-model="model.cmd" placeholder="cmd" />
+						<input v-model="model.base_size" placeholder="case" />
 					</div>
-					<div class="row">							
-						<label v-for="a in advantages" :key="a.label" v-bind:value="a.label" class="form-check form-check-inline form-check-label" >
-							<input class="form-check-input" type="checkbox" v-model="model.advantages" :value="a.label">{{a.name}}
-						</label>	
-					</div>
+					<label v-for="a in advantages" :key="a.label" v-bind:value="a.label">
+						<input type="checkbox" v-model="model.advantages" :value="a.label" />{{ a.name }}
+					</label>
 				</div>
 			</div>
 
-			<div v-if="model.id" class="mt-3">
-				<div class="row">
-					<label class="col-1 col-form-label"></label>
-					<h4 class="col-11">{{model.name}} weapons</h4>
-					<label class="col-1 col-form-label"></label>
+			<div v-if="model.id">
+				<div class="row pt-3">
+					<div class="col-1"></div>
 					<div class="col-11">
+						<h4>{{ model.name || model.title }}'s weapons</h4>
 						<Weapons :model_id="model.id" />
 					</div>
 				</div>
 			</div>
 		</div>
-		<hr>
+		<hr v-if="model.id" />
 	</div>
 </template>
 
 <script>
-import Weapons from "./weapons.vue";
-import { ModelAdvantages } from "./const.js";
-import { EventBus } from '../main.js';
+import Weapons from './weapons.vue'
+import { ModelAdvantages } from './const.js'
+import { EventBus } from '../main.js'
 
 export default {
-	name: "Model",
-	props: ["model"],
-	components: {
-		Weapons
-	},
-	watch: {
-		model: function(newVal) {
-			this.getVO(newVal.id);
-		}
-	},
-	created: function() {
-		this.getVO(this.model.id);
-	},
-	mounted: function(){
+	name: 'Model',
+	props: ['model'],
+	components: { Weapons },
+	mounted: function() {
 		EventBus.$on('mega_save', () => {
 			if (this.model.id == null) {
-				return;
+				return
 			}
 			this.save(this.model)
 		})
 	},
-	beforeDestroy(){
+	beforeDestroy() {
 		EventBus.$off('mega_save')
 	},
 	data() {
 		return {
-			vo: {},
-			alert: "",
-			alert_succes: false,
-			advantages: ModelAdvantages
-		};
+			advantages: ModelAdvantages,
+		}
 	},
 	methods: {
-		getVO: function(id) {
-			if (id == null) {
-				return;
-			}
-			this.$http
-				.get(process.env.VUE_APP_API_ENDPOINT+ "/model/" + id + "/vo")
-				.then(function(res) {
-					console.log(res);
-					this.vo = res.data;
-				});
-		},
 		save: function(model) {
 			if (model.id == null) {
-				model.id = 0;
+				model.id = 0
 			}
-			this.reset();
 			this.$http
-				.put(process.env.VUE_APP_API_ENDPOINT+ "/model/" + model.id + "?lang=" + this.$language, model)
+				.put(process.env.VUE_APP_API_ENDPOINT + '/model/' + model.id + '?lang=' + this.$language, model)
 				.then(function(res) {
-					console.log(res);
-					this.alert = "save success";
-					this.alert_success = true;
-					if (res.status === 201) {
-						model.id = res.data;
-						this.$emit("add", model);
-					}
+					console.debug(res)
 				})
 				.catch(function(err) {
-					EventBus.$emit('err_save', "model", model.id, err.data);
-				});
-		},
-		remove: function(model) {
-			this.reset();
-			this.$http
-				.delete(process.env.VUE_APP_API_ENDPOINT+ "/model/" + model.id)
-				.then(function(res) {
-					console.log(res);
-					if (res.status === 204) {
-						this.$emit("remove");
-					}
+					EventBus.$emit('err_save', 'model', model.id, err.data)
 				})
-				.catch(function(err) {
-					this.alert = "error: " + err;
-					this.alert_success = false;
-				});
-		},
-		reset: function() {
-			this.alert = "";
-			this.alert_succes = false;
 		},
 		open: function() {
-			this.$refs.model.click();
+			this.$refs.model.click()
 		},
-	}
-};
+	},
+}
 </script>
 
-<style scoped>
-.statline input {
-	max-width: 4rem;
+<style lang="scss" scoped>
+@import '../custom.scss';
+.names {
+	@extend .col-4;
+	div {
+		@extend .row;
+		label {
+			@extend .col-4;
+			@extend .col-form-label;
+			@extend .px-0;
+		}
+		input {
+			@extend .col-8;
+		}
+	}
+}
+.statline {
+	@extend .col-8;
+	div {
+		@extend .row;
+		span {
+			@extend .col;
+		}
+		input {
+			@extend .col;
+		}
+	}
+	label {
+		@extend .form-check;
+		@extend .form-check-inline;
+		@extend .form-check-label;
+		input {
+			@extend .form-check-input;
+		}
+	}
 }
 </style>

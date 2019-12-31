@@ -158,17 +158,3 @@ func (s *Service) GetEndpoint(w http.ResponseWriter, r *http.Request, p httprout
 
 	utils.WriteJson(w, res, http.StatusOK)
 }
-func (s *Service) GetVO(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
-	id, err := strconv.Atoi(p.ByName("id"))
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
-		return
-	}
-	res, err := s.GetLang(id, "US")
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-
-	utils.WriteJson(w, res, http.StatusOK)
-}

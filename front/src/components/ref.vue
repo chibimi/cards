@@ -1,157 +1,122 @@
 <template>
-	<div class="w-100 mt-4">
-		<div class="row my-4">
-			<h2 class="text-left col-7">{{reference.title}} <span class="font-italic h5">{{reference.properties}}</span> </h2>
-			<select v-model="status" class="form-control col-2 mr-3">
-				<option value="wip">WIP</option>
-				<option value="tbv">A valider</option>
-				<option value="done">Terminée</option>
-			</select>
-			<div class="col-1 pl-0">
-				<button type="submit" class="form-control btn btn-primary" @click="save()">Save</button>
-			</div>
-			<div class="col-1 pl-0">
-				<button type="submit" class="form-control btn btn-danger" @click="remove(reference.id)">Delete</button>
-			</div>
-
-			<div class="col-12" >
-				<div v-if="alert" class="alert py-2" v-bind:class="{ 'alert-success': alert_success,'alert-danger': !alert_success}"><pre class="mb-0">{{alert}}</pre></div>
+	<div class="ref">
+		<div class="header">
+			<h2 class="col-8">{{ ref.title }}</h2>
+			<div class="col-4">
+				<div class="float-right">
+					<select v-model="ref.status">
+						<option value="wip">WIP</option>
+						<option value="tbv">A valider</option>
+						<option value="done">Terminée</option>
+					</select>
+					<button v-on:click="save()">Save</button>
+					<button class="btn-danger" v-on:click="remove(ref.id)">Delete</button>
+				</div>
 			</div>
 		</div>
-		<nav>
-			<div class="nav nav-tabs" id="nav-tab" role="tablist">
-				<a 
-					class="nav-item nav-link active" 
-					id="nav-ref-tab" 
-					data-toggle="tab" 
-					href="#nav-ref" 
-					role="tab" 
-					aria-controls="nav-ref" 
-					aria-selected="true"
-				>Ref</a>
-				<a
-					v-if="reference.id>0"
-					class="nav-item nav-link"
-					id="nav-models-tab"
-					data-toggle="tab"
-					href="#nav-models"
-					role="tab"
-					aria-controls="nav-models"
-					aria-selected="false"
-				>Models</a>	
-				<a
-					v-if="reference.id>0"
-					class="nav-item nav-link"
-					id="nav-abilities-tab"
-					data-toggle="tab"
-					href="#nav-abilities"
-					role="tab"
-					aria-controls="nav-abilities"
-					aria-selected="false"
-					v-on:click="abilitiesKey++"
-				>Abilities</a>	
-				<a
-					v-if="reference.id>0"
-					class="nav-item nav-link"
-					id="nav-spells-tab"
-					data-toggle="tab"
-					href="#nav-spells"
-					role="tab"
-					aria-controls="nav-spells"
-					aria-selected="false"
-				>Spells & Animus</a> 
-				<a
-					v-if="reference.id>0 && (reference.category_id=== 1 || reference.category_id===2|| reference.category_id===10)"
-					class="nav-item nav-link"
-					id="nav-feat-tab"
-					data-toggle="tab"
-					href="#nav-feat"
-					role="tab"
-					aria-controls="nav-feat"
-					aria-selected="false"
-				>Feat</a>
-			</div>
-		</nav>
-		<div class="tab-content" id="nav-tabContent">
+
+		<div class="error" v-if="alert" :class="{ 'alert-success': alert_success, 'alert-danger': !alert_success }">
+			<pre class="mb-0">{{ alert }}</pre>
+		</div>
+
+		<div class="nav" role="tablist">
+			<a class="active" data-toggle="tab" href="#nav-ref">Ref</a>
+			<a v-if="ref.id > 0" data-toggle="tab" href="#nav-models">Models</a>
+			<a v-if="ref.id > 0" data-toggle="tab" href="#nav-abilities" v-on:click="abilitiesKey++">Abilities</a>
+			<a v-if="ref.id > 0" data-toggle="tab" href="#nav-spells">Spells & Animus</a>
+			<a v-if="ref.id > 0 && [1, 2, 10].includes(ref.category_id)" data-toggle="tab" href="#nav-feat">Feat</a>
+		</div>
+
+		<div class="content">
 			<div class="tab-pane fade show active" id="nav-ref" role="tabpanel" aria-labelledby="nav-ref-tab">
-				<Card :ref_id="reference.id" :ref_status="status" />
+				<Card :reference="ref" />
 			</div>
 			<div class="tab-pane fade" id="nav-models" role="tabpanel" aria-labelledby="nav-models-tab">
-				<Models v-if="reference.id>0" :ref_id="reference.id" />
+				<Models v-if="ref.id > 0" :ref_id="ref.id" />
 			</div>
-			<div class="tab-pane fade" id="nav-abilities" role="tabpanel" aria-labelledby="nav-abilities-tab">	
-				<Abilities v-if="reference.id>0" :ref_id="reference.id" :key="abilitiesKey"></Abilities>
+			<div class="tab-pane fade" id="nav-abilities" role="tabpanel" aria-labelledby="nav-abilities-tab">
+				<Abilities v-if="ref.id > 0" :ref_id="ref.id" :key="abilitiesKey"></Abilities>
 			</div>
 			<div class="tab-pane fade" id="nav-spells" role="tabpanel" aria-labelledby="nav-spells-tab">
-				<Spells v-if="reference.id>0" :ref_id="reference.id"></Spells>
-			</div> 
+				<Spells v-if="ref.id > 0" :ref_id="ref.id"></Spells>
+			</div>
 			<div class="tab-pane fade" id="nav-feat" role="tabpanel" aria-labelledby="nav-feat-tab">
-				<Feat v-if="reference.id>0 && (reference.category_id=== 1 || reference.category_id===2|| reference.category_id===10)" :ref_id="reference.id"></Feat>
+				<Feat v-if="ref.id > 0 && [1, 2, 10].includes(ref.category_id)" :ref_id="ref.id"></Feat>
 			</div>
 		</div>
 	</div>
 </template>
 
 <script>
-import Abilities from "./abilities.vue";
-import Models from "./models.vue";
-import Spells from "./spells.vue";
-import Feat from "./feat.vue";
-import Card from "./card.vue";
-import { EventBus } from '../main.js';
+import Abilities from './abilities.vue'
+import Models from './models.vue'
+import Spells from './spells.vue'
+import Feat from './feat.vue'
+import Card from './card.vue'
+import { EventBus } from '../main.js'
 export default {
-	name: "Ref",
-	props: ["reference"],
-	components: { Card, Models, Feat, Spells, Abilities},
+	name: 'Ref',
+	props: ['ref_id'],
+	components: { Card, Models, Abilities, Spells, Feat },
 	watch: {
-		reference: function(newVal) {
-			this.status = newVal.status;
-		}
+		ref_id: function(newVal) {
+			console.log('watch', newVal)
+			this.get(newVal)
+		},
 	},
-	ceeated: function(){
-		this.status = this.reference.status;
-	},
-	mounted: function(){
-		this.status = this.reference.status;
+	created: function() {
 		EventBus.$on('err_save', (component, id, err) => {
-			this.alert = this.alert + "Error in " + component + " " + id + ": " + err + "\n"; 
+			this.alert = this.alert + 'Error in ' + component + ' ' + id + ': ' + err + '\n'
 			this.alert_success = false
-		});
+		})
+
+		this.get(this.ref_id)
 	},
-	beforeDestroy(){
+	beforeDestroy() {
 		EventBus.$off('err_save')
 	},
 	data() {
 		return {
-			status: "wip",
-			alert: "",
+			ref: {},
+			alert: '',
 			alert_success: false,
 			abilitiesKey: 0,
-		};
+		}
 	},
 	methods: {
 		reset: function() {
-			this.alert = ""
+			this.alert = ''
 			this.alert_success = false
 		},
+		get: function(refID) {
+			this.$http
+				.get(process.env.VUE_APP_API_ENDPOINT + `/ref/${refID}?lang=${this.$language}`)
+				.then(function(res) {
+					console.debug(res)
+					this.ref = res.data
+				})
+				.catch(function(err) {
+					console.error(err)
+				})
+		},
 		save: function() {
-			this.reset();
-			EventBus.$emit('mega_save');
+			this.reset()
+			EventBus.$emit('mega_save')
 			this.sleep(1000).then(() => {
-				if (this.alert === ""){
-					this.alert = "save success"
+				if (this.alert === '') {
+					this.alert = 'save success'
 					this.alert_success = true
 				}
 			})
 			this.sleep(5000).then(() => {
-				if (this.alert_success){
+				if (this.alert_success) {
 					this.reset()
 				}
 			})
 		},
 		sleep: function(ms) {
-			return new Promise(resolve => setTimeout(resolve, ms));
-		}
+			return new Promise(resolve => setTimeout(resolve, ms))
+		},
 		// remove: function(card) {
 		// 				this.alert = ""
 		// 	this.$http
@@ -166,9 +131,40 @@ export default {
 		// 			this.alert_success = false
 		// 		});
 		// },
-	}
-};
+	},
+}
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import '../custom.scss';
+.ref {
+	.header {
+		@extend .row;
+		@extend .form-inline;
+	}
+
+	.error {
+		@extend .row;
+		@extend .alert;
+		@extend .mx-0;
+		@extend .py-1;
+	}
+
+	.nav {
+		@extend .nav;
+		@extend .nav-tabs;
+
+		a {
+			@extend .nav-item;
+			@extend .nav-link;
+		}
+	}
+
+	.content {
+		@extend .tab-content;
+		@extend .container;
+		@extend .px-0;
+		@extend .mt-4;
+	}
+}
 </style>

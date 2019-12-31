@@ -1,8 +1,6 @@
 package spell
 
 import (
-	"database/sql"
-
 	"github.com/jmoiron/sqlx"
 	"github.com/pkg/errors"
 )
@@ -17,7 +15,7 @@ func NewRepository(db *sqlx.DB) *Repository {
 
 func (r *Repository) Create(sp *Spell, lang string) (int, error) {
 	stmt := `
-	INSERT INTO spells (title, cost, rng, aoe, pow, dur, off) 
+	INSERT INTO spells (title, cost, rng, aoe, pow, dur, off)
 	VALUES(:title, :cost, :rng, :aoe, :pow, :dur, :off)
 	`
 
@@ -65,7 +63,7 @@ func (r *Repository) Save(sp *Spell, lang string) error {
 		return errors.Wrap(err, "create transaction")
 	}
 	stmt := `
-	UPDATE spells SET 
+	UPDATE spells SET
 	title = :title, cost = :cost, rng = :rng, aoe = :aoe, pow = :pow, dur = :dur, off = :off
 	WHERE id = :id
 	`
@@ -126,19 +124,6 @@ func (r *Repository) DeleteSpellRef(ref, spell int) error {
 		return errors.Wrap(err, "execute query")
 	}
 	return nil
-}
-
-func (r *Repository) GetLang(id int, lang string) (*Spell, error) {
-	stmt := `
-	SELECT name, description FROM spells_lang WHERE spell_id = ? AND lang = ?
-	`
-	res := &Spell{}
-	err := r.db.Get(res, stmt, id, lang)
-	if err != nil && err != sql.ErrNoRows {
-		return nil, errors.Wrap(err, "execute query")
-	}
-
-	return res, nil
 }
 
 func (r *Repository) Get(id int, lang string) (*Spell, error) {

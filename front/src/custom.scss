@@ -1,0 +1,31 @@
+@import '~bootstrap/scss/bootstrap.scss';
+
+select, input:not([type=checkbox]), textarea {
+    @extend .form-control;
+}
+
+button {
+	@extend .form-control;
+    @extend .btn-sm;
+	@extend .btn-primary;
+	@extend .ml-1;
+	width: 60px !important;
+}
+
+.card {
+	@extend .card;
+	@extend .border-secondary;
+
+
+	.header {
+		@extend .card-header;
+		@extend .bg-secondary;
+		@extend .text-light;
+		@extend .text-center;
+		@extend .py-1;
+	}
+}
+
+.vo {
+	color: #828da9;
+}

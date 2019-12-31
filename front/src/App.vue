@@ -1,74 +1,64 @@
 <template>
-	<div id="app" class="container mt-3">
-		<Selector v-on:select_ref="setRef" v-on:change_language="setLanguage" :key="componentKey" />
-		<div class="row">
-			<Ref v-if="reference.id !== null" :reference="reference" :key="componentKey" />
-		</div>
+	<div id="app">
+		<Selector class="mb-4" v-on:select_ref="ref_id = $event" :key="$language" />
+		<Ref v-if="ref_id !== null" :ref_id="ref_id" :key="$language" />
 	</div>
 </template>
 
 <script>
-import Ref from "./components/ref.vue"
-import Selector from "./components/selector.vue"
+import Selector from './components/selector.vue'
+import Ref from './components/ref.vue'
 
 export default {
-	name: "app",
-	components: { Ref, Selector },
+	name: 'app',
+	components: { Selector, Ref },
 	data() {
 		return {
-			componentKey: 0,
-			ref: null,
-			reference: {
-				id: null,
-			},
+			ref_id: null,
 		}
 	},
-	methods: {
-		setRef: function(ref) {
-			if (ref.id === 0 && this.reference.id === 0) {
-				this.reference.id = -1
-			} else {
-				this.reference = ref
-			}
-		},
-		setLanguage: function(language) {
-			if (language === this.$language) {
-				return
-			}
-			this.$change_language(language)
-			this.forceRerender()
-		},
-		forceRerender() {
-			this.componentKey += 1
-		},
-	},
+	methods: {},
 }
 </script>
 
-<style>
+<style lang="scss">
+@import 'custom.scss';
+
 #app {
-	font-family: "Avenir", Helvetica, Arial, sans-serif;
+	@extend .container;
+	font-family: 'Avenir', Helvetica, Arial, sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	text-align: center;
 	color: #2c3e50;
-}
-
-body,
-html {
-	height: 100%;
-}
-.h-head {
-	height: 10vh;
-}
-.h-content {
-	height: 90vh;
 }
 ::-webkit-input-placeholder {
 	color: #aeaeae !important;
 	font-style: italic !important;
 }
-.vo {
-	color: #828da9;
-}
+// FIXME
+// #app {
+// 	font-family: "Avenir", Helvetica, Arial, sans-serif;
+// 	-webkit-font-smoothing: antialiased;
+// 	-moz-osx-font-smoothing: grayscale;
+// 	text-align: center;
+// 	color: #2c3e50;
+// }
+
+// body,
+// html {
+// 	height: 100%;
+// }
+// .h-head {
+// 	height: 10vh;
+// }
+// .h-content {
+// 	height: 90vh;
+// }
+// ::-webkit-input-placeholder {
+// 	color: #aeaeae !important;
+// 	font-style: italic !important;
+// }
+// .vo {
+// 	color: #828da9;
+// }
 </style>

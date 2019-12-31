@@ -1,15 +1,15 @@
 <template>
-  <div class="text-left">
-    <b>#{{item.id}}</b>
-    <span>{{ item.title }}</span>
-  </div>
+	<div>
+		<b>#{{ item.id }}</b>
+		<span>{{ item.title }}</span>
+	</div>
 </template>
 
 <script>
 export default {
-  props: {
-    item: { required: true },
-    searchText: { required: true }
-  }
+	props: {
+		item: { required: true },
+		searchText: { required: true },
+	},
 }
 </script>

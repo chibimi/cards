@@ -1,103 +1,85 @@
 <template>
-	<div class="w-100">
-		<h5 class="text-left mt-3">{{weapon.name || vo.name}} abilities</h5>
+	<div>
+		<h5 class="my-3">{{ weapon.name || weapon.title }} abilities</h5>
 		<Ability
-			v-for="(value,index) in abilities"
-			v-bind:ability="value"
+			v-for="(val, idx) in abilities"
+			v-bind:ability_id="val.id"
+			v-bind:ability_type="val.type"
 			:abilitiesList="abilitiesList"
-			:key="value.id"
-			v-on:remove="removeAbility(value,index)"
-			v-on:update="updateAbility"
+			:key="val.id"
+			v-on:remove="removeAbility(val, idx)"
+			v-on:update="$emit('update')"
+			v-on:add="addAbility"
 		></Ability>
-		<div class="card border-secondary">
+		<div class="card">
 			<h5
-				class="card-header bg-secondary text-light card-icon py-1"
+				class="header"
 				data-toggle="collapse"
 				v-bind:data-target="'#new_weapon_ability' + weapon.id"
 				aria-expanded="false"
-				v-bind:aria-controls="'new_weapon_ability' + weapon.id"
-			>New {{weapon.name}} Ability</h5>
-			<div class="collapse card-body p-1" v-bind:id="'new_weapon_ability' + weapon.id">
-				<Ability :ability="ability" :abilitiesList="abilitiesList" v-on:add="addAbility" v-on:new="newAbility" v-on:update="updateAbility"></Ability>
+			>
+				New Ability for {{ weapon.name || weapon.title }}
+			</h5>
+			<div class="collapse card-body p-2" v-bind:id="'new_weapon_ability' + weapon.id">
+				<Ability :abilitiesList="abilitiesList" v-on:add="addAbility" v-on:update="$emit('update')"></Ability>
 			</div>
 		</div>
 	</div>
 </template>
 
 <script>
-import Ability from "./ability.vue";
+import Ability from './ability.vue'
 export default {
-	name: "WeaponAbilities",
-	props: ["weapon", "abilitiesList"],
-	components: {
-		Ability
-	},
+	name: 'WeaponAbilities',
+	props: ['weapon', 'abilitiesList'],
+	components: { Ability },
 	watch: {
 		weapon: function(newVal) {
-			this.get(newVal.id);
+			this.get(newVal.id)
 		},
-		abilitiesList: function() {
-			this.get(this.weapon.id);
-		}
 	},
 	created: function() {
-		this.get(this.weapon.id);
+		this.get(this.weapon.id)
 	},
 	data() {
 		return {
-			vo: {},
 			abilities: [],
-			ability: {
-				type: 0,
-			}
-		};
+		}
 	},
 	methods: {
 		get: function(weaponID) {
 			this.$http
-				.get(process.env.VUE_APP_API_ENDPOINT+ "/weapon/" + weaponID + "/ability?lang=" + this.$language)
+				.get(process.env.VUE_APP_API_ENDPOINT + `/weapon/${weaponID}/ability?lang=${this.$language}`)
 				.then(function(res) {
-					console.log(res);
-					this.abilities = res.data;
-				});
-			this.$http
-				.get(process.env.VUE_APP_API_ENDPOINT+ "/weapon/" + weaponID + "/vo")
-				.then(function(res) {
-					console.log(res);
-					this.vo = res.data;
-				});
+					console.log(res)
+					this.abilities = res.data
+				})
 		},
 		removeAbility: function(ability, index) {
 			this.$http
-				.delete(process.env.VUE_APP_API_ENDPOINT+ "/weapon/" + this.weapon.id + "/ability/" + ability.id)
+				.delete(process.env.VUE_APP_API_ENDPOINT + `/weapon/${this.weapon.id}/ability/${ability.id}`)
 				.then(function(res) {
-					console.log(res);
+					console.log(res)
 					if (res.status === 204) {
-						this.abilities.splice(index, 1);
+						this.abilities.splice(index, 1)
 					}
-				});
+				})
 		},
-		addAbility: function(ability) {
+		addAbility: function(ability,push) {
 			this.$http
-				.put(process.env.VUE_APP_API_ENDPOINT+ "/weapon/" + this.weapon.id + "/ability/" + ability.id + "?type=" + ability.type + "&lang=" + this.$language)
+				.put(
+					process.env.VUE_APP_API_ENDPOINT +
+						`/weapon/${this.weapon.id}/ability/${ability.id}?type=${ability.type}&lang=${this.$language}`
+				)
 				.then(function(res) {
-					console.log(res);
-					if (res.status === 201) {
-						this.abilities.push(ability);
-						this.ability = {type: 0};
+					console.log(res)
+					if (res.status === 201 && push) {
+						this.abilities.push(ability)
 					}
-				});
+				})
 		},
-		updateAbility: function() {
-			this.$emit("update");
-		},
-		newAbility: function(ability) {
-			this.$emit("new", ability);
-		}
-	}
-};
+	},
+}
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-</style>
+<style scoped></style>
