@@ -1,8 +1,8 @@
 <template>
 	<div class="w-100">
-		<div class="row px-3 py-0">
-			<div class="col-4 py-0">
-				<div class="form-group row my-0">
+		<div class="row">
+			<div class="col-5">
+				<div class="row">
 					<span class="col-6 text-bottom">English Name</span>
 					<span class="col-6">Name</span>
 				</div>
@@ -18,54 +18,41 @@
 					<span class="col">cnt</span>
 				</div>
 			</div>
-			<div class="col-2"></div>
+			<div class="col-1"></div>
 
-			<div class="col-4">
-				<div class="form-group row my-0">
-					<input v-model="weapon.title" type="text" class="form-control col-6" placeholder="English Name" />
-					<input v-model="weapon.name" type="text" class="form-control col-6" placeholder="Name" />
+			<div class="col-5">
+				<div class="row">
+					<input v-model="weapon.title" class="col-6" placeholder="English Name" />
+					<input v-model="weapon.name"  class="col-6" placeholder="Name" />
 				</div>
 			</div>
 
 			<div class="col-6">
-				<div class="form-group row my-0">
-					<select v-model="weapon.type" class="form-control col-2">
+				<div class="row">
+					<select v-model="weapon.type" class="col-2">
 						<option value="1">Meele</option>
 						<option value="2">Ranged</option>
 						<option value="3">Mount</option>
 					</select>
-					<input v-model="weapon.rng" type="text" class="form-control col" placeholder="rng" />
-					<input v-model="weapon.pow" type="text" class="form-control col" placeholder="pow" />
-					<input v-model="weapon.rof" type="text" class="form-control col" placeholder="rof" />
-					<input v-model="weapon.aoe" type="text" class="form-control col" placeholder="aoe" />
-					<input v-model="weapon.loc" type="text" class="form-control col" placeholder="loc" />
-					<input v-model="weapon.cnt" type="text" class="form-control col" placeholder="cnt" />
+					<input v-model="weapon.rng"  class="col" placeholder="rng" />
+					<input v-model="weapon.pow"  class="col" placeholder="pow" />
+					<input v-model="weapon.rof"  class="col" placeholder="rof" />
+					<input v-model="weapon.aoe"  class="col" placeholder="aoe" />
+					<input v-model="weapon.loc"  class="col" placeholder="loc" />
+					<input v-model="weapon.cnt"  class="col" placeholder="cnt" />
 				</div>
 			</div>
 
-			<div class="col-2">
-				<div v-if="weapon.id" class="">
-					<button type="submit" class="form-control btn btn-danger" @click="remove(weapon)">Delete</button>
-				</div>
-				<div v-if="!weapon.id" class="">
-					<button type="submit" class="form-control btn btn-primary" @click="save(weapon)">Add</button>
-				</div>
+			<div class="col-1 px-0">
+					<button v-if="weapon.id" class="btn-danger" @click="$emit('remove')">Delete</button>
+					<button v-if="!weapon.id" @click="$emit('add', weapon)">Add</button>
 			</div>
 		</div>
-		<div class="row px-3">
-			<div class="col-12 text-left px-0 mt-2">
-				<label
-					v-for="a in advantages"
-					:key="a.label"
-					v-bind:value="a.label"
-					class="form-check form-check-inline form-check-label"
-				>
-					<input class="form-check-input" type="checkbox" v-model="weapon.advantages" :value="a.label" />{{
-						a.name
-					}}
-				</label>
-			</div>
-		</div>
+
+		<label v-for="a in advantages" :key="a.label" v-bind:value="a.label">
+			<input type="checkbox" v-model="weapon.advantages" :value="a.label" />{{ a.name }}
+		</label>
+
 	</div>
 </template>
 
@@ -77,14 +64,6 @@ export default {
 	name: "Weapon",
 	props: ["weapon"],
 	components: {},
-	watch: {
-		weapon: function(newVal) {
-			this.getVO(newVal.id)
-		},
-	},
-	created: function() {
-		this.getVO(this.weapon.id)
-	},
 	mounted: function() {
 		EventBus.$on("mega_save", () => {
 			if (this.weapon.id == null) {
@@ -98,67 +77,35 @@ export default {
 	},
 	data() {
 		return {
-			vo: {},
-			alert: "",
-			alert_succes: false,
 			advantages: WeaponAdvantages,
 		}
 	},
 	methods: {
-		getVO: function(id) {
-			if (id == null) {
-				return
-			}
-			this.$http.get(process.env.VUE_APP_API_ENDPOINT + "/weapon/" + id + "/vo").then(function(res) {
-				console.log(res)
-				this.vo = res.data
-			})
-		},
 		save: function(weapon) {
 			if (weapon.id == null) {
 				weapon.id = 0
 			}
-			this.reset()
 			this.$http
 				.put(process.env.VUE_APP_API_ENDPOINT + "/weapon/" + weapon.id + "?lang=" + this.$language, weapon)
 				.then(function(res) {
-					console.log(res)
-					this.alert = "save success"
-					this.alert_success = true
-					if (res.status === 201) {
-						weapon.id = res.data
-						this.$emit("add", weapon)
-					}
+					console.debug(res)
 				})
 				.catch(function(err) {
 					EventBus.$emit("err_save", "weapon", weapon.id, err.data)
 				})
 		},
-		remove: function(weapon) {
-			this.reset()
-			this.$http
-				.delete(process.env.VUE_APP_API_ENDPOINT + "/weapon/" + weapon.id)
-				.then(function(res) {
-					console.log(res)
-					if (res.status === 204) {
-						this.$emit("remove")
-					}
-				})
-				.catch(function(err) {
-					this.alert = "error: " + err
-					this.alert_success = false
-				})
-		},
-		reset: function() {
-			this.alert = ""
-			this.alert_succes = false
-		},
 	},
 }
 </script>
 
-<style scoped>
-.statline input {
-	max-width: 4rem;
-}
+<style lang="scss" scoped>
+@import '../custom.scss';
+	label {
+		@extend .form-check;
+		@extend .form-check-inline;
+		@extend .form-check-label;
+		input {
+			@extend .form-check-input;
+		}
+	}
 </style>

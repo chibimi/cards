@@ -8,7 +8,7 @@
 			:ref="'model_' + val.id"
 		></Model>
 		<div class="card">
-			<h5 class="header" data-toggle="collapse" data-target="#new_model" aria-expanded="false">
+			<h5 class="header" data-toggle="collapse" data-target="#new_model" aria-expanded="false" ref="newModel">
 				New Model
 			</h5>
 			<div class="collapse card-body p-1" id="new_model">
@@ -48,20 +48,19 @@ export default {
 			this.$http
 				.get(process.env.VUE_APP_API_ENDPOINT + `/ref/${id}/model?lang=${this.$language}`)
 				.then(function(res) {
-					console.log(res)
+					console.debug(res)
 					this.models = res.data
 				})
 		},
 		removeModel: function(model, index) {
 			this.$http
-				.delete(process.env.VUE_APP_API_ENDPOINT + `/ref/${this.ref_id}/model/${model.id}`)
+				.delete(process.env.VUE_APP_API_ENDPOINT + `/model/${model.id}`)
 				.then(function(res) {
 					console.log(res)
 					if (res.status === 204) {
 						this.models.splice(index, 1)
 					}
 				})
-			this.models.splice(index, 1)
 		},
 		addModel: function(model) {
 			if (model.id == null) {
@@ -70,12 +69,13 @@ export default {
 			}
 			this.$http
 				.put(
-					process.env.VUE_APP_API_ENDPOINT + `/ref/${this.ref_id}/model/${model.id}?lang=${this.$language}`,
+					process.env.VUE_APP_API_ENDPOINT + `/model/${model.id}?lang=${this.$language}`,
 					model
 				)
 				.then(async function(res) {
-					console.log(res)
+					console.debug(res)
 					if (res.status === 201) {
+						model.id = res.data
 						this.models.push(model)
 						this.model = {
 							ref_id: this.ref_id,

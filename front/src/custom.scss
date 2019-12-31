@@ -1,6 +1,6 @@
 @import '~bootstrap/scss/bootstrap.scss';
 
-select, input[type]:not([type=checkbox]), textarea {
+select, input:not([type=checkbox]), textarea {
     @extend .form-control;
 }
 

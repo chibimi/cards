@@ -38,7 +38,6 @@
 					<option value="3">Attack Type</option>
 				</select>
 			</div>
-			{{ability}}
 			<div class="col-11">
 				<textarea v-model="ability.description" rows="3" placeholder="Translated ability description" />
 			</div>

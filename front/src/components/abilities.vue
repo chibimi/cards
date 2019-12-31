@@ -1,5 +1,5 @@
 <template>
-	<div class="mt-4">
+	<div>
 		<ModelAbilities
 			v-for="value in models"
 			v-bind:model="value"
