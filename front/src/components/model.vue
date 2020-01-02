@@ -28,10 +28,6 @@
 						<input v-model="model.title" />
 					</div>
 					<div>
-						<label>Name</label>
-						<input v-model="model.name" />
-					</div>
-					<div>
 						<label>Damage</label>
 						<input v-model="model.damage" />
 					</div>
@@ -42,6 +38,10 @@
 					<div>
 						<label>Threshold</label>
 						<input v-model="model.threshold" />
+					</div>
+					<div>
+						<label>Magic Ability</label>
+						<input v-model="model.magic_ability" />
 					</div>
 				</div>
 

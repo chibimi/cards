@@ -6,11 +6,12 @@
 				<div class="float-right">
 					<select v-model="ref.status">
 						<option value="wip">WIP</option>
-						<option value="tbv">A valider</option>
-						<option value="done">Terminée</option>
+						<option value="tbv">To be validated</option>
+						<option value="done">Done</option>
+						<option value="tbd">To be deleted</option>
 					</select>
 					<button v-on:click="save()">Save</button>
-					<button class="btn-danger" v-on:click="remove(ref.id)">Delete</button>
+					<!-- <button class="btn-danger" v-on:click="remove(ref.id)">Delete</button> -->
 				</div>
 			</div>
 		</div>
@@ -117,20 +118,21 @@ export default {
 		sleep: function(ms) {
 			return new Promise(resolve => setTimeout(resolve, ms))
 		},
-		// remove: function(card) {
-		// 				this.alert = ""
-		// 	this.$http
-		// 		.delete(process.env.VUE_APP_API_ENDPOINT+ "/cards/" + card.id)
-		// 		.then(function(res) {
-		// 			console.log(res);
-		// 			if (res.status === 204) {
-		// 				this.$emit('remove_card', card.id)
-		// 			}
-		// 		}).catch(function(err){
-		// 			this.alert = "error: "+err
-		// 			this.alert_success = false
-		// 		});
-		// },
+		remove: function(refID) {
+			this.alert = ''
+			this.$http
+				.delete(process.env.VUE_APP_API_ENDPOINT + '/ref/' + refID)
+				.then(function(res) {
+					console.log(res)
+					// if (res.status === 204) {
+					// 	this.$emit('remove_card', card.id)
+					// }
+				})
+				.catch(function(err) {
+					this.alert = 'error: ' + err.data
+					this.alert_success = false
+				})
+		},
 	},
 }
 </script>
