@@ -21,7 +21,12 @@
 				New Ability for {{ weapon.name || weapon.title }}
 			</h5>
 			<div class="collapse card-body p-2" v-bind:id="'new_weapon_ability' + weapon.id">
-				<Ability :abilitiesList="abilitiesList" v-on:add="addAbility" v-on:update="$emit('update')"></Ability>
+				<Ability
+					:abilitiesList="abilitiesList"
+					v-bind:ability_type="0"
+					v-on:add="addAbility"
+					v-on:update="$emit('update')"
+				></Ability>
 			</div>
 		</div>
 	</div>
@@ -65,7 +70,7 @@ export default {
 					}
 				})
 		},
-		addAbility: function(ability,push) {
+		addAbility: function(ability, push) {
 			this.$http
 				.put(
 					process.env.VUE_APP_API_ENDPOINT +

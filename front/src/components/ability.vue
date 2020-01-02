@@ -78,7 +78,9 @@ export default {
 	},
 	data() {
 		return {
-			ability: {},
+			ability: {
+				type: 0,
+			},
 			vo: {},
 			template: ItemTemplate,
 			items: [],
@@ -127,7 +129,7 @@ export default {
 						this.update = false
 					} else {
 						this.$emit('add', ability, true)
-						this.ability = {}
+						this.ability = { type:0}
 					}
 					this.$emit('update')
 				})
@@ -155,7 +157,7 @@ export default {
 		},
 		inputItem(item) {
 			if (item === null) {
-				this.ability = {}
+				this.ability = {type:0}
 			}
 		},
 	},
