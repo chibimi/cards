@@ -17,6 +17,6 @@ func main() {
 	}
 	defer db.Close()
 	g := pdf.NewGenerator(card.NewSService(db))
-	err = g.GeneratePDF([]int{884, 884, 884, 884, 884, 884}, "FR")
+	err = g.GeneratePDF([]int{884}, "FR")
 	fmt.Println(err)
 }

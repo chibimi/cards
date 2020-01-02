@@ -38,11 +38,11 @@
 			/>
 			<div class="form-check-inline col-5">
 				<label>Type</label>
-				<select v-model="ability.type">
-					<option value="0">None</option>
-					<option value="1">Magic Ability</option>
-					<option value="2">Battle Plan</option>
-					<option value="3">Attack Type</option>
+				<select v-model.number="ability.type">
+					<option value=0>None</option>
+					<option value=1>Magic Ability</option>
+					<option value=2>Battle Plan</option>
+					<option value=3>Attack Type</option>
 				</select>
 			</div>
 			<div class="col-11">
@@ -89,6 +89,7 @@ export default {
 		return {
 			ability: {
 				type: 0,
+				description: "init",
 			},
 			vo: {},
 			template: ItemTemplate,
@@ -115,8 +116,11 @@ export default {
 				.get(process.env.VUE_APP_API_ENDPOINT + `/abilities/${id}?lang=${this.$language}`)
 				.then(function(res) {
 					console.log(res)
+					console.log(res.data.description)
 					this.ability = res.data
+					this.ability.description = res.data.description
 					this.ability.type = this.ability_type
+					console.log(this.ability.description)
 				})
 				.catch(function(err) {
 					console.error(err)
