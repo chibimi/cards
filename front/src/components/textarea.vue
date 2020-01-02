@@ -38,8 +38,6 @@ export default {
 	},
 	methods: {
 		getStategies: function() {
-			console.log('STRAT', this.abilities)
-
 			let _this = this
 			return [
 				{
@@ -48,7 +46,6 @@ export default {
 						return '<span class="m-2">' + name.id + ' ' + name.title + '</span>'
 					},
 					search(item, callback) {
-						console.log('serach', item)
 						callback(
 							_this.abilities
 								.filter(function(name) {
@@ -70,7 +67,6 @@ export default {
 						return '<img width="17" src="advantages/' + name.label + '.jpg"></img> ' + name.label
 					},
 					search(item, callback) {
-						console.log('serach', item)
 						callback(
 							advantages
 								.filter(function(name) {

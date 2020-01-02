@@ -196,7 +196,7 @@ export const WeaponAdvantages = [
 		label: "continuous_corrosion",
 		name: "Cont. Corrosion"
 	}, {
-		label: "crit_corrotion",
+		label: "crit_corrosion",
 		name: "Crit. Corrosion"
 	}, {
 		label: "type_electricity",
@@ -216,6 +216,9 @@ export const WeaponAdvantages = [
 	}, {
 		label: "crit_fire",
 		name: "Crit. Fire"
+	}, {
+		label: "type_frost",
+		name: "Type: Frost"
 	}, {
 		label: "magical",
 		name: "Magical"
