@@ -46,7 +46,14 @@
 				</select>
 			</div>
 			<div class="col-11">
-				<textarea v-model="ability.description" rows="3" placeholder="Translated ability description" />
+				<TextArea
+					v-model="ability.description"
+					:ref_id="ability_id"
+					:abilities="abilitiesList"
+					class="w-100"
+					:rows="3"
+					placeholder="Translated ability description"
+				/>
 			</div>
 			<div class="col-1">
 				<div class="float-right">
@@ -64,10 +71,12 @@
 
 <script>
 import ItemTemplate from './ItemTemplate.vue'
+import TextArea from './textarea.vue'
+
 export default {
 	name: 'Ability',
 	props: ['abilitiesList', 'ability_id', 'ability_type'],
-	components: {},
+	components: { TextArea },
 	watch: {},
 	created: function() {
 		if (!this.ability_id) {
@@ -129,7 +138,7 @@ export default {
 						this.update = false
 					} else {
 						this.$emit('add', ability, true)
-						this.ability = { type:0}
+						this.ability = { type: 0 }
 					}
 					this.$emit('update')
 				})
@@ -157,7 +166,7 @@ export default {
 		},
 		inputItem(item) {
 			if (item === null) {
-				this.ability = {type:0}
+				this.ability = { type: 0 }
 			}
 		},
 	},

@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueResource from 'vue-resource'
 import Autocomplete from 'v-autocomplete'
 import CountryFlag from 'vue-country-flag'
+import TextComplete from 'v-textcomplete'
 
 import App from './App.vue'
 
@@ -13,6 +14,7 @@ export const EventBus = new Vue()
 Vue.use(VueResource)
 Vue.use(Autocomplete)
 Vue.use(CountryFlag)
+Vue.component('v-textcomplete', TextComplete)
 
 let globalData = new Vue({
 	data: { $language: 'FR' },

@@ -24,8 +24,14 @@
 			<a class="active" data-toggle="tab" href="#nav-ref">Ref</a>
 			<a v-if="ref.id > 0" data-toggle="tab" href="#nav-models">Models</a>
 			<a v-if="ref.id > 0" data-toggle="tab" href="#nav-abilities" v-on:click="abilitiesKey++">Abilities</a>
-			<a v-if="ref.id > 0" data-toggle="tab" href="#nav-spells">Spells & Animus</a>
-			<a v-if="ref.id > 0 && [1, 2, 10].includes(ref.category_id)" data-toggle="tab" href="#nav-feat">Feat</a>
+			<a v-if="ref.id > 0" data-toggle="tab" href="#nav-spells" @click="refreshAbilities()">Spells & Animus</a>
+			<a
+				v-if="ref.id > 0 && [1, 2, 10].includes(ref.category_id)"
+				data-toggle="tab"
+				href="#nav-feat"
+				@click="refreshAbilities()"
+				>Feat</a
+			>
 		</div>
 
 		<div class="content">
@@ -39,10 +45,14 @@
 				<Abilities v-if="ref.id > 0" :ref_id="ref.id" :key="abilitiesKey"></Abilities>
 			</div>
 			<div class="tab-pane fade" id="nav-spells" role="tabpanel" aria-labelledby="nav-spells-tab">
-				<Spells v-if="ref.id > 0" :ref_id="ref.id"></Spells>
+				<Spells v-if="ref.id > 0" :ref_id="ref.id" :abilities="abilities"></Spells>
 			</div>
 			<div class="tab-pane fade" id="nav-feat" role="tabpanel" aria-labelledby="nav-feat-tab">
-				<Feat v-if="ref.id > 0 && [1, 2, 10].includes(ref.category_id)" :ref_id="ref.id"></Feat>
+				<Feat
+					v-if="ref.id > 0 && [1, 2, 10].includes(ref.category_id)"
+					:abilities="abilities"
+					:ref_id="ref.id"
+				></Feat>
 			</div>
 		</div>
 	</div>
@@ -82,6 +92,7 @@ export default {
 			alert: '',
 			alert_success: false,
 			abilitiesKey: 0,
+			abilities: [],
 		}
 	},
 	methods: {
@@ -132,6 +143,12 @@ export default {
 					this.alert = 'error: ' + err.data
 					this.alert_success = false
 				})
+		},
+		refreshAbilities: function() {
+			this.$http.get(process.env.VUE_APP_API_ENDPOINT + `/abilities?lang=${this.$language}`).then(function(res) {
+				console.debug(res)
+				this.abilities = res.data
+			})
 		},
 	},
 }

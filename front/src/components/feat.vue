@@ -1,10 +1,26 @@
 <template>
 	<div class="feat">
 		<input v-model="feat.name" placeholder="Name" />
-		<textarea v-model="feat.description" class="mt-2" rows="4" placeholder="Feat description" />
-		<textarea v-model="feat.fluff" class="mt-2" rows="4" placeholder="Feat fluff (optionnal)" />
+		<TextArea
+			v-model="feat.description"
+			:ref_id="ref_id"
+			:abilities="abilities"
+			class="mt-2 w-100"
+			:rows="4"
+			placeholder="Feat description"
+		/>
+		<TextArea
+			v-model="feat.fluff"
+			:ref_id="ref_id"
+			:abilities="abilities"
+			class="mt-2 w-100"
+			:rows="4"
+			placeholder="Feat fluff (optionnal)"
+		/>
 		<div v-if="vo.ref_id" class="vo pl-0">
-			<p><b>{{ vo.name }}:</b> {{ vo.description }}</p>
+			<p>
+				<b>{{ vo.name }}:</b> {{ vo.description }}
+			</p>
 			<p>{{ vo.fluff }}</p>
 		</div>
 	</div>
@@ -12,10 +28,12 @@
 
 <script>
 import { EventBus } from '../main.js'
+import TextArea from './textarea.vue'
 
 export default {
 	name: 'Feat',
-	props: ['ref_id'],
+	components: { TextArea },
+	props: ['ref_id', 'abilities'],
 	watch: {
 		ref_id: function(newVal) {
 			this.get(newVal)

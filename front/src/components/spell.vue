@@ -55,7 +55,14 @@
 			<span class="col-2 py-1 text-danger">USE ENGLIGH HERE</span>
 			<span v-if="!newSpell" class="col-2"></span>
 			<div class="col-11">
-				<textarea v-model="spell.description" rows="3" placeholder="Translated spell description" />
+				<TextArea
+					v-model="spell.description"
+					:ref_id="spell_id"
+					:abilities="abilities"
+					class="w-100"
+					:rows="3"
+					placeholder="Translated spell description"
+				/>
 			</div>
 
 			<div class="col-1 pl-0">
@@ -72,9 +79,12 @@
 
 <script>
 import ItemTemplate from './ItemTemplate.vue'
+import TextArea from './textarea.vue'
+
 export default {
 	name: 'Spell',
-	props: ['spellsList', 'spell_id'],
+	props: ['spellsList', 'spell_id', 'abilities'],
+	components: { TextArea },
 	watch: {},
 	created: function() {
 		if (!this.spell_id) {

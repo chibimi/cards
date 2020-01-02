@@ -14,7 +14,7 @@
 				New Spell
 			</h5>
 			<div class="collapse card-body p-2" id="new_spell">
-				<Spell :spellsList="spellsList" @add="addSpell" @update="getSpells"></Spell>
+				<Spell :spellsList="spellsList" :abilities="abilities" @add="addSpell" @update="getSpells"></Spell>
 			</div>
 		</div>
 		<hr />
@@ -25,7 +25,7 @@
 import Spell from './spell.vue'
 export default {
 	name: 'Spells',
-	props: ['ref_id'],
+	props: ['ref_id', 'abilities'],
 	components: { Spell },
 	watch: {
 		ref_id: function(newVal) {
