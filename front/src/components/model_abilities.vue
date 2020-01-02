@@ -21,7 +21,12 @@
 				New Ability for {{ model.name || model.title }}
 			</h5>
 			<div class="collapse card-body p-2" :id="'new_model_ability' + model.id">
-				<Ability :abilitiesList="abilitiesList" v-on:add="addAbility" v-on:update="$emit('update')"></Ability>
+				<Ability
+					:abilitiesList="abilitiesList"
+					v-bind:ability_type="0"
+					v-on:add="addAbility"
+					v-on:update="$emit('update')"
+				></Ability>
 			</div>
 		</div>
 		<div class="row">
