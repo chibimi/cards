@@ -2,6 +2,7 @@ package pdf
 
 import (
 	"fmt"
+	"regexp"
 	"sort"
 	"strconv"
 	"strings"
@@ -78,18 +79,6 @@ type WeaponAbilities struct {
 }
 
 func (g *Generator) AddCard(card *reference.Reference, lang string) error {
-	// htmlStr := `You can now easily print text mixing different styles: <b>bold</b>, ` +
-	// 	`<i>italic</i>, <u>underlined</u>, or <b><i><u>all at once</u></i></b>!<br><br>` +
-	// 	`<center>You can also center text.</center>` +
-	// 	`<right>Or align it to the right.</right>` +
-	// 	`<b>You can also </b>insert links on text, such as ` +
-	// 	`<a href="http://www.fpdf.org">www.fpdf.org</a>, or on an image: click on the logo.`
-	// html := g.pdf.HTMLBasicNew()
-	// g.pdf.SetFont("Arial", "", 9)
-	// g.pdf.SetLeftMargin(10)
-	// g.pdf.SetRightMargin(70)
-	// _, lh := g.pdf.GetFontSize()
-	// html.Write(lh, htmlStr)
 	if err := g.PrintCard(card); err != nil {
 		return errors.Wrap(err, "print card")
 	}
@@ -97,13 +86,13 @@ func (g *Generator) AddCard(card *reference.Reference, lang string) error {
 	if err != nil {
 		return errors.Wrap(err, "get models")
 	}
-	abilityCache := map[int]struct{}{}
+	abilityCache := map[int]ability.Ability{}
 	cardAbilities := map[*model.Model]ModelAbilities{}
 	for i, model := range models {
 		// If more that 2 models create a new card
 		if i != 0 && i%2 == 0 {
 			g.PrintAbilities(cardAbilities, abilityCache)
-			abilityCache = map[int]struct{}{}
+			abilityCache = map[int]ability.Ability{}
 			g.cardIndex++
 			if err := g.PrintCard(card); err != nil {
 				return errors.Wrap(err, "print card")
@@ -135,7 +124,7 @@ func (g *Generator) AddCard(card *reference.Reference, lang string) error {
 			if _, ok := abilityCache[ability.ID]; ok {
 				mAbilities[j].Description = "Voir plus haut"
 			} else {
-				abilityCache[ability.ID] = struct{}{}
+				abilityCache[ability.ID] = ability
 			}
 			switch ability.Type {
 			case 0:
@@ -169,7 +158,6 @@ func (g *Generator) AddCard(card *reference.Reference, lang string) error {
 			if err != nil {
 				return errors.Wrap(err, "get weapon abilities")
 			}
-			fmt.Println("wabilities", wAbilities)
 			sort.Slice(wAbilities, func(i, j int) bool {
 				if wAbilities[i].Type < wAbilities[j].Type {
 					return true
@@ -184,7 +172,7 @@ func (g *Generator) AddCard(card *reference.Reference, lang string) error {
 				if _, ok := abilityCache[ability.ID]; ok {
 					wAbilities[j].Description = "Voir plus haut"
 				} else {
-					abilityCache[ability.ID] = struct{}{}
+					abilityCache[ability.ID] = ability
 				}
 				switch ability.Type {
 				case 0:
@@ -193,7 +181,6 @@ func (g *Generator) AddCard(card *reference.Reference, lang string) error {
 					weaponAbilities.AttackType = append(weaponAbilities.AttackType, wAbilities[k])
 				}
 			}
-			fmt.Println("weaponabilities", weaponAbilities)
 			modelAbilities.Weapon[&weapons[j]] = weaponAbilities
 		}
 		cardAbilities[&models[i]] = modelAbilities
@@ -201,7 +188,7 @@ func (g *Generator) AddCard(card *reference.Reference, lang string) error {
 		g.PrintStatline(&model, card.FactionID, i%2)
 		if len(models)-1 == i || i%2 == 1 {
 			g.PrintAbilities(cardAbilities, abilityCache)
-			abilityCache = map[int]struct{}{}
+			abilityCache = map[int]ability.Ability{}
 		}
 	}
 
@@ -499,7 +486,7 @@ func (g *Generator) PrintMountStat(X, Y, index float64, value string) {
 	}
 }
 
-func (g *Generator) PrintAbilities(modelAbilities map[*model.Model]ModelAbilities, cache map[int]struct{}) {
+func (g *Generator) PrintAbilities(modelAbilities map[*model.Model]ModelAbilities, cache map[int]ability.Ability) {
 	X := X0 + float64(g.cardIndex%2)*CardWidth*2 + CardWidth + 3
 	Y := Y0 + float64(g.cardIndex/2)*CardHeight + 13
 	tr := g.pdf.UnicodeTranslatorFromDescriptor("") // "" defaults to "cp1252"
@@ -507,6 +494,44 @@ func (g *Generator) PrintAbilities(modelAbilities map[*model.Model]ModelAbilitie
 	lineNb := 0.0
 	g.pdf.SetFont("Arial", "", 6)
 	_, lineHt := g.pdf.GetFontSize()
+
+	var validLink = regexp.MustCompile(`#[0-9]+:[^#]+#`)
+
+	for _, abilities := range modelAbilities {
+		for j, abi := range abilities.Normal {
+			subskills := []string{}
+			fmt.Println(validLink.FindAllString(abi.Description, -1))
+			abi.Description = validLink.ReplaceAllStringFunc(abi.Description, func(src string) string {
+				s := strings.SplitN(src, ":", 2)
+				ids := s[0][1:]
+				id, err := strconv.Atoi(ids)
+				if err != nil {
+					return s[1][:len(s[1])-1]
+				}
+				if a, ok := cache[id]; ok {
+					return a.Name
+				}
+				// fetch ability
+				a, err := g.src.Ability.Get(id, "FR")
+				if err != nil {
+					return s[1][:len(s[1])-1]
+				}
+				fmt.Println(a)
+				subskills = append(subskills, fmt.Sprintf("%s (%s): %s", a.Name, a.Title, a.Description))
+				cache[a.ID] = *a
+				return a.Name
+
+				// return s[1][:len(s[1])-1]
+			})
+			if len(subskills) > 0 {
+				abilities.Normal[j].Description = fmt.Sprintf("%s (%s)", abi.Description, strings.Join(subskills, ", "))
+
+			}
+			fmt.Println(abi.Description)
+
+		}
+
+	}
 
 	for model, abilities := range modelAbilities {
 		fmt.Println("MODEL", model.Title)
@@ -518,7 +543,7 @@ func (g *Generator) PrintAbilities(modelAbilities map[*model.Model]ModelAbilitie
 
 		for _, ability := range abilities.Normal {
 			g.pdf.SetFont("Arial", "", 5)
-			data := g.pdf.SplitLines([]byte(fmt.Sprintf("%s (%s) : %s", strings.ToUpper(ability.Name), ability.Title, ability.Description)), 62)
+			data := g.pdf.SplitLines([]byte(fmt.Sprintf("%s (%s) : %s", strings.ToUpper(ability.Name), ability.Title, ability.Description)), 60)
 			for _, s := range data {
 				g.pdf.Text(X, Y+float64(lineNb)*lineHt, tr(string(s)))
 				lineNb++
@@ -563,11 +588,11 @@ func (g *Generator) PrintAbilities(modelAbilities map[*model.Model]ModelAbilitie
 			}
 
 			for _, ability := range abilities.Normal {
-				fmt.Println("weapon abi", ability)
 				g.pdf.SetFont("Arial", "", 5)
-				data := g.pdf.SplitLines([]byte(fmt.Sprintf("%s (%s) : %s", strings.ToUpper(ability.Name), ability.Title, ability.Description)), 62)
+				data := g.pdf.SplitLines([]byte(fmt.Sprintf("%s (%s) : %s", strings.ToUpper(ability.Name), ability.Title, ability.Description)), 60)
 				for _, s := range data {
 					g.pdf.Text(X, Y+float64(lineNb)*lineHt, tr(string(s)))
+
 					lineNb++
 				}
 				lineNb += 0.5
