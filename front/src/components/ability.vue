@@ -11,7 +11,7 @@
 			</span>
 			<div class="col-1 px-0">
 				<div class="float-right">
-					<button class="btn-success mb-1" @click="update = true">Update</button>
+					<button class="btn-success mb-1" @click="startUpdate()">Update</button>
 					<button class="btn-danger" @click="$emit('remove')">Delete</button>
 				</div>
 			</div>
@@ -58,7 +58,7 @@
 			<div class="col-1">
 				<div class="float-right">
 					<button v-if="ability.id && !newAbility" class="btn-success" @click="save(ability)">Update</button>
-					<button v-if="ability.id && !newAbility" class="my-1" @click="update = false">Cancel</button>
+					<button v-if="ability.id && !newAbility" class="my-1" @click="cancelUpdate()">Cancel</button>
 					<button v-if="newAbility" @click="save(ability)">Add</button>
 				</div>
 			</div>
@@ -89,16 +89,24 @@ export default {
 		return {
 			ability: {
 				type: 0,
-				description: "init",
 			},
 			vo: {},
 			template: ItemTemplate,
 			items: [],
 			update: false,
+			beforeEdit: {},
 			newAbility: false,
 		}
 	},
 	methods: {
+		startUpdate:function(){
+			this.update=true
+			this.beforeEdit = JSON.parse(JSON.stringify(this.ability))
+		},
+		cancelUpdate:function(){
+			this.update=false
+			this.ability = JSON.parse(JSON.stringify(this.beforeEdit))
+		},
 		get: function(id) {
 			if (id == null) {
 				return
@@ -115,12 +123,8 @@ export default {
 			this.$http
 				.get(process.env.VUE_APP_API_ENDPOINT + `/abilities/${id}?lang=${this.$language}`)
 				.then(function(res) {
-					console.log(res)
-					console.log(res.data.description)
 					this.ability = res.data
-					this.ability.description = res.data.description
 					this.ability.type = this.ability_type
-					console.log(this.ability.description)
 				})
 				.catch(function(err) {
 					console.error(err)

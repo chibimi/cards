@@ -15,7 +15,7 @@
 				<span class="vo">{{ vo.description }}</span>
 			</span>
 			<span class="col-1">
-				<button class="btn-success mb-1" @click="update = true">Update</button>
+				<button class="btn-success mb-1" @click="startUpdate()">Update</button>
 				<button class="btn-danger" @click="$emit('remove')">Delete</button>
 			</span>
 		</div>
@@ -67,7 +67,7 @@
 
 			<div class="col-1 pl-0">
 				<button v-if="spell.id && !newSpell" class="btn-success" @click="save(spell)">Update</button>
-				<button v-if="spell.id && !newSpell" class="my-1" @click="update = false">Cancel</button>
+				<button v-if="spell.id && !newSpell" class="my-1" @click="cancelUpdate()">Cancel</button>
 				<button v-if="newSpell" @click="save(spell)">Add</button>
 			</div>
 
@@ -100,10 +100,19 @@ export default {
 			template: ItemTemplate,
 			items: [],
 			update: false,
+			beforeEdit: {},
 			newSpell: false,
 		}
 	},
 	methods: {
+		startUpdate:function(){
+			this.update=true
+			this.beforeEdit = JSON.parse(JSON.stringify(this.spell))
+		},
+		cancelUpdate:function(){
+			this.update=false
+			this.spell = JSON.parse(JSON.stringify(this.beforeEdit))
+		},
 		get: function(id) {
 			if (id == null) {
 				return

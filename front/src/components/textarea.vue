@@ -26,8 +26,12 @@ export default {
 		ref_id: function() {
 			this.strategies = this.getStategies()
 		},
+		value: function(newVal) {
+			this.content = newVal
+		},
 	},
 	created: function() {
+		this.content = this.value
 		this.strategies = this.getStategies()
 	},
 	data() {
@@ -52,13 +56,13 @@ export default {
 									if (name.title == null) {
 										return false
 									}
-									return name.title.startsWith(item)
+									return name.title.toLowerCase().startsWith(item.toLowerCase())
 								})
 								.slice(0, 10)
 						)
 					},
 					replace(value) {
-						return '$1#' + value.id + ':' + value.title + '# '
+						return '$1#' + value.id + ':' + value.title + '#'
 					},
 				},
 				{
@@ -70,13 +74,13 @@ export default {
 						callback(
 							advantages
 								.filter(function(name) {
-									return name.label.startsWith(item)
+									return name.label.toLowerCase().startsWith(item.toLowerCase())
 								})
 								.slice(0, 10)
 						)
 					},
 					replace(value) {
-						return '$1:' + value.label + ': '
+						return '$1:' + value.label + ':'
 					},
 				},
 			]

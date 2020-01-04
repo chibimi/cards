@@ -14,6 +14,7 @@
 					<!-- <button class="btn-danger" v-on:click="remove(ref.id)">Delete</button> -->
 				</div>
 			</div>
+			{{ref}}
 		</div>
 
 		<div class="error" v-if="alert" :class="{ 'alert-success': alert_success, 'alert-danger': !alert_success }">
