@@ -5,6 +5,7 @@
 			v-for="(val, idx) in spells"
 			v-bind:spell_id="val.id"
 			:spellsList="spellsList"
+			:abilities="abilities"
 			:key="val.id"
 			v-on:remove="removeSpell(val, idx)"
 			v-on:update="getSpells"
