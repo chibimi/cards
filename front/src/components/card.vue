@@ -69,6 +69,9 @@ export default {
 			this.save(this.reference)
 		})
 	},
+	beforeDestroy() {
+		EventBus.$off('mega_save')
+	},
 	data() {
 		return {
 			factions: Factions,
@@ -82,6 +85,7 @@ export default {
 	},
 	methods: {
 		save: function(reference) {
+			console.log("save card called", reference)
 			if (reference.id == null) {
 				return
 			}

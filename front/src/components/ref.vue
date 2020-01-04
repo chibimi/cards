@@ -72,7 +72,6 @@ export default {
 	components: { Card, Models, Abilities, Spells, Feat },
 	watch: {
 		ref_id: function(newVal) {
-			console.log('watch', newVal)
 			this.get(newVal)
 		},
 	},

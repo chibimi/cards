@@ -118,7 +118,7 @@ export default {
 				return
 			}
 			this.$http
-				.get(process.env.VUE_APP_API_ENDPOINT + `/spells/${id}?lang=UK`)
+				.get(process.env.VUE_APP_API_ENDPOINT + `/spells/${id}?lang=US`)
 				.then(function(res) {
 					console.debug(res)
 					this.vo = res.data
