@@ -8,6 +8,7 @@ import (
 	"strings"
 
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/kelseyhightower/envconfig"
 
 	"github.com/jmoiron/sqlx"
 	"github.com/pkg/errors"
@@ -15,19 +16,30 @@ import (
 )
 
 func main() {
-	db, err := sqlx.Open("mysql", "cards_api:cards_api@/cards_db")
+	cfg := struct {
+		Login       string `envconfig:"db_login"`
+		Password    string `envconfig:"db_password"`
+		Host        string `envconfig:"db_host"`
+		DB          string `envconfig:"db"`
+		Port        int    `envconfig:"port" default:"4203"`
+		EditorFront string `envconfig:"editor_front"`
+	}{}
+	envconfig.Process("cards", &cfg)
+
+	db, err := sqlx.Open("mysql", fmt.Sprintf("%s:%s@%s/%s", cfg.Login, cfg.Password, cfg.Host, cfg.DB))
 	if err != nil {
 		log15.Crit("Unable to access db", "err", err.Error())
 	}
 	defer db.Close()
-	// err = loadAbilities(db, "abilities.json")
-	// if err != nil {
-	// 	fmt.Println(err)
-	// }
-	// err = loadSpells(db, "spells.json")
-	// if err != nil {
-	// 	fmt.Println(err)
-	// }
+
+	err = loadAbilities(db, "abilities.json")
+	if err != nil {
+		fmt.Println(err)
+	}
+	err = loadSpells(db, "spells.json")
+	if err != nil {
+		fmt.Println(err)
+	}
 	err = loadRefs(db, "models.json")
 	if err != nil {
 		fmt.Println(err)
