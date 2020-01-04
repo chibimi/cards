@@ -14,10 +14,9 @@
 
 <script>
 import TextComplete from 'v-textcomplete'
-import { ModelAdvantages } from './const.js'
-import { WeaponAdvantages } from './const.js'
+import { ModelAdvantages,WeaponAdvantages,KnownWords } from './const.js'
 
-const advantages = ModelAdvantages.concat(WeaponAdvantages)
+const advantages = ModelAdvantages.concat(WeaponAdvantages).concat(KnownWords)
 export default {
 	name: 'TextArea',
 	components: { TextComplete },

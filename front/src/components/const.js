@@ -236,3 +236,31 @@ export const WeaponAdvantages = [
 		name: "Weapon Master"
 	}
 ]
+
+export const KnownWords = [
+	{
+		label: "SPD",
+		name: "SPD"
+	}, {
+		label: "STR",
+		name: "STR"
+	}, {
+		label: "MAT",
+		name: "MAT"
+	}, {
+		label: "RAT",
+		name: "RAT"
+	}, {
+		label: "DEF",
+		name: "DEF"
+	}, {
+		label: "ARM",
+		name: "ARM"
+	}, {
+		label: "CMD",
+		name: "CMD"
+	}, {
+		label: "POW",
+		name: "POW"
+	}
+]
