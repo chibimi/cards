@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/chibimi/cards/card"
-	"github.com/chibimi/cards/card/pdf"
+	"github.com/chibimi/cards/card/generator"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jmoiron/sqlx"
 	"gopkg.in/inconshreveable/log15.v2"
@@ -16,7 +16,7 @@ func main() {
 		log15.Crit("Unable to access db", "err", err.Error())
 	}
 	defer db.Close()
-	g := pdf.NewGenerator(card.NewSService(db))
-	err = g.GeneratePDF([]int{884}, "FR")
+	g := generator.NewGenerator(card.NewSService(db), []int{884, 884, 884, 82, 884}, "FR")
+	err = g.GeneratePDF()
 	fmt.Println(err)
 }

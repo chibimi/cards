@@ -1,5 +1,7 @@
 package weapon
 
+import "sort"
+
 type Service struct {
 	repo *Repository
 }
@@ -13,7 +15,17 @@ func (s *Service) Create(wp *Weapon, lang string) (int, error) {
 }
 
 func (s *Service) List(model int, lang string) ([]Weapon, error) {
-	return s.repo.List(model, lang)
+	weapons, err := s.repo.List(model, lang)
+	if err != nil {
+		return nil, err
+	}
+	sort.Slice(weapons, func(i, j int) bool {
+		if weapons[i].Type == 2 {
+			return true
+		}
+		return weapons[i].Type < weapons[j].Type
+	})
+	return weapons, nil
 }
 
 func (s *Service) Get(id int, lang string) (*Weapon, error) {
