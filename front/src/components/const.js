@@ -174,8 +174,8 @@ export const ModelAdvantages = [
 		label: "stealth",
 		name: "Stealth"
 	}, {
-		label: "tought",
-		name: "Tought"
+		label: "tough",
+		name: "Tough"
 	}, {
 		label: "undead",
 		name: "Undead"
