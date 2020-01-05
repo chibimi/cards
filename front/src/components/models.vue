@@ -47,16 +47,24 @@ export default {
 			this.models = []
 			this.$http
 				.get(process.env.VUE_APP_API_ENDPOINT + `/ref/${id}/model?lang=${this.$language}`)
-				.then(function(res) {
+				.then(async function(res) {
 					console.debug(res)
 					this.models = res.data
+					if (this.models.length === 1) {
+						var modelRef = 'model_' + this.models[0].id
+						while (this.$refs[modelRef] === undefined) {
+							await this.sleep(100)
+						}
+						this.$refs[modelRef][0].open()
+					}
+
 				})
 		},
 		removeModel: function(model, index) {
 			this.$http
 				.delete(process.env.VUE_APP_API_ENDPOINT + `/model/${model.id}`)
 				.then(function(res) {
-					console.log(res)
+					console.debug(res)
 					if (res.status === 204) {
 						this.models.splice(index, 1)
 					}

@@ -14,7 +14,6 @@
 					<!-- <button class="btn-danger" v-on:click="remove(ref.id)">Delete</button> -->
 				</div>
 			</div>
-			{{ref}}
 		</div>
 
 		<div class="error" v-if="alert" :class="{ 'alert-success': alert_success, 'alert-danger': !alert_success }">
@@ -37,7 +36,7 @@
 
 		<div class="content">
 			<div class="tab-pane fade show active" id="nav-ref" role="tabpanel" aria-labelledby="nav-ref-tab">
-				<Card :reference="ref" />
+				<Card :reference="ref" :key="ref.id"/>
 			</div>
 			<div class="tab-pane fade" id="nav-models" role="tabpanel" aria-labelledby="nav-models-tab">
 				<Models v-if="ref.id > 0" :ref_id="ref.id" />
@@ -134,7 +133,7 @@ export default {
 			this.$http
 				.delete(process.env.VUE_APP_API_ENDPOINT + '/ref/' + refID)
 				.then(function(res) {
-					console.log(res)
+					console.debug(res)
 					// if (res.status === 204) {
 					// 	this.$emit('remove_card', card.id)
 					// }

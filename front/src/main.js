@@ -7,6 +7,8 @@ import TextComplete from 'v-textcomplete'
 import App from './App.vue'
 
 import 'bootstrap/dist/js/bootstrap.js'
+import '@fortawesome/fontawesome-free/css/all.css'
+import '@fortawesome/fontawesome-free/js/all.js'
 import './custom.scss'
 
 export const EventBus = new Vue()

@@ -62,7 +62,7 @@ export default {
 			this.$http
 				.delete(process.env.VUE_APP_API_ENDPOINT + `/ref/${this.ref_id}/spell/${spell.id}`)
 				.then(function(res) {
-					console.log(res)
+					console.debug(res)
 					if (res.status === 204) {
 						this.spells.splice(index, 1)
 					}
@@ -72,7 +72,7 @@ export default {
 			this.$http
 				.put(process.env.VUE_APP_API_ENDPOINT + `/ref/${this.ref_id}/spell/${spell.id}?lang=${this.$language}`)
 				.then(function(res) {
-					console.log(res)
+					console.debug(res)
 					if (res.status === 201) {
 						this.spells.push(spell)
 						this.spell = {}

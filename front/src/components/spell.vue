@@ -129,7 +129,7 @@ export default {
 			this.$http
 				.get(process.env.VUE_APP_API_ENDPOINT + `/spells/${id}?lang=${this.$language}`)
 				.then(function(res) {
-					console.log(res)
+					console.debug(res)
 					this.spell = res.data
 				})
 				.catch(function(err) {

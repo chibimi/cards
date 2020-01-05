@@ -58,15 +58,10 @@ export default {
 	props: ['weapon'],
 	components: {},
 	mounted: function() {
-		EventBus.$on('mega_save', () => {
-			if (this.weapon.id == null) {
-				return
-			}
-			this.save(this.weapon)
-		})
+		EventBus.$on('mega_save', this.save)
 	},
 	beforeDestroy() {
-		EventBus.$off('mega_save')
+		EventBus.$off('mega_save', this.save)
 	},
 	data() {
 		return {
@@ -74,17 +69,23 @@ export default {
 		}
 	},
 	methods: {
-		save: function(weapon) {
-			if (weapon.id == null) {
-				weapon.id = 0
+		new: function(){
+			if (this.weapon.id == null) {
+				this.weapon.id = 0
+			}
+			this.save()
+		},
+		save: function() {
+			if (this.weapon.id == null) {
+				return
 			}
 			this.$http
-				.put(process.env.VUE_APP_API_ENDPOINT + '/weapon/' + weapon.id + '?lang=' + this.$language, weapon)
+				.put(process.env.VUE_APP_API_ENDPOINT + '/weapon/' + this.weapon.id + '?lang=' + this.$language, this.weapon)
 				.then(function(res) {
 					console.debug(res)
 				})
 				.catch(function(err) {
-					EventBus.$emit('err_save', 'weapon', weapon.id, err.data)
+					EventBus.$emit('err_save', 'weapon', this.weapon.id, err.data)
 				})
 		},
 	},

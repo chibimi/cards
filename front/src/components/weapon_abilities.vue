@@ -56,7 +56,7 @@ export default {
 			this.$http
 				.get(process.env.VUE_APP_API_ENDPOINT + `/weapon/${weaponID}/ability?lang=${this.$language}`)
 				.then(function(res) {
-					console.log(res)
+					console.debug(res)
 					this.abilities = res.data
 				})
 		},
@@ -64,7 +64,7 @@ export default {
 			this.$http
 				.delete(process.env.VUE_APP_API_ENDPOINT + `/weapon/${this.weapon.id}/ability/${ability.id}`)
 				.then(function(res) {
-					console.log(res)
+					console.debug(res)
 					if (res.status === 204) {
 						this.abilities.splice(index, 1)
 					}
@@ -77,7 +77,7 @@ export default {
 						`/weapon/${this.weapon.id}/ability/${ability.id}?type=${ability.type}&lang=${this.$language}`
 				)
 				.then(function(res) {
-					console.log(res)
+					console.debug(res)
 					if (res.status === 201 && push) {
 						this.abilities.push(ability)
 					}

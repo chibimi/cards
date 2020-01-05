@@ -43,7 +43,7 @@ export default {
 			this.$http
 				.get(process.env.VUE_APP_API_ENDPOINT + "/ref/" + refID + "/model?lang=" + this.$language)
 				.then(function(res) {
-					console.log(res)
+					console.debug(res)
 					this.models = res.data
 				})
 		},

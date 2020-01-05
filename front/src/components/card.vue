@@ -46,10 +46,10 @@
 				<label v-if="reference.category_id === 5" class="ml-3">Nb model max</label>
 				<input v-if="reference.category_id === 5" v-model="reference.models_max" />
 			</div>
-			<div>
+			<!-- <div>
 				<label class="col-form-label col-3">Main ID <Tooltip :txt="help.main_id"/></label>
 				<input v-model="reference.main_card_id" type="text" class="form-control col-2" />
-			</div>
+			</div> -->
 		</div>
 	</div>
 </template>
@@ -63,14 +63,11 @@ export default {
 	name: 'Card',
 	props: ['reference'],
 	components: { Tooltip },
-	watch: {},
 	mounted: function() {
-		EventBus.$on('mega_save', () => {
-			this.save(this.reference)
-		})
+		EventBus.$on('mega_save', this.save)
 	},
-	beforeDestroy() {
-		EventBus.$off('mega_save')
+	destroyed() {
+		EventBus.$off('mega_save', this.save)
 	},
 	data() {
 		return {
@@ -84,20 +81,19 @@ export default {
 		}
 	},
 	methods: {
-		save: function(reference) {
-			console.log("save card called", reference)
-			if (reference.id == null) {
+		save: function() {
+			if (this.reference.id == null) {
 				return
 			}
 			this.alert = ''
 			this.$http
-				.put(process.env.VUE_APP_API_ENDPOINT + `/ref/${reference.id}?lang=${this.$language}`, reference)
+				.put(process.env.VUE_APP_API_ENDPOINT + `/ref/${this.reference.id}?lang=${this.$language}`, this.reference)
 				.then(function(res) {
 					console.debug(res)
-					EventBus.$emit('refresh_selector', reference.id)
+					EventBus.$emit('refresh_selector', this.reference.id)
 				})
 				.catch(function(err) {
-					EventBus.$emit('err_save', 'card', reference.id, err.data)
+					EventBus.$emit('err_save', 'card', this.reference.id, err.data)
 				})
 		},
 	},

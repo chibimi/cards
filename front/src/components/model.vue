@@ -9,7 +9,8 @@
 				v-bind:aria-controls="'model_' + model.id"
 				ref="model"
 			>
-				<i class="fa fa-angle-right"></i> {{ model.name || model.title }}
+				{{ model.name || model.title }}
+				<i class="fa fa-angle-down"></i>
 			</h4>
 
 			<div class="col-3">
@@ -96,33 +97,38 @@ export default {
 	props: ['model'],
 	components: { Weapons },
 	mounted: function() {
-		EventBus.$on('mega_save', () => {
-			if (this.model.id == null) {
-				return
-			}
-			this.save(this.model)
-		})
+		EventBus.$on('mega_save', this.save)
 	},
 	beforeDestroy() {
-		EventBus.$off('mega_save')
+		EventBus.$off('mega_save', this.save)
 	},
 	data() {
 		return {
 			advantages: ModelAdvantages,
+			update: false,
 		}
 	},
 	methods: {
-		save: function(model) {
-			if (model.id == null) {
-				model.id = 0
+		new: function() {
+			if (this.model.id == null) {
+				this.model.id = 0
+			}
+			this.save()
+		},
+		save: function() {
+			if (this.model.id == null) {
+				return
 			}
 			this.$http
-				.put(process.env.VUE_APP_API_ENDPOINT + '/model/' + model.id + '?lang=' + this.$language, model)
+				.put(
+					process.env.VUE_APP_API_ENDPOINT + '/model/' + this.model.id + '?lang=' + this.$language,
+					this.model
+				)
 				.then(function(res) {
 					console.debug(res)
 				})
 				.catch(function(err) {
-					EventBus.$emit('err_save', 'model', model.id, err.data)
+					EventBus.$emit('err_save', 'model', this.model.id, err.data)
 				})
 		},
 		open: function() {
