@@ -21,7 +21,7 @@
 			</select>
 
 			<!-- References -->
-			<select class="mw-45" v-model="ref" >
+			<select class="ref-w" v-model="ref" >
 				<option v-for="r in refs" :key="r.id" :value="r.id">[{{ r.status }}] #{{ r.id }} {{ r.title }}</option>
 			</select>
 			<button @click="$emit('select_ref', ref)">Go</button>
@@ -108,9 +108,9 @@ export default {
 
 <style lang="scss" scoped>
 @import '../custom.scss';
-.mw-45 {
-	min-width: 45%;
-	max-width: 45%;
+.ref-w {
+	min-width: 40%;
+	max-width: 40%;
 }
 .selector {
 	@extend .row;
