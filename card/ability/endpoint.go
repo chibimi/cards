@@ -112,8 +112,13 @@ func (s *Service) AddAbilityRefEndpoint(w http.ResponseWriter, r *http.Request, 
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
+	star, err := strconv.Atoi(r.URL.Query().Get("star"))
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
 
-	err = s.AddAbilityRef(rid, id, typ)
+	err = s.AddAbilityRef(rid, id, typ, star)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -178,8 +183,13 @@ func (s *Service) AddAbilityModelEndpoint(w http.ResponseWriter, r *http.Request
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
+	star, err := strconv.Atoi(r.URL.Query().Get("star"))
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
 
-	err = s.AddAbilityModel(rid, id, typ)
+	err = s.AddAbilityModel(rid, id, typ, star)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -244,8 +254,13 @@ func (s *Service) AddAbilityWeaponEndpoint(w http.ResponseWriter, r *http.Reques
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
+	star, err := strconv.Atoi(r.URL.Query().Get("star"))
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
 
-	err = s.AddAbilityWeapon(rid, id, typ)
+	err = s.AddAbilityWeapon(rid, id, typ, star)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return

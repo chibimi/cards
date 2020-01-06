@@ -106,10 +106,10 @@ func (r *Repository) ListByRef(ref int, lang string) ([]Ability, error) {
 	return res, nil
 }
 
-func (r *Repository) AddAbilityRef(ref, ability, typ int) error {
-	stmt := `INSERT INTO ref_ability VALUES(?, ?, ?)`
+func (r *Repository) AddAbilityRef(ref, ability, typ, star int) error {
+	stmt := `INSERT INTO ref_ability VALUES(?, ?, ?, ?)`
 
-	_, err := r.db.Exec(stmt, ref, ability, typ)
+	_, err := r.db.Exec(stmt, ref, ability, typ, star)
 	if err != nil {
 		return errors.Wrap(err, "execute query")
 	}
@@ -128,7 +128,7 @@ func (r *Repository) DeleteAbilityRef(ref, ability int) error {
 
 func (r *Repository) ListByModel(model int, lang string) ([]Ability, error) {
 	stmt := `
-	SELECT r.*, IFNULL(s.name, "") as name, IFNULL(s.description, "") as description, a.type as type FROM (
+	SELECT r.*, IFNULL(s.name, "") as name, IFNULL(s.description, "") as description, a.type as type, a.star as star FROM (
 		SELECT * FROM model_ability WHERE model_id = ?
 	) as a LEFT JOIN (
 		SELECT * FROM abilities
@@ -144,11 +144,11 @@ func (r *Repository) ListByModel(model int, lang string) ([]Ability, error) {
 	return res, nil
 }
 
-func (r *Repository) AddAbilityModel(model, ability, typ int) error {
-	stmt := `INSERT INTO model_ability VALUES(?, ?, ?)
-	ON DUPLICATE KEY UPDATE model_id = ?, ability_id = ?, type = ?`
+func (r *Repository) AddAbilityModel(model, ability, typ, star int) error {
+	stmt := `INSERT INTO model_ability VALUES(?, ?, ?, ?)
+	ON DUPLICATE KEY UPDATE model_id = ?, ability_id = ?, type = ?, star = ?`
 
-	_, err := r.db.Exec(stmt, model, ability, typ, model, ability, typ)
+	_, err := r.db.Exec(stmt, model, ability, typ, star, model, ability, typ, star)
 	if err != nil {
 		return errors.Wrap(err, "execute query")
 	}
@@ -167,7 +167,7 @@ func (r *Repository) DeleteAbilityModel(model, ability int) error {
 
 func (r *Repository) ListByWeapon(weapon int, lang string) ([]Ability, error) {
 	stmt := `
-	SELECT r.*, IFNULL(s.name, "") as name, IFNULL(s.description, "") as description, a.type as type FROM (
+	SELECT r.*, IFNULL(s.name, "") as name, IFNULL(s.description, "") as description, a.type as type, a.star as star FROM (
 		SELECT * FROM weapon_ability WHERE weapon_id = ?
 	) as a LEFT JOIN (
 		SELECT * FROM abilities
@@ -183,11 +183,11 @@ func (r *Repository) ListByWeapon(weapon int, lang string) ([]Ability, error) {
 	return res, nil
 }
 
-func (r *Repository) AddAbilityWeapon(weapon, ability, typ int) error {
-	stmt := `INSERT INTO weapon_ability VALUES(?, ?, ?)
-	ON DUPLICATE KEY UPDATE weapon_id = ?, ability_id = ?, type = ?`
+func (r *Repository) AddAbilityWeapon(weapon, ability, typ, star int) error {
+	stmt := `INSERT INTO weapon_ability VALUES(?, ?, ?, ?)
+	ON DUPLICATE KEY UPDATE weapon_id = ?, ability_id = ?, type = ?, star = ?`
 
-	_, err := r.db.Exec(stmt, weapon, ability, typ, weapon, ability, typ)
+	_, err := r.db.Exec(stmt, weapon, ability, typ, star, weapon, ability, typ, star)
 	if err != nil {
 		return errors.Wrap(err, "execute query")
 	}

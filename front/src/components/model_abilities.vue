@@ -5,6 +5,7 @@
 			v-for="(val, idx) in abilities"
 			v-bind:ability_id="val.id"
 			v-bind:ability_type="val.type"
+			v-bind:ability_star="val.star"
 			:abilitiesList="abilitiesList"
 			:key="val.id"
 			v-on:remove="removeAbility(val, idx)"
@@ -24,6 +25,7 @@
 				<Ability
 					:abilitiesList="abilitiesList"
 					v-bind:ability_type="0"
+					v-bind:ability_star="0"
 					v-on:add="addAbility"
 					v-on:update="$emit('update')"
 				></Ability>
@@ -99,7 +101,7 @@ export default {
 			this.$http
 				.put(
 					process.env.VUE_APP_API_ENDPOINT +
-						`/model/${this.model.id}/ability/${ability.id}?type=${ability.type | 0}&lang=${this.$language}`
+						`/model/${this.model.id}/ability/${ability.id}?type=${ability.type | 0}&star=${ability.star | 0}&lang=${this.$language}`
 				)
 				.then(function(res) {
 					console.debug(res)

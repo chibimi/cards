@@ -27,6 +27,9 @@ export default {
 		value: function(newVal) {
 			this.content = newVal
 		},
+		abilities: function() {
+			this.strategies = this.getStategies()
+		}
 	},
 	created: function() {
 		this.content = this.value
@@ -45,10 +48,11 @@ export default {
 			let _this = this
 			return [
 				{
-					match: /(^|\s)#([a-zA-Z0-9+\-_]*)$/,
+					match: /(^|\s)#([a-zA-Z0-9+\-_ ]*)$/,
 					template(name) {
 						if (name.id == null){
-							return '<img width="17" src="advantages/' + name.label + '.jpg"></img> ' + name.label
+							// return '<img width="17" src="advantages/' + name.label + '.jpg"></img> ' + name.label
+							return name.label
 						}
 						return '<span class="m-2">' + name.id + ' ' + name.title + '</span>'
 					},

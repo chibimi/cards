@@ -2,7 +2,7 @@
 	<div class="ability">
 		<div v-if="!update" class="row mx-0">
 			<span class="col-3">
-				{{ ability.name }} <br />
+				{{ ability.name }} {{ability.type | type}} {{ability.star | star}}<br />
 				<span class="vo">{{ ability.title }}</span>
 			</span>
 			<span class="col-8">
@@ -36,13 +36,21 @@
 				:class="{ 'ml-3': !newAbility }"
 				placeholder="Translated Name"
 			/>
-			<div class="form-check-inline col-5">
+			<div class="form-check-inline  ml-3 col-3">
 				<label>Type</label>
 				<select v-model.number="ability.type">
-					<option value=0>None</option>
-					<option value=1>Magic Ability</option>
-					<option value=2>Battle Plan</option>
-					<option value=3>Attack Type</option>
+					<option value="0">None</option>
+					<option value="1">Magic Ability</option>
+					<option value="2">Battle Plan</option>
+					<option value="3">Attack Type</option>
+				</select>
+			</div>
+			<div class="form-check-inline col-3">
+				<label>Star</label>
+				<select v-model.number="ability.star">
+					<option value="0">None</option>
+					<option value="1">*Attack</option>
+					<option value="2">*Action</option>
 				</select>
 			</div>
 			<div class="col-11">
@@ -75,7 +83,7 @@ import TextArea from './textarea.vue'
 
 export default {
 	name: 'Ability',
-	props: ['abilitiesList', 'ability_id', 'ability_type'],
+	props: ['abilitiesList', 'ability_id', 'ability_type', 'ability_star'],
 	components: { TextArea },
 	watch: {},
 	created: function() {
@@ -89,6 +97,7 @@ export default {
 		return {
 			ability: {
 				type: 0,
+				star: 0,
 			},
 			vo: {},
 			template: ItemTemplate,
@@ -99,12 +108,12 @@ export default {
 		}
 	},
 	methods: {
-		startUpdate:function(){
-			this.update=true
+		startUpdate: function() {
+			this.update = true
 			this.beforeEdit = JSON.parse(JSON.stringify(this.ability))
 		},
-		cancelUpdate:function(){
-			this.update=false
+		cancelUpdate: function() {
+			this.update = false
 			this.ability = JSON.parse(JSON.stringify(this.beforeEdit))
 		},
 		get: function(id) {
@@ -125,6 +134,7 @@ export default {
 				.then(function(res) {
 					this.ability = res.data
 					this.ability.type = this.ability_type
+					this.ability.star = this.ability_star
 				})
 				.catch(function(err) {
 					console.error(err)
@@ -146,7 +156,7 @@ export default {
 						this.update = false
 					} else {
 						this.$emit('add', ability, true)
-						this.ability = { type: 0 }
+						this.ability = { type: 0, star: 0 }
 					}
 					this.$emit('update')
 				})
@@ -174,8 +184,21 @@ export default {
 		},
 		inputItem(item) {
 			if (item === null) {
-				this.ability = { type: 0 }
+				this.ability = { type: 0, star: 0 }
 			}
+		},
+	},
+	filters: {
+		type: function(value) {
+			if (value === 1) return '[Magical]'
+			if (value === 2) return '[Battle Plan]'
+			if (value === 3) return '[Attack Type]'
+			return ''
+		},
+		star: function(value) {
+			if (value === 1) return '(*Attack)'
+			if (value === 2) return '(*Action)'
+			return ''
 		},
 	},
 }
