@@ -98,3 +98,23 @@ func (s *Service) GetRef(w http.ResponseWriter, r *http.Request, p httprouter.Pa
 
 	utils.WriteJson(w, res, http.StatusOK)
 }
+
+func (s *Service) ListRefByStatus(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+	lang := r.URL.Query().Get("lang")
+	if lang == "" {
+		http.Error(w, "require lang", http.StatusBadRequest)
+		return
+	}
+	status := r.URL.Query().Get("status")
+	if lang == "" {
+		http.Error(w, "require status", http.StatusBadRequest)
+		return
+	}
+	res, err := s.ListByStatus(lang, status)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	utils.WriteJson(w, res, http.StatusOK)
+}

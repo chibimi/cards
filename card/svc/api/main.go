@@ -37,6 +37,7 @@ func main() {
 	router := httprouter.New()
 	router.POST("/ref", ss.Ref.CreateRef)
 	router.GET("/ref", ss.Ref.ListRef)
+	router.GET("/status/ref", ss.Ref.ListRefByStatus)
 	router.GET("/ref/:id", ss.Ref.GetRef)
 	router.PUT("/ref/:id", ss.Ref.SaveRef)
 	router.GET("/ref/:id/spell", ss.Spell.ListByRefEndpoint)

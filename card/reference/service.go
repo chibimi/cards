@@ -23,3 +23,7 @@ func (s *Service) Get(id int, lang string) (*Reference, error) {
 func (s *Service) Save(ref *Reference, lang string) error {
 	return s.repo.Save(ref, lang)
 }
+
+func (s *Service) ListByStatus(lang, status string) ([]Reference, error) {
+	return s.repo.ListByStatus(lang, status)
+}

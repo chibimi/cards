@@ -139,3 +139,20 @@ func (r *Repository) Save(ref *Reference, lang string) error {
 
 	return nil
 }
+
+func (r *Repository) ListByStatus(lang, status string) ([]Reference, error) {
+	stmt := `
+	SELECT r.*, IFNULL(s.status, "wip") as status FROM (
+		SELECT id, faction_id, category_id, title FROM refs
+	) as r INNER JOIN (
+		SELECT ref_id, status FROM refs_lang WHERE lang = ? AND status = ?
+	) as s ON r.id = s.ref_id
+	`
+	res := []Reference{}
+	err := r.db.Select(&res, stmt, lang, status)
+	if err != nil {
+		return nil, errors.Wrap(err, "execute query")
+	}
+
+	return res, nil
+}
