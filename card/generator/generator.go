@@ -1,17 +1,18 @@
 package generator
 
 import (
-	"fmt"
+	"os"
 
 	"github.com/chibimi/cards/card"
 	"github.com/jung-kurt/gofpdf"
 	"github.com/pkg/errors"
 )
 
-const X0 float64 = 10.0
-const Y0 float64 = 10.0
-const CardWidth float64 = 64.0
-const CardHeight float64 = 89.0
+const X0 float64 = 10.0 + 1.9
+const Y0 float64 = 10.0 + 9.2
+const CardWidth float64 = 63.3
+const CardHeight float64 = 88.9
+const Separator float64 = 0.55
 
 type Generator struct {
 	src         *card.SService
@@ -29,33 +30,54 @@ func NewGenerator(src *card.SService, references []int, lang string) *Generator 
 		src:        src,
 		references: references,
 		lang:       lang,
-		x:          10,
-		y:          10,
+		x:          X0,
+		y:          Y0,
 		cardIndex:  -1,
 	}
 }
 
-func (g *Generator) GeneratePDF() error {
-	g.pdf = gofpdf.New("L", "mm", "A4", "")
+func (g *Generator) initializePDF(images []string) {
+	g.pdf = gofpdf.New("L", "mm", "letter", "")
 	g.unicode = g.pdf.UnicodeTranslatorFromDescriptor("")
-	g.pdf.AddPage()
+	for _, v := range images {
+		g.pdf.AddPage()
+		g.pdf.Image(v, 0, 0, 279.4, 215.9, false, "", 0, "")
+		os.Remove(v)
+	}
+	g.pdf.SetPage(1)
+}
 
+func (g *Generator) GeneratePDF() error {
 	for _, id := range g.references {
 		g.nextCard()
-
 		ref, err := g.src.Ref.Get(id, g.lang)
 		if err != nil {
 			return errors.Wrap(err, "get ref")
 		}
+
 		err = g.PrintCard(ref)
 		if err != nil {
-			return errors.Wrap(err, "add card")
+			return errors.Wrap(err, "print abilities")
+		}
+
+		if ref.CategoryID == 1 || ref.CategoryID == 2 || ref.CategoryID == 10 {
+			g.nextCard()
+			err = g.PrintSpells(ref)
+			if err != nil {
+				return errors.Wrap(err, "print spells")
+			}
+			err = g.PrintFeat(ref)
+			if err != nil {
+				return errors.Wrap(err, "print feat")
+			}
 		}
 	}
 
-	err := g.pdf.OutputFileAndClose("hello_new.pdf")
-	fmt.Println(err)
-	return errors.Wrap(err, "write output file")
+	return nil
+}
+
+func (g *Generator) WritePDF(dest string) error {
+	return g.pdf.OutputFileAndClose(dest)
 }
 
 func (g *Generator) nextCard() {
@@ -64,18 +86,13 @@ func (g *Generator) nextCard() {
 		return
 	}
 	g.cardIndex++
-	g.x = 10 + float64(g.cardIndex%2)*CardWidth*2
-	g.y = 10 + float64(g.cardIndex/2)*CardHeight
+	g.x = X0 + float64(g.cardIndex)*(CardWidth+Separator)*1
 }
 
 func (g *Generator) nextPage() {
-	if g.pdf.PageCount() > g.pdf.PageNo() {
-		g.pdf.SetPage(g.pdf.PageNo() + 1)
-	} else {
-		g.pdf.AddPage()
-		g.currentPage++
-	}
+	g.pdf.SetPage(g.pdf.PageNo() + 1)
+
 	g.cardIndex = 0
-	g.x = 10
-	g.y = 10
+	g.x = X0
+	g.y = Y0
 }

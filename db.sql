@@ -18,11 +18,6 @@ CREATE TABLE refs (
     PRIMARY KEY (id)
 );
 
-INSERT INTO refs (faction_id, category_id, title, main_card_id, models_cnt, models_max, cost, cost_max, fa) VALUES (11, 5, 'Nyss Swordmen', 0, "6", "10", "9", "15", "2");
-INSERT INTO refs (faction_id, category_id, title, main_card_id, models_cnt, models_max, cost, cost_max, fa) VALUES (11, 5, 'Nyss Legionnaires', 0, "6", "10", "9", "15", "2");
-INSERT INTO refs (faction_id, category_id, title, main_card_id, models_cnt, models_max, cost, cost_max, fa) VALUES (11, 5, 'Hellmouth', 0, "4", "", "6", "", "2");
-INSERT INTO refs (faction_id, category_id, title, main_card_id, models_cnt, models_max, cost, cost_max, fa) VALUES (11, 5, 'BlackFrost Shard', 0, "3", "", "9", "", "C");
-
 CREATE TABLE refs_lang (
     ref_id int unsigned not null,
     lang varchar(2),
@@ -31,12 +26,6 @@ CREATE TABLE refs_lang (
     properties text,
     PRIMARY KEY (ref_id, lang)
 );
-
-INSERT INTO refs_lang (ref_id, lang, name, properties, status) VALUES (1, "FR", "Epéeistes Nyss", "Unité de Nyss de la légion", "wip");
-INSERT INTO refs_lang (ref_id, lang, name, properties, status) VALUES (3, "FR", "Gueule l'enfer", "Unité de la légion", "done");
-INSERT INTO refs_lang (ref_id, lang, name, properties, status) VALUES (3, "US", "Hellmouth", "Legion Unit", "tbv");
-INSERT INTO refs_lang (ref_id, lang, name, properties, status) VALUES (4, "FR", "Shard GlaceNoire", "Unité de Nyss de la légion", "wip");
-
 
 CREATE TABLE feats (
     ref_id int unsigned not null,
@@ -49,8 +38,8 @@ CREATE TABLE feats (
 
 
 CREATE TABLE abilities (
-    id int unsigned not null auto_increment, 
-    title text, 
+    id int unsigned not null auto_increment,
+    title text,
     PRIMARY KEY (id)
 );
 
@@ -84,7 +73,7 @@ CREATE TABLE weapon_ability (
 );
 
 CREATE TABLE spells (
-    id int unsigned not null auto_increment, 
+    id int unsigned not null auto_increment,
     title text,
     cost text,
     rng text,
@@ -110,7 +99,7 @@ CREATE TABLE ref_spell (
 );
 
 CREATE TABLE models (
-    id int unsigned not null auto_increment, 
+    id int unsigned not null auto_increment,
     ref_id int not null,
     title text,
     spd text,
@@ -137,7 +126,7 @@ CREATE TABLE models_lang (
 );
 
 CREATE TABLE weapons (
-    id int unsigned not null auto_increment, 
+    id int unsigned not null auto_increment,
     model_id int not null,
     title text,
     type text,
@@ -157,3 +146,7 @@ CREATE TABLE weapons_lang (
     name text,
     PRIMARY KEY (weapon_id, lang)
 );
+
+ALTER TABLE ref_ability ADD star int DEFAULT (0);
+ALTER TABLE model_ability ADD star int DEFAULT (0);
+ALTER TABLE weapon_ability ADD star int DEFAULT (0);

@@ -8,30 +8,12 @@ import (
 )
 
 func (g *Generator) PrintCard(ref *reference.Reference) error {
-	g.PrintFront(ref)
-	g.PrintBack(ref)
+	g.PrintBack(ref, true)
 
 	models, err := g.src.Model.List(ref.ID, g.lang)
 	if err != nil {
 		return errors.Wrap(err, "get models")
 	}
-	ci, pi, x, y := g.cardIndex, g.pdf.PageNo(), g.x, g.y
-	for i, model := range models {
-		// If more that 2 models create a new card
-		if i != 0 && i%2 == 0 {
-			fmt.Println("GENERATE WEW CARD FOR MORE MODEL")
-			g.nextCard()
-			g.PrintFront(ref)
-			g.PrintBack(ref)
-		}
-
-		err = g.PrintModel(&model, i%2)
-		if err != nil {
-			return errors.Wrap(err, "print model")
-		}
-	}
-	g.pdf.SetPage(pi)
-	g.cardIndex, g.x, g.y = ci, x, y
 
 	err = g.PrintAbilities(models)
 	if err != nil {
@@ -41,24 +23,25 @@ func (g *Generator) PrintCard(ref *reference.Reference) error {
 	return nil
 }
 
-func (g *Generator) PrintFront(ref *reference.Reference) {
+func (g *Generator) PrintBack(ref *reference.Reference, rotate bool) {
+	if rotate {
+		g.pdf.TransformBegin()
+		X1 := g.x + CardWidth/2
+		Y1 := g.y + CardHeight + 0.1
+		g.pdf.TransformRotate(180, X1, Y1)
+		defer g.pdf.TransformEnd()
+	}
+
 	X, Y := g.x, g.y
-	g.pdf.Image(fmt.Sprintf("images/front_%d.png", ref.FactionID), X, Y, CardWidth, CardHeight, false, "", 0, "")
+	g.pdf.Image(fmt.Sprintf("images/back_%s.png", "wm"), X+2, Y+10.3, CardWidth-4, CardHeight-18, false, "", 0, "")
 
-	g.pdf.SetFont("Arial", "", 9)
-	g.pdf.Text(X+14, Y+6, g.unicode(ref.Name))
-
-	g.pdf.SetFont("Arial", "", 7)
-	g.pdf.Text(X+14, Y+8.5, g.unicode(ref.Properties))
-
-	// TODO: print FA
-	// TODO: print cost
 }
 
-func (g *Generator) PrintBack(ref *reference.Reference) {
-	X, Y := g.x+CardWidth, g.y
-	g.pdf.Image(fmt.Sprintf("images/back_%d.png", ref.FactionID), X, Y, CardWidth, CardHeight, false, "", 0, "")
-
-	g.pdf.SetFont("Arial", "", 9)
-	g.pdf.Text(X+10, Y+7, g.unicode(ref.Name))
+func (g *Generator) PrintSpells(ref *reference.Reference) error {
+	g.PrintBack(ref, false)
+	return nil
+}
+func (g *Generator) PrintFeat(ref *reference.Reference) error {
+	g.PrintBack(ref, true)
+	return nil
 }

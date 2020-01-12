@@ -8,11 +8,14 @@ import (
 
 	"github.com/chibimi/cards/card/ability"
 	"github.com/chibimi/cards/card/model"
+	"github.com/chibimi/cards/card/reference"
+	"github.com/chibimi/cards/card/spell"
 	"github.com/chibimi/cards/card/weapon"
 	"github.com/pkg/errors"
 )
 
 type ModelAbilities struct {
+	Spell     []spell.Spell
 	Normal    []ability.Ability
 	Magic     []ability.Ability
 	BatlePlan []ability.Ability
@@ -25,33 +28,32 @@ type WeaponAbilities struct {
 }
 
 func (g *Generator) PrintAbilities(models []model.Model) error {
+	// Used to not print 2 times a description
 	abilityCache := map[int]ability.Ability{}
+
+	// Map of all the abilities to print on a card for models and weapons
 	cardAbilities := map[*model.Model]ModelAbilities{}
+
 	for i, m := range models {
-		// If more that 2 models create a new card
+		// If more that 2 models fill the current card and create a new one
 		if i != 0 && i%2 == 0 {
 			g.printAbilities(cardAbilities, abilityCache)
 			abilityCache = map[int]ability.Ability{}
 			cardAbilities = map[*model.Model]ModelAbilities{}
 			g.nextCard()
-
+			g.PrintBack(&reference.Reference{}, true)
 		}
-		modelAbilities, abilityCache, err := g.getModelAbilities(m.ID, abilityCache)
+
+		// Fill the abilities map and the cache with the model abilitie
+		modelAbilities, abilityCache, err := g.getModelAbilities(m.ID, m.RefID, abilityCache)
 		if err != nil {
 			return errors.Wrap(err, "get model abilities")
 		}
 
-		weapons, err := g.src.Weapon.List(m.ID, g.lang)
+		// Fill the abilities map and the cache with the weapon abilities for this model
+		modelAbilities.Weapon, abilityCache, err = g.getWeaponsAbilities(m.ID, abilityCache)
 		if err != nil {
-			return errors.Wrap(err, "get weapons")
-		}
-		for j, weapon := range weapons {
-			var weaponAbilities *WeaponAbilities
-			weaponAbilities, abilityCache, err = g.getWeaponAbilities(weapon.ID, abilityCache)
-			if err != nil {
-				return errors.Wrap(err, "get weapon abilities")
-			}
-			modelAbilities.Weapon[&weapons[j]] = *weaponAbilities
+			return errors.Wrap(err, "get weapons abilities")
 		}
 		cardAbilities[&models[i]] = *modelAbilities
 
@@ -63,8 +65,9 @@ func (g *Generator) PrintAbilities(models []model.Model) error {
 }
 
 func (g *Generator) printAbilities(modelAbilities map[*model.Model]ModelAbilities, cache map[int]ability.Ability) {
-	X := X0 + float64(g.cardIndex%2)*CardWidth*2 + CardWidth + 3
-	Y := Y0 + float64(g.cardIndex/2)*CardHeight + 13
+
+	X := X0 + float64(g.cardIndex)*(CardWidth+Separator) + 3
+	Y := Y0 + 13
 	tr := g.pdf.UnicodeTranslatorFromDescriptor("") // "" defaults to "cp1252"
 
 	lineNb := 0.0
@@ -74,6 +77,7 @@ func (g *Generator) printAbilities(modelAbilities map[*model.Model]ModelAbilitie
 	var validLink = regexp.MustCompile(`#[0-9]+:[^#]+#`)
 
 	for _, abilities := range modelAbilities {
+		//FIXME: do samething for spells, weapon, magic....
 		for j, abi := range abilities.Normal {
 			subskills := []string{}
 			abi.Description = validLink.ReplaceAllStringFunc(abi.Description, func(src string) string {
@@ -106,13 +110,38 @@ func (g *Generator) printAbilities(modelAbilities map[*model.Model]ModelAbilitie
 
 	}
 
+	g.pdf.TransformBegin()
+	X1 := g.x + CardWidth/2
+	Y1 := g.y + CardHeight + 0.1
+	fmt.Println("A", g.pdf.PageNo(), X1, Y1)
+	g.pdf.TransformRotate(180, X1, Y1)
+
 	for model, abilities := range modelAbilities {
+		if len(abilities.Spell) > 0 {
+			g.pdf.Image(fmt.Sprintf("images/spell.png"), X-1.35, Y-2.5, CardWidth-3.3, 3, false, "", 0, "")
+			Y += 4
+		}
+		for _, spell := range abilities.Spell {
+			Y += g.PrintSpell(X, Y, spell)
+		}
+		if len(abilities.Spell) > 0 {
+			g.pdf.Line(X, Y-3, X+57, Y-3)
+		}
 		if len(abilities.Normal) > 0 || len(abilities.Magic) > 0 || len(abilities.BatlePlan) > 0 {
 			g.pdf.SetFont("Arial", "BU", 6)
 			g.pdf.Text(X, Y+float64(lineNb)*lineHt, tr(strings.ToUpper(model.Title)))
 			lineNb += 1.5
 		}
 
+		for _, ability := range abilities.Spell {
+			g.pdf.SetFont("Arial", "", 5)
+			data := g.pdf.SplitLines([]byte(fmt.Sprintf("%s (%s) : %s", strings.ToUpper(ability.Name), ability.Title, ability.Description)), 60)
+			for _, s := range data {
+				g.pdf.Text(X, Y+float64(lineNb)*lineHt, tr(string(s)))
+				lineNb++
+			}
+			lineNb += 0.5
+		}
 		for _, ability := range abilities.Normal {
 			g.pdf.SetFont("Arial", "", 5)
 			data := g.pdf.SplitLines([]byte(fmt.Sprintf("%s (%s) : %s", strings.ToUpper(ability.Name), ability.Title, ability.Description)), 60)
@@ -184,14 +213,48 @@ func (g *Generator) printAbilities(modelAbilities map[*model.Model]ModelAbilitie
 			}
 		}
 	}
+	g.pdf.TransformEnd()
 }
 
-func (g *Generator) getModelAbilities(id int, cache map[int]ability.Ability) (*ModelAbilities, map[int]ability.Ability, error) {
+func (g *Generator) PrintSpell(X, Y float64, spell spell.Spell) float64 {
+	g.pdf.SetFont("Arial", "B", 5)
+	g.pdf.Text(X, Y-1.3, g.unicode(fmt.Sprintf("%s", strings.ToUpper(spell.Name))))
+	g.pdf.SetFont("Arial", "", 5)
+	g.pdf.Text(X, Y+0.8, g.unicode(fmt.Sprintf("(%s)", spell.Title)))
+	g.pdf.SetFont("Arial", "B", 5)
+	g.pdf.Text(X+30, Y, g.unicode(spell.Cost))
+	g.pdf.Text(X+35, Y, g.unicode(spell.RNG))
+	g.pdf.Text(X+40, Y, g.unicode(spell.AOE))
+	g.pdf.Text(X+45, Y, g.unicode(spell.POW))
+	g.pdf.Text(X+50, Y, g.unicode(spell.DUR))
+	g.pdf.Text(X+55, Y, g.unicode(spell.OFF))
+
+	g.pdf.SetFont("Arial", "", 5)
+	lineNb := 0.0
+	_, lineHt := g.pdf.GetFontSize()
+	data := g.pdf.SplitText(spell.Description, 60)
+	for _, s := range data {
+		g.pdf.Text(X, Y+3+lineNb*lineHt, g.unicode(s))
+		lineNb++
+	}
+	return 5 + lineNb*lineHt
+
+}
+
+func (g *Generator) getModelAbilities(id, refId int, cache map[int]ability.Ability) (*ModelAbilities, map[int]ability.Ability, error) {
 	modelAbilities := &ModelAbilities{
+		Spell:     []spell.Spell{},
 		Normal:    []ability.Ability{},
 		Magic:     []ability.Ability{},
 		BatlePlan: []ability.Ability{},
 		Weapon:    map[*weapon.Weapon]WeaponAbilities{},
+	}
+	spells, err := g.src.Spell.ListByRef(refId, g.lang)
+	if err != nil {
+		return nil, nil, errors.Wrap(err, "get model spells")
+	}
+	for j, _ := range spells {
+		modelAbilities.Spell = append(modelAbilities.Spell, spells[j])
 	}
 
 	mAbilities, err := g.src.Ability.ListByModel(id, g.lang)
@@ -214,6 +277,23 @@ func (g *Generator) getModelAbilities(id int, cache map[int]ability.Ability) (*M
 		}
 	}
 	return modelAbilities, cache, nil
+}
+
+func (g *Generator) getWeaponsAbilities(modelID int, cache map[int]ability.Ability) (map[*weapon.Weapon]WeaponAbilities, map[int]ability.Ability, error) {
+	res := map[*weapon.Weapon]WeaponAbilities{}
+	weapons, err := g.src.Weapon.List(modelID, g.lang)
+	if err != nil {
+		return nil, nil, errors.Wrap(err, "get weapons")
+	}
+	for j, weapon := range weapons {
+		var weaponAbilities *WeaponAbilities
+		weaponAbilities, cache, err = g.getWeaponAbilities(weapon.ID, cache)
+		if err != nil {
+			return nil, nil, errors.Wrap(err, "get weapon abilities")
+		}
+		res[&weapons[j]] = *weaponAbilities
+	}
+	return res, cache, nil
 }
 
 func (g *Generator) getWeaponAbilities(id int, cache map[int]ability.Ability) (*WeaponAbilities, map[int]ability.Ability, error) {
