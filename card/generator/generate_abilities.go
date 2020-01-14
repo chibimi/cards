@@ -117,31 +117,31 @@ func (g *Generator) printAbilities(modelAbilities map[*model.Model]ModelAbilitie
 	g.pdf.TransformRotate(180, X1, Y1)
 
 	for model, abilities := range modelAbilities {
-		if len(abilities.Spell) > 0 {
-			g.pdf.Image(fmt.Sprintf("images/spell.png"), X-1.35, Y-2.5, CardWidth-3.3, 3, false, "", 0, "")
-			Y += 4
-		}
-		for _, spell := range abilities.Spell {
-			Y += g.PrintSpell(X, Y, spell)
-		}
-		if len(abilities.Spell) > 0 {
-			g.pdf.Line(X, Y-3, X+57, Y-3)
-		}
+		// if len(abilities.Spell) > 0 {
+		// 	g.pdf.Image(fmt.Sprintf("images/spell.png"), X-1.35, Y-2.5, CardWidth-3.3, 3, false, "", 0, "")
+		// 	Y += 4
+		// }
+		// for _, spell := range abilities.Spell {
+		// 	Y += g.PrintSpell(X, Y, spell)
+		// }
+		// if len(abilities.Spell) > 0 {
+		// 	g.pdf.Line(X, Y-3, X+57, Y-3)
+		// }
 		if len(abilities.Normal) > 0 || len(abilities.Magic) > 0 || len(abilities.BatlePlan) > 0 {
 			g.pdf.SetFont("Arial", "BU", 6)
 			g.pdf.Text(X, Y+float64(lineNb)*lineHt, tr(strings.ToUpper(model.Title)))
 			lineNb += 1.5
 		}
 
-		for _, ability := range abilities.Spell {
-			g.pdf.SetFont("Arial", "", 5)
-			data := g.pdf.SplitLines([]byte(fmt.Sprintf("%s (%s) : %s", strings.ToUpper(ability.Name), ability.Title, ability.Description)), 60)
-			for _, s := range data {
-				g.pdf.Text(X, Y+float64(lineNb)*lineHt, tr(string(s)))
-				lineNb++
-			}
-			lineNb += 0.5
-		}
+		// for _, ability := range abilities.Spell {
+		// 	g.pdf.SetFont("Arial", "", 5)
+		// 	data := g.pdf.SplitLines([]byte(fmt.Sprintf("%s (%s) : %s", strings.ToUpper(ability.Name), ability.Title, ability.Description)), 60)
+		// 	for _, s := range data {
+		// 		g.pdf.Text(X, Y+float64(lineNb)*lineHt, tr(string(s)))
+		// 		lineNb++
+		// 	}
+		// 	lineNb += 0.5
+		// }
 		for _, ability := range abilities.Normal {
 			g.pdf.SetFont("Arial", "", 5)
 			data := g.pdf.SplitLines([]byte(fmt.Sprintf("%s (%s) : %s", strings.ToUpper(ability.Name), ability.Title, ability.Description)), 60)
@@ -218,16 +218,16 @@ func (g *Generator) printAbilities(modelAbilities map[*model.Model]ModelAbilitie
 
 func (g *Generator) PrintSpell(X, Y float64, spell spell.Spell) float64 {
 	g.pdf.SetFont("Arial", "B", 5)
-	g.pdf.Text(X, Y-1.3, g.unicode(fmt.Sprintf("%s", strings.ToUpper(spell.Name))))
+	g.pdf.Text(X, Y-1.5, g.unicode(fmt.Sprintf("%s", strings.ToUpper(spell.Name))))
 	g.pdf.SetFont("Arial", "", 5)
-	g.pdf.Text(X, Y+0.8, g.unicode(fmt.Sprintf("(%s)", spell.Title)))
+	g.pdf.Text(X, Y+0.5, g.unicode(fmt.Sprintf("(%s)", spell.Title)))
 	g.pdf.SetFont("Arial", "B", 5)
-	g.pdf.Text(X+30, Y, g.unicode(spell.Cost))
-	g.pdf.Text(X+35, Y, g.unicode(spell.RNG))
-	g.pdf.Text(X+40, Y, g.unicode(spell.AOE))
-	g.pdf.Text(X+45, Y, g.unicode(spell.POW))
-	g.pdf.Text(X+50, Y, g.unicode(spell.DUR))
-	g.pdf.Text(X+55, Y, g.unicode(spell.OFF))
+	g.pdf.Text(X+30, Y-1.5, g.unicode(spell.Cost))
+	g.pdf.Text(X+35, Y-1.5, g.unicode(spell.RNG))
+	g.pdf.Text(X+40, Y-1.5, g.unicode(spell.AOE))
+	g.pdf.Text(X+45, Y-1.5, g.unicode(spell.POW))
+	g.pdf.Text(X+50, Y-1.5, g.unicode(spell.DUR))
+	g.pdf.Text(X+55, Y-1.5, g.unicode(spell.OFF))
 
 	g.pdf.SetFont("Arial", "", 5)
 	lineNb := 0.0
@@ -237,7 +237,7 @@ func (g *Generator) PrintSpell(X, Y float64, spell spell.Spell) float64 {
 		g.pdf.Text(X, Y+3+lineNb*lineHt, g.unicode(s))
 		lineNb++
 	}
-	return 5 + lineNb*lineHt
+	return 5.5 + lineNb*lineHt
 
 }
 
