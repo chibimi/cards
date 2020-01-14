@@ -23,8 +23,8 @@ type referenceDB struct {
 
 func (r *Repository) Create(ref *Reference) (int, error) {
 	stmt := `
-	INSERT INTO refs (faction_id, category_id, title, main_card_id, models_cnt, models_max, cost, cost_max, fa, mercenary_for, minion_for)
-	VALUES(:faction_id, :category_id, :title, :main_card_id, :models_cnt, :models_max, :cost, :cost_max, :fa, :mercenary_for, :minion_for)
+	INSERT INTO refs (ppid, faction_id, category_id, title, main_card_id, models_cnt, models_max, cost, cost_max, fa, mercenary_for, minion_for)
+	VALUES(:ppid, :faction_id, :category_id, :title, :main_card_id, :models_cnt, :models_max, :cost, :cost_max, :fa, :mercenary_for, :minion_for)
 	`
 	merc, err := json.Marshal(ref.MercFor)
 	if err != nil {
@@ -53,7 +53,7 @@ func (r *Repository) Create(ref *Reference) (int, error) {
 func (r *Repository) List(faction, category int, lang string) ([]Reference, error) {
 	stmt := `
 	SELECT r.*, IFNULL(s.status, "wip") as status FROM (
-		SELECT id, faction_id, category_id, title FROM refs WHERE faction_id = ? AND category_id = ?
+		SELECT id, ppid, faction_id, category_id, title FROM refs WHERE faction_id = ? AND category_id = ?
 	) as r LEFT JOIN (
 		SELECT ref_id, status FROM refs_lang WHERE lang = ?
 	) as s ON r.id = s.ref_id
@@ -101,7 +101,7 @@ func (r *Repository) Save(ref *Reference, lang string) error {
 		return errors.Wrap(err, "create transaction")
 	}
 	stmt := `
-	UPDATE refs SET faction_id = :faction_id, category_id = :category_id, title = :title, main_card_id = :main_card_id,
+	UPDATE refs SET ppid = :ppid, faction_id = :faction_id, category_id = :category_id, title = :title, main_card_id = :main_card_id,
 	models_cnt = :models_cnt, models_max = :models_max, cost = :cost, cost_max = :cost_max, fa = :fa,
 	mercenary_for = :mercenary_for, minion_for = :minion_for
 	WHERE id = :id

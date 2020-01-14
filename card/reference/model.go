@@ -2,6 +2,7 @@ package reference
 
 type Reference struct {
 	ID         int    `json:"id,omitempty" db:"id"`
+	PPID       int    `json:"ppid,omitempty" db:"ppid"`
 	FactionID  int    `json:"faction_id,omitempty" db:"faction_id"`
 	CategoryID int    `json:"category_id,omitempty" db:"category_id"`
 	Title      string `json:"title,omitempty" db:"title"`
