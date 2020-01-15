@@ -14,7 +14,7 @@ func (g *Generator) PrintSpells(X, Y float64, ref *reference.Reference, spells [
 
 	// Spell header
 	if len(spells) > 0 {
-		g.pdf.Image(fmt.Sprintf("images/spell.png"), X+1.55, Y+11, 60, 3, false, "", 0, "")
+		g.pdf.Image(fmt.Sprintf("%s/images/icon/spell.png", g.assets), X+1.55, Y+11, 60, 3, false, "", 0, "")
 	}
 	X += 3
 	Y += 16

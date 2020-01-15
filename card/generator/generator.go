@@ -17,11 +17,12 @@ const X0 float64 = 10.0 + 1.9
 const Y0 float64 = 10.0 + 9.2
 const CardWidth float64 = 63.3
 const CardHeight float64 = 88.9
-const SeparatorW float64 = 0.55
+const SeparatorW float64 = 0.3
 const SeparatorH float64 = 0.2
 
 type Generator struct {
 	src         *card.SService
+	assets      string
 	references  []int
 	lang        string
 	pdf         *gofpdf.Fpdf
@@ -31,11 +32,12 @@ type Generator struct {
 	x, y        float64
 }
 
-func NewGenerator(src *card.SService, references []int, lang string) *Generator {
+func NewGenerator(src *card.SService, references []int, lang, assets string) *Generator {
 	pdf := gofpdf.New("L", "mm", "letter", "")
 	unicode := pdf.UnicodeTranslatorFromDescriptor("")
 	return &Generator{
 		src:        src,
+		assets:     assets,
 		references: references,
 		lang:       lang,
 		x:          X0,
@@ -47,8 +49,9 @@ func NewGenerator(src *card.SService, references []int, lang string) *Generator 
 }
 
 func (g *Generator) LoadFont() {
-	g.pdf.AddUTF8Font("Abilities", "", "fonts/CALIST.ttf")
-	g.pdf.AddUTF8Font("Abilities", "B", "fonts/CALISTB.ttf")
+	g.pdf.SetFontLocation(fmt.Sprintf("%s/fonts", g.assets))
+	g.pdf.AddUTF8Font("Abilities", "", "CALIST.ttf")
+	g.pdf.AddUTF8Font("Abilities", "B", "CALISTB.ttf")
 }
 
 func (g *Generator) GeneratePDF() error {
@@ -126,7 +129,7 @@ func (g *Generator) nextCard() {
 
 func (g *Generator) nextPage() {
 	g.pdf.AddPage()
-	g.pdf.Image("pp/871c3261-9ddd-4bcf-9737-4b4fb9008105-0.png", 0, 0, 279.4, 215.9, false, "", 0, "")
+	// g.pdf.Image("pp/871c3261-9ddd-4bcf-9737-4b4fb9008105-0.png", 0, 0, 279.4, 215.9, false, "", 0, "")
 
 	g.cardIndex = 0
 	g.x = X0

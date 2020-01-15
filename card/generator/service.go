@@ -4,24 +4,27 @@ import (
 	"fmt"
 
 	"github.com/chibimi/cards/card"
+	"github.com/google/uuid"
 	"github.com/jung-kurt/gofpdf"
 )
 
 type Service struct {
-	src *card.SService
+	src    *card.SService
+	assets string
 }
 
-func NewService(cards *card.SService) *Service {
+func NewService(cards *card.SService, assets string) *Service {
 	return &Service{
-		src: cards,
+		src:    cards,
+		assets: assets,
 	}
 }
 
 func (s *Service) GeneratePDF(references []int, lang string) (string, error) {
-	// id := uuid.New()
+	id := uuid.New()
 
 	// generator.new
-	g := NewGenerator(s.src, references, lang)
+	g := NewGenerator(s.src, references, lang, s.assets)
 	g.pdf = gofpdf.New("L", "mm", "letter", "")
 	g.unicode = g.pdf.UnicodeTranslatorFromDescriptor("")
 	// generator.translate
@@ -30,7 +33,7 @@ func (s *Service) GeneratePDF(references []int, lang string) (string, error) {
 		return "", err
 	}
 
-	res := fmt.Sprintf("%s.pdf", "hello_new")
+	res := fmt.Sprintf("%s.pdf", id)
 	err = g.WritePDF(res)
 	if err != nil {
 		return "", err
