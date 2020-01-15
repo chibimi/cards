@@ -34,7 +34,7 @@ func main() {
 	// s := api.NewService(card.NewService(db, log15.New()))
 	ss := card.NewSService(db)
 
-	generator := generator.New(db)
+	// generator := generator.New(db)
 
 	router := httprouter.New()
 	router.POST("/ref", ss.Ref.CreateRef)
@@ -77,7 +77,7 @@ func main() {
 	router.POST("/abilities", ss.Ability.CreateEndpoint)
 	router.PUT("/abilities/:id", ss.Ability.SaveEndpoint)
 
-	router.GET("/pdf/generate", generator.GenerateEndpoint)
+	// router.GET("/pdf/generate", generator.GenerateEndpoint)
 	//OLD
 	// router.GET("/abilities", s.ListAbilities)
 	// router.GET("/abilities/:id", s.GetAbility)
