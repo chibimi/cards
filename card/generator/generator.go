@@ -18,7 +18,7 @@ const Y0 float64 = 10.0 + 9.2
 const CardWidth float64 = 63.3
 const CardHeight float64 = 88.9
 const SeparatorW float64 = 0.55
-const SeparatorH float64 = 0.4
+const SeparatorH float64 = 0.2
 
 type Generator struct {
 	src         *card.SService
@@ -65,7 +65,7 @@ func (g *Generator) GeneratePDF() error {
 		for i, models := range modelsByCard {
 			g.nextCard()
 			g.PrintFront(g.x, g.y, ref, i)
-			g.y += SeparatorH
+
 			g.reverse()
 			g.PrintAbilities(g.x, g.y, ref, models)
 			g.pdf.TransformEnd()
@@ -96,7 +96,7 @@ func (g *Generator) GeneratePDF() error {
 
 func (g *Generator) reverse() {
 	g.pdf.TransformBegin()
-	g.pdf.TransformRotate(180, g.x+CardWidth/2, g.y+CardHeight)
+	g.pdf.TransformRotate(180, g.x+CardWidth/2, g.y+CardHeight+SeparatorH)
 }
 
 func split(models []model.Model) [][]model.Model {
