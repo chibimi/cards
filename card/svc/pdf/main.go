@@ -16,7 +16,8 @@ func main() {
 		log15.Crit("Unable to access db", "err", err.Error())
 	}
 	defer db.Close()
-	g := generator.NewGenerator(card.NewSService(db), []int{884, 884, 884, 82, 884}, "FR")
-	err = g.GeneratePDF()
-	fmt.Println(err)
+
+	s := generator.NewService(card.NewSService(db))
+	res, err := s.GeneratePDF([]int{3, 91, 91, 82, 91}, "FR")
+	fmt.Println(res, err)
 }
