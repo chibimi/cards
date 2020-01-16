@@ -33,7 +33,7 @@ func (s *Service) GeneratePDF(references []int, lang string) (string, error) {
 		return "", err
 	}
 
-	res := fmt.Sprintf("%s.pdf", id)
+	res := fmt.Sprintf("%s/%s.pdf", s.assets, id)
 	err = g.WritePDF(res)
 	if err != nil {
 		return "", err

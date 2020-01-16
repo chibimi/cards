@@ -7,15 +7,15 @@ import (
 	"sync"
 
 	"github.com/PuerkitoBio/goquery"
+	_ "github.com/go-sql-driver/mysql"
 	log "github.com/inconshreveable/log15"
 	"github.com/jmoiron/sqlx"
-	_ "github.com/go-sql-driver/mysql"
 )
 
 func main() {
 	var (
 		baseURL string
-		dsn string
+		dsn     string
 		workers int
 	)
 
@@ -52,7 +52,7 @@ func main() {
 		ID      string
 		Faction string
 		Job     string
-		Title string
+		Title   string
 	}
 	references := make(chan Ref)
 	go func() {
@@ -62,7 +62,7 @@ func main() {
 				ID:      s.AttrOr(":card", ""),
 				Faction: s.AttrOr("faction", ""),
 				Job:     s.AttrOr("job", ""),
-				Title:    s.AttrOr("title", ""),
+				Title:   s.AttrOr("title", ""),
 			}
 			return true
 		})
