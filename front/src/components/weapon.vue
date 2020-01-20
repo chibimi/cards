@@ -2,9 +2,9 @@
 	<div class="">
 		<div class="row mx-0">
 			<span class="col-3 text-bottom">English Name</span>
-			<span class="col-3">Name</span>
+			<!-- <span class="col-3">Name</span> -->
 
-			<div class="col-5">
+			<div class="col-8"><!-- <div class="col-5"> -->
 				<div class="form-group row my-0">
 					<span class="col-2">Type</span>
 					<span class="col">rng</span>
@@ -18,8 +18,9 @@
 			<div class="col-1"></div>
 
 			<input v-model="weapon.title" class="col-3" placeholder="English Name" />
-			<input v-model="weapon.name" class="col-3" placeholder="Name" />
-			<div class="col-5">
+			<!-- <input v-model="weapon.name" class="col-3" placeholder="Name" /> -->
+
+			<div class="col-8"><!-- <div class="col-5"> -->
 				<div class="form-group row my-0">
 					<select v-model="weapon.type" class="col-2">
 						<option value="1">Meele</option>

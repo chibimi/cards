@@ -5,14 +5,14 @@
 				<label>English Name</label>
 				<input v-model="reference.title" placeholder="English Name" />
 			</div>
-			<div>
+			<!-- <div>
 				<label>Name</label>
 				<input v-model="reference.name" placeholder="Translated Full name" />
-			</div>
-			<div>
+			</div> -->
+			<!-- <div>
 				<label>Type <Tooltip :txt="help.type"/></label>
 				<input v-model="reference.properties" placeholder="Translated Type" />
-			</div>
+			</div> -->
 			<div>
 				<label>Faction</label>
 				<select v-model="reference.faction_id">
@@ -24,6 +24,10 @@
 				<select v-model="reference.category_id">
 					<option v-for="c in categories" :key="c.id" :value="c.id">{{ c.name }}</option>
 				</select>
+			</div>
+			<div>
+				<label>PP ID</label>
+				<input v-model.number="reference.ppid" placeholder="PP ID" />
 			</div>
 		</div>
 
@@ -56,13 +60,13 @@
 
 <script>
 import { Factions, Categories } from './const.js'
-import Tooltip from './tooltip.vue'
+// import Tooltip from './tooltip.vue'
 import { EventBus } from '../main.js'
 
 export default {
 	name: 'Card',
 	props: ['reference'],
-	components: { Tooltip },
+	// components: { Tooltip },
 	mounted: function() {
 		EventBus.$on('mega_save', this.save)
 	},

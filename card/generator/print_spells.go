@@ -29,7 +29,7 @@ func (g *Generator) PrintSpells(X, Y float64, ref *reference.Reference, spells [
 func (g *Generator) PrintSpell(X, Y float64, spell spell.Spell) float64 {
 	// Name and cost
 	g.pdf.SetFont("Arial", "B", 5)
-	g.pdf.Text(X, Y, fmt.Sprintf("%s", g.unicode(strings.ToUpper(spell.Name))))
+	g.pdf.Text(X, Y, g.unicode(strings.ToUpper(spell.Name)))
 	g.pdf.SetFont("Arial", "", 5)
 	g.pdf.Text(X, Y+1.5, fmt.Sprintf("(%s)", spell.Title))
 	g.pdf.SetFont("Arial", "B", 5)
