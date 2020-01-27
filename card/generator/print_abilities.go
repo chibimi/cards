@@ -112,7 +112,7 @@ func (g *Generator) prepareAbilities(abilities []ability.Ability, cache map[int]
 	abilitiesByType := map[int][]ability.Ability{}
 	for _, ability := range abilities {
 		temp := abilitiesByType[ability.Type]
-		ability.Description = g.replaceLinks(ability.Description, cache)
+		ability.Description = g.replaceLinks(ability.Name, ability.Description, cache)
 		if _, ok := (*present)[ability.ID]; ok {
 			ability.Description = "Voir plus haut"
 		} else {

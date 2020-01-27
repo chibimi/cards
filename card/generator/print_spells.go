@@ -21,7 +21,7 @@ func (g *Generator) PrintSpells(X, Y float64, ref *reference.Reference, spells [
 
 	// Spells
 	for _, spell := range spells {
-		spell.Description = g.replaceLinks(spell.Description, map[int]ability.Ability{})
+		spell.Description = g.replaceLinks(spell.Name, spell.Description, map[int]ability.Ability{})
 		Y += g.PrintSpell(X, Y, spell)
 	}
 }

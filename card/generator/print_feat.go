@@ -8,7 +8,7 @@ import (
 
 func (g *Generator) PrintFeat(X, Y float64, ref *reference.Reference, feat *feat.Feat) {
 	g.PrintBack(X, Y, ref)
-	feat.Description = g.replaceLinks(feat.Description, map[int]ability.Ability{})
+	feat.Description = g.replaceLinks(feat.Name, feat.Description, map[int]ability.Ability{})
 
 	// Feat name
 	X += 4

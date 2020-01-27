@@ -20,7 +20,7 @@ func main() {
 	)
 
 	flag.StringVar(&baseURL, "base-url", "http://cards.privateerpress.com", "URL of the Privateer Press Cards Database")
-	flag.StringVar(&dsn, "dsn", "jackmarshall:coconuts@tcp(localhost:3306)/jackmarshall", "DSN of the Jackmarshall Database")
+	flag.StringVar(&dsn, "dsn", "jackmarshall:password@tcp(localhost:3306)/jackmarshall", "DSN of the Jackmarshall Database")
 	flag.IntVar(&workers, "workers", 1, "number of cards to process in parallel")
 	flag.Parse()
 

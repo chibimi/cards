@@ -99,7 +99,8 @@ func (g *Generator) GeneratePDF() error {
 
 func (g *Generator) reverse() {
 	g.pdf.TransformBegin()
-	g.pdf.TransformRotate(180, g.x+CardWidth/2, g.y+CardHeight+SeparatorH)
+	g.pdf.TransformTranslateY(CardHeight + SeparatorH)
+	// g.pdf.TransformRotate(180, g.x+CardWidth/2, g.y+CardHeight+SeparatorH)
 }
 
 func split(models []model.Model) [][]model.Model {
@@ -138,8 +139,9 @@ func (g *Generator) nextPage() {
 
 var validLink = regexp.MustCompile(`#[0-9]+:[^#]+#`)
 
-func (g *Generator) replaceLinks(description string, abilities map[int]ability.Ability) string {
+func (g *Generator) replaceLinks(name, description string, abilities map[int]ability.Ability) string {
 	subskills := []string{}
+	description = strings.Replace(description, "#this#", name, -1)
 	description = validLink.ReplaceAllStringFunc(description, func(src string) string {
 		s := strings.SplitN(src, ":", 2)
 		ids := s[0][1:]
