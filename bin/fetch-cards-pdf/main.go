@@ -22,7 +22,7 @@ func main() {
 
 	flag.StringVar(&baseURL, "base-url", "http://cards.privateerpress.com", "URL of the Privateer Press Cards Database")
 	flag.StringVar(&destDir, "dest-dir", ".", "directory to output the images into")
-	flag.IntVar(&workers, "workers", 1, "number of cards to process in parallel")
+	flag.IntVar(&workers, "workers", 10, "number of cards to process in parallel")
 	flag.Parse()
 
 	log.Info("starting")

@@ -21,7 +21,7 @@ func main() {
 
 	flag.StringVar(&baseURL, "base-url", "http://cards.privateerpress.com", "URL of the Privateer Press Cards Database")
 	flag.StringVar(&dsn, "dsn", "jackmarshall:password@tcp(localhost:3306)/jackmarshall", "DSN of the Jackmarshall Database")
-	flag.IntVar(&workers, "workers", 1, "number of cards to process in parallel")
+	flag.IntVar(&workers, "workers", 10, "number of cards to process in parallel")
 	flag.Parse()
 
 	log.Info("starting")
@@ -79,7 +79,7 @@ func main() {
 				log := log.New("ref", ref.ID, "title", ref.Title)
 				log.Debug("matching ref")
 
-				_, err := db.Exec("update refs set ppid = ? where title sounds like ?", ref.ID, ref.Title)
+				_, err := db.Exec("update refs set ppid = ? where title = ?", ref.ID, ref.Title)
 				if err != nil {
 					log.Error("matching ref", "err", err)
 					continue
