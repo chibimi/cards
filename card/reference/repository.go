@@ -23,8 +23,8 @@ type referenceDB struct {
 
 func (r *Repository) Create(ref *Reference) (int, error) {
 	stmt := `
-	INSERT INTO refs (ppid, faction_id, category_id, title, main_card_id, models_cnt, models_max, cost, cost_max, fa, mercenary_for, minion_for)
-	VALUES(:ppid, :faction_id, :category_id, :title, :main_card_id, :models_cnt, :models_max, :cost, :cost_max, :fa, :mercenary_for, :minion_for)
+	INSERT INTO refs (ppid, faction_id, category_id, title, main_card_id, models_cnt, models_max, cost, cost_max, fa, mercenary_for, minion_for, special, linked_to)
+	VALUES(:ppid, :faction_id, :category_id, :title, :main_card_id, :models_cnt, :models_max, :cost, :cost_max, :fa, :mercenary_for, :minion_for, :special, :linked_to)
 	`
 	merc, err := json.Marshal(ref.MercFor)
 	if err != nil {
@@ -103,7 +103,7 @@ func (r *Repository) Save(ref *Reference, lang string) error {
 	stmt := `
 	UPDATE refs SET ppid = :ppid, faction_id = :faction_id, category_id = :category_id, title = :title, main_card_id = :main_card_id,
 	models_cnt = :models_cnt, models_max = :models_max, cost = :cost, cost_max = :cost_max, fa = :fa,
-	mercenary_for = :mercenary_for, minion_for = :minion_for
+	mercenary_for = :mercenary_for, minion_for = :minion_for, special = :special, linked_to = :linked_to
 	WHERE id = :id
 	`
 	merc, err := json.Marshal(ref.MercFor)

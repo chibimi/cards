@@ -150,4 +150,6 @@ CREATE TABLE weapons_lang (
 ALTER TABLE ref_ability ADD star int DEFAULT (0);
 ALTER TABLE model_ability ADD star int DEFAULT (0);
 ALTER TABLE weapon_ability ADD star int DEFAULT (0);
-ALTER TABLE refs ADD ppid text DEFAULT ("");
+ALTER TABLE refs ADD ppid int DEFAULT 0;
+ALTER TABLE refs ADD special text DEFAULT ("");
+ALTER TABLE refs ADD linked_to int;

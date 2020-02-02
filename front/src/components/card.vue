@@ -29,6 +29,14 @@
 				<label>PP ID</label>
 				<input v-model.number="reference.ppid" placeholder="PP ID" />
 			</div>
+			<div>
+				<label>Special</label>
+				<input v-model="reference.special" placeholder="dragoon,colossal,charunit" />
+			</div>
+			<div>
+				<label>Linked To</label>
+				<input v-model.number="reference.linked_to" placeholder="Linked to" />
+			</div>
 		</div>
 
 		<div class="right">
