@@ -6,7 +6,6 @@ require (
 	github.com/PuerkitoBio/goquery v1.5.0
 	github.com/codegangsta/negroni v1.0.0
 	github.com/go-sql-driver/mysql v1.4.0
-	github.com/go-stack/stack v1.8.0 // indirect
 	github.com/gogo/protobuf v1.3.1
 	github.com/gographics/imagick v3.2.0+incompatible
 	github.com/google/uuid v1.1.1
@@ -19,6 +18,7 @@ require (
 	github.com/mattn/go-colorable v0.1.4 // indirect
 	github.com/mattn/go-isatty v0.0.11 // indirect
 	github.com/pkg/errors v0.8.1
+	github.com/prometheus/common v0.9.1
 	github.com/rs/cors v1.7.0
 	gitlab.com/golang-commonmark/markdown v0.0.0-20191127184510-91b5b3c99c19
 	google.golang.org/appengine v1.6.5 // indirect
