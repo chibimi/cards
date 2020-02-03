@@ -1,0 +1,76 @@
+:root {
+	--card-width: 750px;
+	--card-height: 1050px;
+
+	--rules-header-width: 662px;
+	--rules-header-height: 50px;
+	--rules-header-top: 48px;
+	--rules-header-left: 87px;
+
+	--rules-section-width: 707px;
+	--rules-section-height: 852px;
+	--rules-section-top: 113px;
+	--rules-section-left: 21px;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+.card {
+	width: var(--card-width);
+	height: var(--card-height);
+	position: relative;
+	background-size: cover;
+}
+
+.card.rules > header {
+	width: var(--rules-header-width);
+	height: var(--rules-header-height);
+	position: absolute;
+	top: var(--rules-header-top);
+	left: var(--rules-header-left);
+	overflow: hidden;
+	padding: 0 calc(var(--rules-header-width) * 0.01);
+}
+
+.card.rules > header > p {
+	margin: 0;
+	padding: 0;
+	line-height: var(--rules-header-height);
+	font-size: calc(var(--rules-header-height) * 0.7);
+	text-transform: uppercase;
+}
+
+.card.rules > section {
+	width: var(--rules-section-width);
+	height: var(--rules-section-height);
+	position: absolute;
+	top: var(--rules-section-top);
+	left: var(--rules-section-left);
+	overflow: hidden;
+	padding: calc(var(--rules-section-height) * 0.025) calc(var(--rules-section-width) * 0.025);
+}
+
+.card.rules > section > * {
+	margin-top: 0;
+	margin-bottom: 0.5em;
+	line-height: calc(var(--rules-header-height) * 0.6);
+	font-size: calc(var(--rules-header-height) * 0.45);
+}
+
+.card.rules > section > p.title {
+	text-transform: uppercase;
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+.card.rules > section > ul {
+	padding: 0;
+	padding-left: 1em;
+}
+
+.card.rules > section strong::after {
+	content: "-";
+	margin: 0 0.25em;
+}

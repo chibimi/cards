@@ -1,0 +1,23 @@
+{{ define "rules" }}
+<div class="card rules" style="background-image: url('assets/images/rules/{{ .Background }}.png');">
+	<header>{{ .Header | safe }}</header>
+	<section>{{ .Section | safe }}</section>
+</div>
+{{ end }}
+{{ define "profile" }}
+<div class="card profile" style="background-image: url('assets/images/profile/{{ .Background }}.png');">
+</div>
+{{ end }}
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="assets/styles/cards.css" type="text/css">
+	</head>
+	<body>
+		{{ range . }}
+		{{ if eq .Type "rules" }}{{ template "rules" . }}
+		{{ else if eq .Type "profile" }}{{ template "profile" . }}
+		{{ end }}
+		{{ end }}
+	</body>
+</html>

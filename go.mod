@@ -7,9 +7,8 @@ require (
 	github.com/andybalholm/cascadia v1.2.0 // indirect
 	github.com/codegangsta/negroni v1.0.0
 	github.com/go-sql-driver/mysql v1.5.0
-	github.com/go-stack/stack v1.8.0 // indirect
 	github.com/gographics/imagick v3.2.0+incompatible
-	github.com/google/uuid v1.1.1
+	github.com/google/uuid v1.1.1 // indirect
 	github.com/inconshreveable/log15 v0.0.0-20200109203555-b30bc20e4fd1
 	github.com/jmoiron/sqlx v1.2.0
 	github.com/julienschmidt/httprouter v1.3.0
@@ -17,6 +16,7 @@ require (
 	github.com/kelseyhightower/envconfig v1.4.0
 	github.com/mattn/go-colorable v0.1.7 // indirect
 	github.com/pkg/errors v0.9.1
+	github.com/prometheus/common v0.10.0
 	github.com/rs/cors v1.7.0
 	golang.org/x/net v0.0.0-20200625001655-4c5254603344 // indirect
 	golang.org/x/sys v0.0.0-20200625212154-ddb9806d33ae // indirect
