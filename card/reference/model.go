@@ -20,3 +20,59 @@ type Reference struct {
 	Special    string `json:"special,omitempty" db:"special"`
 	LinkedTo   *int   `json:"linked_to,omitempty" db:"linked_to"`
 }
+
+func (r Reference) HasFeat() bool {
+	switch Category(r.CategoryID) {
+	case CategoryWarcaster, CategoryWarlock, CategoryInfernalMaster:
+		return true
+	default:
+		return false
+	}
+}
+
+func (r Reference) HasSpells() bool {
+	switch Category(r.CategoryID) {
+	case CategoryWarcaster, CategoryWarlock, CategoryInfernalMaster:
+		return true
+	default:
+		return false
+	}
+}
+
+type Category int
+
+const (
+	CategoryInvalid Category = iota
+	CategoryWarcaster
+	CategoryWarlock
+	CategoryWarjack
+	CategoryWarbeast
+	CategoryUnit
+	CategorySolo
+	CategoryAttachments
+	CategoryBattleEngine
+	CategoryStructure
+	CategoryInfernalMaster
+	CategoryHorror
+)
+
+type Faction int
+
+const (
+	FactionInvalid = iota
+	FactionCygnar
+	FactionProtectorateOfMenoth
+	FactionKhador
+	FactionCryx
+	FactionRetributionOfScyrah
+	FactionConvergeanceOfCyriss
+	FactionCrucibleGuard
+	FactionMercenaries
+	FactionTrollbloods
+	FactionCircleOrboros
+	FactionLegionOfEverblight
+	FactionSkorne
+	FactionGrymkin
+	FactionInfernals
+	FactionMinions
+)

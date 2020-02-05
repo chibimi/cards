@@ -1,13 +1,46 @@
+{{ define "profile" }}
+<div class="card profile" style="background-image: url('assets/images/profile/1.png');">
+</div>
+{{ end }}
+
 {{ define "rules" }}
 <div class="card rules" style="background-image: url('assets/images/rules/{{ .Background }}.png');">
-	<header>{{ .Header | safe }}</header>
-	<section>{{ .Section | safe }}</section>
+	<header><p>{{ .Ref.Title | safe }}</p></header>
+	<section>
+		{{ $card := . }}
+		{{ range .RefAbilities }}
+		<p class="ability"><strong>{{ .Title }}</strong> {{ .Description }}</p>
+		{{ end }}
+		{{ range .Models }}
+		<p class="title">{{ .Title }}</p>
+			{{ range index $card.ModelsAbilities .ID }}
+			<p class="ability"><strong>{{ .Title }}</strong> {{ .Description }}</p>
+			{{ end }}
+
+			{{ if not (eq (len (index $card.WeaponsAbilities .ID)) 0) }}
+			{{ range index $card.WeaponsAbilities .ID }}
+			<p class="title">{{ .Title }}</p>
+				{{ range index $card.WeaponsAbilities .ID }}
+				<p class="ability"><strong>{{ .Title }}</strong> {{ .Description }}</p>
+				{{ end }}
+			{{ end }}
+			{{ end }}
+		{{ end }}
+	</section>
 </div>
 {{ end }}
-{{ define "profile" }}
-<div class="card profile" style="background-image: url('assets/images/profile/{{ .Background }}.png');">
+
+{{ define "feat" }}
+<div class="card rules" style="background-image: url('assets/images/rules/{{ .Background }}.png');">
+	<header><p>{{ .Ref.Title | safe }}</p></header>
+	<section>
+		<p class="title">{{ .Feat.Name }}</p>
+		<p class="fluff">{{ .Feat.Fluff }}</p>
+		<p class="feat">{{ .Feat.Description}}</p>
+	</section>
 </div>
 {{ end }}
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -17,6 +50,7 @@
 		{{ range . }}
 		{{ if eq .Type "rules" }}{{ template "rules" . }}
 		{{ else if eq .Type "profile" }}{{ template "profile" . }}
+		{{ else if eq .Type "feat" }}{{ template "feat" . }}
 		{{ end }}
 		{{ end }}
 	</body>
