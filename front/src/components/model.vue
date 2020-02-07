@@ -65,7 +65,7 @@
 						<input v-model="model.def" placeholder="def" />
 						<input v-model="model.arm" placeholder="arm" />
 						<input v-model="model.cmd" placeholder="cmd" />
-						<input v-model="model.base_size" placeholder="case" />
+						<input v-model="model.base_size" placeholder="base" />
 					</div>
 					<label v-for="a in advantages" :key="a.label" v-bind:value="a.label">
 						<input type="checkbox" v-model="model.advantages" :value="a.label" />{{ a.name }}
