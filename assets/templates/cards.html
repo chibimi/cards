@@ -30,6 +30,43 @@
 </div>
 {{ end }}
 
+{{ define "spells" }}
+<div class="card spells" style="background-image: url('assets/images/rules/{{ .Background }}.png');">
+	<header><p>{{ .Ref.Title | safe }}</p></header>
+	<section>
+		<table>
+			<thead>
+				<tr>
+					<th>spells</th>
+					<th>cost</th>
+					<th>rng</th>
+					<th>aoe</th>
+					<th>pow</th>
+					<th>dur</th>
+					<th>off</th>
+				</tr>
+			</thead>
+			<tbody>
+				{{ range .Spells }}
+				<tr class="spellline">
+					<td>{{ .Name }}<br></td>
+					<td>{{ .Cost }}</td>
+					<td>{{ .RNG }}</td>
+					<td>{{ .AOE }}</td>
+					<td>{{ .POW }}</td>
+					<td>{{ .DUR }}</td>
+					<td>{{ .OFF }}</td>
+				</tr>
+				<tr>
+					<td colspan="7">{{ .Description }}</td>
+				</tr>
+				{{ end }}
+			</tbody>
+		</table>
+	</section>
+</div>
+{{ end }}
+
 {{ define "feat" }}
 <div class="card rules" style="background-image: url('assets/images/rules/{{ .Background }}.png');">
 	<header><p>{{ .Ref.Title | safe }}</p></header>
@@ -48,10 +85,11 @@
 	</head>
 	<body>
 		{{ range . }}
-		{{ if eq .Type "rules" }}{{ template "rules" . }}
-		{{ else if eq .Type "profile" }}{{ template "profile" . }}
-		{{ else if eq .Type "feat" }}{{ template "feat" . }}
-		{{ end }}
+			{{ if eq .Type "rules" }}{{ template "rules" . }}
+			{{ else if eq .Type "profile" }}{{ template "profile" . }}
+			{{ else if eq .Type "spells" }}{{ template "spells" . }}
+			{{ else if eq .Type "feat" }}{{ template "feat" . }}
+			{{ end }}
 		{{ end }}
 	</body>
 </html>
