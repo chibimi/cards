@@ -15,6 +15,7 @@
 
 	font-family: 'Calisto MT', serif;
 	font-size: 2mm;
+	line-height: 2.1mm;
 
 	// The text class is used as the base for all the text cards, those
 	// that are composed of a title block and a section block that contains
@@ -23,15 +24,17 @@
 		> header {
 			position: absolute;
 			left: 10mm;
-			top: 4mm;
+			top: 4.5mm;
 			width: @card-width - 10mm;
 			height: 4mm;
+			line-height: 4.2mm;
 
 			> p {
 				margin: 0;
 				padding: 0;
 
-				font-size: 3.5mm;
+				font-size: 3mm;
+				text-transform: uppercase;
 			}
 		}
 
@@ -76,12 +79,15 @@
 			}
 
 			p.title {
+				font-size: 0.9em;
 				font-weight: bold;
 				text-decoration: underline;
 				text-transform: uppercase;
 			}
 
-			p > strong.name {
+			p > strong {
+				font-size: 0.9em;
+				font-weight: bold;
 				text-transform: uppercase;
 			}
 
@@ -108,13 +114,14 @@
 				}
 
 				th, tr.spellline > td {
+					font-size: 0.85em;
 					font-weight: bold;
 					font-stretch: condensed;
 					text-transform: uppercase;
 				}
 
 				tr.spellline > td {
-					padding-top: 0.5em;
+					padding-top: 1em;
 				}
 			}
 		}
@@ -124,11 +131,18 @@
 		.text;
 
 		> section {
+			width: 52mm;
+			padding: 1.5mm 5mm;
+
 			p.title {
 				font-weight: bold;
 				font-stretch: condensed;
 				text-transform: uppercase;
 				text-align: center;
+
+				&::before {
+					content: "feat: ";
+				}
 			}
 
 			p.fluff {
