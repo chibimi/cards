@@ -93,8 +93,17 @@ func (s *Service) DisplayEndpoint(w http.ResponseWriter, r *http.Request, p http
 	}
 
 	t, err := template.New("cards.html").Funcs(template.FuncMap{
+		// safe is for printing HTML directly into the template. Might
+		// be useful if we use markdown somewhere.
 		"safe": func(html string) template.HTML {
 			return template.HTML(html)
+		},
+		// slug takes a string and returns a slug-case version of if
+		// (spaces replaced by dashes), which is useful for using
+		// strings as class name, like for the multi-word factions
+		// names.
+		"slug": func(s string) string {
+			return strings.Replace(s, " ", "-", -1)
 		},
 	}).ParseFiles(path.Join(s.assets, "templates/cards.html"))
 	if err != nil {
@@ -195,7 +204,7 @@ func (s *Service) Build(id int, lang string) (cards []Card, err error) {
 
 type Card interface {
 	Type() string
-	Background() string
+	Faction() reference.Faction
 }
 
 type ProfileCard struct {
@@ -204,8 +213,8 @@ type ProfileCard struct {
 	ModelsWeapons map[int][]weapon.Weapon
 }
 
-func (c ProfileCard) Background() string {
-	return strconv.Itoa(c.Ref.FactionID)
+func (c ProfileCard) Faction() reference.Faction {
+	return c.Ref.FactionID
 }
 
 func (ProfileCard) Type() string {
@@ -225,8 +234,8 @@ func (RulesCard) Type() string {
 	return "rules"
 }
 
-func (c RulesCard) Background() string {
-	return strconv.Itoa(c.Ref.FactionID)
+func (c RulesCard) Faction() reference.Faction {
+	return c.Ref.FactionID
 }
 
 type SpellsCard struct {
@@ -234,8 +243,8 @@ type SpellsCard struct {
 	Spells []spell.Spell
 }
 
-func (c SpellsCard) Background() string {
-	return strconv.Itoa(c.Ref.FactionID)
+func (c SpellsCard) Faction() reference.Faction {
+	return c.Ref.FactionID
 }
 
 func (SpellsCard) Type() string {
@@ -247,8 +256,8 @@ type FeatCard struct {
 	Feat *feat.Feat
 }
 
-func (c FeatCard) Background() string {
-	return strconv.Itoa(c.Ref.FactionID)
+func (c FeatCard) Faction() reference.Faction {
+	return c.Ref.FactionID
 }
 
 func (FeatCard) Type() string {
