@@ -50,7 +50,22 @@
 	}
 
 	&.profile {
-		background-image: url('../images/cards/profile-trollbloods.png');
+		> header {
+			position: absolute;
+			left: 9.5mm;
+			top: 4.5mm;
+			width: @card-width - 9.5mm;
+			height: 4mm;
+			line-height: 4.2mm;
+
+			> p {
+				margin: 0;
+				padding: 0;
+
+				font-size: 3mm;
+				text-transform: uppercase;
+			}
+		}
 	}
 
 	&.rules {
@@ -72,6 +87,7 @@
 			p > strong {
 				font-size: 0.9em;
 				font-weight: bold;
+				letter-spacing: -0.05em;
 				text-transform: uppercase;
 			}
 
@@ -100,7 +116,7 @@
 				th, tr.spellline > td {
 					font-size: 0.85em;
 					font-weight: bold;
-					font-stretch: condensed;
+					letter-spacing: -0.05em;
 					text-transform: uppercase;
 				}
 
@@ -159,7 +175,7 @@
 			background-image: url('../images/cards/text-crucible-guard.png');
 		}
 		> header > p {
-			font-family: 'Amplifier';
+			font-family: 'Arial';
 		}
 	}
 	&.cryx {
@@ -183,7 +199,7 @@
 			background-image: url('../images/cards/text-grymkin.png');
 		}
 		> header > p {
-			font-family: 'Modern Blues';
+			font-family: 'Arial';
 		}
 	}
 	&.infernals {
@@ -191,7 +207,7 @@
 			background-image: url('../images/cards/text-infernals.png');
 		}
 		> header > p {
-			font-family: 'Modern Blues';
+			font-family: 'Arial';
 		}
 	}
 	&.khador {
@@ -224,7 +240,7 @@
 			background-image: url('../images/cards/text-minions.png');
 		}
 		> header > p {
-			font-family: 'Parchment';
+			font-family: 'Arial';
 		}
 	}
 	&.protectorate-of-menoth {
@@ -252,6 +268,9 @@
 		}
 	}
 	&.trollbloods {
+		&.profile {
+			background-image: url('../images/cards/profile-trollbloods.png');
+		}
 		&.rules, &.spells, &.feat {
 			background-image: url('../images/cards/text-trollbloods.png');
 		}
