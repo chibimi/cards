@@ -1,6 +1,6 @@
 @import: url(https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css);
 
-@import 'calisto.css';
+@import 'fonts.css';
 
 @card-width: 65mm;
 @card-height: 90mm;
@@ -13,7 +13,7 @@
 	display: inline-block;
 	overflow: hidden;
 
-	font-family: 'Calisto MT', serif;
+	font-family: 'Calisto', serif;
 	font-size: 2mm;
 	line-height: 2.1mm;
 
@@ -23,9 +23,9 @@
 	.text {
 		> header {
 			position: absolute;
-			left: 10mm;
+			left: 9.5mm;
 			top: 4.5mm;
-			width: @card-width - 10mm;
+			width: @card-width - 9.5mm;
 			height: 4mm;
 			line-height: 4.2mm;
 
@@ -47,22 +47,6 @@
 
 			padding: 1.5mm;
 		}
-
-		&.circle-orboros { background-image: url('../images/cards/text-circle-orboros.png'); }
-		&.convergeance-of-cyriss { background-image: url('../images/cards/text-convergeance-of-cyriss.png'); }
-		&.crucible-guard { background-image: url('../images/cards/text-crucible-guard.png'); }
-		&.cryx { background-image: url('../images/cards/text-cryx.png'); }
-		&.cygnar { background-image: url('../images/cards/text-cygnar.png'); }
-		&.grymkin { background-image: url('../images/cards/text-grymkin.png'); }
-		&.infernals { background-image: url('../images/cards/text-infernals.png'); }
-		&.khador { background-image: url('../images/cards/text-khador.png'); }
-		&.legion-of-everblight { background-image: url('../images/cards/text-legion-of-everblight.png'); }
-		&.mercenaries { background-image: url('../images/cards/text-mercenaries.png'); }
-		&.minions { background-image: url('../images/cards/text-minions.png'); }
-		&.protectorate-of-menoth { background-image: url('../images/cards/text-protectorate-of-menoth.png'); }
-		&.retribution-of-scyrah { background-image: url('../images/cards/text-retribution-of-scyrah.png'); }
-		&.skorne { background-image: url('../images/cards/text-skorne.png'); }
-		&.trollbloods { background-image: url('../images/cards/text-trollbloods.png'); }
 	}
 
 	&.profile {
@@ -152,39 +136,128 @@
 			}
 		}
 	}
+
+	&.circle-orboros {
+		&.rules, &.spells, &.feat {
+			background-image: url('../images/cards/text-circle-orboros.png');
+		}
+		> header > p {
+			font-family: 'Scurlock';
+		}
+	}
+	&.convergeance-of-cyriss {
+		&.rules, &.spells, &.feat {
+			background-image: url('../images/cards/text-convergeance-of-cyriss.png');
+		}
+		> header > p {
+			font-family: 'Arts and Crafts';
+			letter-spacing: -0.05em;
+		}
+	}
+	&.crucible-guard {
+		&.rules, &.spells, &.feat {
+			background-image: url('../images/cards/text-crucible-guard.png');
+		}
+		> header > p {
+			font-family: 'Amplifier';
+		}
+	}
+	&.cryx {
+		&.rules, &.spells, &.feat {
+			background-image: url('../images/cards/text-cryx.png');
+		}
+		> header > p {
+			font-family: 'Templar';
+		}
+	}
+	&.cygnar {
+		&.rules, &.spells, &.feat {
+			background-image: url('../images/cards/text-cygnar.png');
+		}
+		> header > p {
+			font-family: 'Amplifier';
+		}
+	}
+	&.grymkin {
+		&.rules, &.spells, &.feat {
+			background-image: url('../images/cards/text-grymkin.png');
+		}
+		> header > p {
+			font-family: 'Modern Blues';
+		}
+	}
+	&.infernals {
+		&.rules, &.spells, &.feat {
+			background-image: url('../images/cards/text-infernals.png');
+		}
+		> header > p {
+			font-family: 'Modern Blues';
+		}
+	}
+	&.khador {
+		&.rules, &.spells, &.feat {
+			background-image: url('../images/cards/text-khador.png');
+		}
+		> header > p {
+			font-family: 'Satellite';
+		}
+	}
+	&.legion-of-everblight {
+		&.rules, &.spells, &.feat {
+			background-image: url('../images/cards/text-legion-of-everblight.png');
+		}
+		> header > p {
+			font-family: 'Fandango';
+			letter-spacing: -0.05em;
+		}
+	}
+	&.mercenaries {
+		&.rules, &.spells, &.feat {
+			background-image: url('../images/cards/text-mercenaries.png');
+		}
+		> header > p {
+			font-family: 'Parchment';
+		}
+	}
+	&.minions {
+		&.rules, &.spells, &.feat {
+			background-image: url('../images/cards/text-minions.png');
+		}
+		> header > p {
+			font-family: 'Parchment';
+		}
+	}
+	&.protectorate-of-menoth {
+		&.rules, &.spells, &.feat {
+			background-image: url('../images/cards/text-protectorate-of-menoth.png');
+		}
+		> header > p {
+			font-family: 'Konfactur';
+		}
+	}
+	&.retribution-of-scyrah {
+		&.rules, &.spells, &.feat {
+			background-image: url('../images/cards/text-retribution-of-scyrah.png');
+		}
+		> header > p {
+			font-family: 'Nailfont';
+		}
+	}
+	&.skorne {
+		&.rules, &.spells, &.feat {
+			background-image: url('../images/cards/text-skorne.png');
+		}
+		> header > p {
+			font-family: 'Kruella';
+		}
+	}
+	&.trollbloods {
+		&.rules, &.spells, &.feat {
+			background-image: url('../images/cards/text-trollbloods.png');
+		}
+		> header > p {
+			font-family: 'Modern Blues';
+		}
+	}
 }
 
-/*
-
-.card.spells > section table {
-border-collapse: collapse;
-text-align: center;
-}
-
-.card.spells > section table td:first-child {
-text-align: left;
-}
-
-.card.spells > section table th:first-child {
-text-align: left;
-}
-
-.card.spells > section thead {
-background: black;
-color: white;
-text-transform: uppercase;
-}
-
-.card.spells > section tr > * {
-}
-
-.card.spells > section tr.spellline > td {
-text-transform: uppercase;
-font-family: sans-serif;
-padding-top: 0.5em;
-}
-
-.card.spells > section tr.spellline > td:first-child {
-font-weight: bold;
-}
-*/
