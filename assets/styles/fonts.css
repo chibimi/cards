@@ -1,0 +1,204 @@
+@font-face {
+    font-family: 'Kruella';
+    src: url('../fonts/Kruella.eot');
+    src: url('../fonts/Kruella.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/Kruella.woff2') format('woff2'),
+        url('../fonts/Kruella.woff') format('woff'),
+        url('../fonts/Kruella.ttf') format('truetype'),
+        url('../fonts/Kruella.svg#Kruella') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Satellite';
+    src: url('../fonts/Satellite-Regular.eot');
+    src: url('../fonts/Satellite-Regular.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/Satellite-Regular.woff2') format('woff2'),
+        url('../fonts/Satellite-Regular.woff') format('woff'),
+        url('../fonts/Satellite-Regular.ttf') format('truetype'),
+        url('../fonts/Satellite-Regular.svg#Satellite-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Amplifier';
+    src: url('../fonts/AmplifierBold.eot');
+    src: url('../fonts/AmplifierBold.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/AmplifierBold.woff2') format('woff2'),
+        url('../fonts/AmplifierBold.woff') format('woff'),
+        url('../fonts/AmplifierBold.ttf') format('truetype'),
+        url('../fonts/AmplifierBold.svg#AmplifierBold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Parchment';
+    src: url('../fonts/Parchment.eot');
+    src: url('../fonts/Parchment.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/Parchment.woff2') format('woff2'),
+        url('../fonts/Parchment.woff') format('woff'),
+        url('../fonts/Parchment.ttf') format('truetype'),
+        url('../fonts/Parchment.svg#Parchment') format('svg');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Calisto';
+    src: url('../fonts/CalisMTBol.eot');
+    src: url('../fonts/CalisMTBol.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/CalisMTBol.woff2') format('woff2'),
+        url('../fonts/CalisMTBol.woff') format('woff'),
+        url('../fonts/CalisMTBol.ttf') format('truetype'),
+        url('../fonts/CalisMTBol.svg#CalisMTBol') format('svg');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Amplifier';
+    src: url('../fonts/AmplifierLight.eot');
+    src: url('../fonts/AmplifierLight.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/AmplifierLight.woff2') format('woff2'),
+        url('../fonts/AmplifierLight.woff') format('woff'),
+        url('../fonts/AmplifierLight.ttf') format('truetype'),
+        url('../fonts/AmplifierLight.svg#AmplifierLight') format('svg');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Fandango';
+    src: url('../fonts/FandangoBold.eot');
+    src: url('../fonts/FandangoBold.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/FandangoBold.woff2') format('woff2'),
+        url('../fonts/FandangoBold.woff') format('woff'),
+        url('../fonts/FandangoBold.ttf') format('truetype'),
+        url('../fonts/FandangoBold.svg#FandangoBold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Templar';
+    src: url('../fonts/TemplarRegularSWFTE.eot');
+    src: url('../fonts/TemplarRegularSWFTE.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/TemplarRegularSWFTE.woff2') format('woff2'),
+        url('../fonts/TemplarRegularSWFTE.woff') format('woff'),
+        url('../fonts/TemplarRegularSWFTE.ttf') format('truetype'),
+        url('../fonts/TemplarRegularSWFTE.svg#TemplarRegularSWFTE') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Fandango';
+    src: url('../fonts/FandangoRegular.eot');
+    src: url('../fonts/FandangoRegular.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/FandangoRegular.woff2') format('woff2'),
+        url('../fonts/FandangoRegular.woff') format('woff'),
+        url('../fonts/FandangoRegular.ttf') format('truetype'),
+        url('../fonts/FandangoRegular.svg#FandangoRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Scurlock';
+    src: url('../fonts/Scurlock.eot');
+    src: url('../fonts/Scurlock.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/Scurlock.woff2') format('woff2'),
+        url('../fonts/Scurlock.woff') format('woff'),
+        url('../fonts/Scurlock.ttf') format('truetype'),
+        url('../fonts/Scurlock.svg#Scurlock') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Calisto';
+    src: url('../fonts/CalistoMT-BoldItalic.eot');
+    src: url('../fonts/CalistoMT-BoldItalic.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/CalistoMT-BoldItalic.woff2') format('woff2'),
+        url('../fonts/CalistoMT-BoldItalic.woff') format('woff'),
+        url('../fonts/CalistoMT-BoldItalic.ttf') format('truetype'),
+        url('../fonts/CalistoMT-BoldItalic.svg#CalistoMT-BoldItalic') format('svg');
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Calisto';
+    src: url('../fonts/CalistoMT-Italic.eot');
+    src: url('../fonts/CalistoMT-Italic.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/CalistoMT-Italic.woff2') format('woff2'),
+        url('../fonts/CalistoMT-Italic.woff') format('woff'),
+        url('../fonts/CalistoMT-Italic.ttf') format('truetype'),
+        url('../fonts/CalistoMT-Italic.svg#CalistoMT-Italic') format('svg');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Calisto';
+    src: url('../fonts/CalistoMT.eot');
+    src: url('../fonts/CalistoMT.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/CalistoMT.woff2') format('woff2'),
+        url('../fonts/CalistoMT.woff') format('woff'),
+        url('../fonts/CalistoMT.ttf') format('truetype'),
+        url('../fonts/CalistoMT.svg#CalistoMT') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Modern Blues';
+    src: url('../fonts/ModernBlues.eot');
+    src: url('../fonts/ModernBlues.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/ModernBlues.woff2') format('woff2'),
+        url('../fonts/ModernBlues.woff') format('woff'),
+        url('../fonts/ModernBlues.ttf') format('truetype'),
+        url('../fonts/ModernBlues.svg#ModernBlues') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Nailfont';
+    src: url('../fonts/Nailfont.eot');
+    src: url('../fonts/Nailfont.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/Nailfont.woff2') format('woff2'),
+        url('../fonts/Nailfont.woff') format('woff'),
+        url('../fonts/Nailfont.ttf') format('truetype'),
+        url('../fonts/Nailfont.svg#Nailfont') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Arts and Crafts';
+    src: url('../fonts/P22ArtsandCrafts-Regular.eot');
+    src: url('../fonts/P22ArtsandCrafts-Regular.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/P22ArtsandCrafts-Regular.woff2') format('woff2'),
+        url('../fonts/P22ArtsandCrafts-Regular.woff') format('woff'),
+        url('../fonts/P22ArtsandCrafts-Regular.ttf') format('truetype'),
+        url('../fonts/P22ArtsandCrafts-Regular.svg#P22ArtsandCrafts-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Konfactur';
+    src: url('../fonts/Konfactur-One.eot');
+    src: url('../fonts/Konfactur-One.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/Konfactur-One.woff2') format('woff2'),
+        url('../fonts/Konfactur-One.woff') format('woff'),
+        url('../fonts/Konfactur-One.ttf') format('truetype'),
+        url('../fonts/Konfactur-One.svg#Konfactur-One') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+

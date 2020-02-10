@@ -10,18 +10,19 @@
 	{{ end }}
 	{{ range .Models }}
 	<p class="title">{{ .Title }}</p>
-	{{ range index $card.ModelsAbilities .ID }}
-	<p class="ability"><strong>{{ .Title }}</strong> {{ .Description }}</p>
-	{{ end }}
 
-	{{ if not (eq (len (index $card.WeaponsAbilities .ID)) 0) }}
-	{{ range index $card.WeaponsAbilities .ID }}
-	<p class="title">{{ .Title }}</p>
-	{{ range index $card.WeaponsAbilities .ID }}
-	<p class="ability"><strong>{{ .Title }}</strong> {{ .Description }}</p>
-	{{ end }}
-	{{ end }}
-	{{ end }}
+		{{ range index $card.ModelsAbilities .ID }}
+		<p class="ability"><strong>{{ .Title }}</strong> {{ .Description }}</p>
+		{{ end }}
+
+		{{ range index $card.ModelsWeapons .ID }}
+			{{ if not (eq (len (index $card.WeaponsAbilities .ID)) 0) }}
+				<p class="title">{{ .Title }}</p>
+				{{ range index $card.WeaponsAbilities .ID }}
+					<p class="ability"><strong>{{ .Title }}</strong> {{ .Description }}</p>
+				{{ end }}
+			{{ end }}
+		{{ end }}
 	{{ end }}
 </section>
 {{ end }}

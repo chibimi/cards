@@ -169,7 +169,7 @@ func (s *Service) Build(id int, lang string) (cards []Card, err error) {
 			if err != nil {
 				return nil, fmt.Errorf(`fetching abilities for weapon %d: %w`, weapon.ID, err)
 			}
-			rules.WeaponsAbilities[model.ID] = abilities
+			rules.WeaponsAbilities[weapon.ID] = abilities
 		}
 	}
 
