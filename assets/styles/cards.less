@@ -46,6 +46,11 @@
 			height: 72mm;
 
 			padding: 1.5mm;
+
+			p > img {
+				height: 2mm;
+				vertical-align: middle;
+			}
 		}
 	}
 
@@ -99,11 +104,6 @@
 				letter-spacing: -0.05em;
 				text-transform: uppercase;
 			}
-
-			p > strong::after {
-				content: "–";
-				margin-left: 0.25em;
-			}
 		}
 	}
 
@@ -137,6 +137,10 @@
 
 				tr.spellline > td {
 					padding-top: 1em;
+				}
+
+				td > * {
+					margin: 0;
 				}
 			}
 		}
@@ -172,7 +176,7 @@
 
 	&.circle-orboros {
 		&.rules, &.spells, &.feat {
-			background-image: url('../images/cards/text-circle-orboros.png');
+			background-image: url('../cards/text-circle-orboros.png');
 		}
 		> header > p {
 			font-family: 'Scurlock';
@@ -180,7 +184,7 @@
 	}
 	&.convergeance-of-cyriss {
 		&.rules, &.spells, &.feat {
-			background-image: url('../images/cards/text-convergeance-of-cyriss.png');
+			background-image: url('../cards/text-convergeance-of-cyriss.png');
 		}
 		> header > p {
 			font-family: 'Arts and Crafts';
@@ -189,7 +193,7 @@
 	}
 	&.crucible-guard {
 		&.rules, &.spells, &.feat {
-			background-image: url('../images/cards/text-crucible-guard.png');
+			background-image: url('../cards/text-crucible-guard.png');
 		}
 		> header > p {
 			font-family: 'Arial';
@@ -197,16 +201,16 @@
 	}
 	&.cryx {
 		&.profile {
-			background-image: url('../images/cards/profile-cryx.png');
+			background-image: url('../cards/profile-cryx.png');
 		}
 		&.rules {
-			background-image: url('../images/cards/rules-cryx.jpeg');
+			background-image: url('../cards/rules-cryx.jpeg');
 		}
 		&.spells {
-			background-image: url('../images/cards/spells-cryx.jpeg');
+			background-image: url('../cards/spells-cryx.jpeg');
 		}
 		&.feat {
-			background-image: url('../images/cards/feat-cryx.jpeg');
+			background-image: url('../cards/feat-cryx.jpeg');
 		}
 		> header > p {
 			font-family: 'Templar';
@@ -214,7 +218,7 @@
 	}
 	&.cygnar {
 		&.rules, &.spells, &.feat {
-			background-image: url('../images/cards/text-cygnar.png');
+			background-image: url('../cards/text-cygnar.png');
 		}
 		> header > p {
 			font-family: 'Amplifier';
@@ -222,7 +226,7 @@
 	}
 	&.grymkin {
 		&.rules, &.spells, &.feat {
-			background-image: url('../images/cards/text-grymkin.png');
+			background-image: url('../cards/text-grymkin.png');
 		}
 		> header > p {
 			font-family: 'Arial';
@@ -230,7 +234,7 @@
 	}
 	&.infernals {
 		&.rules, &.spells, &.feat {
-			background-image: url('../images/cards/text-infernals.png');
+			background-image: url('../cards/text-infernals.png');
 		}
 		> header > p {
 			font-family: 'Arial';
@@ -238,7 +242,7 @@
 	}
 	&.khador {
 		&.rules, &.spells, &.feat {
-			background-image: url('../images/cards/text-khador.png');
+			background-image: url('../cards/text-khador.png');
 		}
 		> header > p {
 			font-family: 'Satellite';
@@ -246,7 +250,7 @@
 	}
 	&.legion-of-everblight {
 		&.rules, &.spells, &.feat {
-			background-image: url('../images/cards/text-legion-of-everblight.png');
+			background-image: url('../cards/text-legion-of-everblight.png');
 		}
 		> header > p {
 			font-family: 'Fandango';
@@ -255,7 +259,7 @@
 	}
 	&.mercenaries {
 		&.rules, &.spells, &.feat {
-			background-image: url('../images/cards/text-mercenaries.png');
+			background-image: url('../cards/text-mercenaries.png');
 		}
 		> header > p {
 			font-family: 'Parchment';
@@ -263,7 +267,7 @@
 	}
 	&.minions {
 		&.rules, &.spells, &.feat {
-			background-image: url('../images/cards/text-minions.png');
+			background-image: url('../cards/text-minions.png');
 		}
 		> header > p {
 			font-family: 'Arial';
@@ -271,7 +275,7 @@
 	}
 	&.protectorate-of-menoth {
 		&.rules, &.spells, &.feat {
-			background-image: url('../images/cards/text-protectorate-of-menoth.png');
+			background-image: url('../cards/text-protectorate-of-menoth.png');
 		}
 		> header > p {
 			font-family: 'Konfactur';
@@ -279,7 +283,7 @@
 	}
 	&.retribution-of-scyrah {
 		&.rules, &.spells, &.feat {
-			background-image: url('../images/cards/text-retribution-of-scyrah.png');
+			background-image: url('../cards/text-retribution-of-scyrah.png');
 		}
 		> header > p {
 			font-family: 'Nailfont';
@@ -287,7 +291,7 @@
 	}
 	&.skorne {
 		&.rules, &.spells, &.feat {
-			background-image: url('../images/cards/text-skorne.png');
+			background-image: url('../cards/text-skorne.png');
 		}
 		> header > p {
 			font-family: 'Kruella';
@@ -295,10 +299,10 @@
 	}
 	&.trollbloods {
 		&.profile {
-			background-image: url('../images/cards/profile-trollbloods.png');
+			background-image: url('../cards/profile-trollbloods.png');
 		}
 		&.rules, &.spells, &.feat {
-			background-image: url('../images/cards/text-trollbloods.png');
+			background-image: url('../cards/text-trollbloods.png');
 		}
 		> header > p {
 			font-family: 'Modern Blues';

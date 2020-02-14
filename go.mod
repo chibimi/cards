@@ -20,6 +20,7 @@ require (
 	github.com/pkg/errors v0.8.1
 	github.com/prometheus/common v0.9.1
 	github.com/rs/cors v1.7.0
+	github.com/yuin/goldmark v1.1.22
 	gitlab.com/golang-commonmark/markdown v0.0.0-20191127184510-91b5b3c99c19
 	google.golang.org/appengine v1.6.5 // indirect
 	gopkg.in/gographics/imagick.v3 v3.3.0
