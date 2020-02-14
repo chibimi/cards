@@ -1,7 +1,7 @@
 {{ define "profile" }}
 <header><p>{{ .Ref.Title }}</p></header>
 <section>
-	<img class="portrait" src="assets/images/portraits/{{ .Ref.ID }}.png">
+	<img class="portrait" src="assets/portraits/{{ .Ref.ID }}.png">
 </section>
 {{ end }}
 
@@ -10,20 +10,20 @@
 <section>
 	{{ $card := . }}
 	{{ range .RefAbilities }}
-	<p class="ability"><strong>{{ .Title }}</strong> {{ .Description }}</p>
+	<p class="ability">{{ .Text | compile | safe }}</p>
 	{{ end }}
 	{{ range .Models }}
 	<p class="title">{{ .Title }}</p>
 
 		{{ range index $card.ModelsAbilities .ID }}
-		<p class="ability"><strong>{{ .Title }}</strong> {{ .Description }}</p>
+		<p class="ability">{{ .Text | compile | safe }}</p>
 		{{ end }}
 
 		{{ range index $card.ModelsWeapons .ID }}
 			{{ if not (eq (len (index $card.WeaponsAbilities .ID)) 0) }}
 				<p class="title">{{ .Title }}</p>
 				{{ range index $card.WeaponsAbilities .ID }}
-					<p class="ability"><strong>{{ .Title }}</strong> {{ .Description }}</p>
+					<p class="ability">{{ .Text | compile | safe }}</p>
 				{{ end }}
 			{{ end }}
 		{{ end }}
@@ -58,7 +58,7 @@
 				<td>{{ .OFF }}</td>
 			</tr>
 			<tr>
-				<td colspan="7">{{ .Description }}</td>
+				<td colspan="7">{{ .Description | compile | safe }}</td>
 			</tr>
 			{{ end }}
 		</tbody>
@@ -71,7 +71,7 @@
 <section>
 	<p class="title">{{ .Feat.Name }}</p>
 	<p class="fluff">{{ .Feat.Fluff }}</p>
-	<p class="feat">{{ .Feat.Description}}</p>
+	<p class="feat">{{ .Feat.Description | compile | safe }}</p>
 </section>
 {{ end }}
 

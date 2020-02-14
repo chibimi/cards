@@ -33,7 +33,6 @@ func main() {
 	}
 	defer db.Close()
 
-	// s := api.NewService(card.NewService(db, log15.New()))
 	ss := card.NewSService(db)
 
 	generator := generator.NewService(ss, cfg.AssetsDir)

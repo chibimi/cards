@@ -1,5 +1,7 @@
 package ability
 
+import "fmt"
+
 type Ability struct {
 	ID          int    `json:"id,omitempty"`
 	Title       string `json:"title,omitempty"`
@@ -16,7 +18,6 @@ type Relation struct {
 	Star      *int `json:"star,omitempty"`
 }
 
-type Rule struct {
-	Main Ability
-	Sub  []Ability
+func (a Ability) Text() string {
+	return fmt.Sprintf("**%s** – %s", a.Title, a.Description)
 }

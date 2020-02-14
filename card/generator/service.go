@@ -7,6 +7,7 @@ import (
 	"io"
 	"net/http"
 	"path"
+	"regexp"
 	"strconv"
 	"strings"
 
@@ -17,10 +18,18 @@ import (
 	"github.com/chibimi/cards/card/reference"
 	"github.com/chibimi/cards/card/spell"
 	"github.com/chibimi/cards/card/weapon"
+	multierror "github.com/hashicorp/go-multierror"
 	"github.com/julienschmidt/httprouter"
 	"github.com/prometheus/common/log"
+	"gitlab.com/golang-commonmark/markdown"
 	log15 "gopkg.in/inconshreveable/log15.v2"
 )
+
+// reAbility is the regex for abilities tags in texts.
+var reAbility = regexp.MustCompile(`#[0-9]+:[^#]+#`)
+
+// reAdvantage is the regex for advantages tags in texts.
+var reAdvantage = regexp.MustCompile(`:[^: ]+:`)
 
 type Service struct {
 	src    *card.SService
@@ -104,6 +113,50 @@ func (s *Service) DisplayEndpoint(w http.ResponseWriter, r *http.Request, p http
 		// names.
 		"slug": func(s string) string {
 			return strings.Replace(s, " ", "-", -1)
+		},
+		// compile takes a strings and returns a HTML version of it
+		// with abilities and advantages tags replaced by their textual
+		// versions.
+		"compile": func(src string) (string, error) {
+			log15.Debug("compiling", "src", src)
+			var abilities []string
+			var err *multierror.Error
+
+			var buf strings.Builder
+			buf.WriteString(reAbility.ReplaceAllStringFunc(src, func(tag string) string {
+				id, e := strconv.Atoi(tag[1:strings.IndexRune(tag, ':')])
+				if e != nil {
+					err = multierror.Append(err, e)
+					log15.Debug("parsing ability tag", "tag", tag, "err", e)
+					return tag
+				}
+
+				ability, e := s.src.Ability.Get(id, lang)
+				if e != nil {
+					err = multierror.Append(err, e)
+					log15.Debug("finding ability", "tag", tag, "err", e)
+					return tag
+				}
+
+				abilities = append(abilities, fmt.Sprintf("%s: %s", ability.Name, ability.Description))
+				return ability.Name
+			}))
+			for _, ability := range abilities {
+				buf.WriteString(fmt.Sprintf(" _(%s)_", ability))
+			}
+
+			res := reAdvantage.ReplaceAllStringFunc(buf.String(), func(tag string) string {
+				advantage, e := s.src.Advantage.Get(tag[1 : len(tag)-1])
+				if e != nil {
+					err = multierror.Append(err, e)
+					log15.Debug("finding advantage", "tag", tag, "err", e)
+					return tag
+				}
+
+				return fmt.Sprintf(`%s ![%s](%s/icons/%s.png)`, advantage.Name, advantage.ID, s.assets, advantage.ID)
+			})
+
+			return markdown.New().RenderToString([]byte(res)), err.ErrorOrNil()
 		},
 	}).ParseFiles(path.Join(s.assets, "templates/cards.html"))
 	if err != nil {

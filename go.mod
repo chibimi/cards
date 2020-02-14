@@ -9,6 +9,7 @@ require (
 	github.com/go-sql-driver/mysql v1.5.0
 	github.com/gographics/imagick v3.2.0+incompatible
 	github.com/google/uuid v1.1.1 // indirect
+	github.com/hashicorp/go-multierror v1.1.0
 	github.com/inconshreveable/log15 v0.0.0-20200109203555-b30bc20e4fd1
 	github.com/jmoiron/sqlx v1.2.0
 	github.com/julienschmidt/httprouter v1.3.0
@@ -18,6 +19,7 @@ require (
 	github.com/pkg/errors v0.9.1
 	github.com/prometheus/common v0.10.0
 	github.com/rs/cors v1.7.0
+	gitlab.com/golang-commonmark/markdown v0.0.0-20191127184510-91b5b3c99c19
 	golang.org/x/net v0.0.0-20200625001655-4c5254603344 // indirect
 	golang.org/x/sys v0.0.0-20200625212154-ddb9806d33ae // indirect
 	google.golang.org/appengine v1.6.6 // indirect
