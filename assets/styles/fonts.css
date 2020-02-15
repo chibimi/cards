@@ -202,3 +202,26 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'Bell Gothic Black';
+    src: url('../fonts/AdobeBellGothicStdBlack.eot');
+    src: url('../fonts/AdobeBellGothicStdBlack.eot') format('embedded-opentype'),
+         url('../fonts/AdobeBellGothicStdBlack.woff2') format('woff2'),
+         url('../fonts/AdobeBellGothicStdBlack.woff') format('woff'),
+         url('../fonts/AdobeBellGothicStdBlack.ttf') format('truetype'),
+         url('../fonts/AdobeBellGothicStdBlack.svg#AdobeBellGothicStdBlack') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Bell Gothic';
+    src: url('../fonts/AdobeBellGothicStdBold.eot');
+    src: url('../fonts/AdobeBellGothicStdBold.eot') format('embedded-opentype'),
+         url('../fonts/AdobeBellGothicStdBold.woff2') format('woff2'),
+         url('../fonts/AdobeBellGothicStdBold.woff') format('woff'),
+         url('../fonts/AdobeBellGothicStdBold.ttf') format('truetype'),
+         url('../fonts/AdobeBellGothicStdBold.svg#AdobeBellGothicStdBold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+}
