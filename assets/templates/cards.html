@@ -1,38 +1,62 @@
 {{ define "profile" }}
-<header><p>{{ .Ref.Title }}</p></header>
+<header>
+	<p class="title">{{ .Title }}</p>
+	<p class="tagline">{{ .Tagline }}</p>
+</header>
 <section>
-	<img class="portrait" src="assets/portraits/{{ .Ref.ID }}.png">
+	<img class="portrait" src="assets/portraits/{{ .Portrait }}.png">
+	<div class="profiles">
+		{{ range .Profiles }}
+		<div class="profile">
+			<p class="name">{{ .Name }}</p>
+			<table>
+				<tr>
+					<th>SPD</th>
+					<th>STR</th>
+					<th>MAT</th>
+					<th>RAT</th>
+					<th>DEF</th>
+					<th>ARM</th>
+					<th>CMD</th>
+				</tr>
+				<tr>
+					<td>{{ .Stats.SPD }}</td>
+					<td>{{ .Stats.STR }}</td>
+					<td>{{ .Stats.MAT }}</td>
+					<td>{{ .Stats.RAT }}</td>
+					<td>{{ .Stats.DEF }}</td>
+					<td>{{ .Stats.ARM }}</td>
+					<td>{{ .Stats.CMD }}</td>
+				</tr>
+			</table>
+			<ul class="advantages">
+				<li>{{ .Stats.Base }}</li>
+				{{ range .Advantages }}
+				<li><img class="icon" src="assets/icons/{{ .ID }}.png"></li>
+				{{ end }}
+			</ul>
+		</div>
+		{{ end }}
+	</div>
 </section>
 {{ end }}
 
 {{ define "rules" }}
-<header><p>{{ .Ref.Title }}</p></header>
+<header><p>{{ .Title }}</p></header>
 <section>
-	{{ $card := . }}
-	{{ range .RefAbilities }}
-	<p class="ability">{{ .Text | compile | safe }}</p>
-	{{ end }}
-	{{ range .Models }}
-	<p class="title">{{ .Title }}</p>
-
-		{{ range index $card.ModelsAbilities .ID }}
-		<p class="ability">{{ .Text | compile | safe }}</p>
+	{{ range .Abilities }}
+		{{ if ne .Source "" }}
+		<p class="title">{{ .Source }}</p>
 		{{ end }}
-
-		{{ range index $card.ModelsWeapons .ID }}
-			{{ if not (eq (len (index $card.WeaponsAbilities .ID)) 0) }}
-				<p class="title">{{ .Title }}</p>
-				{{ range index $card.WeaponsAbilities .ID }}
-					<p class="ability">{{ .Text | compile | safe }}</p>
-				{{ end }}
-			{{ end }}
+		{{ range .Abilities }}
+		<p class="ability">{{ .Description | safe }}</p>
 		{{ end }}
 	{{ end }}
 </section>
 {{ end }}
 
 {{ define "spells" }}
-<header><p>{{ .Ref.Title }}</p></header>
+<header><p>{{ .Title }}</p></header>
 <section>
 	<table>
 		<thead>
@@ -50,15 +74,15 @@
 			{{ range .Spells }}
 			<tr class="spellline">
 				<td>{{ .Name }}<br></td>
-				<td>{{ .Cost }}</td>
-				<td>{{ .RNG }}</td>
-				<td>{{ .AOE }}</td>
-				<td>{{ .POW }}</td>
-				<td>{{ .DUR }}</td>
-				<td>{{ .OFF }}</td>
+				<td>{{ .Stats.COST }}</td>
+				<td>{{ .Stats.RNG }}</td>
+				<td>{{ .Stats.AOE }}</td>
+				<td>{{ .Stats.POW }}</td>
+				<td>{{ .Stats.DUR }}</td>
+				<td>{{ .Stats.OFF }}</td>
 			</tr>
 			<tr>
-				<td colspan="7">{{ .Description | compile | safe }}</td>
+				<td colspan="7">{{ .Description | safe }}</td>
 			</tr>
 			{{ end }}
 		</tbody>
@@ -67,11 +91,11 @@
 {{ end }}
 
 {{ define "feat" }}
-<header><p>{{ .Ref.Title }}</p></header>
+<header><p>{{ .Title }}</p></header>
 <section>
-	<p class="title">{{ .Feat.Name }}</p>
-	<p class="fluff">{{ .Feat.Fluff }}</p>
-	<p class="feat">{{ .Feat.Description | compile | safe }}</p>
+	<p class="title">{{ .Name }}</p>
+	<p class="fluff">{{ .Fluff }}</p>
+	<p class="feat">{{ .Description | safe }}</p>
 </section>
 {{ end }}
 

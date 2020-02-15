@@ -15,7 +15,12 @@
 
 	font-family: 'Calisto', serif;
 	font-size: 2mm;
-	line-height: 2.1mm;
+
+	* {
+		margin: 0;
+		padding: 0;
+		line-height: 1.1em;
+	}
 
 	// The text class is used as the base for all the text cards, those
 	// that are composed of a title block and a section block that contains
@@ -27,12 +32,8 @@
 			top: 4.5mm;
 			width: @card-width - 9.5mm;
 			height: 4mm;
-			line-height: 4.2mm;
 
 			> p {
-				margin: 0;
-				padding: 0;
-
 				font-size: 3mm;
 				text-transform: uppercase;
 			}
@@ -47,7 +48,7 @@
 
 			padding: 1.5mm;
 
-			p > img {
+			p img {
 				height: 2mm;
 				vertical-align: middle;
 			}
@@ -58,16 +59,21 @@
 		> header {
 			position: absolute;
 			left: 14mm;
-			top: 4mm;
-			width: @card-width - 22mm;
-			height: 4mm;
+			top: 3mm;
+			width: 43mm;
+			height: 6mm;
 
-			> p {
-				margin: 0.5mm 0;
-				padding: 0;
+			> p.title {
+				margin-top: 0.85mm;
+				font-size: 2.5mm;
+				line-height: 1em;
+				text-transform: uppercase;
+			}
 
-				font-size: 3mm;
-				line-height: 3mm;
+			> p.tagline {
+				font-family: 'Calisto';
+				font-size: 2mm;
+				line-height: 1em;
 				text-transform: uppercase;
 			}
 		}
@@ -79,6 +85,59 @@
 				top: 15mm;
 				z-index: -1;
 			}
+
+			> .profiles {
+				position: absolute;
+				width: 32.5mm;
+				top: 10mm;
+				left: 30.5mm;
+
+				> .profile {
+					> p.name {
+						margin: 1.125mm 0.5mm 0.125mm 1mm;
+						font-weight: bold;
+						text-transform: uppercase;
+					}
+
+					> table {
+						font-family: 'Bell Gothic';
+						font-weight: bold;
+						font-size: 0.8em;
+						border-collapse: collapse;
+						margin-left: 2mm;
+
+						th {
+							color: white;
+							padding: 0.5mm 0.55mm 0 0.55mm;
+						}
+
+						td {
+							padding-top: 0.5mm;
+							text-align: center;
+						}
+					}
+
+					> ul.advantages {
+						margin-right: -0.25mm;
+						> li {
+							display: inline-block;
+							float: right;
+							width: 4.5mm;
+							height: 4.5mm;
+							margin-left: 0.5mm;
+
+							&:first-child {
+								line-height: 4.5mm;
+								text-align: center;
+							}
+
+							> img {
+								width: 100%;
+							}
+						}
+					}
+				}
+			}
 		}
 	}
 
@@ -87,7 +146,6 @@
 
 		> section {
 			* {
-				margin-top: 0;
 				margin-bottom: 0.5em;
 			}
 
@@ -99,9 +157,9 @@
 			}
 
 			p > strong {
-				font-size: 0.9em;
+				font-family: 'Bell Gothic', sans-serif;
 				font-weight: bold;
-				letter-spacing: -0.05em;
+				font-size: 0.85em;
 				text-transform: uppercase;
 			}
 		}
@@ -112,12 +170,19 @@
 
 		> section {
 			padding-top: 0.8mm;
+			width: 60mm;
 
 			> table {
 				border-collapse: collapse;
 
 				th {
 					color: white;
+					width: 6.25mm;
+					padding-top: 0.5mm;
+				}
+
+				th:first-child {
+					width: 23.5mm;
 				}
 
 				th, td {
@@ -129,9 +194,9 @@
 				}
 
 				th, tr.spellline > td {
-					font-size: 0.85em;
+					font-family: 'Bell Gothic', sans-serif;
 					font-weight: bold;
-					letter-spacing: -0.05em;
+					font-size: 0.85em;
 					text-transform: uppercase;
 				}
 
@@ -170,6 +235,11 @@
 				font-weight: bold;
 				font-style: italic;
 				text-align: center;
+				margin-top: 1em;
+			}
+
+			p.feat {
+				margin-top: 1em;
 			}
 		}
 	}
