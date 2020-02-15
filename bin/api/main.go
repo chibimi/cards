@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"time"
 
 	"github.com/chibimi/cards/card"
 	"github.com/chibimi/cards/card/generator"
@@ -83,7 +84,18 @@ func main() {
 
 	stack := negroni.New()
 	stack.Use(cors.AllowAll())
-	stack.Use(negroni.NewLogger())
+	stack.Use(negroni.HandlerFunc(func(rw http.ResponseWriter, r *http.Request, next http.HandlerFunc) {
+		start := time.Now()
+		next(rw, r)
+		res := rw.(negroni.ResponseWriter)
+		log15.Info("request",
+			"started_at", start,
+			"duration", time.Since(start),
+			"method", r.Method,
+			"path", r.URL.Path,
+			"status", res.Status(),
+		)
+	}))
 	stack.Use(negroni.NewRecovery())
 	stack.UseHandler(router)
 
