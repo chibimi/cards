@@ -23,7 +23,7 @@ func (s *Service) Build(r Reference) (cards []Card, err error) {
 	}
 
 	for _, m := range r.Models {
-		profile.Profiles = append(profile.Profiles, Profile{
+		p := Profile{
 			Name: m.Title,
 			Stats: map[string]string{
 				"SPD":      m.SPD,
@@ -37,7 +37,36 @@ func (s *Service) Build(r Reference) (cards []Card, err error) {
 				"Base":     m.BaseSize,
 			},
 			Advantages: makeAdvantages(m.Advantages, r.Lang),
-		})
+		}
+
+		str, err := strconv.Atoi(m.STR)
+		if err != nil {
+			errs = multierror.Append(errs, err)
+		}
+
+		for _, w := range r.ModelsWeapons[m.ID] {
+			pow, err := strconv.Atoi(w.POW)
+			if err != nil {
+				errs = multierror.Append(errs, err)
+			}
+
+			p.Weapons = append(p.Weapons, Weapon{
+				Name:     w.Name,
+				Type:     WeaponType(w.Type),
+				Number:   w.CNT,
+				Location: w.LOC,
+				Stats: map[string]string{
+					"RNG": w.RNG,
+					"POW": w.POW,
+					"AOE": w.AOE,
+					"ROF": w.ROF,
+					"PS":  strconv.Itoa(str + pow),
+				},
+				Advantages: makeAdvantages(w.Advantages, r.Lang),
+			})
+		}
+
+		profile.Profiles = append(profile.Profiles, p)
 	}
 
 	cards = append(cards, profile)
@@ -205,19 +234,31 @@ type Profile struct {
 type Weapon struct {
 	Name       string
 	Type       WeaponType
-	Number     int
-	System     rune
+	Number     string
+	Location   string
 	Stats      map[string]string
 	Advantages []Advantage
 }
 
-type WeaponType string
+type WeaponType int
 
 const (
-	WeaponTypeMelee  WeaponType = "melee"
-	WeaponTypeRanged            = "ranged"
-	WeaponTypeMount             = "mount"
+	WeaponTypeInvalid = iota
+	WeaponTypeMelee
+	WeaponTypeRanged
+	WeaponTypeMount
 )
+
+var weaponTypesNames = map[WeaponType]string{
+	WeaponTypeInvalid: "invalid",
+	WeaponTypeMelee:   "melee",
+	WeaponTypeRanged:  "ranged",
+	WeaponTypeMount:   "mount",
+}
+
+func (wt WeaponType) String() string {
+	return weaponTypesNames[wt]
+}
 
 type Advantage struct {
 	ID   string

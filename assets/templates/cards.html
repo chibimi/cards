@@ -36,6 +36,28 @@
 				{{ end }}
 			</ul>
 		</div>
+		{{ range .Weapons }}
+		<div class="weapon {{ .Type.String }}">
+			<p class="name">{{ .Name }}</p>
+			<table>
+				<tr>
+					<th>RNG</th>
+					<th>POW</th>
+					<th>P+S</th>
+				</tr>
+				<tr>
+					<td>{{ .Stats.RNG }}</td>
+					<td>{{ .Stats.POW }}</td>
+					<td>{{ .Stats.PS }}</td>
+				</tr>
+			</table>
+			<ul class="advantages">
+				{{ range .Advantages }}
+				<li><img class="icon" src="assets/icons/{{ .ID }}.png"></li>
+				{{ end }}
+			</ul>
+		</div>
+		{{ end }}
 		{{ end }}
 	</div>
 </section>
@@ -45,12 +67,12 @@
 <header><p>{{ .Title }}</p></header>
 <section>
 	{{ range .Abilities }}
-		{{ if ne .Source "" }}
-		<p class="title">{{ .Source }}</p>
-		{{ end }}
-		{{ range .Abilities }}
-		<p class="ability">{{ .Description | safe }}</p>
-		{{ end }}
+	{{ if ne .Source "" }}
+	<p class="title">{{ .Source }}</p>
+	{{ end }}
+	{{ range .Abilities }}
+	<p class="ability">{{ .Description | safe }}</p>
+	{{ end }}
 	{{ end }}
 </section>
 {{ end }}

@@ -136,39 +136,25 @@ const (
 	FactionMinions
 )
 
+var factionsNames = map[Faction]string{
+	FactionInvalid:              "invalid",
+	FactionCygnar:               "cygnar",
+	FactionProtectorateOfMenoth: "protectorate of menoth",
+	FactionKhador:               "khador",
+	FactionCryx:                 "cryx",
+	FactionRetributionOfScyrah:  "retribution of scyrah",
+	FactionConvergeanceOfCyriss: "convergeance of cyriss",
+	FactionCrucibleGuard:        "crucible guard",
+	FactionMercenaries:          "mercenaries",
+	FactionTrollbloods:          "trollbloods",
+	FactionCircleOrboros:        "circle orboros",
+	FactionLegionOfEverblight:   "legion of everblight",
+	FactionSkorne:               "skorne",
+	FactionGrymkin:              "grymkin",
+	FactionInfernals:            "infernals",
+	FactionMinions:              "minions",
+}
+
 func (f Faction) String() string {
-	switch f {
-	case FactionCygnar:
-		return "cygnar"
-	case FactionProtectorateOfMenoth:
-		return "protectorate of menoth"
-	case FactionKhador:
-		return "khador"
-	case FactionCryx:
-		return "cryx"
-	case FactionRetributionOfScyrah:
-		return "retribution of scyrah"
-	case FactionConvergeanceOfCyriss:
-		return "convergeance of cyriss"
-	case FactionCrucibleGuard:
-		return "crucible guard"
-	case FactionMercenaries:
-		return "mercenaries"
-	case FactionTrollbloods:
-		return "trollbloods"
-	case FactionCircleOrboros:
-		return "circle orboros"
-	case FactionLegionOfEverblight:
-		return "legion of everblight"
-	case FactionSkorne:
-		return "skorne"
-	case FactionGrymkin:
-		return "grymkin"
-	case FactionInfernals:
-		return "infernals"
-	case FactionMinions:
-		return "minions"
-	default:
-		return "invalid"
-	}
+	return factionsNames[f]
 }
