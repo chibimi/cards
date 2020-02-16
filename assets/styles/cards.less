@@ -92,9 +92,12 @@
 				top: 10mm;
 				left: 30.5mm;
 
-				> .profile {
+				.profile, .weapon {
+					clear: both;
+					margin-bottom: 5mm;
+
 					> p.name {
-						margin: 1.125mm 0.5mm 0.125mm 1mm;
+						padding: 1.25mm 0.5mm 0.125mm 1mm;
 						font-weight: bold;
 						text-transform: uppercase;
 					}
@@ -117,8 +120,9 @@
 						}
 					}
 
-					> ul.advantages {
+					ul.advantages {
 						margin-right: -0.25mm;
+
 						> li {
 							display: inline-block;
 							float: right;
@@ -135,6 +139,29 @@
 								width: 100%;
 							}
 						}
+					}
+				}
+
+				.weapon {
+					width: 22mm;
+					height: 10mm;
+					margin-left: 10.5mm;
+					background-size: 22mm 10mm;
+
+					> table {
+						margin-left: 6.5mm;
+					}
+
+					&.melee {
+						background-image: url('../cards/melee.png');
+					}
+
+					&.ranged {
+						background-image: url('../cards/ranged.png');
+					}
+
+					&.mount {
+						background-image: url('../cards/mount.png');
 					}
 				}
 			}
