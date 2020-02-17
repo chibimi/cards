@@ -4,9 +4,10 @@
 		<Ability
 			v-for="(val, idx) in abilities"
 			v-bind:ability_id="val.id"
-			v-bind:ability_type="val.type"
+			v-bind:ability_header="val.header"
 			v-bind:ability_star="val.star"
 			:abilitiesList="abilitiesList"
+			:itemAbilities="abilities"
 			:key="val.id"
 			v-on:remove="removeAbility(val, idx)"
 			v-on:update="$emit('update')"
@@ -24,8 +25,7 @@
 			<div class="collapse card-body p-2" v-bind:id="'new_weapon_ability' + weapon.id">
 				<Ability
 					:abilitiesList="abilitiesList"
-					v-bind:ability_type="0"
-					v-bind:ability_star="0"
+					:itemAbilities="abilities"
 					v-on:add="addAbility"
 					v-on:update="$emit('update')"
 				></Ability>
@@ -73,11 +73,14 @@ export default {
 				})
 		},
 		addAbility: function(ability, push) {
+			var relation = {
+				related_id: this.weapon.id,
+				ability_id: ability.id,
+				header: ability.header,
+				star: ability.star,
+			}
 			this.$http
-				.put(
-					process.env.VUE_APP_API_ENDPOINT +
-						`/weapon/${this.weapon.id}/ability/${ability.id}?type=${ability.type}&star=${ability.star}&lang=${this.$language}`
-				)
+				.put(process.env.VUE_APP_API_ENDPOINT + `/weapon/${this.weapon.id}/ability/${ability.id}`, relation)
 				.then(function(res) {
 					console.debug(res)
 					if (res.status === 201 && push) {

@@ -2,7 +2,7 @@
 	<div class="ability">
 		<div v-if="!update" class="row mx-0">
 			<span class="col-3">
-				{{ ability.name }} {{ability.type | type}} {{ability.star | star}}<br />
+				{{getHeaderName(ability.header)}} {{ ability.name }} {{ability.star | star}}<br />
 				<span class="vo">{{ ability.title }}</span>
 			</span>
 			<span class="col-8">
@@ -37,6 +37,13 @@
 				placeholder="Translated Name"
 			/>
 			<div class="form-check-inline  ml-3 col-3">
+				<label>Header</label>
+				<select v-model.number="ability.header">
+					<option :value=null>None</option>
+					<option v-for="a in itemAbilities" :key="a.id" :value="a.id">{{ a.title }}</option>
+				</select>
+			</div>
+			<!-- <div class="form-check-inline  col-2">
 				<label>Type</label>
 				<select v-model.number="ability.type">
 					<option value="0">None</option>
@@ -44,13 +51,14 @@
 					<option value="2">Battle Plan</option>
 					<option value="3">Attack Type</option>
 				</select>
-			</div>
+			</div> -->
 			<div class="form-check-inline col-3">
 				<label>Star</label>
 				<select v-model.number="ability.star">
-					<option value="0">None</option>
+					<option :value=null>None</option>
 					<option value="1">*Attack</option>
 					<option value="2">*Action</option>
+					<option value="3">*Action or *Attack</option>
 				</select>
 			</div>
 			<div class="col-11">
@@ -83,7 +91,7 @@ import TextArea from './textarea.vue'
 
 export default {
 	name: 'Ability',
-	props: ['abilitiesList', 'ability_id', 'ability_type', 'ability_star'],
+	props: ['abilitiesList', 'ability_id', 'ability_header', 'ability_star', 'itemAbilities'],
 	components: { TextArea },
 	watch: {},
 	created: function() {
@@ -133,7 +141,7 @@ export default {
 				.get(process.env.VUE_APP_API_ENDPOINT + `/abilities/${id}?lang=${this.$language}`)
 				.then(function(res) {
 					this.ability = res.data
-					this.ability.type = this.ability_type
+					this.ability.header = this.ability_header
 					this.ability.star = this.ability_star
 				})
 				.catch(function(err) {
@@ -144,6 +152,7 @@ export default {
 			if (ability.id == null) {
 				ability.id = 0
 			}
+
 			this.$http
 				.put(process.env.VUE_APP_API_ENDPOINT + `/abilities/${ability.id}?lang=${this.$language}`, ability)
 				.then(function(res) {
@@ -156,7 +165,7 @@ export default {
 						this.update = false
 					} else {
 						this.$emit('add', ability, true)
-						this.ability = { type: 0, star: 0 }
+						this.ability = {}
 					}
 					this.$emit('update')
 				})
@@ -171,6 +180,13 @@ export default {
 				return
 			}
 			return item.title
+		},
+		getHeaderName: function(val) {
+			var res = this.itemAbilities.find(function(item){return item.id === val});
+			if (res != null) {
+				return '['+res.name+']'
+			}
+			return ''
 		},
 		updateItems(text) {
 			this.ability.title = text
@@ -189,12 +205,6 @@ export default {
 		},
 	},
 	filters: {
-		type: function(value) {
-			if (value === 1) return '[Magical]'
-			if (value === 2) return '[Battle Plan]'
-			if (value === 3) return '[Attack Type]'
-			return ''
-		},
 		star: function(value) {
 			if (value === 1) return '(*Attack)'
 			if (value === 2) return '(*Action)'

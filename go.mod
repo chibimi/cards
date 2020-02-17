@@ -10,6 +10,7 @@ require (
 	github.com/gogo/protobuf v1.3.1
 	github.com/gographics/imagick v3.2.0+incompatible
 	github.com/google/uuid v1.1.1
+	github.com/hashicorp/go-multierror v1.0.0
 	github.com/inconshreveable/log15 v0.0.0-20200109203555-b30bc20e4fd1
 	github.com/jmoiron/sqlx v1.2.0
 	github.com/julienschmidt/httprouter v1.3.0
@@ -19,6 +20,7 @@ require (
 	github.com/mattn/go-isatty v0.0.11 // indirect
 	github.com/pkg/errors v0.8.1
 	github.com/rs/cors v1.7.0
+	gitlab.com/golang-commonmark/markdown v0.0.0-20191127184510-91b5b3c99c19
 	google.golang.org/appengine v1.6.5 // indirect
 	gopkg.in/gographics/imagick.v3 v3.3.0
 	gopkg.in/inconshreveable/log15.v2 v2.0.0-20200109203555-b30bc20e4fd1

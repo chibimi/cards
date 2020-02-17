@@ -1,6 +1,8 @@
 package ability
 
 import (
+	"fmt"
+
 	"github.com/jmoiron/sqlx"
 	"github.com/pkg/errors"
 )
@@ -40,37 +42,26 @@ func (r *Repository) Create(sp *Ability, lang string) (int, error) {
 	return int(id), nil
 }
 
-func (r *Repository) List(lang string) ([]Ability, error) {
-	stmt := `
-	SELECT r.*, IFNULL(s.name, "") as name, IFNULL(s.description, "") as description FROM (
-		SELECT * FROM abilities
-	) as r LEFT JOIN (
-		SELECT ability_id, name, description FROM abilities_lang WHERE lang = ?
-	) as s ON r.id = s.ability_id
-	`
-	res := []Ability{}
-	err := r.db.Select(&res, stmt, lang)
-	if err != nil {
-		return nil, errors.Wrap(err, "execute query")
-	}
-
-	return res, nil
-}
-
 func (r *Repository) Save(sp *Ability, lang string) error {
 	tx, err := r.db.Beginx()
 	if err != nil {
 		return errors.Wrap(err, "create transaction")
 	}
-	stmt := `
-	UPDATE abilities SET
-	title = :title
-	WHERE id = :id
-	`
-	_, err = tx.NamedExec(stmt, sp)
+	stmt := `UPDATE abilities SET title = :title WHERE id = :id`
+	if sp.ID == 0 {
+		stmt = `INSERT INTO abilities (title) VALUES(:title)`
+	}
+
+	res, err := tx.NamedExec(stmt, sp)
 	if err != nil {
 		return errors.Wrap(err, "execute query")
 	}
+
+	id, err := res.LastInsertId()
+	if err != nil {
+		return errors.Wrap(err, "last index")
+	}
+	fmt.Println(id)
 
 	stmt = `
 	REPLACE INTO abilities_lang (ability_id, lang, name, description)
@@ -88,47 +79,43 @@ func (r *Repository) Save(sp *Ability, lang string) error {
 	return nil
 }
 
-func (r *Repository) ListByRef(ref int, lang string) ([]Ability, error) {
+func (r *Repository) List(lang string) ([]Ability, error) {
 	stmt := `
 	SELECT r.*, IFNULL(s.name, "") as name, IFNULL(s.description, "") as description FROM (
-		SELECT * FROM ref_ability WHERE ref_id = ?
-	) as a LEFT JOIN (
 		SELECT * FROM abilities
-	) as r ON a.ability_id = r.id LEFT JOIN (
+	) as r LEFT JOIN (
 		SELECT ability_id, name, description FROM abilities_lang WHERE lang = ?
 	) as s ON r.id = s.ability_id
 	`
 	res := []Ability{}
-	err := r.db.Select(&res, stmt, ref, lang)
+	err := r.db.Select(&res, stmt, lang)
 	if err != nil {
 		return nil, errors.Wrap(err, "execute query")
 	}
+
 	return res, nil
 }
 
-func (r *Repository) AddAbilityRef(ref, ability, typ, star int) error {
-	stmt := `INSERT INTO ref_ability VALUES(?, ?, ?, ?)`
-
-	_, err := r.db.Exec(stmt, ref, ability, typ, star)
+func (r *Repository) Get(id int, lang string) (*Ability, error) {
+	stmt := `
+	SELECT r.*, IFNULL(s.name, "") as name, IFNULL(s.description, "") as description FROM (
+		SELECT * FROM abilities WHERE id = ?
+	) as r LEFT JOIN (
+		SELECT * FROM abilities_lang WHERE ability_id = ? AND lang = ?
+	) as s ON r.id = s.ability_id
+	`
+	res := &Ability{}
+	err := r.db.Get(res, stmt, id, id, lang)
 	if err != nil {
-		return errors.Wrap(err, "execute query")
+		return nil, errors.Wrap(err, "execute query")
 	}
-	return nil
-}
 
-func (r *Repository) DeleteAbilityRef(ref, ability int) error {
-	stmt := `DELETE FROM ref_ability WHERE ref_id = ? AND ability_id = ?`
-
-	_, err := r.db.Exec(stmt, ref, ability)
-	if err != nil {
-		return errors.Wrap(err, "execute query")
-	}
-	return nil
+	return res, nil
 }
 
 func (r *Repository) ListByModel(model int, lang string) ([]Ability, error) {
 	stmt := `
-	SELECT r.*, IFNULL(s.name, "") as name, IFNULL(s.description, "") as description, a.type as type, a.star as star FROM (
+	SELECT r.*, IFNULL(s.name, "") as name, IFNULL(s.description, "") as description, a.star as star, a.header as header FROM (
 		SELECT * FROM model_ability WHERE model_id = ?
 	) as a LEFT JOIN (
 		SELECT * FROM abilities
@@ -144,11 +131,11 @@ func (r *Repository) ListByModel(model int, lang string) ([]Ability, error) {
 	return res, nil
 }
 
-func (r *Repository) AddAbilityModel(model, ability, typ, star int) error {
-	stmt := `INSERT INTO model_ability VALUES(?, ?, ?, ?)
-	ON DUPLICATE KEY UPDATE model_id = ?, ability_id = ?, type = ?, star = ?`
+func (r *Repository) AddAbilityModel(relation *Relation) error {
+	stmt := `INSERT INTO model_ability VALUES(:relatedid, :abilityid, 0, :star, :header)
+	ON DUPLICATE KEY UPDATE model_id = :relatedid, ability_id = :abilityid, star = :star, header = :header`
 
-	_, err := r.db.Exec(stmt, model, ability, typ, star, model, ability, typ, star)
+	_, err := r.db.NamedExec(stmt, relation)
 	if err != nil {
 		return errors.Wrap(err, "execute query")
 	}
@@ -167,7 +154,7 @@ func (r *Repository) DeleteAbilityModel(model, ability int) error {
 
 func (r *Repository) ListByWeapon(weapon int, lang string) ([]Ability, error) {
 	stmt := `
-	SELECT r.*, IFNULL(s.name, "") as name, IFNULL(s.description, "") as description, a.type as type, a.star as star FROM (
+	SELECT r.*, IFNULL(s.name, "") as name, IFNULL(s.description, "") as description, a.star as star, a.header as header FROM (
 		SELECT * FROM weapon_ability WHERE weapon_id = ?
 	) as a LEFT JOIN (
 		SELECT * FROM abilities
@@ -183,11 +170,11 @@ func (r *Repository) ListByWeapon(weapon int, lang string) ([]Ability, error) {
 	return res, nil
 }
 
-func (r *Repository) AddAbilityWeapon(weapon, ability, typ, star int) error {
-	stmt := `INSERT INTO weapon_ability VALUES(?, ?, ?, ?)
-	ON DUPLICATE KEY UPDATE weapon_id = ?, ability_id = ?, type = ?, star = ?`
+func (r *Repository) AddAbilityWeapon(relation *Relation) error {
+	stmt := `INSERT INTO weapon_ability VALUES(:relatedid, :abilityid, 0, :star, :header)
+	ON DUPLICATE KEY UPDATE weapon_id = :relatedid, ability_id = :abilityid, star = :star, header = :header`
 
-	_, err := r.db.Exec(stmt, weapon, ability, typ, star, weapon, ability, typ, star)
+	_, err := r.db.NamedExec(stmt, relation)
 	if err != nil {
 		return errors.Wrap(err, "execute query")
 	}
@@ -202,21 +189,4 @@ func (r *Repository) DeleteAbilityWeapon(weapon, ability int) error {
 		return errors.Wrap(err, "execute query")
 	}
 	return nil
-}
-
-func (r *Repository) Get(id int, lang string) (*Ability, error) {
-	stmt := `
-	SELECT r.*, IFNULL(s.name, "") as name, IFNULL(s.description, "") as description FROM (
-		SELECT * FROM abilities WHERE id = ?
-	) as r LEFT JOIN (
-		SELECT * FROM abilities_lang WHERE ability_id = ? AND lang = ?
-	) as s ON r.id = s.ability_id
-	`
-	res := &Ability{}
-	err := r.db.Get(res, stmt, id, id, lang)
-	if err != nil {
-		return nil, errors.Wrap(err, "execute query")
-	}
-
-	return res, nil
 }
