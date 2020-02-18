@@ -36,7 +36,7 @@ func main() {
 
 	ss := card.NewSService(db)
 
-	generator := generator.NewService(ss, cfg.AssetsDir)
+	generator := generator.NewService(ss, db, cfg.AssetsDir)
 
 	router := httprouter.New()
 	router.POST("/ref", ss.Ref.CreateRef)

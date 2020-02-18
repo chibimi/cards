@@ -31,11 +31,6 @@ func (s *Service) Get(id int, lang string) (r Reference, err error) {
 		return r, fmt.Errorf(`fetching reference: %w`, err)
 	}
 
-	r.RefAbilities, err = s.src.Ability.ListByRef(r.Ref.ID, lang)
-	if err != nil {
-		return r, fmt.Errorf(`fetching abilities for ref %d: %w`, r.Ref.ID, err)
-	}
-
 	r.Models, err = s.src.Model.List(id, lang)
 	if err != nil {
 		return r, fmt.Errorf(`fetching models for ref%d: %w`, r.Ref.ID, err)
@@ -46,7 +41,7 @@ func (s *Service) Get(id int, lang string) (r Reference, err error) {
 	r.WeaponsAbilities = make(map[int][]ability.Ability)
 
 	for _, model := range r.Models {
-		abilities, err := s.src.Ability.ListByModel(model.ID, lang)
+		abilities, err := s.ability.ListByModel(model.ID, lang)
 		if err != nil {
 			return r, fmt.Errorf(`fetching abilities for model %d: %w`, model.ID, err)
 		}
@@ -59,7 +54,7 @@ func (s *Service) Get(id int, lang string) (r Reference, err error) {
 		r.ModelsWeapons[model.ID] = weapons
 
 		for _, weapon := range weapons {
-			abilities, err := s.src.Ability.ListByWeapon(weapon.ID, lang)
+			abilities, err := s.ability.ListByWeapon(weapon.ID, lang)
 			if err != nil {
 				return r, fmt.Errorf(`fetching abilities for weapon %d: %w`, weapon.ID, err)
 			}

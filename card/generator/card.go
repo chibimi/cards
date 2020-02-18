@@ -8,6 +8,7 @@ import (
 
 	"github.com/chibimi/cards/card/ability"
 	multierror "github.com/hashicorp/go-multierror"
+	"github.com/pkg/errors"
 	"gitlab.com/golang-commonmark/markdown"
 )
 
@@ -41,13 +42,13 @@ func (s *Service) Build(r Reference) (cards []Card, err error) {
 
 		str, err := strconv.Atoi(m.STR)
 		if err != nil {
-			errs = multierror.Append(errs, err)
+			errs = multierror.Append(errs, errors.Wrap(err, "conv STR"))
 		}
 
 		for _, w := range r.ModelsWeapons[m.ID] {
 			pow, err := strconv.Atoi(w.POW)
 			if err != nil {
-				errs = multierror.Append(errs, err)
+				errs = multierror.Append(errs, errors.Wrap(err, "conv POW"))
 			}
 
 			p.Weapons = append(p.Weapons, Weapon{
@@ -93,10 +94,13 @@ func (s *Service) Build(r Reference) (cards []Card, err error) {
 		for _, a := range abilities {
 			ability := Ability{
 				Name: a.Name,
-				Type: AbilityType(a.Type),
 			}
-			ability.Description, err = s.Compile(fmt.Sprintf(`**%s –** %s`, a.Title, a.Description), r.Lang, a.Title)
-			errs = multierror.Append(errs, err)
+			bullet := ""
+			if a.Header != nil {
+				bullet = "- "
+			}
+			ability.Description, err = s.Compile(fmt.Sprintf(`%s**%s** (%s) – %s`, bullet, a.Name, a.Title, a.Description), r.Lang, a.Title)
+			errs = multierror.Append(errs, errors.Wrap(err, "compile description"))
 
 			list.Abilities = append(list.Abilities, ability)
 		}
@@ -134,7 +138,7 @@ func (s *Service) Build(r Reference) (cards []Card, err error) {
 				},
 			}
 			spell.Description, err = s.Compile(sp.Description, r.Lang, sp.Name)
-			errs = multierror.Append(errs, err)
+			errs = multierror.Append(errs, errors.Wrap(err, "compile spell description"))
 
 			spells.Spells = append(spells.Spells, spell)
 		}
@@ -151,7 +155,7 @@ func (s *Service) Build(r Reference) (cards []Card, err error) {
 			Fluff:   r.Feat.Fluff,
 		}
 		feat.Description, err = s.Compile(r.Feat.Description, r.Lang, r.Feat.Name)
-		errs = multierror.Append(errs, err)
+		errs = multierror.Append(errs, errors.Wrap(err, "compile feat description"))
 
 		cards = append(cards, feat)
 	}
@@ -178,13 +182,13 @@ func (s *Service) Compile(src, lang, this string) (string, error) {
 	buf.WriteString(reAbility.ReplaceAllStringFunc(src, func(tag string) string {
 		id, err := strconv.Atoi(tag[1:strings.IndexRune(tag, ':')])
 		if err != nil {
-			errs = multierror.Append(errs, err)
+			errs = multierror.Append(errs, errors.Wrap(err, "conv link ID"))
 			return tag
 		}
 
-		ability, err := s.src.Ability.Get(id, lang)
+		ability, err := s.ability.Get(id, lang)
 		if err != nil {
-			errs = multierror.Append(errs, err)
+			errs = multierror.Append(errs, errors.Wrap(err, "get linked ability"))
 			return tag
 		}
 
@@ -198,7 +202,7 @@ func (s *Service) Compile(src, lang, this string) (string, error) {
 	res := reAdvantage.ReplaceAllStringFunc(buf.String(), func(tag string) string {
 		advantage, err := s.src.Advantage.Get(tag[1 : len(tag)-1])
 		if err != nil {
-			errs = multierror.Append(errs, err)
+			errs = multierror.Append(errs, errors.Wrapf(err, "get advantage: %s", tag[1:len(tag)-1]))
 			return tag
 		}
 
@@ -292,7 +296,6 @@ type Abilities struct {
 
 type Ability struct {
 	Name        string
-	Type        AbilityType
 	Description string
 }
 
