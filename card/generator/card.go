@@ -89,7 +89,7 @@ func (s *Service) Build(r Reference) (cards []Card, err error) {
 
 	// cardAbilities contains the list of all abilities present on the card
 	// this is used to not add the description of a linked ability that is already on the card
-	cardAbilities := sync.Map{}
+	cardAbilities := &sync.Map{}
 	for _, a := range r.RefAbilities {
 		cardAbilities.Store(a.ID, nil)
 	}
@@ -163,7 +163,7 @@ func (s *Service) Build(r Reference) (cards []Card, err error) {
 					"OFF":  sp.OFF,
 				},
 			}
-			spell.Description, err = s.Compile(sp.Description, r.Lang, sp.Name, sync.Map{})
+			spell.Description, err = s.Compile(sp.Description, r.Lang, sp.Name, &sync.Map{})
 			errs = multierror.Append(errs, errors.Wrap(err, "compile spell description"))
 
 			spells.Spells = append(spells.Spells, spell)
@@ -180,7 +180,7 @@ func (s *Service) Build(r Reference) (cards []Card, err error) {
 			Name:    r.Feat.Name,
 			Fluff:   r.Feat.Fluff,
 		}
-		feat.Description, err = s.Compile(r.Feat.Description, r.Lang, r.Feat.Name, sync.Map{})
+		feat.Description, err = s.Compile(r.Feat.Description, r.Lang, r.Feat.Name, &sync.Map{})
 		errs = multierror.Append(errs, errors.Wrap(err, "compile feat description"))
 
 		cards = append(cards, feat)
@@ -198,7 +198,7 @@ var reAdvantage = regexp.MustCompile(`:[^: ]+:`)
 // Compile takes a strings and returns a HTML version of it
 // with abilities and advantages tags replaced by their textual
 // versions.
-func (s *Service) Compile(src, lang, this string, cardAbilities sync.Map) (string, error) {
+func (s *Service) Compile(src, lang, this string, cardAbilities *sync.Map) (string, error) {
 	var abilities []string
 	var errs *multierror.Error
 
