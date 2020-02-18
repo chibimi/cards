@@ -5,6 +5,7 @@ import (
 	"regexp"
 	"strconv"
 	"strings"
+	"sync"
 
 	"github.com/chibimi/cards/card/ability"
 	multierror "github.com/hashicorp/go-multierror"
@@ -82,6 +83,26 @@ func (s *Service) Build(r Reference) (cards []Card, err error) {
 		Title:   r.Ref.Title,
 	}
 
+	// abilityCache is used to keep track of abilities already on the card
+	// to change the description of subsequent iteration by "see_above"
+	abilityCache := map[int]ability.Ability{}
+
+	// cardAbilities contains the list of all abilities present on the card
+	// this is used to not add the description of a linked ability that is already on the card
+	cardAbilities := sync.Map{}
+	for _, a := range r.RefAbilities {
+		cardAbilities.Store(a.ID, nil)
+	}
+	for _, m := range r.Models {
+		for _, a := range r.ModelsAbilities[m.ID] {
+			cardAbilities.Store(a.ID, nil)
+		}
+		for _, w := range r.ModelsWeapons[m.ID] {
+			for _, a := range r.WeaponsAbilities[w.ID] {
+				cardAbilities.Store(a.ID, nil)
+			}
+		}
+	}
 	addAbilities := func(source string, abilities []ability.Ability) {
 		if len(abilities) == 0 {
 			return
@@ -99,7 +120,12 @@ func (s *Service) Build(r Reference) (cards []Card, err error) {
 			if a.Header != nil {
 				bullet = "- "
 			}
-			ability.Description, err = s.Compile(fmt.Sprintf(`%s**%s** (%s) – %s`, bullet, a.Name, a.Title, a.Description), r.Lang, a.Title)
+			if _, ok := abilityCache[a.ID]; ok {
+				ability.Description, err = s.Compile(fmt.Sprintf(`%s**%s** (%s) – %s`, bullet, a.Name, a.Title, translations[fmt.Sprintf("see_above_%s", r.Lang)]), r.Lang, a.Title, cardAbilities)
+			} else {
+				ability.Description, err = s.Compile(fmt.Sprintf(`%s**%s** (%s) – %s`, bullet, a.Name, a.Title, a.Description), r.Lang, a.Title, cardAbilities)
+				abilityCache[a.ID] = a
+			}
 			errs = multierror.Append(errs, errors.Wrap(err, "compile description"))
 
 			list.Abilities = append(list.Abilities, ability)
@@ -137,7 +163,7 @@ func (s *Service) Build(r Reference) (cards []Card, err error) {
 					"OFF":  sp.OFF,
 				},
 			}
-			spell.Description, err = s.Compile(sp.Description, r.Lang, sp.Name)
+			spell.Description, err = s.Compile(sp.Description, r.Lang, sp.Name, sync.Map{})
 			errs = multierror.Append(errs, errors.Wrap(err, "compile spell description"))
 
 			spells.Spells = append(spells.Spells, spell)
@@ -154,7 +180,7 @@ func (s *Service) Build(r Reference) (cards []Card, err error) {
 			Name:    r.Feat.Name,
 			Fluff:   r.Feat.Fluff,
 		}
-		feat.Description, err = s.Compile(r.Feat.Description, r.Lang, r.Feat.Name)
+		feat.Description, err = s.Compile(r.Feat.Description, r.Lang, r.Feat.Name, sync.Map{})
 		errs = multierror.Append(errs, errors.Wrap(err, "compile feat description"))
 
 		cards = append(cards, feat)
@@ -172,7 +198,7 @@ var reAdvantage = regexp.MustCompile(`:[^: ]+:`)
 // Compile takes a strings and returns a HTML version of it
 // with abilities and advantages tags replaced by their textual
 // versions.
-func (s *Service) Compile(src, lang, this string) (string, error) {
+func (s *Service) Compile(src, lang, this string, cardAbilities sync.Map) (string, error) {
 	var abilities []string
 	var errs *multierror.Error
 
@@ -191,8 +217,10 @@ func (s *Service) Compile(src, lang, this string) (string, error) {
 			errs = multierror.Append(errs, errors.Wrap(err, "get linked ability"))
 			return tag
 		}
+		if _, ok := cardAbilities.LoadOrStore(id, nil); !ok {
+			abilities = append(abilities, fmt.Sprintf("%s: %s", ability.Name, ability.Description))
+		}
 
-		abilities = append(abilities, fmt.Sprintf("%s: %s", ability.Name, ability.Description))
 		return ability.Name
 	}))
 	for _, ability := range abilities {

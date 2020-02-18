@@ -153,3 +153,8 @@ var factionsNames = map[Faction]string{
 func (f Faction) String() string {
 	return factionsNames[f]
 }
+
+var translations = map[string]string{
+	"see_above_FR": "Voir plus haut.",
+	"see_above_US": "See above.",
+}
