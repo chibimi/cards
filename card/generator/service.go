@@ -11,20 +11,24 @@ import (
 	"strings"
 
 	"github.com/chibimi/cards/card"
+	"github.com/chibimi/cards/card/ability"
+	"github.com/jmoiron/sqlx"
 	"github.com/julienschmidt/httprouter"
 	"github.com/prometheus/common/log"
 	log15 "gopkg.in/inconshreveable/log15.v2"
 )
 
 type Service struct {
-	src    *card.SService
-	assets string
+	src     *card.SService
+	ability *ability.Repository
+	assets  string
 }
 
-func NewService(cards *card.SService, assets string) *Service {
+func NewService(cards *card.SService, db *sqlx.DB, assets string) *Service {
 	return &Service{
-		src:    cards,
-		assets: assets,
+		src:     cards,
+		ability: ability.NewRepository(db),
+		assets:  assets,
 	}
 }
 
