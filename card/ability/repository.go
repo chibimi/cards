@@ -115,16 +115,18 @@ func (r *Repository) Get(id int, lang string) (*Ability, error) {
 
 func (r *Repository) ListByModel(model int, lang string) ([]Ability, error) {
 	stmt := `
-	SELECT r.*, IFNULL(s.name, "") as name, IFNULL(s.description, "") as description, a.star as star, a.header as header FROM (
-		SELECT * FROM model_ability WHERE model_id = ?
-	) as a LEFT JOIN (
-		SELECT * FROM abilities
-	) as r ON a.ability_id = r.id LEFT JOIN (
-		SELECT ability_id, name, description FROM abilities_lang WHERE lang = ?
-	) as s ON r.id = s.ability_id
+	SELECT id, title, COALESCE(name,"") as name, COALESCE(description,"") as description, star, header
+	FROM  model_ability
+	LEFT JOIN abilities ON model_ability.ability_id = abilities.id
+	LEFT JOIN abilities_lang ON abilities.id = abilities_lang.ability_id
+	LEFT JOIN (
+		SELECT ability_id, name as header_name from abilities_lang where lang = ?
+	) as h on h.ability_id = model_ability.header
+	WHERE lang = ? AND model_id = ?
+	ORDER BY COALESCE(header_name,name), header_name, name
 	`
 	res := []Ability{}
-	err := r.db.Select(&res, stmt, model, lang)
+	err := r.db.Select(&res, stmt, lang, lang, model)
 	if err != nil {
 		return nil, errors.Wrap(err, "execute query")
 	}
@@ -154,16 +156,18 @@ func (r *Repository) DeleteAbilityModel(model, ability int) error {
 
 func (r *Repository) ListByWeapon(weapon int, lang string) ([]Ability, error) {
 	stmt := `
-	SELECT r.*, IFNULL(s.name, "") as name, IFNULL(s.description, "") as description, a.star as star, a.header as header FROM (
-		SELECT * FROM weapon_ability WHERE weapon_id = ?
-	) as a LEFT JOIN (
-		SELECT * FROM abilities
-	) as r ON a.ability_id = r.id LEFT JOIN (
-		SELECT ability_id, name, description FROM abilities_lang WHERE lang = ?
-	) as s ON r.id = s.ability_id
+	SELECT id, title, COALESCE(name,"") as name, COALESCE(description,"") as description, star, header
+	FROM  weapon_ability
+	LEFT JOIN abilities ON weapon_ability.ability_id = abilities.id
+	LEFT JOIN abilities_lang ON abilities.id = abilities_lang.ability_id
+	LEFT JOIN (
+		SELECT ability_id, name as header_name from abilities_lang where lang = ?
+	) as h on h.ability_id = weapon_ability.header
+	WHERE lang = ? AND weapon_id = ?
+	ORDER BY COALESCE(header_name,name), header_name, name
 	`
 	res := []Ability{}
-	err := r.db.Select(&res, stmt, weapon, lang)
+	err := r.db.Select(&res, stmt, lang, lang, weapon)
 	if err != nil {
 		return nil, errors.Wrap(err, "execute query")
 	}
