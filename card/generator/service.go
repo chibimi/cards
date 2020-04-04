@@ -124,3 +124,8 @@ func (s *Service) DisplayEndpoint(w http.ResponseWriter, r *http.Request, p http
 		return
 	}
 }
+
+// wrap an error using the provided message and arguments.
+func wrap(err error, msg string, args ...interface{}) error {
+	return fmt.Errorf("%s: %w", fmt.Sprintf(msg, args...), err)
+}

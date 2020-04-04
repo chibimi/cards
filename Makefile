@@ -20,7 +20,8 @@ build-all: build-front build-back
 
 deploy-all: deploy-front deploy-back
 
+fronts_dir ?= ./assets/fronts
+
 download-assets:
-	rm -R /srv/jackmarshall/assets/pdf_generator/
-	cp -R assets /srv/jackmarshall/assets/pdf_generator/
-	CGO_CFLAGS_ALLOW="-Xpreprocessor" go run ./bin/fetch-cards-pdf/main.go -dest-dir /srv/jackmarshall/assets/pdf_generator/images/front -workers 10
+	mkdir -p $(fronts_dir)
+	CGO_CFLAGS_ALLOW="-Xpreprocessor" go run ./bin/fetch-cards-pdf/main.go -dest-dir $(fronts_dir) -workers 10

@@ -5,6 +5,7 @@ go 1.13
 require (
 	github.com/PuerkitoBio/goquery v1.5.0
 	github.com/codegangsta/negroni v1.0.0
+	github.com/elwinar/rcoredump v0.8.0 // indirect
 	github.com/go-sql-driver/mysql v1.4.0
 	github.com/gogo/protobuf v1.3.1
 	github.com/gographics/imagick v3.2.0+incompatible

@@ -9,7 +9,6 @@ import (
 
 	"github.com/chibimi/cards/card/ability"
 	multierror "github.com/hashicorp/go-multierror"
-	"github.com/pkg/errors"
 	"gitlab.com/golang-commonmark/markdown"
 )
 
@@ -17,61 +16,10 @@ func (s *Service) Build(r Reference) (cards []Card, err error) {
 	var errs *multierror.Error
 
 	// Build the profile card.
-	profile := ProfileCard{
-		Faction:  Faction(r.Ref.FactionID),
-		Title:    r.Ref.Title,
-		Tagline:  r.Ref.Properties,
-		Portrait: strconv.Itoa(r.Ref.ID),
-	}
-
-	for _, m := range r.Models {
-		p := Profile{
-			Name: m.Title,
-			Stats: map[string]string{
-				"SPD":      m.SPD,
-				"STR":      m.STR,
-				"MAT":      m.MAT,
-				"RAT":      m.RAT,
-				"DEF":      m.DEF,
-				"ARM":      m.ARM,
-				"CMD":      m.CMD,
-				"Resource": m.Resource,
-				"Base":     m.BaseSize,
-			},
-			Advantages: makeAdvantages(m.Advantages, r.Lang),
-		}
-
-		str, err := strconv.Atoi(m.STR)
-		if err != nil {
-			errs = multierror.Append(errs, errors.Wrap(err, "conv STR"))
-		}
-
-		for _, w := range r.ModelsWeapons[m.ID] {
-			pow, err := strconv.Atoi(w.POW)
-			if err != nil {
-				errs = multierror.Append(errs, errors.Wrap(err, "conv POW"))
-			}
-
-			p.Weapons = append(p.Weapons, Weapon{
-				Name:     w.Name,
-				Type:     WeaponType(w.Type),
-				Number:   w.CNT,
-				Location: w.LOC,
-				Stats: map[string]string{
-					"RNG": w.RNG,
-					"POW": w.POW,
-					"AOE": w.AOE,
-					"ROF": w.ROF,
-					"PS":  strconv.Itoa(str + pow),
-				},
-				Advantages: makeAdvantages(w.Advantages, r.Lang),
-			})
-		}
-
-		profile.Profiles = append(profile.Profiles, p)
-	}
-
-	cards = append(cards, profile)
+	cards = append(cards, ProfileCard{
+		Faction: Faction(r.Ref.FactionID),
+		PPID:    r.Ref.PPID,
+	})
 
 	// Build the rules card.
 	// This start with the abilities that refer to the reference itself,
@@ -126,7 +74,9 @@ func (s *Service) Build(r Reference) (cards []Card, err error) {
 				ability.Description, err = s.Compile(fmt.Sprintf(`%s**%s** (%s) – %s`, bullet, a.Name, a.Title, a.Description), r.Lang, a.Title, cardAbilities)
 				abilityCache[a.ID] = a
 			}
-			errs = multierror.Append(errs, errors.Wrap(err, "compile description"))
+			if err != nil {
+				errs = multierror.Append(errs, wrap(err, "compile description"))
+			}
 
 			list.Abilities = append(list.Abilities, ability)
 		}
@@ -164,7 +114,9 @@ func (s *Service) Build(r Reference) (cards []Card, err error) {
 				},
 			}
 			spell.Description, err = s.Compile(sp.Description, r.Lang, sp.Name, &sync.Map{})
-			errs = multierror.Append(errs, errors.Wrap(err, "compile spell description"))
+			if err != nil {
+				errs = multierror.Append(errs, wrap(err, "compile spell description"))
+			}
 
 			spells.Spells = append(spells.Spells, spell)
 		}
@@ -181,7 +133,9 @@ func (s *Service) Build(r Reference) (cards []Card, err error) {
 			Fluff:   r.Feat.Fluff,
 		}
 		feat.Description, err = s.Compile(r.Feat.Description, r.Lang, r.Feat.Name, &sync.Map{})
-		errs = multierror.Append(errs, errors.Wrap(err, "compile feat description"))
+		if err != nil {
+			errs = multierror.Append(errs, wrap(err, "compile feat description"))
+		}
 
 		cards = append(cards, feat)
 	}
@@ -208,13 +162,13 @@ func (s *Service) Compile(src, lang, this string, cardAbilities *sync.Map) (stri
 	buf.WriteString(reAbility.ReplaceAllStringFunc(src, func(tag string) string {
 		id, err := strconv.Atoi(tag[1:strings.IndexRune(tag, ':')])
 		if err != nil {
-			errs = multierror.Append(errs, errors.Wrap(err, "conv link ID"))
+			errs = multierror.Append(errs, wrap(err, "conv link ID"))
 			return tag
 		}
 
 		ability, err := s.ability.Get(id, lang)
 		if err != nil {
-			errs = multierror.Append(errs, errors.Wrap(err, "get linked ability"))
+			errs = multierror.Append(errs, wrap(err, "get linked ability"))
 			return tag
 		}
 		if _, ok := cardAbilities.LoadOrStore(id, nil); !ok {
@@ -230,7 +184,7 @@ func (s *Service) Compile(src, lang, this string, cardAbilities *sync.Map) (stri
 	res := reAdvantage.ReplaceAllStringFunc(buf.String(), func(tag string) string {
 		advantage, err := s.src.Advantage.Get(tag[1 : len(tag)-1])
 		if err != nil {
-			errs = multierror.Append(errs, errors.Wrapf(err, "get advantage: %s", tag[1:len(tag)-1]))
+			errs = multierror.Append(errs, wrap(err, "get advantage: %s", tag[1:len(tag)-1]))
 			return tag
 		}
 
@@ -245,66 +199,12 @@ type Card interface {
 }
 
 type ProfileCard struct {
-	Faction  Faction
-	Title    string
-	Tagline  string
-	Portrait string
-	Profiles []Profile
+	Faction Faction
+	PPID    int
 }
 
 func (ProfileCard) Type() string {
 	return "profile"
-}
-
-type Profile struct {
-	Name       string
-	Stats      map[string]string
-	Advantages []Advantage
-	Weapons    []Weapon
-}
-
-type Weapon struct {
-	Name       string
-	Type       WeaponType
-	Number     string
-	Location   string
-	Stats      map[string]string
-	Advantages []Advantage
-}
-
-type WeaponType int
-
-const (
-	WeaponTypeInvalid = iota
-	WeaponTypeMelee
-	WeaponTypeRanged
-	WeaponTypeMount
-)
-
-var weaponTypesNames = map[WeaponType]string{
-	WeaponTypeInvalid: "invalid",
-	WeaponTypeMelee:   "melee",
-	WeaponTypeRanged:  "ranged",
-	WeaponTypeMount:   "mount",
-}
-
-func (wt WeaponType) String() string {
-	return weaponTypesNames[wt]
-}
-
-type Advantage struct {
-	ID   string
-	Name string
-}
-
-func makeAdvantages(advantages []string, lang string) []Advantage {
-	var res []Advantage
-	for _, id := range advantages {
-		res = append(res, Advantage{
-			ID: id,
-		})
-	}
-	return res
 }
 
 type RulesCard struct {
