@@ -15,6 +15,9 @@ import (
 func (s *Service) Build(r Reference) (cards []Card, err error) {
 	var errs *multierror.Error
 
+	// Used later for various checks.
+	var category = Category(r.Ref.CategoryID)
+
 	// Build the profile card.
 	cards = append(cards, ProfileCard{
 		Faction: Faction(r.Ref.FactionID),
@@ -91,11 +94,39 @@ func (s *Service) Build(r Reference) (cards []Card, err error) {
 		}
 	}
 
+	switch category {
+	case CategorySolo, CategoryWarbeast:
+		if len(r.Spells) == 0 {
+			break
+		}
+
+		for _, sp := range r.Spells {
+			spell := Spell{
+				Name: sp.Name,
+				Stats: map[string]string{
+					"COST": sp.Cost,
+					"RNG":  sp.RNG,
+					"AOE":  sp.AOE,
+					"POW":  sp.POW,
+					"DUR":  sp.DUR,
+					"OFF":  sp.OFF,
+				},
+			}
+			spell.Description, err = s.Compile(sp.Description, r.Lang, sp.Name, &sync.Map{})
+			if err != nil {
+				errs = multierror.Append(errs, wrap(err, "compile spell description"))
+			}
+
+			rules.Spells = append(rules.Spells, spell)
+		}
+	}
+
 	cards = append(cards, rules)
 
 	// Build the spells card. It is only a separate card for warboss-type
 	// references.
-	if r.HasSpells() {
+	switch category {
+	case CategoryWarcaster, CategoryWarlock, CategoryInfernalMaster:
 		spells := SpellsCard{
 			Faction: Faction(r.Ref.FactionID),
 			Title:   r.Ref.Title,
@@ -125,7 +156,8 @@ func (s *Service) Build(r Reference) (cards []Card, err error) {
 	}
 
 	// Build the feat card, if the reference is a warboss-type reference.
-	if r.HasFeat() {
+	switch Category(r.Ref.CategoryID) {
+	case CategoryWarcaster, CategoryWarlock, CategoryInfernalMaster:
 		feat := FeatCard{
 			Faction: Faction(r.Ref.FactionID),
 			Title:   r.Ref.Title,
@@ -210,6 +242,7 @@ func (ProfileCard) Type() string {
 type RulesCard struct {
 	Faction   Faction
 	Title     string
+	Spells    []Spell
 	Abilities []Abilities
 }
 

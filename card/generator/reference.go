@@ -75,24 +75,6 @@ func (s *Service) Get(id int, lang string) (r Reference, err error) {
 	return r, nil
 }
 
-func (r Reference) HasFeat() bool {
-	switch Category(r.Ref.CategoryID) {
-	case CategoryWarcaster, CategoryWarlock, CategoryInfernalMaster:
-		return true
-	default:
-		return false
-	}
-}
-
-func (r Reference) HasSpells() bool {
-	switch Category(r.Ref.CategoryID) {
-	case CategoryWarcaster, CategoryWarlock, CategoryInfernalMaster:
-		return true
-	default:
-		return false
-	}
-}
-
 type Category int
 
 const (
