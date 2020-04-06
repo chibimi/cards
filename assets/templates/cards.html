@@ -5,6 +5,37 @@
 {{ define "rules" }}
 <header><p>{{ .Title }}</p></header>
 <section>
+	{{ if ne (len .Spells) 0 }}
+	<table>
+		<thead>
+			<tr>
+				<th>spells</th>
+				<th>cost</th>
+				<th>rng</th>
+				<th>aoe</th>
+				<th>pow</th>
+				<th>dur</th>
+				<th>off</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{ range .Spells }}
+			<tr class="spellline">
+				<td>{{ .Name }}<br></td>
+				<td>{{ .Stats.COST }}</td>
+				<td>{{ .Stats.RNG }}</td>
+				<td>{{ .Stats.AOE }}</td>
+				<td>{{ .Stats.POW }}</td>
+				<td>{{ .Stats.DUR }}</td>
+				<td>{{ .Stats.OFF }}</td>
+			</tr>
+			<tr>
+				<td colspan="7">{{ .Description | safe }}</td>
+			</tr>
+			{{ end }}
+		</tbody>
+	</table>
+	{{ end }}
 	{{ range .Abilities }}
 	{{ if ne .Source "" }}
 	<p class="title">{{ .Source }}</p>

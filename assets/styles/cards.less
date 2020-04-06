@@ -14,7 +14,7 @@
 	overflow: hidden;
 
 	font-family: 'Calisto', serif;
-	font-size: 2mm;
+	font-size: 1.8mm;
 
 	* {
 		margin: 0;
@@ -59,6 +59,44 @@
 		}
 	}
 
+	.spelllist {
+		border-collapse: collapse;
+
+		th {
+			background: black;
+			color: white;
+			width: 6.25mm;
+			padding-top: 0.5mm;
+		}
+
+		th:first-child {
+			width: 23.5mm;
+		}
+
+		th, td {
+			text-align: center;
+
+			&:first-child {
+				text-align: left;
+			}
+		}
+
+		th, tr.spellline > td {
+			font-family: 'Bell Gothic', sans-serif;
+			font-weight: bold;
+			font-size: 0.85em;
+			text-transform: uppercase;
+		}
+
+		tr.spellline > td {
+			padding-top: 1em;
+		}
+
+		td > * {
+			margin: 0;
+		}
+	}
+
 	&.profile {
 		img {
 			width: 100%;
@@ -69,6 +107,12 @@
 		.text;
 
 		> section {
+			> table {
+				.spelllist;
+
+				border-bottom: 1px solid black;
+			}
+
 			* {
 				margin-bottom: 0.5em;
 			}
@@ -108,40 +152,7 @@
 			width: 60mm;
 
 			> table {
-				border-collapse: collapse;
-
-				th {
-					color: white;
-					width: 6.25mm;
-					padding-top: 0.5mm;
-				}
-
-				th:first-child {
-					width: 23.5mm;
-				}
-
-				th, td {
-					text-align: center;
-
-					&:first-child {
-						text-align: left;
-					}
-				}
-
-				th, tr.spellline > td {
-					font-family: 'Bell Gothic', sans-serif;
-					font-weight: bold;
-					font-size: 0.85em;
-					text-transform: uppercase;
-				}
-
-				tr.spellline > td {
-					padding-top: 1em;
-				}
-
-				td > * {
-					margin: 0;
-				}
+				.spelllist;
 			}
 		}
 	}
