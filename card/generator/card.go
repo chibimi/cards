@@ -72,9 +72,9 @@ func (s *Service) Build(r Reference) (cards []Card, err error) {
 				bullet = "- "
 			}
 			if _, ok := abilityCache[a.ID]; ok {
-				ability.Description, err = s.Compile(fmt.Sprintf(`%s**%s** (%s) – %s`, bullet, a.Name, a.Title, translations[fmt.Sprintf("see_above_%s", r.Lang)]), r.Lang, a.Title, cardAbilities)
+				ability.Description, err = s.Compile(fmt.Sprintf(`%s**%s** (%s) – %s`, bullet, a.Name, a.Title, translations[fmt.Sprintf("see_above_%s", r.Lang)]), r.Lang, a.Name, cardAbilities)
 			} else {
-				ability.Description, err = s.Compile(fmt.Sprintf(`%s**%s** (%s) – %s`, bullet, a.Name, a.Title, a.Description), r.Lang, a.Title, cardAbilities)
+				ability.Description, err = s.Compile(fmt.Sprintf(`%s**%s** (%s) – %s`, bullet, a.Name, a.Title, a.Description), r.Lang, a.Name, cardAbilities)
 				abilityCache[a.ID] = a
 			}
 			if err != nil {
