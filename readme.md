@@ -12,3 +12,15 @@ npm run serve
 ./set_env.sh
 go get ./...
 go run main.go
+
+scp user@host:saves/jackmarshall-200626.sql .
+mysql -u cards_api -p cards_db < jackmarshall-200626.sql
+
+
+export CGO_CFLAGS_ALLOW='-Xpreprocessor'
+go run bin/fetch-cards-pdf/main.go --dest-dir assets/images/front
+
+
+
+
+cp assets/images/front/0.png /srv/jackmarshall/assets/pdf_generator/images/front/
