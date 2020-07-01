@@ -27,7 +27,3 @@ func (s *Service) Save(ref *Reference, lang string) error {
 func (s *Service) ListByStatus(lang, status string) ([]Reference, error) {
 	return s.repo.ListByStatus(lang, status)
 }
-
-func (s *Service) ListRefLinkedTo(lang string, linked_to int) ([]Reference, error) {
-	return s.repo.ListRefLinkedTo(lang, linked_to)
-}

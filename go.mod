@@ -4,13 +4,12 @@ go 1.13
 
 require (
 	github.com/PuerkitoBio/goquery v1.5.0
-	github.com/SebastiaanKlippert/go-wkhtmltopdf v1.5.0
 	github.com/codegangsta/negroni v1.0.0
 	github.com/elwinar/rcoredump v0.8.0 // indirect
 	github.com/go-sql-driver/mysql v1.4.0
-	github.com/gogo/protobuf v1.3.1 // indirect
+	github.com/gogo/protobuf v1.3.1
 	github.com/gographics/imagick v3.2.0+incompatible
-	github.com/google/uuid v1.1.1 // indirect
+	github.com/google/uuid v1.1.1
 	github.com/hashicorp/go-multierror v1.0.0
 	github.com/inconshreveable/log15 v0.0.0-20200109203555-b30bc20e4fd1
 	github.com/jmoiron/sqlx v1.2.0
@@ -21,10 +20,9 @@ require (
 	github.com/pkg/errors v0.8.1
 	github.com/prometheus/common v0.9.1
 	github.com/rs/cors v1.7.0
-	github.com/yuin/goldmark v1.1.22 // indirect
+	github.com/yuin/goldmark v1.1.22
 	gitlab.com/golang-commonmark/markdown v0.0.0-20191127184510-91b5b3c99c19
-	golang.org/x/sync v0.0.0-20181221193216-37e7f081c4d4
 	google.golang.org/appengine v1.6.5 // indirect
-	gopkg.in/gographics/imagick.v3 v3.3.0 // indirect
+	gopkg.in/gographics/imagick.v3 v3.3.0
 	gopkg.in/inconshreveable/log15.v2 v2.0.0-20200109203555-b30bc20e4fd1
 )

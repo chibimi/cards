@@ -8,85 +8,12 @@ import (
 	"sync"
 
 	"github.com/chibimi/cards/card/ability"
-	"github.com/chibimi/cards/card/model"
-	"github.com/chibimi/cards/card/weapon"
 	multierror "github.com/hashicorp/go-multierror"
 	"gitlab.com/golang-commonmark/markdown"
 )
 
 func (s *Service) Build(r Reference) (cards []Card, err error) {
 	var errs *multierror.Error
-
-	if r.Ref.Special == "colossal" {
-		secondRef := Reference{
-			Lang: r.Lang,
-			Ref:  r.Ref,
-			PPID: fmt.Sprintf("%d_1", r.Ref.PPID),
-		}
-		secondRef.Ref.Special = ""
-		defer func() {
-			secondCards, err := s.Build(secondRef)
-			if err != nil {
-				errs = multierror.Append(errs, wrap(err, "build second ref"))
-			}
-			cards = append(cards, secondCards...)
-		}()
-	}
-
-	if r.Ref.Special == "charunit" || r.Ref.Special == "dragoon" {
-		firstModel := r.Models[0]
-		secondRef := Reference{
-			Lang:             r.Lang,
-			Ref:              r.Ref,
-			PPID:             fmt.Sprintf("%d_1", r.Ref.PPID),
-			RefAbilities:     r.RefAbilities,
-			ModelsAbilities:  map[int][]ability.Ability{},
-			ModelsWeapons:    map[int][]weapon.Weapon{},
-			WeaponsAbilities: map[int][]ability.Ability{},
-			Models:           make([]model.Model, len(r.Models)-1),
-		}
-
-		copy(secondRef.Models, r.Models[1:])
-		r.Models = r.Models[:1]
-		for k, v := range r.ModelsAbilities {
-			if k == firstModel.ID {
-				continue
-			}
-			secondRef.ModelsAbilities[k] = v
-			delete(r.ModelsAbilities, k)
-		}
-		for k, v := range r.ModelsWeapons {
-			if k == firstModel.ID {
-				continue
-			}
-			secondRef.ModelsWeapons[k] = v
-			delete(r.ModelsWeapons, k)
-			for _, w := range v {
-				secondRef.WeaponsAbilities[w.ID] = r.WeaponsAbilities[w.ID]
-				delete(r.WeaponsAbilities, w.ID)
-			}
-		}
-
-		fmt.Println(r.Models)
-		fmt.Println(secondRef.Models)
-		fmt.Println("--------")
-		fmt.Println(r.ModelsAbilities)
-		fmt.Println(secondRef.ModelsAbilities)
-		fmt.Println("--------")
-		fmt.Println(r.ModelsWeapons)
-		fmt.Println(secondRef.ModelsWeapons)
-		fmt.Println("--------")
-		fmt.Println(r.WeaponsAbilities)
-		fmt.Println(secondRef.WeaponsAbilities)
-		secondRef.Ref.Special = ""
-		defer func() {
-			secondCards, err := s.Build(secondRef)
-			if err != nil {
-				errs = multierror.Append(errs, wrap(err, "build second ref"))
-			}
-			cards = append(cards, secondCards...)
-		}()
-	}
 
 	// Used later for various checks.
 	var category = Category(r.Ref.CategoryID)
@@ -95,7 +22,6 @@ func (s *Service) Build(r Reference) (cards []Card, err error) {
 	cards = append(cards, ProfileCard{
 		Faction: Faction(r.Ref.FactionID),
 		PPID:    r.Ref.PPID,
-		PPIDStr: r.PPID,
 	})
 
 	// Build the rules card.
@@ -122,7 +48,6 @@ func (s *Service) Build(r Reference) (cards []Card, err error) {
 		for _, a := range r.ModelsAbilities[m.ID] {
 			cardAbilities.Store(a.ID, nil)
 		}
-		fmt.Println("MODEL", m.Title, "Weapons", r.ModelsWeapons[m.ID])
 		for _, w := range r.ModelsWeapons[m.ID] {
 			for _, a := range r.WeaponsAbilities[w.ID] {
 				cardAbilities.Store(a.ID, nil)
@@ -165,7 +90,7 @@ func (s *Service) Build(r Reference) (cards []Card, err error) {
 	for _, m := range r.Models {
 		addAbilities(m.Title, r.ModelsAbilities[m.ID])
 		for _, w := range r.ModelsWeapons[m.ID] {
-			addAbilities(w.Title, r.WeaponsAbilities[w.ID])
+			addAbilities(w.Name, r.WeaponsAbilities[w.ID])
 		}
 	}
 
@@ -247,13 +172,6 @@ func (s *Service) Build(r Reference) (cards []Card, err error) {
 		cards = append(cards, feat)
 	}
 
-	for _, attachment := range r.Attachments {
-		attachmentCards, err := s.Build(attachment)
-		if err != nil {
-			errs = multierror.Append(errs, wrap(err, "build attachment"))
-		}
-		cards = append(cards, attachmentCards...)
-	}
 	return cards, errs.ErrorOrNil()
 }
 
@@ -315,7 +233,6 @@ type Card interface {
 type ProfileCard struct {
 	Faction Faction
 	PPID    int
-	PPIDStr string
 }
 
 func (ProfileCard) Type() string {
