@@ -200,13 +200,11 @@ func downloadCard(ppURL, destDir string, job DownloadJob) error {
 
 	err = mw.SetOption("density", "300")
 	if err != nil {
-		log.Error("setting wand options", "err", err, "option", "density", "value", "300")
 		return errors.Wrap(err, "wand option density")
 	}
 
 	err = mw.SetOption("quality", "100")
 	if err != nil {
-		log.Error("setting wand options", "err", err, "option", "quality", "value", "100")
 		return errors.Wrap(err, "wand option quality")
 	}
 
@@ -221,7 +219,7 @@ func downloadCard(ppURL, destDir string, job DownloadJob) error {
 	}
 
 	mw.SetIteratorIndex(0)
-	// The coordinates here depends on the DPI used?
+	// The coordinates here depends on the DPI used.
 	card_h := 1050
 	card_w := 748
 	space := 7
