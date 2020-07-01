@@ -15,6 +15,7 @@ import (
 )
 
 func (s *Service) Build(r Reference) (cards []Card, err error) {
+	translations := GetTranslation(r.Lang)
 	var errs *multierror.Error
 
 	if r.Ref.Special == "colossal" {
@@ -134,7 +135,7 @@ func (s *Service) Build(r Reference) (cards []Card, err error) {
 				bullet = "- "
 			}
 			if _, ok := abilityCache[a.ID]; ok {
-				ability.Description, err = s.Compile(fmt.Sprintf(`%s**%s** (%s) – %s`, bullet, a.Name, a.Title, translations[fmt.Sprintf("see_above_%s", r.Lang)]), r.Lang, a.Name, cardAbilities)
+				ability.Description, err = s.Compile(fmt.Sprintf(`%s**%s** (%s) – %s`, bullet, a.Name, a.Title, translations.Phrases["see_above"]), r.Lang, a.Name, cardAbilities)
 			} else {
 				ability.Description, err = s.Compile(fmt.Sprintf(`%s**%s** (%s) – %s`, bullet, a.Name, a.Title, a.Description), r.Lang, a.Name, cardAbilities)
 				abilityCache[a.ID] = a
@@ -254,6 +255,7 @@ var reAdvantage = regexp.MustCompile(`:[^: ]+:`)
 // with abilities and advantages tags replaced by their textual
 // versions.
 func (s *Service) Compile(src, lang, this string, cardAbilities *sync.Map) (string, error) {
+	translations := GetTranslation(lang)
 	var abilities []string
 	var errs *multierror.Error
 
@@ -283,13 +285,14 @@ func (s *Service) Compile(src, lang, this string, cardAbilities *sync.Map) (stri
 	}
 
 	res := reAdvantage.ReplaceAllStringFunc(buf.String(), func(tag string) string {
-		advantage, err := s.src.Advantage.Get(tag[1 : len(tag)-1])
-		if err != nil {
-			errs = multierror.Append(errs, wrap(err, "get advantage: %s", tag[1:len(tag)-1]))
+		tag = tag[1 : len(tag)-1]
+		translation, ok := translations.Advantages[tag]
+		if !ok {
+			errs = multierror.Append(errs, fmt.Errorf("advantage no found: %s", tag[1:len(tag)-1]))
 			return tag
 		}
 
-		return fmt.Sprintf(`%s ![%s](%s/icons/%s.png)`, advantage.Name, advantage.ID, s.assets, advantage.ID)
+		return fmt.Sprintf(`%s ![%s](%s/icons/%s.png)`, translation, tag, s.assets, tag)
 	})
 
 	return markdown.New().RenderToString([]byte(res)), errs.ErrorOrNil()
