@@ -159,14 +159,12 @@ func (r *Repository) ListByStatus(lang, status string) ([]Reference, error) {
 
 func (r *Repository) ListRefAttachments(lang string, linked_to int) ([]Reference, error) {
 	stmt := `
-	SELECT r.*, IFNULL(s.status, "wip") as status FROM (
-		SELECT id, faction_id, category_id, title FROM refs WHERE linked_to = ?
-	) as r INNER JOIN (
-		SELECT ref_id, status FROM refs_lang WHERE lang = ?
-	) as s ON r.id = s.ref_id
+	SELECT id, faction_id, category_id, title
+	FROM refs
+	WHERE linked_to = ?
 	`
 	res := []Reference{}
-	err := r.db.Select(&res, stmt, linked_to, lang)
+	err := r.db.Select(&res, stmt, linked_to)
 	if err != nil {
 		return nil, errors.Wrap(err, "execute query")
 	}
