@@ -12,7 +12,7 @@
 		"@fortawesome/vue-fontawesome": "^0.1.9",
 		"bootstrap": "^4.3.1",
 		"core-js": "^3.3.2",
-		"jquery": "^3.4.1",
+		"jquery": "^3.5.1",
 		"popper.js": "^1.16.0",
 		"v-autocomplete": "^1.8.2",
 		"v-textcomplete": "^0.2.5",
@@ -29,7 +29,7 @@
 		"eslint": "^5.16.0",
 		"eslint-plugin-prettier": "^3.1.1",
 		"eslint-plugin-vue": "^5.0.0",
-		"node-sass": "^4.13.0",
+		"node-sass": "^4.14.1",
 		"prettier": "^1.19.0",
 		"sass-loader": "^8.0.0",
 		"vue-template-compiler": "^2.6.10"
