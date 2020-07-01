@@ -3,7 +3,9 @@
 {{ end }}
 
 {{ define "rules" }}
-<header><p>{{ .Title }}</p></header>
+<header>
+	<p>{{ .Title }}</p>
+</header>
 <section>
 	{{ if ne (len .Spells) 0 }}
 	<table>
@@ -48,7 +50,9 @@
 {{ end }}
 
 {{ define "spells" }}
-<header><p>{{ .Title }}</p></header>
+<header>
+	<p>{{ .Title }}</p>
+</header>
 <section>
 	<table>
 		<thead>
@@ -83,7 +87,9 @@
 {{ end }}
 
 {{ define "feat" }}
-<header><p>{{ .Title }}</p></header>
+<header>
+	<p>{{ .Title }}</p>
+</header>
 <section>
 	<p class="title">{{ .Name }}</p>
 	<p class="fluff">{{ .Fluff }}</p>
@@ -93,19 +99,22 @@
 
 <!DOCTYPE html>
 <html>
-	<head>
-		<link rel="stylesheet/less" type="text/css" href="assets/styles/cards.less">
-		<script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.9.0/less.min.js"></script>
-	</head>
-	<body>
-		{{ range . }}
-		<div class="card {{ .Type }} {{ .Faction.String | slug }}">
-			{{ if eq .Type "rules" }}{{ template "rules" . }}
-			{{ else if eq .Type "profile" }}{{ template "profile" . }}
-			{{ else if eq .Type "spells" }}{{ template "spells" . }}
-			{{ else if eq .Type "feat" }}{{ template "feat" . }}
-			{{ end }}
-		</div>
+
+<head>
+	<link rel="stylesheet/less" type="text/css" href="assets/styles/cards.less">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.9.0/less.min.js"></script>
+</head>
+
+<body>
+	{{ range . }}
+	<div class="card {{ .Type }} {{ .Faction.String | slug }}">
+		{{ if eq .Type "rules" }}{{ template "rules" . }}
+		{{ else if eq .Type "profile" }}{{ template "profile" . }}
+		{{ else if eq .Type "spells" }}{{ template "spells" . }}
+		{{ else if eq .Type "feat" }}{{ template "feat" . }}
 		{{ end }}
-	</body>
+	</div>
+	{{ end }}
+</body>
+
 </html>
