@@ -157,7 +157,7 @@ func (r *Repository) ListByStatus(lang, status string) ([]Reference, error) {
 	return res, nil
 }
 
-func (r *Repository) ListRefLinkedTo(lang string, linked_to int) ([]Reference, error) {
+func (r *Repository) ListRefAttachments(lang string, linked_to int) ([]Reference, error) {
 	stmt := `
 	SELECT r.*, IFNULL(s.status, "wip") as status FROM (
 		SELECT id, faction_id, category_id, title FROM refs WHERE linked_to = ?

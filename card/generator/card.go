@@ -19,9 +19,9 @@ func (s *Service) Build(r Reference) (cards []Card, err error) {
 
 	if r.Ref.Special == "colossal" {
 		secondRef := Reference{
-			Lang: r.Lang,
-			Ref:  r.Ref,
-			PPID: fmt.Sprintf("%d_1", r.Ref.PPID),
+			Lang:   r.Lang,
+			Ref:    r.Ref,
+			FileID: fmt.Sprintf("%s_1", r.FileID),
 		}
 		secondRef.Ref.Special = ""
 		defer func() {
@@ -38,7 +38,7 @@ func (s *Service) Build(r Reference) (cards []Card, err error) {
 		secondRef := Reference{
 			Lang:             r.Lang,
 			Ref:              r.Ref,
-			PPID:             fmt.Sprintf("%d_1", r.Ref.PPID),
+			FileID:           fmt.Sprintf("%s_1", r.FileID),
 			RefAbilities:     r.RefAbilities,
 			ModelsAbilities:  map[int][]ability.Ability{},
 			ModelsWeapons:    map[int][]weapon.Weapon{},
@@ -67,17 +67,6 @@ func (s *Service) Build(r Reference) (cards []Card, err error) {
 			}
 		}
 
-		fmt.Println(r.Models)
-		fmt.Println(secondRef.Models)
-		fmt.Println("--------")
-		fmt.Println(r.ModelsAbilities)
-		fmt.Println(secondRef.ModelsAbilities)
-		fmt.Println("--------")
-		fmt.Println(r.ModelsWeapons)
-		fmt.Println(secondRef.ModelsWeapons)
-		fmt.Println("--------")
-		fmt.Println(r.WeaponsAbilities)
-		fmt.Println(secondRef.WeaponsAbilities)
 		secondRef.Ref.Special = ""
 		defer func() {
 			secondCards, err := s.Build(secondRef)
@@ -94,8 +83,7 @@ func (s *Service) Build(r Reference) (cards []Card, err error) {
 	// Build the profile card.
 	cards = append(cards, ProfileCard{
 		Faction: Faction(r.Ref.FactionID),
-		PPID:    r.Ref.PPID,
-		PPIDStr: r.PPID,
+		FileID:  r.FileID,
 	})
 
 	// Build the rules card.
@@ -122,7 +110,6 @@ func (s *Service) Build(r Reference) (cards []Card, err error) {
 		for _, a := range r.ModelsAbilities[m.ID] {
 			cardAbilities.Store(a.ID, nil)
 		}
-		fmt.Println("MODEL", m.Title, "Weapons", r.ModelsWeapons[m.ID])
 		for _, w := range r.ModelsWeapons[m.ID] {
 			for _, a := range r.WeaponsAbilities[w.ID] {
 				cardAbilities.Store(a.ID, nil)
@@ -314,8 +301,7 @@ type Card interface {
 
 type ProfileCard struct {
 	Faction Faction
-	PPID    int
-	PPIDStr string
+	FileID  string
 }
 
 func (ProfileCard) Type() string {

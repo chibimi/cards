@@ -28,6 +28,6 @@ func (s *Service) ListByStatus(lang, status string) ([]Reference, error) {
 	return s.repo.ListByStatus(lang, status)
 }
 
-func (s *Service) ListRefLinkedTo(lang string, linked_to int) ([]Reference, error) {
-	return s.repo.ListRefLinkedTo(lang, linked_to)
+func (s *Service) ListRefAttachments(lang string, linked_to int) ([]Reference, error) {
+	return s.repo.ListRefAttachments(lang, linked_to)
 }
