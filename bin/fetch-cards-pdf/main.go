@@ -199,8 +199,7 @@ func (s *Service) downloadCard(job DownloadJob) error {
 	log := log.New("ref", job.RefID)
 	log.Debug("retrieving card")
 
-	url := fmt.Sprintf("%s/?card_items_to_pdf=$%s,1", s.cfg.ppURL, job.RefID)
-	res, err := http.Get(url)
+	res, err := http.Get(fmt.Sprintf("%s/?card_items_to_pdf=$%s,1", s.cfg.ppURL, job.RefID))
 	if err != nil {
 		return errors.Wrap(err, "retrieving card")
 	}
