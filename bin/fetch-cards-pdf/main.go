@@ -54,17 +54,19 @@ func main() {
 
 	// create job queue
 	jobQueue := make(chan DownloadJob)
+	go func() {
+		// queue front cards for all refs
+		if !cfg.secondaryOnly {
+			queueFirstCards(cfg.ppURL, jobQueue)
+		}
 
-	// queue front cards for all refs
-	if !cfg.secondaryOnly {
-		go queueFirstCards(cfg.ppURL, jobQueue)
-	}
+		// queue front cards for special cases (colossal, character unit, dragoon)
+		queueSpecialCaseCards(db, jobQueue)
 
-	// queue front cards for special cases (colossal, character unit, dragoon)
-	go queueSpecialCaseCards(db, jobQueue)
-
-	// queue front cards for attachments (makeda & exalted court)
-	go queueAttachmentCards(db, jobQueue)
+		// queue front cards for attachments (makeda & exalted court)
+		queueAttachmentCards(db, jobQueue)
+		close(jobQueue)
+	}()
 
 	// process jobQueue
 	var wg sync.WaitGroup
@@ -83,6 +85,8 @@ func main() {
 		}(w)
 	}
 	wg.Wait()
+
+	log.Debug("done")
 }
 
 func queueFirstCards(ppURL string, jobQueue chan DownloadJob) {
@@ -127,6 +131,7 @@ func queueSpecialCaseCards(db *sqlx.DB, jobQueue chan DownloadJob) {
 			Index: 1,
 		}
 	}
+	log.Debug("done queuing special cases", "count", len(refs))
 }
 
 func queueAttachmentCards(db *sqlx.DB, jobQueue chan DownloadJob) {
@@ -161,6 +166,8 @@ func queueAttachmentCards(db *sqlx.DB, jobQueue chan DownloadJob) {
 			}
 		}
 	}
+	log.Debug("done queuing attachements", "count", len(refs))
+
 }
 
 func downloadCard(ppURL, destDir, id string, index int) error {
