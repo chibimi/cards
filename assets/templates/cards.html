@@ -1,37 +1,27 @@
 {{ define "profile" }}
-<img src="assets/fronts/{{ .PPIDStr }}.png">
+<img src="assets/fronts/{{ .PPID }}.png">
 {{ end }}
 
 {{ define "rules" }}
 <header><p>{{ .Title }}</p></header>
 <section>
-	{{ if ne (len .Spells) 0 }}
-	<table>
-		<thead>
-			<tr>
-				<th>spells</th>
-				<th>cost</th>
-				<th>rng</th>
-				<th>aoe</th>
-				<th>pow</th>
-				<th>dur</th>
-				<th>off</th>
-			</tr>
-		</thead>
-		<tbody>
-			{{ range .Spells }}
-			<tr class="spellline">
-				<td>{{ .Name }}<br></td>
-				<td>{{ .Stats.COST }}</td>
-				<td>{{ .Stats.RNG }}</td>
-				<td>{{ .Stats.AOE }}</td>
-				<td>{{ .Stats.POW }}</td>
-				<td>{{ .Stats.DUR }}</td>
-				<td>{{ .Stats.OFF }}</td>
-			</tr>
-			<tr>
-				<td colspan="7">{{ .Description | safe }}</td>
-			</tr>
+	{{ $card := . }}
+	{{ range .RefAbilities }}
+	<p class="ability">{{ .Text | compile | safe }}</p>
+	{{ end }}
+	{{ range .Models }}
+	<p class="title">{{ .Title }}</p>
+
+		{{ range index $card.ModelsAbilities .ID }}
+		<p class="ability">{{ .Text | compile | safe }}</p>
+		{{ end }}
+
+		{{ range index $card.ModelsWeapons .ID }}
+			{{ if not (eq (len (index $card.WeaponsAbilities .ID)) 0) }}
+				<p class="title">{{ .Title }}</p>
+				{{ range index $card.WeaponsAbilities .ID }}
+					<p class="ability">{{ .Text | gompile | safe }}</p>
+				{{ end }}
 			{{ end }}
 		</tbody>
 	</table>
@@ -74,7 +64,7 @@
 				<td>{{ .Stats.OFF }}</td>
 			</tr>
 			<tr>
-				<td colspan="7">{{ .Description | safe }}</td>
+				<td colspan="7">{{ .Description | compile | safe }}</td>
 			</tr>
 			{{ end }}
 		</tbody>
@@ -85,9 +75,9 @@
 {{ define "feat" }}
 <header><p>{{ .Title }}</p></header>
 <section>
-	<p class="title">{{ .Name }}</p>
-	<p class="fluff">{{ .Fluff }}</p>
-	<p class="feat">{{ .Description | safe }}</p>
+	<p class="title">{{ .Feat.Name }}</p>
+	<p class="fluff">{{ .Feat.Fluff }}</p>
+	<p class="feat">{{ .Feat.Description | compile | safe }}</p>
 </section>
 {{ end }}
 
