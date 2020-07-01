@@ -138,8 +138,8 @@ func queueAttachmentCards(db *sqlx.DB, jobQueue chan DownloadJob) {
 	log.Debug("looking for attachements ")
 
 	stmt := `
-		SELECT parent.ppid, parent.category_id, parent.special, ref.id
-		FROM (select id, title, linked_to FROM refs WHERE linked_to is not null AND linked_to != 0) as ref
+		SELECT parent.ppid, parent.category_id, parent.special
+		FROM (select linked_to FROM refs WHERE linked_to is not null AND linked_to != 0) as ref
 		LEFT JOIN (select id, ppid, category_id, special FROM refs) AS parent ON ref.linked_to = parent.id
 		`
 	refs := []reference.Reference{}
@@ -201,12 +201,12 @@ func downloadCard(ppURL, destDir, id string, index int) error {
 
 	err = mw.ReadImageBlob(raw)
 	if err != nil {
-		errors.Wrap(err, "parsing card")
+		return errors.Wrap(err, "parsing card")
 	}
 
 	err = mw.SetImageFormat("png")
 	if err != nil {
-		errors.Wrap(err, "setting wand format")
+		return errors.Wrap(err, "setting wand format")
 	}
 
 	mw.SetIteratorIndex(0)
@@ -216,7 +216,7 @@ func downloadCard(ppURL, destDir, id string, index int) error {
 	space := 7
 	err = mw.CropImage(uint(card_w), uint(card_h), 140+(card_w+space)*index, 227)
 	if err != nil {
-		errors.Wrap(err, "extracting card")
+		return errors.Wrap(err, "extracting card")
 	}
 
 	var path string
@@ -227,7 +227,7 @@ func downloadCard(ppURL, destDir, id string, index int) error {
 	}
 	err = mw.WriteImage(path)
 	if err != nil {
-		errors.Wrap(err, "writing card")
+		return errors.Wrap(err, "writing card")
 	}
 	return nil
 }
