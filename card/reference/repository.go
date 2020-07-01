@@ -156,3 +156,18 @@ func (r *Repository) ListByStatus(lang, status string) ([]Reference, error) {
 
 	return res, nil
 }
+
+func (r *Repository) ListRefAttachments(lang string, linked_to int) ([]Reference, error) {
+	stmt := `
+	SELECT id, faction_id, category_id, title
+	FROM refs
+	WHERE linked_to = ?
+	`
+	res := []Reference{}
+	err := r.db.Select(&res, stmt, linked_to)
+	if err != nil {
+		return nil, errors.Wrap(err, "execute query")
+	}
+
+	return res, nil
+}

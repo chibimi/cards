@@ -2,6 +2,7 @@ package generator
 
 import (
 	"fmt"
+	"strconv"
 
 	"github.com/chibimi/cards/card/ability"
 	"github.com/chibimi/cards/card/feat"
@@ -21,6 +22,8 @@ type Reference struct {
 	WeaponsAbilities map[int][]ability.Ability
 	Spells           []spell.Spell
 	Feat             *feat.Feat
+	Attachments      []Reference
+	FileID           string
 }
 
 func (s *Service) Get(id int, lang string) (r Reference, err error) {
@@ -30,10 +33,10 @@ func (s *Service) Get(id int, lang string) (r Reference, err error) {
 	if err != nil {
 		return r, fmt.Errorf(`fetching reference: %w`, err)
 	}
-
+	r.FileID = strconv.Itoa(r.Ref.PPID)
 	r.Models, err = s.src.Model.List(id, lang)
 	if err != nil {
-		return r, fmt.Errorf(`fetching models for ref%d: %w`, r.Ref.ID, err)
+		return r, fmt.Errorf(`fetching models for ref %d: %w`, r.Ref.ID, err)
 	}
 
 	r.ModelsAbilities = make(map[int][]ability.Ability)
@@ -72,6 +75,25 @@ func (s *Service) Get(id int, lang string) (r Reference, err error) {
 		return r, fmt.Errorf(`fetching feat: %w`, err)
 	}
 
+	attachments, err := s.src.Ref.ListRefAttachments(lang, r.Ref.ID)
+	if err != nil {
+		return r, fmt.Errorf(`list ref linked to: %w`, err)
+	}
+	for _, attachment := range attachments {
+		child, err := s.Get(attachment.ID, lang)
+		if err != nil {
+			return r, fmt.Errorf(`get attachment %d for ref %d: %w`, attachment.ID, r.Ref.ID, err)
+		}
+		index := 1
+		if r.Ref.CategoryID == 1 || r.Ref.CategoryID == 2 || r.Ref.CategoryID == 10 {
+			index++
+		}
+		if r.Ref.Special != "" {
+			index++
+		}
+		child.FileID = fmt.Sprintf("%s_%d", r.FileID, index)
+		r.Attachments = append(r.Attachments, child)
+	}
 	return r, nil
 }
 
