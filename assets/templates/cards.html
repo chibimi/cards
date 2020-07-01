@@ -1,27 +1,39 @@
 {{ define "profile" }}
-<img src="assets/fronts/{{ .PPID }}.png">
+<img src="assets/fronts/{{ .PPIDStr }}.png">
 {{ end }}
 
 {{ define "rules" }}
-<header><p>{{ .Title }}</p></header>
+<header>
+	<p>{{ .Title }}</p>
+</header>
 <section>
-	{{ $card := . }}
-	{{ range .RefAbilities }}
-	<p class="ability">{{ .Text | compile | safe }}</p>
-	{{ end }}
-	{{ range .Models }}
-	<p class="title">{{ .Title }}</p>
-
-		{{ range index $card.ModelsAbilities .ID }}
-		<p class="ability">{{ .Text | compile | safe }}</p>
-		{{ end }}
-
-		{{ range index $card.ModelsWeapons .ID }}
-			{{ if not (eq (len (index $card.WeaponsAbilities .ID)) 0) }}
-				<p class="title">{{ .Title }}</p>
-				{{ range index $card.WeaponsAbilities .ID }}
-					<p class="ability">{{ .Text | gompile | safe }}</p>
-				{{ end }}
+	{{ if ne (len .Spells) 0 }}
+	<table>
+		<thead>
+			<tr>
+				<th>spells</th>
+				<th>cost</th>
+				<th>rng</th>
+				<th>aoe</th>
+				<th>pow</th>
+				<th>dur</th>
+				<th>off</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{ range .Spells }}
+			<tr class="spellline">
+				<td>{{ .Name }}<br></td>
+				<td>{{ .Stats.COST }}</td>
+				<td>{{ .Stats.RNG }}</td>
+				<td>{{ .Stats.AOE }}</td>
+				<td>{{ .Stats.POW }}</td>
+				<td>{{ .Stats.DUR }}</td>
+				<td>{{ .Stats.OFF }}</td>
+			</tr>
+			<tr>
+				<td colspan="7">{{ .Description | safe }}</td>
+			</tr>
 			{{ end }}
 		</tbody>
 	</table>
@@ -38,7 +50,9 @@
 {{ end }}
 
 {{ define "spells" }}
-<header><p>{{ .Title }}</p></header>
+<header>
+	<p>{{ .Title }}</p>
+</header>
 <section>
 	<table>
 		<thead>
@@ -64,7 +78,7 @@
 				<td>{{ .Stats.OFF }}</td>
 			</tr>
 			<tr>
-				<td colspan="7">{{ .Description | compile | safe }}</td>
+				<td colspan="7">{{ .Description | safe }}</td>
 			</tr>
 			{{ end }}
 		</tbody>
@@ -73,29 +87,34 @@
 {{ end }}
 
 {{ define "feat" }}
-<header><p>{{ .Title }}</p></header>
+<header>
+	<p>{{ .Title }}</p>
+</header>
 <section>
-	<p class="title">{{ .Feat.Name }}</p>
-	<p class="fluff">{{ .Feat.Fluff }}</p>
-	<p class="feat">{{ .Feat.Description | compile | safe }}</p>
+	<p class="title">{{ .Name }}</p>
+	<p class="fluff">{{ .Fluff }}</p>
+	<p class="feat">{{ .Description | safe }}</p>
 </section>
 {{ end }}
 
 <!DOCTYPE html>
 <html>
-	<head>
-		<link rel="stylesheet/less" type="text/css" href="assets/styles/cards.less">
-		<script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.9.0/less.min.js"></script>
-	</head>
-	<body>
-		{{ range . }}
-		<div class="card {{ .Type }} {{ .Faction.String | slug }}">
-			{{ if eq .Type "rules" }}{{ template "rules" . }}
-			{{ else if eq .Type "profile" }}{{ template "profile" . }}
-			{{ else if eq .Type "spells" }}{{ template "spells" . }}
-			{{ else if eq .Type "feat" }}{{ template "feat" . }}
-			{{ end }}
-		</div>
+
+<head>
+	<link rel="stylesheet/less" type="text/css" href="assets/styles/cards.less">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.9.0/less.min.js"></script>
+</head>
+
+<body>
+	{{ range . }}
+	<div class="card {{ .Type }} {{ .Faction.String | slug }}">
+		{{ if eq .Type "rules" }}{{ template "rules" . }}
+		{{ else if eq .Type "profile" }}{{ template "profile" . }}
+		{{ else if eq .Type "spells" }}{{ template "spells" . }}
+		{{ else if eq .Type "feat" }}{{ template "feat" . }}
 		{{ end }}
-	</body>
+	</div>
+	{{ end }}
+</body>
+
 </html>
