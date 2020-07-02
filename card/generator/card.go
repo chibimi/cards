@@ -276,6 +276,7 @@ func (s *Service) Compile(src, lang, this string, cardAbilities *sync.Map) (stri
 			return tag
 		}
 		if _, ok := cardAbilities.LoadOrStore(id, nil); !ok {
+			ability.Description = strings.Replace(ability.Description, `#this#`, ability.Name, -1)
 			abilities = append(abilities, fmt.Sprintf("%s: %s", ability.Name, ability.Description))
 		}
 
