@@ -45,7 +45,7 @@ var langFR = Translation{
 		"type_corrosion":       "Type: Corrosion",
 		"continuous_corrosion": "Corrosion Continue",
 		"crit_corrosion":       "Crit: Corrosion",
-		"type_electricity":     "Type: Electricity",
+		"type_electricity":     "Type: Electrique",
 		"disruption":           "Disruption",
 		"crit_disruption":      "Crit: Disruption",
 		"type_fire":            "Type: Feu",
