@@ -1,7 +1,5 @@
 package ability
 
-import "fmt"
-
 type Ability struct {
 	ID          int    `json:"id,omitempty"`
 	Title       string `json:"title,omitempty"`
@@ -18,6 +16,18 @@ type Relation struct {
 	Star      *int `json:"star,omitempty"`
 }
 
-func (a Ability) Text() string {
-	return fmt.Sprintf("**%s** – %s", a.Title, a.Description)
+func (a Ability) GetStarText() string {
+	if a.Star == nil {
+		return ""
+	}
+	switch *a.Star {
+	case 1:
+		return " (\u2605Attaque)"
+	case 2:
+		return " (\u2605Action)"
+	case 3:
+		return " (\u2605Action ou \u2605Attaque)"
+	default:
+		return ""
+	}
 }
