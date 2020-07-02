@@ -184,6 +184,7 @@ func (s *Service) Build(r Reference) (cards []Card, err error) {
 		}
 	}
 
+	rules.SetFontSize()
 	cards = append(cards, rules)
 
 	// Build the spells card. It is only a separate card for warboss-type
@@ -214,7 +215,7 @@ func (s *Service) Build(r Reference) (cards []Card, err error) {
 
 			spells.Spells = append(spells.Spells, spell)
 		}
-
+		spells.SetFontSize()
 		cards = append(cards, spells)
 	}
 
@@ -316,10 +317,26 @@ type RulesCard struct {
 	Title     string
 	Spells    []Spell
 	Abilities []Abilities
+	FontClass string
 }
 
 func (RulesCard) Type() string {
 	return "rules"
+}
+func (c *RulesCard) SetFontSize() {
+	nbChar := 0
+	for _, s := range c.Spells {
+		nbChar += len(s.Name)
+		nbChar += len(s.Description)
+	}
+	for _, abilities := range c.Abilities {
+		for _, a := range abilities.Abilities {
+			nbChar += len(a.Name)
+			nbChar += len(a.Description)
+		}
+	}
+
+	c.FontClass = getFontClass(nbChar)
 }
 
 type Abilities struct {
@@ -335,13 +352,23 @@ type Ability struct {
 type AbilityType int
 
 type SpellsCard struct {
-	Faction Faction
-	Title   string
-	Spells  []Spell
+	Faction   Faction
+	Title     string
+	Spells    []Spell
+	FontClass string
 }
 
 func (SpellsCard) Type() string {
 	return "spells"
+}
+
+func (c *SpellsCard) SetFontSize() {
+	nbChar := 0
+	for _, s := range c.Spells {
+		nbChar += len(s.Name)
+		nbChar += len(s.Description)
+	}
+	c.FontClass = getFontClass(nbChar)
 }
 
 type Spell struct {
@@ -360,4 +387,17 @@ type FeatCard struct {
 
 func (FeatCard) Type() string {
 	return "feat"
+}
+
+func getFontClass(nbChar int) string {
+	switch {
+	case nbChar > 2300:
+		return "font-seriously-pp"
+	case nbChar > 1900:
+		return "font-xs"
+	case nbChar > 1500:
+		return "font-s"
+	default:
+		return "font-m"
+	}
 }

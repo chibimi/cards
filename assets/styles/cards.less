@@ -2,8 +2,8 @@
 
 @import 'fonts.css';
 
-@card-width: 65mm;
-@card-height: 91mm;
+@card-width: 63.5mm;
+@card-height: 90mm;
 
 .card {
 	width: @card-width;
@@ -14,12 +14,25 @@
 	overflow: hidden;
 
 	font-family: 'Calisto', serif;
-	font-size: 1.8mm;
+	font-size: 2mm;
 
 	* {
 		margin: 0;
 		padding: 0;
 		line-height: 1.1em;
+	}
+
+	.font-m {
+		font-size: 2mm;
+	}
+	.font-s {
+		font-size: 1.9mm;
+	}
+	.font-xs {
+		font-size: 1.8mm;
+	}
+	.font-seriously-pp {
+		font-size: 1.6mm;
 	}
 
 	// The text class is used as the base for all the text cards, those
@@ -43,7 +56,7 @@
 			position: absolute;
 			left: 1.5mm;
 			top: 10mm;
-			width: 59mm;
+			width: 58mm;
 			height: 72mm;
 
 			padding: 1.5mm;
@@ -102,6 +115,7 @@
 	&.profile {
 		img {
 			width: 100%;
+			height: 100%;
 		}
 	}
 
@@ -151,7 +165,7 @@
 
 		> section {
 			padding-top: 0.8mm;
-			width: 60mm;
+			width: 58mm;
 
 			> table {
 				.spelllist;

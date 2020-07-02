@@ -28,4 +28,10 @@ fronts_dir ?= ./assets/fronts
 
 download-assets: ## Download the cards front from the privateer press cards database
 	mkdir -p $(fronts_dir)
-	CGO_CFLAGS_ALLOW="-Xpreprocessor" go run ./bin/fetch-cards-pdf/main.go -dest-dir $(fronts_dir) -workers 10
+	CGO_CFLAGS_ALLOW="-Xpreprocessor" go run ./bin/fetch-cards-pdf/main.go -dest-dir $(fronts_dir) -dsn "jackmarshall:$(password)@tcp(localhost:3306)/jackmarshall"
+
+download-assets-light: ## Only downlaod attachment and secondary cards
+	CGO_CFLAGS_ALLOW="-Xpreprocessor" go run ./bin/fetch-cards-pdf/main.go -secondary-only -dest-dir $(fronts_dir) -dsn "jackmarshall:$(password)@tcp(localhost:3306)/jackmarshall"
+
+find-ids:
+	go run ./bin/find-ids/main.go -dsn "jackmarshall:$(password)@tcp(localhost:3306)/jackmarshall"

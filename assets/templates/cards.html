@@ -6,7 +6,7 @@
 <header>
 	<p>{{ .Title }}</p>
 </header>
-<section>
+<section class="{{ .FontClass }}">
 	{{ if ne (len .Spells) 0 }}
 	<table>
 		<thead>
@@ -53,7 +53,7 @@
 <header>
 	<p>{{ .Title }}</p>
 </header>
-<section>
+<section class="{{ .FontSize }}">
 	<table>
 		<thead>
 			<tr>
