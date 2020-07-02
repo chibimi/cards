@@ -391,7 +391,7 @@ func (FeatCard) Type() string {
 
 func getFontClass(nbChar int) string {
 	switch {
-	case nbChar > 2300:
+	case nbChar > 2250:
 		return "font-seriously-pp"
 	case nbChar > 1900:
 		return "font-xs"
