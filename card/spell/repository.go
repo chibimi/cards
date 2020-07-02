@@ -30,7 +30,7 @@ func (r *Repository) Create(sp *Spell, lang string) (int, error) {
 
 	stmt = `
 	REPLACE INTO spells_lang (spell_id, lang, name, description)
-	VALUES (?, ?, ?, ?)
+	VALUES (?, ?, TRIM(?), TRIM(?))
 	`
 	_, err = r.db.Exec(stmt, id, lang, sp.Name, sp.Description)
 	if err != nil {
@@ -74,7 +74,7 @@ func (r *Repository) Save(sp *Spell, lang string) error {
 
 	stmt = `
 	REPLACE INTO spells_lang (spell_id, lang, name, description)
-	VALUES (?, ?, ?, ?)
+	VALUES (?, ?, TRIM(?), TRIM(?))
 	`
 	_, err = tx.Exec(stmt, sp.ID, lang, sp.Name, sp.Description)
 	if err != nil {
