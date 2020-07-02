@@ -32,7 +32,7 @@ func (r *Repository) Create(sp *Ability, lang string) (int, error) {
 
 	stmt = `
 	REPLACE INTO abilities_lang (ability_id, lang, name, description)
-	VALUES (?, ?, ?, ?)
+	VALUES (?, ?, TRIM(?), TRIM(?))
 	`
 	_, err = r.db.Exec(stmt, id, lang, sp.Name, sp.Description)
 	if err != nil {
@@ -65,7 +65,7 @@ func (r *Repository) Save(sp *Ability, lang string) error {
 
 	stmt = `
 	REPLACE INTO abilities_lang (ability_id, lang, name, description)
-	VALUES (?, ?, ?, ?)
+	VALUES (?, ?, TRIM(?), TRIM(?))
 	`
 	_, err = tx.Exec(stmt, sp.ID, lang, sp.Name, sp.Description)
 	if err != nil {
