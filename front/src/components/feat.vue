@@ -43,12 +43,10 @@ export default {
 		this.get(this.ref_id)
 	},
 	mounted: function() {
-		EventBus.$on('mega_save', () => {
-			this.save(this.feat)
-		})
+		EventBus.$on('mega_save', this.save)
 	},
 	beforeDestroy() {
-		EventBus.$off('mega_save')
+		EventBus.$off('mega_save', this.save)
 	},
 	data() {
 		return {
@@ -77,18 +75,18 @@ export default {
 					console.error(err)
 				})
 		},
-		save: function(feat) {
-			if (feat.ref_id == null) {
+		save: function() {
+			if (this.feat.ref_id == null) {
 				return
 			}
 			this.$http
-				.put(process.env.VUE_APP_API_ENDPOINT + `/ref/${feat.ref_id}/feat?lang=${this.$language}`, feat)
+				.put(process.env.VUE_APP_API_ENDPOINT + `/ref/${this.feat.ref_id}/feat?lang=${this.$language}`, this.feat)
 				.then(function(res) {
 					console.debug(res)
 				})
 				.catch(function(err) {
 					console.error(err)
-					EventBus.$emit('err_save', 'feat', feat.ref_id, err.data)
+					EventBus.$emit('err_save', 'feat', this.feat.ref_id, err.data)
 				})
 		},
 	},

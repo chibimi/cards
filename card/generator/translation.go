@@ -27,7 +27,7 @@ var langFR = Translation{
 		"eyeless_sight":        "Vision Aveugle",
 		"flight":               "Vol",
 		"gunfighter":           "Pistolero",
-		"incorporeal":          "Incorporel",
+		"incorporeal":          "Intangible",
 		"immunity_corrosion":   "Immunité Corrosion ",
 		"immunity_electricity": "Immunité Electricité",
 		"immunity_fire":        "Immunité Feu",
