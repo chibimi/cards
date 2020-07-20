@@ -3,6 +3,7 @@ package generator
 import (
 	"fmt"
 	"strconv"
+	"strings"
 
 	"github.com/chibimi/cards/card/ability"
 	"github.com/chibimi/cards/card/feat"
@@ -88,8 +89,16 @@ func (s *Service) Get(id int, lang string) (r Reference, err error) {
 		if r.Ref.CategoryID == 1 || r.Ref.CategoryID == 2 || r.Ref.CategoryID == 10 {
 			index++
 		}
+
 		if r.Ref.Special != "" {
 			index++
+		}
+
+		if strings.HasPrefix(child.Ref.Special, "index") {
+			index, err = strconv.Atoi(child.Ref.Special[5:])
+			if err != nil {
+				return r, fmt.Errorf(`get index for child %d: %w`, child.Ref.ID, err)
+			}
 		}
 		child.FileID = fmt.Sprintf("%s_%d", r.FileID, index)
 		r.Attachments = append(r.Attachments, child)
