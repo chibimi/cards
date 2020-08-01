@@ -191,6 +191,13 @@ func (s *Service) queueAttachmentCards() {
 			// if the ref if a special case there is one more card before the attachement
 			index++
 		}
+		if strings.HasPrefix(ref.Special, "index") {
+			index, err = strconv.Atoi(ref.Special[5:])
+			if err != nil {
+				s.errQueue <- errors.Wrap(err, "converting index")
+				continue
+			}
+		}
 		s.jobQueue <- DownloadJob{
 			RefID: strconv.Itoa(ref.PPID),
 			Index: index,
