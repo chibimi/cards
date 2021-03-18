@@ -1,0 +1,338 @@
+@import: url(https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css);
+
+@import 'fonts.css';
+
+@card-width: 63.5mm;
+@card-height: 90mm;
+
+.card {
+	width: @card-width;
+	height: @card-height;
+	position: relative;
+	background-size: @card-width @card-height;
+	display: inline-block;
+	overflow: hidden;
+
+	font-family: 'Calisto', serif;
+	font-size: 2mm;
+
+	* {
+		margin: 0;
+		padding: 0;
+		line-height: 1.1em;
+	}
+
+	.font-m {
+		font-size: 2mm;
+	}
+	.font-s {
+		font-size: 1.9mm;
+	}
+	.font-xs {
+		font-size: 1.8mm;
+	}
+	.font-seriously-pp {
+		font-size: 1.6mm;
+	}
+
+	// The text class is used as the base for all the text cards, those
+	// that are composed of a title block and a section block that contains
+	// free-form text, like the rules, spells, or feat cards.
+	.text {
+		> header {
+			position: absolute;
+			left: 9.5mm;
+			top: 4.5mm;
+			width: @card-width - 9.5mm;
+			height: 4mm;
+
+			> p {
+				font-size: 3mm;
+				text-transform: uppercase;
+			}
+		}
+
+		> section {
+			position: absolute;
+			left: 1.5mm;
+			top: 10mm;
+			width: 58mm;
+			height: 72mm;
+
+			padding: 1.5mm;
+
+			p img {
+				height: 2mm;
+				vertical-align: middle;
+			}
+			li img {
+				height: 2mm;
+				vertical-align: middle;
+			}
+		}
+	}
+
+	.spelllist {
+		border-collapse: collapse;
+
+		th {
+			background: black;
+			color: white;
+			width: 6.25mm;
+			padding-top: 1mm;
+			padding-bottom: 0.5mm;
+			padding-left: 1mm;
+		}
+
+		th:first-child {
+			width: 23.5mm;
+		}
+
+		th, td {
+			text-align: center;
+
+			&:first-child {
+				text-align: left;
+			}
+		}
+
+		th, tr.spellline > td {
+			font-family: 'Bell Gothic', sans-serif;
+			font-weight: bold;
+			font-size: 0.85em;
+			text-transform: uppercase;
+		}
+
+		tr.spellline > td {
+			padding-top: 1em;
+		}
+
+		td > * {
+			margin: 0;
+		}
+	}
+
+	&.profile {
+		img {
+			width: 100%;
+			height: 100%;
+		}
+	}
+
+	&.rules {
+		.text;
+
+		> section {
+			> table {
+				.spelllist;
+
+				border-bottom: 1px solid black;
+			}
+
+			* {
+				margin-bottom: 0.5em;
+			}
+
+			p.title {
+				font-size: 0.9em;
+				font-weight: bold;
+				text-decoration: underline;
+				text-transform: uppercase;
+			}
+
+			p > strong {
+				font-family: 'Bell Gothic', sans-serif;
+				font-weight: bold;
+				font-size: 0.85em;
+				text-transform: uppercase;
+			}
+
+			li {
+    			margin-left: 3mm;
+			}
+
+			li > strong {
+				font-family: 'Bell Gothic', sans-serif;
+				font-weight: bold;
+				font-size: 0.85em;
+				text-transform: uppercase;
+			}
+		}
+	}
+
+	&.spells {
+		.text;
+
+		> section {
+			padding-top: 0.8mm;
+			width: 58mm;
+
+			> table {
+				.spelllist;
+			}
+		}
+	}
+
+	&.feat {
+		.text;
+
+		> section {
+			width: 52mm;
+			padding: 1.5mm 5mm;
+
+			p.title {
+				font-weight: bold;
+				font-stretch: condensed;
+				text-transform: uppercase;
+				text-align: center;
+				margin-top: 1.1mm;
+				color: white;
+				background: black;
+				padding-top: 1mm;
+				padding-bottom: 0.5mm;
+
+				&::before {
+					content: "feat: ";
+				}
+			}
+
+			p.fluff {
+				font-weight: bold;
+				font-style: italic;
+				text-align: center;
+				margin-top: 1em;
+			}
+
+			p.feat {
+				margin-top: 1em;
+			}
+		}
+	}
+
+	&.circle-orboros {
+		&.rules, &.spells, &.feat {
+			background-image: url('../cards/text-circle-orboros.png');
+		}
+		> header > p {
+			font-family: 'Scurlock';
+		}
+	}
+	&.convergeance-of-cyriss {
+		&.rules, &.spells, &.feat {
+			background-image: url('../cards/text-convergeance-of-cyriss.png');
+		}
+		> header > p {
+			font-family: 'Arts and Crafts';
+			letter-spacing: -0.05em;
+		}
+	}
+	&.crucible-guard {
+		&.rules, &.spells, &.feat {
+			background-image: url('../cards/text-crucible-guard.png');
+		}
+		> header > p {
+			font-family: 'Arial';
+		}
+	}
+	&.cryx {
+		&.rules, &.spells, &.feat {
+			background-image: url('../cards/text-cryx.png');
+		}
+		> header > p {
+			font-family: 'Templar';
+		}
+	}
+	&.cygnar {
+		&.rules, &.spells, &.feat {
+			background-image: url('../cards/text-cygnar.png');
+		}
+		> header > p {
+			font-family: 'Amplifier';
+		}
+	}
+	&.grymkin {
+		&.rules, &.spells, &.feat {
+			background-image: url('../cards/text-grymkin.png');
+		}
+		> header > p {
+			font-family: 'Arial';
+		}
+	}
+	&.infernals {
+		&.rules, &.spells, &.feat {
+			background-image: url('../cards/text-infernals.png');
+		}
+		> header > p {
+			font-family: 'Arial';
+		}
+	}
+	&.khador {
+		&.rules, &.spells, &.feat {
+			background-image: url('../cards/text-khador.png');
+		}
+		> header > p {
+			font-family: 'Satellite';
+		}
+	}
+	&.legion-of-everblight {
+		&.rules, &.spells, &.feat {
+			background-image: url('../cards/text-legion-of-everblight.png');
+		}
+		> header > p {
+			font-family: 'Fandango';
+			letter-spacing: -0.05em;
+		}
+	}
+	&.mercenaries {
+		&.rules, &.spells, &.feat {
+			background-image: url('../cards/text-mercenaries.png');
+		}
+		> header > p {
+			font-family: 'Parchment';
+		}
+	}
+	&.minions {
+		&.rules, &.spells, &.feat {
+			background-image: url('../cards/text-minions.png');
+		}
+		> header > p {
+			font-family: 'Arial';
+		}
+	}
+	&.protectorate-of-menoth {
+		&.rules, &.spells, &.feat {
+			background-image: url('../cards/text-protectorate-of-menoth.png');
+		}
+		> header > p {
+			font-family: 'Konfactur';
+		}
+	}
+	&.retribution-of-scyrah {
+		&.rules, &.spells, &.feat {
+			background-image: url('../cards/text-retribution-of-scyrah.png');
+		}
+		> header > p {
+			font-family: 'Nailfont';
+		}
+	}
+	&.skorne {
+		&.rules, &.spells, &.feat {
+			background-image: url('../cards/text-skorne.png');
+		}
+		> header > p {
+			font-family: 'Kruella';
+		}
+	}
+	&.trollbloods {
+		&.profile {
+			background-image: url('../cards/profile-trollbloods.png');
+		}
+		&.rules, &.spells, &.feat {
+			background-image: url('../cards/text-trollbloods.png');
+		}
+		> header > p {
+			font-family: 'Modern Blues';
+		}
+	}
+}
+

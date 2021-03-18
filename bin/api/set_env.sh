@@ -1,6 +1,6 @@
 #!/bin/bash
-export CARD_API_DB="cards_db"
-export CARD_API_DB_LOGIN="cards_api"
-export CARD_API_DB_PASSWORD="cards_api"
-export CARD_API_PDF_ASSETS="/srv/jackmarshall/assets/pdf_generator"
+export CARD_API_DB="jackmarshall"
+export CARD_API_DB_LOGIN="jackmarshall"
+export CARD_API_DB_PASSWORD="jackmarshall"
+export CARD_API_PDF_ASSETS="assets/images"
 export CARD_API_EDITOR_FRONT="../../../front/dist"

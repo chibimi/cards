@@ -16,7 +16,18 @@ type Relation struct {
 	Star      *int `json:"star,omitempty"`
 }
 
-type Rule struct {
-	Main Ability
-	Sub  []Ability
+func (a Ability) GetStarText() string {
+	if a.Star == nil {
+		return ""
+	}
+	switch *a.Star {
+	case 1:
+		return " (\u2605Attaque)"
+	case 2:
+		return " (\u2605Action)"
+	case 3:
+		return " (\u2605Action ou \u2605Attaque)"
+	default:
+		return ""
+	}
 }

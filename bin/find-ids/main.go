@@ -79,7 +79,7 @@ func main() {
 				log := log.New("ref", ref.ID, "title", ref.Title)
 				log.Debug("matching ref")
 
-				_, err := db.Exec("update refs set ppid = ? where title = ?", ref.ID, ref.Title)
+				_, err := db.Exec("update refs set ppid = ? where title = ? AND ppid = 0", ref.ID, ref.Title)
 				if err != nil {
 					log.Error("matching ref", "err", err)
 					continue

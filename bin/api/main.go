@@ -3,15 +3,17 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"time"
 
 	"github.com/chibimi/cards/card"
+	"github.com/chibimi/cards/card/generator"
 	"github.com/codegangsta/negroni"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jmoiron/sqlx"
 	"github.com/julienschmidt/httprouter"
 	"github.com/kelseyhightower/envconfig"
 	"github.com/rs/cors"
-	"gopkg.in/inconshreveable/log15.v2"
+	log15 "gopkg.in/inconshreveable/log15.v2"
 )
 
 func main() {
@@ -22,7 +24,7 @@ func main() {
 		DB          string `envconfig:"db"`
 		Port        int    `envconfig:"port" default:"4203"`
 		EditorFront string `envconfig:"editor_front"`
-		PDFAssets   string `envconfig:"pdf_assets"`
+		AssetsDir   string `envconfig:"assets_dir" default:"assets"`
 	}{}
 	envconfig.Process("card_api", &cfg)
 
@@ -32,10 +34,9 @@ func main() {
 	}
 	defer db.Close()
 
-	// s := api.NewService(card.NewService(db, log15.New()))
 	ss := card.NewSService(db)
 
-	// generator := generator.NewService(ss, cfg.PDFAssets)
+	generator := generator.NewService(ss, db, cfg.AssetsDir)
 
 	router := httprouter.New()
 	router.POST("/ref", ss.Ref.CreateRef)
@@ -75,13 +76,26 @@ func main() {
 	router.POST("/abilities", ss.Ability.Create)
 	router.PUT("/abilities/:id", ss.Ability.Save)
 
-	// router.GET("/pdf/generate", generator.GenerateEndpoint)
+	router.GET("/generate", generator.GenerateEndpoint)
+	router.GET("/display", generator.DisplayEndpoint)
+	router.ServeFiles("/assets/*filepath", http.Dir(cfg.AssetsDir))
 
 	router.ServeFiles("/editor/*filepath", http.Dir(cfg.EditorFront))
 
 	stack := negroni.New()
 	stack.Use(cors.AllowAll())
-	stack.Use(negroni.NewLogger())
+	stack.Use(negroni.HandlerFunc(func(rw http.ResponseWriter, r *http.Request, next http.HandlerFunc) {
+		start := time.Now()
+		next(rw, r)
+		res := rw.(negroni.ResponseWriter)
+		log15.Info("request",
+			"started_at", start,
+			"duration", time.Since(start),
+			"method", r.Method,
+			"path", r.URL.Path,
+			"status", res.Status(),
+		)
+	}))
 	stack.Use(negroni.NewRecovery())
 	stack.UseHandler(router)
 

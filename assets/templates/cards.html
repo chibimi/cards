@@ -1,0 +1,120 @@
+{{ define "profile" }}
+<img src="assets/fronts/{{ .FileID }}.png">
+{{ end }}
+
+{{ define "rules" }}
+<header>
+	<p>{{ .Title }}</p>
+</header>
+<section class="{{ .FontClass }}">
+	{{ if ne (len .Spells) 0 }}
+	<table>
+		<thead>
+			<tr>
+				<th>spells</th>
+				<th>cost</th>
+				<th>rng</th>
+				<th>aoe</th>
+				<th>pow</th>
+				<th>dur</th>
+				<th>off</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{ range .Spells }}
+			<tr class="spellline">
+				<td>{{ .Name }}<br></td>
+				<td>{{ .Stats.COST }}</td>
+				<td>{{ .Stats.RNG }}</td>
+				<td>{{ .Stats.AOE }}</td>
+				<td>{{ .Stats.POW }}</td>
+				<td>{{ .Stats.DUR }}</td>
+				<td>{{ .Stats.OFF }}</td>
+			</tr>
+			<tr>
+				<td colspan="7">{{ .Description | safe }}</td>
+			</tr>
+			{{ end }}
+		</tbody>
+	</table>
+	{{ end }}
+	{{ range .Abilities }}
+	{{ if ne .Source "" }}
+	<p class="title">{{ .Source }}</p>
+	{{ end }}
+	{{ range .Abilities }}
+	<p class="ability">{{ .Description | safe }}</p>
+	{{ end }}
+	{{ end }}
+</section>
+{{ end }}
+
+{{ define "spells" }}
+<header>
+	<p>{{ .Title }}</p>
+</header>
+<section class="{{ .FontClass }}">
+	<table>
+		<thead>
+			<tr>
+				<th>spells</th>
+				<th>cost</th>
+				<th>rng</th>
+				<th>aoe</th>
+				<th>pow</th>
+				<th>dur</th>
+				<th>off</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{ range .Spells }}
+			<tr class="spellline">
+				<td>{{ .Name }}<br></td>
+				<td>{{ .Stats.COST }}</td>
+				<td>{{ .Stats.RNG }}</td>
+				<td>{{ .Stats.AOE }}</td>
+				<td>{{ .Stats.POW }}</td>
+				<td>{{ .Stats.DUR }}</td>
+				<td>{{ .Stats.OFF }}</td>
+			</tr>
+			<tr>
+				<td colspan="7">{{ .Description | safe }}</td>
+			</tr>
+			{{ end }}
+		</tbody>
+	</table>
+</section>
+{{ end }}
+
+{{ define "feat" }}
+<header>
+	<p>{{ .Title }}</p>
+</header>
+<section>
+	<p class="title">{{ .Name }}</p>
+	<p class="fluff">{{ .Fluff }}</p>
+	<p class="feat">{{ .Description | safe }}</p>
+</section>
+{{ end }}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link rel="stylesheet/less" type="text/css" href="assets/styles/cards.less">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.9.0/less.min.js"></script>
+</head>
+
+<body>
+	{{ range . }}
+	<div class="card {{ .Type }} {{ .Faction.String | slug }}">
+		{{ if eq .Type "rules" }}{{ template "rules" . }}
+		{{ else if eq .Type "profile" }}{{ template "profile" . }}
+		{{ else if eq .Type "spells" }}{{ template "spells" . }}
+		{{ else if eq .Type "feat" }}{{ template "feat" . }}
+		{{ end }}
+	</div>
+	{{ end }}
+</body>
+
+</html>
