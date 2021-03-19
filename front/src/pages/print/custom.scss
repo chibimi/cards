@@ -1,0 +1,14 @@
+@import '~bootstrap/scss/bootstrap.scss';
+
+select, input:not([type=checkbox]), textarea {
+	min-width:0;
+    @extend .form-control;
+}
+
+button {
+	@extend .form-control;
+    @extend .btn-sm;
+	@extend .btn-primary;
+	@extend .ml-1;
+	width: 60px !important;
+}

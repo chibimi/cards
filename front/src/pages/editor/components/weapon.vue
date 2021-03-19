@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import { WeaponAdvantages } from './const.js'
+import { WeaponAdvantages } from '../../../const.js'
 import { EventBus } from '../main.js'
 
 export default {

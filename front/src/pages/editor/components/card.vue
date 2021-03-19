@@ -67,7 +67,7 @@
 </template>
 
 <script>
-import { Factions, Categories } from './const.js'
+import { Factions, Categories } from '../../../const.js'
 // import Tooltip from './tooltip.vue'
 import { EventBus } from '../main.js'
 

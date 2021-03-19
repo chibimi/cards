@@ -89,7 +89,7 @@
 
 <script>
 import Weapons from './weapons.vue'
-import { ModelAdvantages } from './const.js'
+import { ModelAdvantages } from '../../../const.js'
 import { EventBus } from '../main.js'
 
 export default {

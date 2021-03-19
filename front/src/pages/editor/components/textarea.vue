@@ -14,7 +14,7 @@
 
 <script>
 import TextComplete from 'v-textcomplete'
-import { ModelAdvantages,WeaponAdvantages,KnownWords } from './const.js'
+import { ModelAdvantages,WeaponAdvantages,KnownWords } from '../../../const.js'
 
 export default {
 	name: 'TextArea',
