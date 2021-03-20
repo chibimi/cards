@@ -25,12 +25,11 @@
 						v-on:remove="remove"
 					/>
 				</div>
-				{{ card_ids }}
 			</div>
 		</div>
 
 		<div>
-			<button v-on:click="generate_pdf" class="form-control btn-sm btn-primary">Generate PDF</button>
+			<button v-on:click="generate_pdf" class="my-5 form-control btn-sm btn-primary">Generate PDF</button>
 		</div>
 	</div>
 </template>

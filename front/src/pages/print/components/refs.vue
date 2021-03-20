@@ -29,11 +29,11 @@
 			</div>
 		</div>
 
-		<h4>{{ category.name }}</h4>
-		<div class="d-flex flex-wrap">
+		<h4 class="mt-4">{{ category.name }}</h4>
+		<div class="my-3 d-flex flex-wrap">
 			<div class="col-6" v-for="(r, i) in refs" :key="r.id">
 				<div class="row" v-bind:class="{ odd: i % 4 in [0, 1] }">
-					<div class="col-6 align-self-center">{{ r.title }} </div>
+					<div class="col-6 align-self-center" >{{ r.title }} </div>
 
 					<div class="col-6 align-self-center px-4">
 						<div class="counter float-right ml-3" style="user-select: none">
