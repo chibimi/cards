@@ -82,8 +82,10 @@ func main() {
 	router.GET("/generate", generator.GenerateEndpoint)
 	router.GET("/display", generator.DisplayEndpoint)
 	router.ServeFiles("/assets/*filepath", http.Dir(cfg.AssetsDir))
+	router.ServeFiles("/dist/*filepath", http.Dir(cfg.EditorFront))
 
-	router.ServeFiles("/editor/*filepath", http.Dir(cfg.EditorFront))
+	router.ServeFiles("/editor/*filepath", http.Dir(cfg.EditorFront+"/editor"))
+	router.ServeFiles("/print/*filepath", http.Dir(cfg.EditorFront+"/print"))
 
 	stack := negroni.New()
 	stack.Use(cors.AllowAll())
