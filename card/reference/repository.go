@@ -1,6 +1,7 @@
 package reference
 
 import (
+	"database/sql"
 	"encoding/json"
 
 	"github.com/jmoiron/sqlx"
@@ -50,16 +51,30 @@ func (r *Repository) Create(ref *Reference) (int, error) {
 	return int(id), nil
 }
 
-func (r *Repository) List(faction, category int, lang string) ([]Reference, error) {
+func (r *Repository) List(faction, category int, lang, status string) ([]Reference, error) {
 	stmt := `
-	SELECT r.*, IFNULL(s.status, "wip") as status FROM (
+	WITH last_reviews AS (
+		SELECT ref_id, rating, ROW_NUMBER() OVER (PARTITION BY ref_id, lang, ip ORDER BY created_at DESC) AS rn
+		FROM reviews_lang 
+		WHERE lang = ?
+	)
+	SELECT r.*, IFNULL(s.status, "wip") as status, IFNULL(good, 0) as good, IFNULL(bad, 0) as bad FROM (
 		SELECT id, ppid, faction_id, category_id, title FROM refs WHERE faction_id = ? AND category_id = ?
 	) as r LEFT JOIN (
 		SELECT ref_id, status FROM refs_lang WHERE lang = ?
-	) as s ON r.id = s.ref_id
+	) as s ON r.id = s.ref_id LEFT JOIN (
+		SELECT ref_id, SUM(CASE WHEN rating = "good" THEN 1 ELSE 0 END) "good", SUM(CASE WHEN rating = "bad" THEN 1 ELSE 0 END) "bad"
+		FROM last_reviews WHERE rn = 1
+		GROUP BY ref_id 
+	) as reviews on r.id = reviews.ref_id
 	`
+	args := []interface{}{lang, faction, category, lang}
+	if status != "" {
+		stmt += `WHERE status = ?`
+		args = append(args, status)
+	}
 	res := []Reference{}
-	err := r.db.Select(&res, stmt, faction, category, lang)
+	err := r.db.Select(&res, stmt, args...)
 	if err != nil {
 		return nil, errors.Wrap(err, "execute query")
 	}
@@ -69,14 +84,23 @@ func (r *Repository) List(faction, category int, lang string) ([]Reference, erro
 
 func (r *Repository) Get(id int, lang string) (*Reference, error) {
 	stmt := `
-	SELECT r.*, IFNULL(s.status, "wip") as status, IFNULL(s.name, "") as name, IFNULL(s.properties, "") as properties FROM (
+	WITH last_reviews AS (
+		SELECT ref_id, rating, ROW_NUMBER() OVER (PARTITION BY ref_id, lang, ip ORDER BY created_at DESC) AS rn
+		FROM reviews_lang 
+		WHERE lang = ?
+	)
+	SELECT r.*, IFNULL(s.status, "wip") as status, IFNULL(s.name, "") as name, IFNULL(s.properties, "") as properties,
+	IFNULL(good, 0) as good, IFNULL(bad, 0) as bad FROM (
 		SELECT * FROM refs WHERE id = ?
 	) as r LEFT JOIN (
 		SELECT * FROM refs_lang WHERE ref_id = ? AND lang = ?
-	) as s ON r.id = s.ref_id
+	) as s ON r.id = s.ref_id LEFT JOIN (
+		SELECT ref_id, SUM(CASE WHEN rating = "good" THEN 1 ELSE 0 END) "good", SUM(CASE WHEN rating = "bad" THEN 1 ELSE 0 END) "bad"
+		FROM last_reviews WHERE ref_id = ? AND rn = 1
+	) as reviews on r.id = reviews.ref_id
 	`
 	res := &referenceDB{}
-	err := r.db.Get(res, stmt, id, id, lang)
+	err := r.db.Get(res, stmt, lang, id, id, lang, id)
 	if err != nil {
 		return nil, errors.Wrap(err, "execute query")
 	}
@@ -169,5 +193,24 @@ func (r *Repository) ListRefAttachments(lang string, linked_to int) ([]Reference
 		return nil, errors.Wrap(err, "execute query")
 	}
 
+	return res, nil
+}
+
+func (r *Repository) GetRating(refID int, lang string) (*Rating, error) {
+	stmt := `
+	WITH last_reviews AS (
+  		SELECT ref_id, rating, ROW_NUMBER() OVER (PARTITION BY ref_id, lang, ip ORDER BY created_at DESC) AS rn
+  		FROM reviews_lang 
+		WHERE ref_id = ? AND lang = ?
+	)
+	SELECT SUM(CASE WHEN rating = "good" THEN 1 ELSE 0 END) "good", SUM(CASE WHEN rating = "bad" THEN 1 ELSE 0 END) "bad"
+	FROM last_reviews WHERE rn = 1
+	`
+
+	res := &Rating{}
+	err := r.db.Get(res, stmt, refID, lang)
+	if err != nil && err != sql.ErrNoRows {
+		return nil, errors.Wrap(err, "execute query")
+	}
 	return res, nil
 }

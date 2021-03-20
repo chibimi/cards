@@ -6,6 +6,7 @@ import (
 	"github.com/chibimi/cards/card/feat"
 	"github.com/chibimi/cards/card/model"
 	"github.com/chibimi/cards/card/reference"
+	"github.com/chibimi/cards/card/review"
 	"github.com/chibimi/cards/card/spell"
 	"github.com/chibimi/cards/card/weapon"
 	"github.com/jmoiron/sqlx"
@@ -21,6 +22,7 @@ type SService struct {
 	Weapon    *weapon.Service
 	Spell     *spell.Service
 	Ability   *ability.API
+	Review    *review.Service
 	Advantage *advantage.Repository
 }
 
@@ -32,6 +34,7 @@ func NewSService(db *sqlx.DB) *SService {
 		Weapon:    weapon.NewService(weapon.NewRepository(db)),
 		Spell:     spell.NewService(spell.NewRepository(db)),
 		Ability:   ability.NewAPI(ability.NewRepository(db)),
+		Review:    review.NewService(review.NewRepository(db)),
 		Advantage: advantage.NewRepository(db),
 	}
 }

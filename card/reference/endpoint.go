@@ -70,7 +70,9 @@ func (s *Service) ListRef(w http.ResponseWriter, r *http.Request, p httprouter.P
 		http.Error(w, "require lang", http.StatusBadRequest)
 		return
 	}
-	res, err := s.List(fid, cid, lang)
+	status := r.URL.Query().Get("status")
+
+	res, err := s.List(fid, cid, lang, status)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -111,6 +113,26 @@ func (s *Service) ListRefByStatus(w http.ResponseWriter, r *http.Request, p http
 		return
 	}
 	res, err := s.ListByStatus(lang, status)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	utils.WriteJson(w, res, http.StatusOK)
+}
+
+func (s *Service) GetRefRating(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+	id, err := strconv.Atoi(p.ByName("id"))
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+	lang := r.URL.Query().Get("lang")
+	if lang == "" {
+		http.Error(w, "require lang", http.StatusBadRequest)
+		return
+	}
+	res, err := s.GetRating(id, lang)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return

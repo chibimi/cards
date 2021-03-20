@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import { Factions, Categories } from './const.js'
+import { Factions, Categories } from '../../../const.js'
 import { EventBus } from '../main.js'
 
 export default {

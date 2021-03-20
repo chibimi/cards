@@ -7,8 +7,8 @@
 					<select v-model="ref.status">
 						<option value="wip">WIP</option>
 						<option value="tbv">To be validated</option>
-						<!-- <option value="done">Done</option> -->
 						<option value="tbd">To be deleted</option>
+						<option value="done">Done</option>
 					</select>
 					<button v-on:click="save()">Save</button>
 					<!-- <button class="btn-danger" v-on:click="remove(ref.id)">Delete</button> -->

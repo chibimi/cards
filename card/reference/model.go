@@ -19,4 +19,11 @@ type Reference struct {
 	MinFor     []int  `json:"minion_for,omitempty"`
 	Special    string `json:"special,omitempty" db:"special"`
 	LinkedTo   *int   `json:"linked_to,omitempty" db:"linked_to"`
+	ReviewGood int    `json:"review_good" db:"good"`
+	ReviewBad  int    `json:"review_bad" db:"bad"`
+}
+
+type Rating struct {
+	Good int `json:"good" db:"good"`
+	Bad  int `json:"bad" db:"bad"`
 }
