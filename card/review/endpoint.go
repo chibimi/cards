@@ -2,7 +2,6 @@ package review
 
 import (
 	"encoding/json"
-	"net"
 	"net/http"
 	"time"
 
@@ -17,15 +16,10 @@ func (s *Service) SaveReview(w http.ResponseWriter, r *http.Request, p httproute
 		return
 	}
 
-	ip, _, err := net.SplitHostPort(r.Header.Get("X-Forwarded-For"))
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
-		return
-	}
-
 	review.CreatedAt = time.Now()
-	review.IP = ip
-	err = s.Save(review)
+	review.IP = r.Header.Get("X-Forwarded-For")
+
+	err := s.Save(review)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
