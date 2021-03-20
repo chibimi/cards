@@ -17,7 +17,7 @@ func (s *Service) SaveReview(w http.ResponseWriter, r *http.Request, p httproute
 		return
 	}
 
-	ip, _, err := net.SplitHostPort(r.RemoteAddr)
+	ip, _, err := net.SplitHostPort(r.Header.Get("X-Forwarded-For"))
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
