@@ -1,6 +1,6 @@
 <template>
 	<div v-if="refs.length != 0">
-
+		
 		<div
 			class="modal fade"
 			id="exampleModal"
@@ -20,9 +20,10 @@
 					<div class="modal-body">
 						<h5>What's wrong ?</h5>
 						<textarea v-model="feedback" placeholder=""></textarea>
+						<input v-model="reviewer" class="mt-1" placeholder="reviewer name (optionnal)" />
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-primary" data-dismiss="modal" @click="saveFeedback">Save</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal" @click="saveFeedback(ref.id, index, 'bad', feedback, reviewer)">Save</button>
 					</div>
 				</div>
 			</div>
@@ -32,19 +33,19 @@
 		<div class="d-flex flex-wrap">
 			<div class="col-6" v-for="(r, i) in refs" :key="r.id">
 				<div class="row" v-bind:class="{ odd: i % 4 in [0, 1] }">
-					<div class="col-6 align-self-center">{{ r.title }}</div>
+					<div class="col-6 align-self-center">{{ r.title }} </div>
 
 					<div class="col-6 align-self-center px-4">
 						<div class="counter float-right ml-3" style="user-select: none">
-							<span class="bg-success name_left" v-on:click="$emit('add', r.id)"
+							<span class="bg-success name_left" v-on:click="saveFeedback(r.id, i, 'good', '', '')"
 								><i class="fas fa-thumbs-up"></i
 							></span>
-							<span class="count">{{ card_ids[r.id] || 0 }} | {{ card_ids[r.id] || 0 }} </span>
+							<span class="count">{{ r.review_good || 0 }} | {{ r.review_bad || 0 }} </span>
 							<span
 								class="bg-danger name_right"
 								data-toggle="modal"
 								data-target="#exampleModal"
-								v-on:click="ref = r; index = i;"
+								v-on:click="ref = r; index = i; feedback= ''"
 								><i class="fas fa-thumbs-down"></i
 							></span>
 						</div>
@@ -89,6 +90,7 @@ export default {
 			ref: {},
 			index: null,
 			feedback: "",
+			reviewer: "",
 		}
 	},
 	methods: {
@@ -99,7 +101,7 @@ export default {
 			this.$http
 				.get(
 					process.env.VUE_APP_API_ENDPOINT +
-						`/ref?faction_id=${faction}&category_id=${category}&lang=${this.$language}`
+						`/ref?faction_id=${faction}&category_id=${category}&lang=fr&status=done`
 				)
 				.then(function (res) {
 					console.debug(res)
@@ -109,8 +111,31 @@ export default {
 					console.error(err)
 				})
 		},
-		saveFeedback: function(){
-			console.log("save feedback", this.ref.id, this.index, this.feedback)
+		saveFeedback: function(ref_id, index, rating, feedback, reviewer){
+			var review = {
+				ref_id: ref_id,
+				lang: 'fr',
+				rating: rating,
+				comment: feedback,
+				reviewer: reviewer,
+			}
+			this.$http
+				.post(process.env.VUE_APP_API_ENDPOINT + `/reviews`, review)
+				.then(function (res) {
+					console.debug(res)
+					this.$http
+						.get(process.env.VUE_APP_API_ENDPOINT + `/ref/${ref_id}/rating?lang=fr`)
+						.then(function (res){
+							this.refs[index].review_good = res.data.good
+							this.refs[index].review_bad = res.data.bad
+						})
+						.catch(function (err){
+							console.error(err)
+						})
+				})
+				.catch(function (err) {
+					console.error(err)
+				})
 		}
 	},
 }
@@ -152,19 +177,6 @@ export default {
 	}
 }
 
-// .socialSharedCount_list_items_count:before,.socialSharedCount_list_items_count:after{
-// 	position: absolute;
-// 	top: 4px;
-// 	left: -12px;
-// 	content:'';
-// 	border: solid 6px transparent;
-// 	border-right: solid 8px rgb(255, 255, 255);
-// }
-// .socialSharedCount_list_items_count:after{
-
-// 	left: -12px;
-
-// }
 .row {
 	height: 60px;
 }

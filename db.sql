@@ -156,3 +156,15 @@ ALTER TABLE refs ADD linked_to int;
 
 ALTER TABLE model_ability ADD header int;
 ALTER TABLE weapon_ability ADD header int;
+
+CREATE TABLE reviews_lang (
+    id int unsigned not null auto_increment,
+    ref_id int unsigned not null,
+    lang varchar(2),
+    ip varchar(60),
+    rating varchar(10),
+    comment text,
+    reviewer text,
+    created_at datetime,
+    PRIMARY KEY (id)
+);

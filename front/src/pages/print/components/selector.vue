@@ -4,23 +4,33 @@
 			<h2 class="col-8">FR Card database</h2>
 			<div class="col-4">
 				<div class="float-right">
-					<button v-on:click="reset()">Reset</button>
+					<button v-on:click="reset()" class="form-control btn-sm btn-primary">Reset</button>
 				</div>
 			</div>
 		</div>
 
 		<div class="nav" role="tablist">
-			<a v-for="f in factions" :key="f.id" data-toggle="tab" href="#nav" @click="faction=f">{{ f.name }}</a>
+			<a v-for="f in factions" :key="f.id" data-toggle="tab" href="#nav" @click="faction = f">{{ f.name }}</a>
 		</div>
 
-		<div class="content">				
+		<div class="content">
 			<div v-if="faction.id != null">
 				<h3>{{ faction.name }}</h3>
-				<div v-for="c in categories" :key="c.id" >
-					<Refs :card_ids="card_ids" :faction="faction.id" :category="c" v-on:add="add" v-on:remove="remove"/>
+				<div v-for="c in categories" :key="c.id">
+					<Refs
+						:card_ids="card_ids"
+						:faction="faction.id"
+						:category="c"
+						v-on:add="add"
+						v-on:remove="remove"
+					/>
 				</div>
-				{{card_ids}}
+				{{ card_ids }}
 			</div>
+		</div>
+
+		<div>
+			<button v-on:click="generate_pdf" class="form-control btn-sm btn-primary">Generate PDF</button>
 		</div>
 	</div>
 </template>
@@ -33,8 +43,7 @@ export default {
 	name: 'Selector',
 	props: [],
 	components: { Refs },
-	watch: {
-	},
+	watch: {},
 	data() {
 		return {
 			card_ids: {},
@@ -44,22 +53,40 @@ export default {
 		}
 	},
 	methods: {
-		reset: function() {
+		reset: function () {
 			this.card_ids = {}
 		},
-		add: function(n) {
+		add: function (n) {
 			var oldval = this.card_ids[n]
-			var newval = oldval != undefined ? oldval+1 : 1 
+			var newval = oldval != undefined ? oldval + 1 : 1
 			this.$set(this.card_ids, n, newval)
 		},
-		remove: function(n) {
+		remove: function (n) {
 			var oldval = this.card_ids[n]
-			if (!oldval) { return }
-			var newval = oldval  != undefined? oldval-1 : 0 
-			if (newval <= 0) { this.$delete(this.card_ids, n); return }
+			if (!oldval) {
+				return
+			}
+			var newval = oldval != undefined ? oldval - 1 : 0
+			if (newval <= 0) {
+				this.$delete(this.card_ids, n)
+				return
+			}
 			this.$set(this.card_ids, n, newval)
 		},
+		generate_pdf: function () {
+			console.log('passage')
+			var cards = []
+			for (const [key, value] of Object.entries(this.card_ids)) {
+				for (var i = 0; i < value; i++) {
+					cards.push(key)
+				}
+			}
+			var url = process.env.VUE_APP_API_ENDPOINT + `/display?cards=${cards.join()}&lang=fr`
 
+			var win = window.open(url, '_blank')
+			win.focus()
+			console.log(url)
+		},
 	},
 }
 </script>

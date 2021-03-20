@@ -50,6 +50,7 @@ func main() {
 	router.PUT("/ref/:id/feat", ss.Feat.SaveFeat)
 	router.GET("/ref/:id/feat", ss.Feat.GetFeat)
 	router.GET("/ref/:id/model", ss.Model.ListEndpoint)
+	router.GET("/ref/:id/rating", ss.Ref.GetRefRating)
 
 	router.POST("/model", ss.Model.CreateEndpoint)
 	router.PUT("/model/:id", ss.Model.SaveEndpoint)
@@ -75,6 +76,8 @@ func main() {
 	router.GET("/abilities", ss.Ability.List)
 	router.POST("/abilities", ss.Ability.Create)
 	router.PUT("/abilities/:id", ss.Ability.Save)
+
+	router.POST("/reviews", ss.Review.SaveReview)
 
 	router.GET("/generate", generator.GenerateEndpoint)
 	router.GET("/display", generator.DisplayEndpoint)

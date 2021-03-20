@@ -12,8 +12,8 @@ func (s *Service) Create(ref *Reference) (int, error) {
 	return s.repo.Create(ref)
 }
 
-func (s *Service) List(faction, category int, lang string) ([]Reference, error) {
-	return s.repo.List(faction, category, lang)
+func (s *Service) List(faction, category int, lang, status string) ([]Reference, error) {
+	return s.repo.List(faction, category, lang, status)
 }
 
 func (s *Service) Get(id int, lang string) (*Reference, error) {
@@ -30,4 +30,8 @@ func (s *Service) ListByStatus(lang, status string) ([]Reference, error) {
 
 func (s *Service) ListRefAttachments(lang string, linked_to int) ([]Reference, error) {
 	return s.repo.ListRefAttachments(lang, linked_to)
+}
+
+func (s *Service) GetRating(refID int, lang string) (*Rating, error) {
+	return s.repo.GetRating(refID, lang)
 }
