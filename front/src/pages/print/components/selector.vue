@@ -14,8 +14,11 @@
 		</div>
 
 		<div class="content">
-			<div v-if="faction.id != null">
-				<h3>{{ faction.name }}</h3>
+			<div v-if="faction.id != null">		
+				<div class="form-inline">
+					<h3>{{ faction.name }}</h3>
+					<button v-on:click="generate_faction_pdf(faction.id)" class="btn btn-primary mb-2 mx-3">Print Faction</button>
+				</div>
 				<div v-for="c in categories" :key="c.id">
 					<Refs
 						:card_ids="card_ids"
@@ -73,7 +76,6 @@ export default {
 			this.$set(this.card_ids, n, newval)
 		},
 		generate_pdf: function () {
-			console.log('passage')
 			var cards = []
 			for (const [key, value] of Object.entries(this.card_ids)) {
 				for (var i = 0; i < value; i++) {
@@ -84,7 +86,26 @@ export default {
 
 			var win = window.open(url, '_blank')
 			win.focus()
-			console.log(url)
+		},
+		generate_faction_pdf: function (faction) {
+			console.log(faction)
+			if (!faction) {
+				return
+			}
+			this.$http
+				.get(
+					process.env.VUE_APP_API_ENDPOINT +
+						`/faction/${faction}/ref?lang=fr&status=done`
+				)
+				.then(function (res) {
+					console.debug(res)
+					var url = process.env.VUE_APP_API_ENDPOINT + `/display?cards=${res.data.join()}&lang=fr`
+					var win = window.open(url, '_blank')
+					win.focus()
+				})
+				.catch(function (err) {
+					console.error(err)
+				})
 		},
 	},
 }

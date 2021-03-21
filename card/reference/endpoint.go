@@ -81,6 +81,28 @@ func (s *Service) ListRef(w http.ResponseWriter, r *http.Request, p httprouter.P
 	utils.WriteJson(w, res, http.StatusOK)
 }
 
+func (s *Service) ListRefIDs(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+	id, err := strconv.Atoi(p.ByName("id"))
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+	lang := r.URL.Query().Get("lang")
+	if lang == "" {
+		http.Error(w, "require lang", http.StatusBadRequest)
+		return
+	}
+	status := r.URL.Query().Get("status")
+
+	res, err := s.ListIDs(id, lang, status)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	utils.WriteJson(w, res, http.StatusOK)
+}
+
 func (s *Service) GetRef(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	id, err := strconv.Atoi(p.ByName("id"))
 	if err != nil {

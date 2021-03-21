@@ -16,6 +16,10 @@ func (s *Service) List(faction, category int, lang, status string) ([]Reference,
 	return s.repo.List(faction, category, lang, status)
 }
 
+func (s *Service) ListIDs(faction int, lang, status string) ([]int, error) {
+	return s.repo.ListIDs(faction, lang, status)
+}
+
 func (s *Service) Get(id int, lang string) (*Reference, error) {
 	return s.repo.Get(id, lang)
 }

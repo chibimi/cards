@@ -1,6 +1,5 @@
 <template>
 	<div v-if="refs.length != 0">
-		
 		<div
 			class="modal fade"
 			id="exampleModal"

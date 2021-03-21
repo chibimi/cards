@@ -82,6 +82,26 @@ func (r *Repository) List(faction, category int, lang, status string) ([]Referen
 	return res, nil
 }
 
+func (r *Repository) ListIDs(faction int, lang, status string) ([]int, error) {
+	stmt := `
+	SELECT r.id FROM (
+		SELECT id FROM refs WHERE faction_id = ?
+	) as r LEFT JOIN (
+		SELECT ref_id, status FROM refs_lang WHERE lang = ?
+	) as s ON r.id = s.ref_id 
+	WHERE status = ? 
+	`
+	args := []interface{}{faction, lang, status}
+
+	res := []int{}
+	err := r.db.Select(&res, stmt, args...)
+	if err != nil {
+		return nil, errors.Wrap(err, "execute query")
+	}
+
+	return res, nil
+}
+
 func (r *Repository) Get(id int, lang string) (*Reference, error) {
 	stmt := `
 	WITH last_reviews AS (
