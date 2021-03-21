@@ -85,11 +85,12 @@ func (r *Repository) List(faction, category int, lang, status string) ([]Referen
 func (r *Repository) ListIDs(faction int, lang, status string) ([]int, error) {
 	stmt := `
 	SELECT r.id FROM (
-		SELECT id FROM refs WHERE faction_id = ?
+		SELECT id, category_id, title FROM refs WHERE faction_id = ? AND (linked_to=0 or linked_to is null)
 	) as r LEFT JOIN (
 		SELECT ref_id, status FROM refs_lang WHERE lang = ?
 	) as s ON r.id = s.ref_id 
 	WHERE status = ? 
+	ORDER BY category_id, title
 	`
 	args := []interface{}{faction, lang, status}
 
