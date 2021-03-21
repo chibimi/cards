@@ -101,10 +101,15 @@
   <body>
     {{ range . }}
     <div class="card {{ .Type }} {{ .Faction.String | slug }}">
-      {{ if eq .Type "rules" }}{{ template "rules" . }} {{ else if eq .Type
-      "profile" }}{{ template "profile" . }} {{ else if eq .Type "spells" }}{{
-      template "spells" . }} {{ else if eq .Type "feat" }}{{ template "feat" .
-      }} {{ end }}
+      {{ if eq .Type "rules" }}
+        {{ template "rules" . }} 
+      {{ else if eq .Type "profile" }}
+        {{ template "profile" . }}
+      {{ else if eq .Type "spells" }}
+        {{ template "spells" . }}
+      {{ else if eq .Type "feat" }}
+        {{ template "feat" . }}
+      {{ end }}
     </div>
     {{ end }}
     <script>

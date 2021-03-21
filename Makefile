@@ -18,6 +18,7 @@ build-back: ## Build the server app
 
 deploy-back: build-back ## Deploy the server app
 	mv bin/api/api /srv/jackmarshall/cards
+	cp assets/* /srv/jackmarshall/assets
 	sudo systemctl restart jackmarshall-cards
 
 build-all: build-front build-back ## Build both the client and the server
