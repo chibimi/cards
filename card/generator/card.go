@@ -18,6 +18,11 @@ func (s *Service) Build(r Reference) (cards []Card, err error) {
 	translations := GetTranslation(r.Lang)
 	var errs *multierror.Error
 
+	// Truncate title if composed of multiple models
+	if i := strings.Index(r.Ref.Title, "&"); i != -1 {
+		r.Ref.Title = strings.TrimSpace(r.Ref.Title[:i])
+	}
+
 	if r.Ref.Special == "colossal" {
 		secondRef := Reference{
 			Lang:   r.Lang,
