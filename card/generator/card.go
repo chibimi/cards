@@ -19,7 +19,7 @@ func (s *Service) Build(r Reference) (cards []Card, err error) {
 	var errs *multierror.Error
 
 	// Truncate title if composed of multiple models
-	if i := strings.Index(r.Ref.Title, "&"); i != -1 {
+	if i := strings.Index(r.Ref.Title, "&"); i != -1 && len(r.Ref.Title) > 35 {
 		r.Ref.Title = strings.TrimSpace(r.Ref.Title[:i])
 	}
 

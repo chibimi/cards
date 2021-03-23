@@ -1,7 +1,6 @@
 package generator
 
 import (
-	"errors"
 	"fmt"
 	"html/template"
 	"io"
@@ -10,6 +9,7 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/SebastiaanKlippert/go-wkhtmltopdf"
 	"github.com/chibimi/cards/card"
 	"github.com/chibimi/cards/card/ability"
 	"github.com/jmoiron/sqlx"
@@ -33,17 +33,17 @@ func NewService(cards *card.SService, db *sqlx.DB, assets string) *Service {
 }
 
 func (s *Service) GenerateEndpoint(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
-	var refs []int
-	for _, v := range strings.Split(r.FormValue("cards"), ",") {
-		ref, err := strconv.Atoi(v)
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
-			return
-		}
-		refs = append(refs, ref)
-	}
+	// var refs []int
+	// for _, v := range strings.Split(r.FormValue("cards"), ",") {
+	// 	ref, err := strconv.Atoi(v)
+	// 	if err != nil {
+	// 		http.Error(w, err.Error(), http.StatusBadRequest)
+	// 		return
+	// 	}
+	// 	refs = append(refs, ref)
+	// }
 
-	res, err := s.Generate(refs, r.FormValue("lang"))
+	res, err := s.Generate(r.FormValue("cards"), r.FormValue("lang"))
 	if err != nil {
 		log15.Error("generating cards", "err", err)
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -59,8 +59,24 @@ func (s *Service) GenerateEndpoint(w http.ResponseWriter, r *http.Request, p htt
 	}
 }
 
-func (s *Service) Generate(refs []int, lang string) (io.Reader, error) {
-	return nil, errors.New("not implemented")
+func (s *Service) Generate(refs string, lang string) (io.Reader, error) {
+	pdfg, err := wkhtmltopdf.NewPDFGenerator()
+	if err != nil {
+		log.Fatal(err)
+	}
+	pdfg.Dpi.Set(300)
+	pdfg.Orientation.Set(wkhtmltopdf.OrientationLandscape)
+
+	page := wkhtmltopdf.NewPage(fmt.Sprintf("http://localhost:4203/display?cards=%s&lang=%s", refs, lang))
+	page.Zoom.Set(2)
+	pdfg.AddPage(page)
+
+	// Create PDF document in internal buffer
+	err = pdfg.Create()
+	if err != nil {
+		log.Fatal(err)
+	}
+	return pdfg.Buffer(), nil
 }
 
 func (s *Service) DisplayEndpoint(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
