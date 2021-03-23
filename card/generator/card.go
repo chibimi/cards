@@ -399,7 +399,9 @@ func getFontClass(nbChar int) string {
 	switch {
 	case nbChar > 2250:
 		return "font-seriously-pp"
-	case nbChar > 1900:
+	case nbChar > 2000:
+		return "font-xxs"
+	case nbChar > 1800:
 		return "font-xs"
 	case nbChar > 1500:
 		return "font-s"
