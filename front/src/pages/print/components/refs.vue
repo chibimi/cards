@@ -44,7 +44,7 @@
 								class="bg-danger name_right"
 								data-toggle="modal"
 								data-target="#exampleModal"
-								v-on:click="ref = r; index = i; feedback= ''"
+								v-on:click="setRef(r, i)"
 								><i class="fas fa-thumbs-down"></i
 							></span>
 						</div>
@@ -135,6 +135,11 @@ export default {
 				.catch(function (err) {
 					console.error(err)
 				})
+		},
+		setRef: function(r, i) {
+			this.ref = r
+			this.index = i
+			this.feedback = ''
 		}
 	},
 }
