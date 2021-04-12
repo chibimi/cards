@@ -2,7 +2,7 @@
 	<div v-if="refs.length != 0">
 		<div
 			class="modal fade"
-			id="exampleModal"
+			:id="'exampleModal_'+category.id"
 			tabindex="-1"
 			role="dialog"
 			aria-labelledby="exampleModalLabel"
@@ -43,7 +43,7 @@
 							<span
 								class="bg-danger name_right"
 								data-toggle="modal"
-								data-target="#exampleModal"
+								:data-target="'#exampleModal_'+category.id"
 								v-on:click="setRef(r, i)"
 								><i class="fas fa-thumbs-down"></i
 							></span>

@@ -4,7 +4,7 @@ go 1.13
 
 require (
 	github.com/PuerkitoBio/goquery v1.5.1
-	github.com/SebastiaanKlippert/go-wkhtmltopdf v1.6.1 // indirect
+	github.com/SebastiaanKlippert/go-wkhtmltopdf v1.6.1
 	github.com/alecthomas/units v0.0.0-20190924025748-f65c72e2690d // indirect
 	github.com/andybalholm/cascadia v1.2.0 // indirect
 	github.com/codegangsta/negroni v1.0.0
