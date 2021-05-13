@@ -8,6 +8,16 @@
 				</div>
 			</div>
 		</div>
+		<div>
+			<h5>Comment imprimer les cartes ?</h5>
+			<ul>
+				<li>Selectionnez les cartes que vous souhaitez imprimer.</li>
+				<li>Cliquez sur le bouton "Generate PDF".</li>
+				<li>Allez sur la nouvelle page ouverte.</li>
+				<li>Ctrl+P: Selectionnez "disposition paysage" et "Afficher les images d'arrière plan" (options avancées).</li>
+				<li>Imprimez.</li>
+			</ul>
+		</div>
 
 		<div class="nav" role="tablist">
 			<a v-for="f in factions" :key="f.id" data-toggle="tab" href="#nav" @click="faction = f">{{ f.name }}</a>
@@ -141,6 +151,9 @@ export default {
 		@extend .container;
 		@extend .px-0;
 		@extend .mt-4;
+	}
+	ul {
+		list-style-type: decimal;
 	}
 }
 </style>
